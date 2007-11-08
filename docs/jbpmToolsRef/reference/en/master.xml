@@ -3,9 +3,9 @@
 "../../resources/support/docbook-dtd/docbookx.dtd"
 
 
-[<!ENTITY jBPMDesignerInstall  SYSTEM "modules/jBPMDesignerInstall.xml">
-
-]>
+[<!ENTITY Introduction  SYSTEM "modules/Introduction.xml">
+<!ENTITY jBPMDesignerInstall  SYSTEM "modules/jBPMDesignerInstall.xml">
+ ]>
 <book>
     
      <bookinfo>
@@ -22,6 +22,7 @@
     
     <toc/>  
 
+&Introduction;
 &jBPMDesignerInstall;
 
     <!-- TODO: drools used in this section is not available for eclipse .3.3 &AddBusinessProcess; -->

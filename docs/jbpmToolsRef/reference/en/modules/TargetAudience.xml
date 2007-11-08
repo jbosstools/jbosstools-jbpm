@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="Introduction" xreflabel="Introduction">
+ <?dbhtml filename="TargetAudience.html"?>
+  <chapterinfo>
+    <keywordset>
+      <keyword>jBPM</keyword>
+      <keyword>Target</keyword>
+      <keyword>developers</keyword>
+      <keyword>Audience</keyword>
+     </keywordset>
+  </chapterinfo>
+ <title>Introduction</title>
+  <para>All developers and process analists who are beginning to use JBoss jBPM should read this Getting Started guide. It will give them a jumpstart showing how to create a process definition.</para>
+  <section id="Preface">
+<?dbhtml filename="Preface.html"?>
+<title>Preface</title>
+<para>This document introduces the use of the JBoss jBPM Graphical Process Designer (GPD) to create workflow processes. It will help first time users with the following tasks :</para>
+<itemizedlist>
+<listitem><para>Install the JBoss jBPM GPD Eclipse plugin available from the JBoss jBPM download area</para></listitem>
+<listitem><para>Set up a Java project in Eclipse and prepare it to do test driven process development</para></listitem>
+<listitem><para>Using the creation wizard to create an empty process definition</para></listitem>
+<listitem><para>Use the designer palette to draw the first processdefinition</para></listitem>
+<listitem><para>Show how the xml processdefinition can be inspected as an xml file</para></listitem>
+<listitem><para>Set up a Java project in Eclipse and prepare it to do test driven process development</para></listitem>
+<listitem><para>Write an example process test case</para></listitem>
+</itemizedlist>
+<para>If you have questions, please feel free to contact Koen Aers or Tom Baeyens for more information.</para>
+</section>
+</chapter>
