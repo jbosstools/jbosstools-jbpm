@@ -21,7 +21,7 @@
 <title>Find And Install</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/jBPMinstallation.png"/>
+            <imagedata fileref="images/jbpm_designer_install/jbpm_installation.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -31,7 +31,7 @@
 <title>Search New Features</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/jBPMinstallation2.png"/>
+            <imagedata fileref="images/jbpm_designer_install/jbpm_installation2.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -40,7 +40,7 @@
 <title>Update Sites to Visit</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/jBPMinstallation3.png"/>
+            <imagedata fileref="images/jbpm_designer_install/jbpm_installation3.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -49,7 +49,7 @@
 <title>Select Local Site Archive</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/jBPMinstallation4.png"/>
+            <imagedata fileref="images/jbpm_designer_install/jbpm_installation4.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -58,7 +58,7 @@
 <title>Edit Local Site Name</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -67,7 +67,7 @@
 <title>Select Update Site to Visit</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -76,7 +76,7 @@
 <title>Select the Feature to Install</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -85,7 +85,7 @@
 <title>Accept Feature License</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -94,7 +94,7 @@
 <title>Install the Selected Feature</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -103,7 +103,7 @@
 <title>Progress of the Download</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -112,7 +112,7 @@
 <title>Feature Verification</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>
@@ -121,7 +121,7 @@
 <title>Restart the Workbench</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jBPMDesignerInstall/default.png"/>
+            <imagedata fileref="images/jbpm_designer_install/default.png"/>
         </imageobject>
 </mediaobject>
 </figure>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="Quick_Howto_Guide" xreflabel="Quick_Howto_Guide">
-    <?dbhtml filename="Tutorial.html"?>
+    <?dbhtml filename="Quick_Howto_Guide.html"?>
     <chapterinfo>
         <keywordset>
             <keyword>jBPM</keyword>
-            <keyword/>
-            <keyword/>
-            <keyword/>
-            <keyword/>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
         </keywordset>
     </chapterinfo>
     <title>Quick Howto Guide</title>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="The_JBoss_jBPM_Int_Mech" xreflabel="The_JBoss_jBPM_Int_Mech">
-    <?dbhtml filename="Tutorial.html"?>
+    <?dbhtml filename="The_JBoss_jBPM_Int_Mech.html"?>
     <chapterinfo>
         <keywordset>
             <keyword>jBPM</keyword>
-            <keyword/>
-            <keyword/>
-            <keyword/>
-            <keyword/>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
         </keywordset>
     </chapterinfo>
     <title>Actions : The JBoss jBPM Integration Mechanism</title>
