@@ -3,9 +3,9 @@
 "../../resources/support/docbook-dtd/docbookx.dtd"
 
 
-[<!ENTITY Introduction  SYSTEM "modules/introduction.xml">
-<!ENTITY jBPMDesignerInstall  SYSTEM "modules/jbpm_designer_install.xml">
-<!ENTITY GuidedTourJBossjBPMGPD  SYSTEM "modules/guided_tour_jboss_jbpmgpd.xml">
+[<!ENTITY introduction  SYSTEM "modules/introduction.xml">
+<!ENTITY jboss_jbpm_runtime_installation  SYSTEM "modules/jboss_jbpm_runtime_installation.xml">
+<!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "modules/guided_tour_jboss_jbpmgpd.xml">
 <!ENTITY Test_Drive_Proc SYSTEM "modules/Test_Drive_Proc.xml">
 <!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "modules/The_JBoss_jBPM_Int_Mech.xml">
 <!ENTITY Quick_Howto_Guide SYSTEM "modules/Quick_Howto_Guide.xml">
@@ -27,9 +27,9 @@
     
     <toc/>  
 
-&Introduction;
-&jBPMDesignerInstall;
-&GuidedTourJBossjBPMGPD;
+&introduction;
+&jboss_jbpm_runtime_installation;
+&guided_tour_jboss_jbpmgpd;
 &Test_Drive_Proc;
 &The_JBoss_jBPM_Int_Mech;
 &Quick_Howto_Guide;

@@ -82,7 +82,7 @@
 		<section id="adding_the_nodes">
 		<?dbhtml filename="adding_the_nodes.html"?>
 		<title>Adding the Nodes</title>
-		<para>Select respectively 'Start', 'State' and 'End' on the tools palette and click on the canvas to add these nodes to the process definition. The result should look similar to this:</para>
+		<para>Select respectively <emphasis><property>Start</property></emphasis>, <emphasis><property>State</property></emphasis> and <emphasis><property>End</property></emphasis> on the tools palette and click on the canvas to add these nodes to the process definition. The result should look similar to this:</para>
 		<figure>
 			<title>A Simple Process With Three Nodes</title>
 			<mediaobject>
@@ -95,7 +95,7 @@
 		<section id="adding_transitions">
 		<?dbhtml filename="adding_transitions.html"?>
 		<title>Adding Transitions</title>
-		<para>We will connect the nodes with transitions. Select the <emphasis><property>Transition</property></emphasis> tool in the tools palette and click on the <emphasis><property>Start</property></emphasis> node, then move to the <emphasis><property>State</property></emphasis> node and click again to see the transition being drawn. Perform the same steps to create a transition from the <emphasis><property>State</property></emphasis> node to the <emphasis><property>End</property></emphasis> node. The result looks like:</para>
+		<para>We will connect the nodes with transitions. Select the <emphasis><property>Transition</property></emphasis> tool in the tools palette and click on the <emphasis><property>Start</property></emphasis> node, then move to the <emphasis><property>State</property></emphasis> node and click again to see the transition being drawn. Perform the same steps to create a transition from the <emphasis><property>State</property></emphasis> node to the <emphasis><property>End</property></emphasis> node. The result will look like:</para>
 		<figure>
 			<title>A Simple Process With Transitions</title>
 			<mediaobject>
@@ -110,7 +110,7 @@
 		<section id="the_outline_view">
 		<?dbhtml filename="the_outline_view.html"?>
 		<title>The Outline View</title>
-		<para>You can see an outline of the process being drawn in the RHDS outline view if it is visible (if not select <emphasis><property>Window &gt; Show view &gt; Outline</property></emphasis>). It is presented as the classical tree view. Also you use <emphasis><property>Overview</property></emphasis> that comes as as a scrollable thumbnail.</para>
+		<para>You can see an outline of the process being drawn in the RHDS outline view if it is visible (if not select <emphasis><property>Window &gt; Show view &gt; Outline</property></emphasis>). It is presented as the classical tree view. Also you can use <emphasis><property>Overview</property></emphasis> that comes as as a scrollable thumbnail.</para>
 		<figure>
 			<title>The Outline and Overview Views</title>
 			<mediaobject>
