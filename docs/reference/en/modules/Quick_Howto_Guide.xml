@@ -30,7 +30,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/Quick_Howto_Guide/defaltImage.png" scalefit="1"/>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png" scalefit="1"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -48,7 +48,7 @@
             
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/Quick_Howto_Guide/defaltImage.png" scalefit="1"/>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_2.png" scalefit="1"/>
                 </imageobject>
             </mediaobject>
         </figure>
