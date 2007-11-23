@@ -15,11 +15,12 @@
 directory where you extracted the runtime either when you create a jBPM project or by using the jBPM preference pages.</para>
  <para>Navigate to <emphasis><property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property></emphasis>. Here you can add, edit and remove JBoss jBPM installation locations.</para>
  <para>Click <emphasis><property>Add</property></emphasis> button. In the diallog that appeared enter a name for a newly added jBPM runtime and point to the correct location of this package on your harddrive. Click <emphasis><property>OK</property></emphasis> then click <emphasis><property>OK</property></emphasis> again.</para>
+ 
  <figure>
 <title>Adding jBPM Location</title>
 <mediaobject> 
         <imageobject>
-            <imagedata fileref="images/jbpm_designer_install/jbpm_location.png"/>
+         <imagedata fileref="images/runtime_installation/runtime_installation1.png"/>
         </imageobject>
 </mediaobject>
 </figure>

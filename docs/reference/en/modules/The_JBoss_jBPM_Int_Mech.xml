@@ -96,83 +96,32 @@
 
         <para> Let&apos;s do something about it and add an action to the first transition of our
             sample process. This is done by bringing up the context menu of the transition in the
-            tree page of the outline view, as shown in Figure 5.5, &quot;Adding an Action to a
-            Transition&quot;. </para>
+            tree page of the outline view.</para>
 
-        <figure>
-            <title>Adding an Action to a Transition</title>
-
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/defaltImage.png" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-        <para> Right-clicking the action brings up a popupmenu with an entry to edit the properties
+           <para> Right-clicking the action brings up a popupmenu with an entry to edit the properties
             of the selected action. Clicking on this menu entry opens a configuration dialog for
             actions. For now we will only configure the name and class properties of this action.
             The rest will be treated later. We enter <property>hello</property> as the name of the
             action and click on the <property>Browse...</property> button to open a choose class
             dialog where we can look for the classes implementing the <property>ActionHandler</property> interface in our
-            project&apos;s classpath (Figure 5.6, &quot;The Choose Action Handler
-            Dialog&quot;). </para>
+            project&apos;s classpath. </para>
 
-        <figure>
-            <title>The Choose Action Handler Dialog</title>
+              <para> We choose our previously created &apos;HelloActionHandler&apos; class and
+            push the <property>OK</property> button. After the selection of the action handler for the action, we can run
+            the test and observe it gives us a green light.</para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/defaltImage.png" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-
-        <figure>
-            <title> The Action Configuration Dialog</title>
-
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/defaltImage.png" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-
-        <para> We choose our previously created &apos;HelloActionHandler&apos; class and
-            push the <property>OK</property> button (Figure 5.7, &quot;The Action Configuration
-            Dialog&quot;). After the selection of the action handler for the action, we can run
-            the test and observe it gives us a green light (Figure 5.8, &quot;The Action
-            Configuration Dialog&quot;). </para>
-
-        <figure>
-            <title>The Action Configuration Dialog</title>
-
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/defaltImage.png" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
     </section>
 
     <section>
         <title> Integration Points</title>
 
         <para> The different integration points in a process definition are thoroughly documented in
-            the <property>JBoss jBPM User Guide</property>. As you see on Figure 5.9, &quot;Adding an Event Action&quot; different
+            the <property>JBoss jBPM User Guide</property>. The Different
             kinds of actions can be added to for instance nodes. Adding such an action will create
             an event object in the outline view and add an action as a child of this newly created
             event. In the same way, actions can be added to the process definition object. Moreover,
             actions can directly be added to events. </para>
         
-        <figure>
-            <title> Adding an Event Action</title>
-            
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/defaltImage.png" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
     </section>
 
 </chapter>
