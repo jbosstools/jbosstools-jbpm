@@ -16,10 +16,10 @@
         and workflow management is that developers can easily leverage their usual programming
         skills and techiques. One of these well-known techniques is unit testing and test driven
         development. In this chapter we will show how developers, making use of the JBoss jBPM GPD
-        can use a technique we have baptised &apos;Test Driven Process Development&apos; to
+        can use a technique we have baptised <property>Test Driven Process Development</property> to
         create process definitions and test their correctness. </para>
 
-    <para> When creating the &apos;Hello jBPM&apos; project the create process project
+    <para> When creating the <property>Hello jBPM</property> project the create process project
         wizard has already put in place all the library requirements we need to start writing jBPM
         unit tests. These are contained in the jBPM Library container and the most important of it
         is - suprisingly - the jar file containing the core jBPM classes. It must be noted that it
@@ -27,11 +27,11 @@
         settings. More on this later in the book. </para>
 
     <para> With that extra knowledge on the project settings, you can create your first test. To do
-        this, we create the &apos;com.jbay&apos; package in the
-        &apos;test/java&apos; source folder. Then we bring up the context menu on this
-        package and select &apos;New->JUnit Test Case&apos; (Figure 3.1, &quot;Create a
+        this, we create the <property>com.jbay</property> package in the
+        <property>test/java</property> source folder. Then we bring up the context menu on this
+        package and select <property>New &gt; JUnit Test Case</property> (Figure 3.1, &quot;Create a
         Test&quot; and Figure 3.2, &quot;Create Test Dialog&quot;). We call the test
-        class '&apos;HelloTest&apos;. </para>
+        class <property>HelloTest</property>. </para>
 
     <figure>
         <title>Create a Test</title>
@@ -61,7 +61,7 @@
         object is fed to the constructor of a process instance object. We have a process instance
         object, but this process is not yet started, so we can safely assert that its root token
         still resides in the start node. After signalling the token will move to the next state and
-        the process will be in the &apos;auction&apos; state. Finally another signal will
+        the process will be in the <property>auction</property> state. Finally another signal will
         end the process. </para>
 
     <figure>
@@ -99,7 +99,7 @@
     <para> Of course, this simple scenario was not very interesting, but the purpose of it was to
         show how you can reuse your development skills in a very straightforward way when doing
         process development. To see how more interesting processes and process test scenario&apos;s can
-        be developed, we suggest you to read the JBoss jBPM User Guide and to study the API
+        be developed, we suggest you to read the <property>JBoss jBPM User Guide</property> and to study the API
         reference. Moreover some more examples will be given later in this book.</para>
     
 </chapter>

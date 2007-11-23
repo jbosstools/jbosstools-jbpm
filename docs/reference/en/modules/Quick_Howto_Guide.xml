@@ -15,13 +15,13 @@
     <section>
         <title>Change the Default Core jBPM Installation</title>
 
-        <para> You can change the default jBPM installation by means of the Eclipse preference
+        <para> You can change the default <property>jBPM</property> installation by means of the Eclipse preference
             mechanism. Open the Preferences dialog by selecting
-            &apos;Window->Preferences&apos; and select the &apos;JBoss jBPM&apos;
-            category (???). Using this page you can add multiple jBPM installation locations and
+            <property>Window &lt; Preferences</property> and select the <property>JBoss jBPM</property>
+            category. Using this page you can add multiple <property>jBPM</property> installation locations and
             change the default one. The default installation is used for the classpath settings when
             creating a new Process Project. Changing the preferences has no influence on already
-            created projects. Getting rid of a jBPM installation that's being referenced by a
+            created projects. Getting rid of a <property>jBPM</property> installation that&apos;s being referenced by a
             project however will cause the classpath to contain errors. </para>
 
 
@@ -41,7 +41,7 @@
 
         <para> You can add tasks to task nodes and then configure these last ones in a similar
             manner as the Action configuration mechanism. The context menu of the tasks contains a
-            &apos;Properties&apos; entry that opens a configuration dialog (???). </para>
+            <property>Properties</property> entry that opens a configuration dialog. </para>
         
         <figure>
             <title> The Task Configuration Dialog</title>
