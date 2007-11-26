@@ -3,7 +3,7 @@
 "../../resources/support/docbook-dtd/docbookx.dtd"
 
 
-[<!ENTITY introduction  SYSTEM "modules/introduction.xml">
+[<!ENTITY introduction  SYSTEM "modules/Introduction.xml">
 <!ENTITY jboss_jbpm_runtime_installation  SYSTEM "modules/jboss_jbpm_runtime_installation.xml">
 <!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "modules/guided_tour_jboss_jbpmgpd.xml">
 <!ENTITY Test_Drive_Proc SYSTEM "modules/Test_Drive_Proc.xml">
