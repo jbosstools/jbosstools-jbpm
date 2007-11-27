@@ -110,7 +110,7 @@
 		<section id="the_outline_view">
 		<?dbhtml filename="the_outline_view.html"?>
 		<title>The Outline View</title>
-		<para>You can see an outline of the process being drawn in the RHDS outline view if it is visible (if not select <emphasis><property>Window &gt; Show view &gt; Outline</property></emphasis>). It is presented as the classical tree view. Also you can use <emphasis><property>Overview</property></emphasis> that comes as as a scrollable thumbnail.</para>
+		<para>You can see an outline of the process being drawn in the JBDS outline view if it is visible (if not select <emphasis><property>Window &gt; Show view &gt; Outline</property></emphasis>). It is presented as the classical tree view. Also you can use <emphasis><property>Overview</property></emphasis> that comes as as a scrollable thumbnail.</para>
 		<figure>
 			<title>The Outline and Overview Views</title>
 			<mediaobject>
@@ -123,7 +123,7 @@
 		<section id="the_properties_view">
 		<?dbhtml filename="the_properties_view.html"?>
 		<title>The Properties View</title>
-		<para>If the RHDS Properties view is visible (if not select <emphasis><property>Window &gt; Show view &gt; Properties</property></emphasis>), the relevant properties of the selected item are shown. Some of these properties may be directly editable in the properties view. An example of a directly editable property is the name property of the process definition. As you can see in the next figure, the name property of the process definition can be changed to <emphasis><property>jbay</property></emphasis>. You can also write a description for this property.</para>
+		<para>If the JBDS Properties view is visible (if not select <emphasis><property>Window &gt; Show view &gt; Properties</property></emphasis>), the relevant properties of the selected item are shown. Some of these properties may be directly editable in the properties view. An example of a directly editable property is the name property of the process definition. As you can see in the next figure, the name property of the process definition can be changed to <emphasis><property>jbay</property></emphasis>. You can also write a description for this property.</para>
 		<figure>
 			<title>The Properties of a Process Definition</title>
 			<mediaobject>

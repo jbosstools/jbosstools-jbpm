@@ -6,12 +6,12 @@
       <keyword>jBPM</keyword>
       <keyword>designer</keyword>
       <keyword>process</keyword>
-      <keyword>Red Hat Developer Studio</keyword>
+      <keyword>JBoss Developer Studio</keyword>
      <keyword>jBPM runtime</keyword>
     </keywordset>
   </chapterinfo>
  <title>JBoss jBPM Runtime Installation</title>
- <para>The jBPM plugin (jBPM Designer) is already included in RHDS. To make it work, you should only download the jBPM runtime (jbpm-jpdl-3.2.2 currently) from <ulink url="http://labs.jboss.com/jbossjbpm/downloads/">here</ulink> and specify the
+ <para>The jBPM plugin (jBPM Designer) is already included in JBDS. To make it work, you should only download the jBPM runtime (jbpm-jpdl-3.2.2 currently) from <ulink url="http://labs.jboss.com/jbossjbpm/downloads/">here</ulink> and specify the
 directory where you extracted the runtime either when you create a jBPM project or by using the jBPM preference pages.</para>
  <para>Navigate to <emphasis><property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property></emphasis>. Here you can add, edit and remove JBoss jBPM installation locations.</para>
  <para>Click <emphasis><property>Add</property></emphasis> button. In the diallog that appeared enter a name for a newly added jBPM runtime and point to the correct location of this package on your harddrive. Click <emphasis><property>OK</property></emphasis> then click <emphasis><property>OK</property></emphasis> again.</para>
