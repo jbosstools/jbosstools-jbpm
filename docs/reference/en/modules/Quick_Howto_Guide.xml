@@ -4,10 +4,10 @@
     <chapterinfo>
         <keywordset>
             <keyword>jBPM</keyword>
-            <keyword></keyword>
-            <keyword></keyword>
-            <keyword></keyword>
-            <keyword></keyword>
+            <keyword/>
+            <keyword/>
+            <keyword/>
+            <keyword/>
         </keywordset>
     </chapterinfo>
     <title>Quick Howto Guide</title>
@@ -15,14 +15,17 @@
     <section>
         <title>Change the Default Core jBPM Installation</title>
 
-        <para> You can change the default <property>jBPM</property> installation by means of the Eclipse preference
-            mechanism. Open the Preferences dialog by selecting
-            <property>Window &lt; Preferences</property> and select the <property>JBoss jBPM</property>
-            category. Using this page you can add multiple <property>jBPM</property> installation locations and
-            change the default one. The default installation is used for the classpath settings when
-            creating a new Process Project. Changing the preferences has no influence on already
-            created projects. Getting rid of a <property>jBPM</property> installation that&apos;s being referenced by a
-            project however will cause the classpath to contain errors. </para>
+        <para> You can change the default <property>jBPM</property> installation by means of the
+            Eclipse preference mechanism. Open the Preferences dialog by selecting <emphasis>
+                <property>Window &gt; Preferences</property>
+            </emphasis> and select the <emphasis>
+                <property>JBoss jBPM &gt; Runtime Location</property>
+            </emphasis> category. Using this page you can add multiple <property>jBPM</property>
+            installation locations and change the default one. The default installation is used for
+            the classpath settings when creating a new Process Project. Changing the preferences has
+            no influence on already created projects. Getting rid of a <property>jBPM</property>
+            installation that&apos;s being referenced by a project however will cause the
+            classpath to contain errors. </para>
 
 
         <figure>
@@ -30,7 +33,8 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png" scalefit="1"/>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png"
+                        scalefit="1"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -41,14 +45,15 @@
 
         <para> You can add tasks to task nodes and then configure these last ones in a similar
             manner as the Action configuration mechanism. The context menu of the tasks contains a
-            <property>Properties</property> entry that opens a configuration dialog. </para>
-        
+                <property>Properties</property> entry that opens a configuration dialog. </para>
+
         <figure>
             <title> The Task Configuration Dialog</title>
-            
+
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_2.png" scalefit="1"/>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_2.png"
+                        scalefit="1"/>
                 </imageobject>
             </mediaobject>
         </figure>
