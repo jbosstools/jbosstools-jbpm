@@ -27,7 +27,7 @@
             implementation of the <emphasis>
                 <property>ActionHandler</property>
             </emphasis> interface, and attach this piece of code to a particular event. These events
-            are amongst others, going over a transition, leaving or enterning nodes, after and
+            are amongst others, going over a transition, leaving or entering nodes, after and
             before signalling. </para>
 
         <figure>

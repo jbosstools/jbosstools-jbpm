@@ -14,9 +14,9 @@
 
     <para> One of the most important advantages of JBoss jBPM&apos;s lightweight approach to BPM
         and workflow management is that developers can easily leverage their usual programming
-        skills and techiques. One of these well-known techniques is unit testing and test driven
+        skills and techniques. One of these well-known techniques is unit testing and test driven
         development. In this chapter we will show how developers, making use of the JBoss jBPM GPD
-        can use a technique we have baptised <property>Test Driven Process Development</property> to
+        can use a technique we have baptized <property>Test Driven Process Development</property> to
         create process definitions and test their correctness. </para>
 
     <para> When creating the <emphasis>
@@ -79,7 +79,7 @@
         <para>In the first line of the method, a jBPM process archive object is
         created. We use a constructor accepting the filename of the archive. In our case it is the
             <emphasis>
-                <property>hello</property></emphasis> file we created earlier and wich lives in the
+                <property>hello</property></emphasis> file we created earlier and which lives in the
             <emphasis>
                 <property>src/main/jpdl</property></emphasis> folder of our project. After asserting that this object is really
         created, we extract a process definition object from it. This object is fed to the

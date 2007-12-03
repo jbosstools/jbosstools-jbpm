@@ -200,7 +200,7 @@
 				<property>Window &gt; Show view &gt; Outline</property>
 			</emphasis>). It is presented as the classical tree view. Also you can use <emphasis>
 				<property>Overview</property>
-			</emphasis> that comes as as a scrollable thumbnail.</para>
+			</emphasis> that comes as a scrollable thumbnail.</para>
 		<figure>
 			<title>The Outline and Overview Views</title>
 			<mediaobject>
@@ -251,7 +251,7 @@
 		<para>Some properties can be directly edited in the graphical editor. One example of this is
 			the <emphasis>
 				<property>Name</property>
-			</emphasis> property of nodes. You can edit this directly by selecting the node of wich
+			</emphasis> property of nodes. You can edit this directly by selecting the node of which
 			you want to change the name and then click once inside this node. This enables an editor
 			in the node. We change the name of the node to <emphasis>
 				<property>auction</property>

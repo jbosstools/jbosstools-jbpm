@@ -10,7 +10,7 @@
      </keywordset>
   </chapterinfo>
  <title>Introduction</title>
-  <para>All developers and process analists who are beginning to use JBoss jBPM should read this Getting Started guide. It will give them a jumpstart showing how to create a process definition.</para>
+  <para>All developers and process analysts who are beginning to use JBoss jBPM should read this Getting Started guide. It will give them a jumpstart showing how to create a process definition.</para>
   <section id="Preface">
 <?dbhtml filename="Preface.html"?>
 <title>Preface</title>
