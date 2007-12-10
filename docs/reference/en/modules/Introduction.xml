@@ -25,5 +25,76 @@
 <listitem><para>Write an example process test case</para></listitem>
 </itemizedlist>
 <para>If you have questions, please feel free to contact Koen Aers or Tom Baeyens for more information.</para>
-</section>
+  </section>
+ 
+ <section id="feature_list">
+  
+  <title>Feature list</title>
+  
+  
+  
+ <para> JBoss jBPM is a workflow that enable creating and 
+  automatization business processes. Look at the list of features below.
+  </para>
+  <table>
+   <title>Key Functionality for JBoss jBPM</title>
+   <tgroup cols="2">
+    <thead>
+     <row>
+      <entry>Feature</entry>
+      <entry>Benefit</entry>
+     </row>
+    </thead>
+    <tbody>
+     
+     <row>
+      <entry>jBDL support</entry>
+      <entry>Enable managing workflow processes as well as human tasks and interactions between them. 
+       jBDL combines the best both Java and declarative process techniques. Look <link linkend="minimal_process_definition">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Support of Graphical Process Designer (GPD)</entry>
+      <entry>For simplifying declarative process development and visualizations of all actions. Look <link linkend="GuidedTourJBossjBPMGPD">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Project Creation wizard</entry>
+      <entry>Allows to create a new jBPM template project that already includes all advanced artifacts and core jBPM libraries.
+       Look <link linkend="CreatingjBPMProject">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Rich  palette of pre-build process nodes</entry>
+      <entry>Provides process-building functionality and gives opportunity even non-programmers to develop processes.
+       Look <link linkend="minimal_process_definition">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Support of XML code view</entry>
+      <entry>Corresponding XML is generated automatically in the Source view of the process definition editor
+       when developing the process. Look <link linkend="the_source_view">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Properties view</entry>
+      <entry>Facilitates configuring and editing of all nodes properties. Look <link linkend="the_properties_view">here.</link></entry>
+     </row>
+     
+     <row>
+      <entry>Interaction with all of the J2EE based integration technologies including Web Services, Java Messaging, 
+       J2EE Connectors, JBDC, EJBs.</entry>
+      <entry>Enables implementation, provides better functionality and flexibility</entry>
+     </row>
+     
+     <row>
+      <entry>Integration with jBoss Seam</entry>
+      <entry>Allows to write applications with complex workflows and provides easier interactions between them</entry>
+     </row>
+     
+    </tbody>
+   </tgroup>
+  </table>
+ </section>
+ 
 </chapter>
