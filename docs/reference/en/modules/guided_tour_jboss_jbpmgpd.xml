@@ -116,7 +116,7 @@
 			<title>The Process Definition Editor</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png" scale="75"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -161,7 +161,7 @@
 					<title>A Simple Process With Three Nodes</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png"/>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png" scale="75"/>
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -185,7 +185,7 @@
 					<title>A Simple Process With Transitions</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png"/>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png" scale="75"/>
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -205,7 +205,7 @@
 			<title>The Outline and Overview Views</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour9.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour9.png" scale="75"/>
 				</imageobject>
 			</mediaobject>
 		</figure>

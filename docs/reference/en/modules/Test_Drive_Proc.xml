@@ -44,7 +44,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1.png" scalefit="1"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -58,7 +58,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2.png" scalefit="1"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -71,7 +71,7 @@
         
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_3.png" scalefit="1"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_3.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -96,7 +96,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_4.png" scalefit="1"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_4.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -107,7 +107,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_5.png" scalefit="1"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_5.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>

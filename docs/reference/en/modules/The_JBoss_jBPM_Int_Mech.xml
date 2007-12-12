@@ -35,8 +35,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_1.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_1.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -58,8 +57,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -87,8 +85,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_3.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_3.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -102,8 +99,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_4.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_4.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -120,8 +116,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -133,8 +128,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -149,8 +143,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -166,8 +159,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_8.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_8.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -182,8 +174,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_10.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_10.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
