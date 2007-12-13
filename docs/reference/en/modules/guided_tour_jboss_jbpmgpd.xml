@@ -10,19 +10,23 @@
 		</keywordset>
 	</chapterinfo>
 	<title>A Guided Tour of JBoss jBPM GPD</title>
-	<para>We have included a wizard in the GPD plugin to create a jBPM project. We have opted to
-		create a project containing based on a template already containing a number of advanced
-		artifacts that we will ignore for this section. In the future we will elaborate this wizard
-		and offer the possibility to create an empty jBPM project as well as projects based on
-		templates taken from the jBPM tutorial.</para>
+	<para>In this chapter we suggest a step-by-step walk-through of creating and editing your own
+		simple process. Let’s start with organizing a new jBPM project.</para>
+	<para>A wizard for creating a jBPM project is included in the GPD plugin. We have opted to
+		create a project based on a template already containing a number of advanced artifacts that
+		we will ignore for this section. In the future we will elaborate this wizard and offer the
+		possibility to create an empty jBPM project as well as projects based on templates taken
+		from the jBPM tutorial.</para>
 	<section id="CreatingjBPMProject">
 		<?dbhtml filename="CreatingjBPMProject.html"?>
 		<title>Creating a jBPM Project</title>
-		<para>To create a new jBPM project using the project creation wizard, we select <emphasis>
+		<para>This section will show you how to use the Creation wizard for creating a new jBPM
+			project with already included source folders.</para>
+		<para>At first you should select <emphasis>
 				<property>File &gt;New Project...</property>
-			</emphasis> and in the New Project dialog, we select <emphasis>
+			</emphasis> and then <emphasis>
 				<property>JBoss jBPM &gt; Process Project</property>
-			</emphasis>:</para>
+			</emphasis> in the New Project dialog:</para>
 		<figure>
 			<title>New Project Dialog</title>
 			<mediaobject>
@@ -74,8 +78,8 @@
 	<section id="creating_an_empty_process_definition">
 		<?dbhtml filename="creating_an_empty_process_definition.html"?>
 		<title>Creating an Empty Process Definition</title>
-		<para>When the project is set up, we can use a creation wizard to create an empty process
-			definition. Bring up the <emphasis>
+		<para>Now when the project is set up, we can use a Creation wizard to create an empty
+			process definition. Bring up the <emphasis>
 				<property>New</property>
 			</emphasis> wizard by clicking the <emphasis>
 				<property>File &gt; New &gt; Other...</property>
@@ -116,12 +120,13 @@
 			<title>The Process Definition Editor</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png" scale="75"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png"
+						scale="75"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
-		
-		
+
+
 		<para>You can see in the Package Explorer that creating a process definition involves
 			creating a folder with the name of the process definition and populating this folder
 			with two .xml files : <emphasis>
@@ -135,21 +140,20 @@
 			</emphasis> file contains the actual process definition info without the graphical
 			rendering info. At present, the GPD assumes that these two files are siblings. More
 			sophisticated configuration will be supported later.</para>
-		
+
 		<section id="minimal_process_definition">
 			<?dbhtml filename="minimal_process_definition.html"?>
 			<title>A Minimal Process Definition</title>
-			<para>We will create a very simple process definition, consisting of a begin state, an
-				intermediate state and an end state.</para>
+			<para>Now we are ready to create a very simple process definition consisting of a begin
+				state, an intermediate state and an end state.</para>
 			<para>To make the configuration of actions much easier it&apos;s better to use the
-				jPDL perspective. It provides the tabbed
-				Properties Editor which allows to configure all the relevant properties of the current
-				selected item. </para>
+				jPDL perspective. It provides the tabbed Properties Editor which allows to configure
+				all the relevant properties of the current selected item. </para>
 
 			<section id="adding_the_nodes">
 				<?dbhtml filename="adding_the_nodes.html"?>
 				<title>Adding the Nodes</title>
-				<para>Select respectively <emphasis>
+				<para>At first select respectively <emphasis>
 						<property>Start</property>
 					</emphasis>, <emphasis>
 						<property>State</property>
@@ -161,7 +165,8 @@
 					<title>A Simple Process With Three Nodes</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png" scale="75"/>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png"
+								scale="75"/>
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -169,7 +174,7 @@
 			<section id="adding_transitions">
 				<?dbhtml filename="adding_transitions.html"?>
 				<title>Adding Transitions</title>
-				<para>We will connect the nodes with transitions. Select the <emphasis>
+				<para>Then we will connect the nodes with transitions. For that select the <emphasis>
 						<property>Transition</property>
 					</emphasis> tool in the tools palette and click on the <emphasis>
 						<property>Start</property>
@@ -185,27 +190,31 @@
 					<title>A Simple Process With Transitions</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png" scale="75"/>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png"
+								scale="75"/>
 						</imageobject>
 					</mediaobject>
 				</figure>
 			</section>
 		</section>
+		<para>Now the simple process is already defined and we can examine it more carefully. For
+			that JBDS provides a number of multiple editors and viewes.</para>
 	</section>
 	<section id="the_outline_view">
 		<?dbhtml filename="the_outline_view.html"?>
 		<title>The Outline View</title>
-		<para>You can see an outline of the process being drawn in the JBDS outline view if it is
-			visible (if not select <emphasis>
+		<para>To have a way to quickly see an outline of the process use the JBDS Outline view. If it is not
+			visible select <emphasis>
 				<property>Window &gt; Show view &gt; Outline</property>
-			</emphasis>). It is presented as the classical tree view. Also you can use <emphasis>
+			</emphasis>. It is presented as the classical tree view. Also you can use <emphasis>
 				<property>Overview</property>
 			</emphasis> that comes as a scrollable thumbnail.</para>
 		<figure>
 			<title>The Outline and Overview Views</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour9.png" scale="75"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour9.png"
+						scale="75"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
