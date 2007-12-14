@@ -16,12 +16,12 @@
         jBPM</property>. The standard mechanism to realize this is to wrap the functionality you
         want to integrate in a class that implements the <emphasis>
             <property>ActionHandler</property>
-        </emphasis> interface. </para>
+        </emphasis> interface. In order to demonstrate it let's specify Hello World action for our process.</para>
 
     <section>
         <title>Creating a Hello World Action</title>
-
-        <para> Each hello process should integrate one or more hello actions, so this is what we
+        
+        <para>Each Hello World process should integrate one or more Hello World actions, so this is what we
             will be doing. We can integrate custom code at different points in the process
             definition. To do this we have to specify an action handler, represented by an
             implementation of the <emphasis>
@@ -65,13 +65,17 @@
 
     <section>
         <title>Integrating the Hello World Action</title>
+        
+        <para>The main purpose of this chapter is to provide you with the steps to associate
+            our Hello World action with a particular event and test the correctness of our actions as well.</para>
 
-        <para> As good Testcity citizens we will first create a unit test that proves the behaviour
+        <para> As good Testcity citizens we will first create a Unit Test that proves the behaviour
             we want to achieve by adding the <emphasis>
                 <property>ActionHandler</property>
             </emphasis> to the process. So we implement another test. Creating the process instance
             is code we already saw in the previous chapter. We assert that no variable called
-            greeting exist. Then we give the process a signal to move it to the first state. We want
+            <emphasis>
+                <property>greeting</property></emphasis> exist. Then we give the process a signal to move it to the first state. We want
             to associate the execution of the action with the event of going over the transition
             from the start state to the first state. So after the signal, the process should be in
             the first state as in the previous scenario. But moreover, the <emphasis>
@@ -179,7 +183,7 @@
             </mediaobject>
         </figure>
 
-
+        <para>Tere we are. The above objective has been achieved.</para>
     </section>
 
     <section>

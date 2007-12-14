@@ -11,11 +11,12 @@
         </keywordset>
     </chapterinfo>
     <title>Test Driven Process Development</title>
-
+    
     <para> One of the most important advantages of JBoss jBPM&apos;s lightweight approach to BPM
         and workflow management is that developers can easily leverage their usual programming
-        skills and techniques. One of these well-known techniques is unit testing and test driven
-        development. In this chapter we will show how developers, making use of the JBoss jBPM GPD
+        skills and techniques. One of these well-known techniques is Unit Testing and Test Driven
+        Development. </para>
+       <para>In this chapter we will show how developers, making use of the JBoss jBPM GPD,
         can use a technique we have baptized <property>Test Driven Process Development</property> to
         create process definitions and test their correctness. </para>
 

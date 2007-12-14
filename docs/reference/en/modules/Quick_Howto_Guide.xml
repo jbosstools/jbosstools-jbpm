@@ -12,6 +12,7 @@
     </chapterinfo>
     <title>Quick Howto Guide</title>
 
+    <para>This chapter contains additional information related to the <property>JBoss jBPM</property>.</para>
     <section>
         <title>Change the Default Core jBPM Installation</title>
 

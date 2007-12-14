@@ -10,7 +10,7 @@
 		</keywordset>
 	</chapterinfo>
 	<title>A Guided Tour of JBoss jBPM GPD</title>
-	<para>In this chapter we suggest a step-by-step walk-through of creating and editing your own
+	<para>In this chapter we suggest a step-by-step walk-through of creating and configuring your own
 		simple process. Let’s start with organizing a new jBPM project.</para>
 	<para>A wizard for creating a jBPM project is included in the GPD plugin. We have opted to
 		create a project based on a template already containing a number of advanced artifacts that
@@ -174,7 +174,7 @@
 			<section id="adding_transitions">
 				<?dbhtml filename="adding_transitions.html"?>
 				<title>Adding Transitions</title>
-				<para>Then we will connect the nodes with transitions. For that select the <emphasis>
+				<para>Then, we will connect the nodes with transitions. To do that select the <emphasis>
 						<property>Transition</property>
 					</emphasis> tool in the tools palette and click on the <emphasis>
 						<property>Start</property>
@@ -197,128 +197,8 @@
 				</figure>
 			</section>
 		</section>
-		<para>Now the simple process is already defined and we can examine it more carefully. For
+		<para>As the simple process is already defined, we can examine it more carefully. For
 			that JBDS provides a number of multiple editors and viewes.</para>
 	</section>
-	<section id="the_outline_view">
-		<?dbhtml filename="the_outline_view.html"?>
-		<title>The Outline View</title>
-		<para>To have a way to quickly see an outline of the process use the JBDS Outline view. If it is not
-			visible select <emphasis>
-				<property>Window &gt; Show view &gt; Outline</property>
-			</emphasis>. It is presented as the classical tree view. Also you can use <emphasis>
-				<property>Overview</property>
-			</emphasis> that comes as a scrollable thumbnail.</para>
-		<figure>
-			<title>The Outline and Overview Views</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour9.png"
-						scale="75"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-	</section>
-	<section id="the_properties_view">
-		<?dbhtml filename="the_properties_view.html"?>
-		<title>The Properties View</title>
-		<para>If the JBDS Properties view is visible (if not select <emphasis>
-				<property>Window &gt; Show view &gt; Properties</property>
-			</emphasis>), the relevant properties of the selected item are shown. Some of these
-			properties may be directly editable in the properties view. An example of a directly
-			editable property is the name property of the process definition. As you can see in the
-			next figure, the name property of the process definition can be changed to <emphasis>
-				<property>jbay</property>
-			</emphasis>. You can also write a description for this property.</para>
-		<figure>
-			<title>The Properties of a Process Definition</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour10.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-		<para>Let&apos;s change the name of the first transition to <emphasis>
-				<property>to_auction</property>
-			</emphasis>. We repeat this name change for the second transition and name it <emphasis>
-				<property>to_end</property>
-			</emphasis>.</para>
-		<figure>
-			<title>Transitions Names</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour11.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-	</section>
-
-
-	<section id="direct_editing">
-		<?dbhtml filename="direct_editing.html"?>
-		<title>Direct Editing</title>
-		<para>Some properties can be directly edited in the graphical editor. One example of this is
-			the <emphasis>
-				<property>Name</property>
-			</emphasis> property of nodes. You can edit this directly by selecting the node of which
-			you want to change the name and then click once inside this node. This enables an editor
-			in the node. We change the name of the node to <emphasis>
-				<property>auction</property>
-			</emphasis>.</para>
-		<figure>
-			<title>Directly Editing the Node Name</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour12.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-	</section>
-	<section id="the_source_view">
-		<?dbhtml filename="the_source_view.html"?>
-		<title>The Source View</title>
-		<para>Now that we have defined a simple process definition, we can have a look at the xml
-			that is being generated under the covers. To see this xml, click on the source tab of
-			the process definition editor.</para>
-		<figure>
-			<title>The Source View</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour13.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-		<para>This source tab is editable, so if you know your way around in jpdl, you can create or
-			tweak your process definitions directly in the xml source.</para>
-	</section>
-	<section id="the_design_view">
-		<?dbhtml filename="the_design_view.html"?>
-		<title>The Design View</title>
-		<para>The file is also editable in <emphasis>
-				<property>Design</property>
-			</emphasis> view as you can see in the next picture:</para>
-		<figure>
-			<title>The Design View</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour14.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-	</section>
-	<section id="the_deployment_view">
-		<?dbhtml filename="the_deployment_view.html"?>
-		<title>The Deployment View</title>
-		<para>The deployment settings of the project you can configure in <emphasis>
-				<property>Deployment</property>
-			</emphasis> view.</para>
-		<figure>
-			<title>The Deployment View</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour15.png"/>
-				</imageobject>
-			</mediaobject>
-		</figure>
-	</section>
+	
 </chapter>
