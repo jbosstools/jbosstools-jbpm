@@ -11,7 +11,7 @@
 	</chapterinfo>
 	<title>A Guided Tour of JBoss jBPM GPD</title>
 	<para>In this chapter we suggest a step-by-step walk-through of creating and configuring your own
-		simple process. Let’s start with organizing a new jBPM project.</para>
+		simple process. Let's start with organizing a new jBPM project.</para>
 	<para>A wizard for creating a jBPM project is included in the GPD plugin. We have opted to
 		create a project based on a template already containing a number of advanced artifacts that
 		we will ignore for this section. In the future we will elaborate this wizard and offer the

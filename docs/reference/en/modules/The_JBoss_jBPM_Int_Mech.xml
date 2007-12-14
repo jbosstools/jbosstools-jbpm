@@ -111,7 +111,7 @@
         <para> Let&apos;s do something about it and add an action to the first transition of our
             sample process. To do this you can use the Actions tab in the Properties Editor that is
             under the graphical canvas. Bring up the popup menu of the action element container and
-            chose New Action as it’s shown on the screenshot below. The other way to add an action
+            chose New Action as it's shown on the screenshot below. The other way to add an action
             to the transition is simply to use the dropdown menu that is available under the action
             icon in the right upper corner of the Properties View.</para>
 
