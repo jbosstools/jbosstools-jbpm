@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="the_views" xreflabel="the_views">
+    <?dbhtml filename="the_views.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>jBPM</keyword>
+        </keywordset>
+    </chapterinfo>
+    
+    <title>The views</title>
+    
+    <para>This chapter will explain you how to work with views and editors provided by JBDS.</para>
+    
+    <section id="the_outline_view">
+        <?dbhtml filename="the_outline_view.html"?>
+        <title>The Outline View</title>
+        <para>To have a way to quickly see an outline of the process use the JBDS Outline view. If it is not
+            visible select <emphasis>
+                <property>Window &gt; Show view &gt; Outline</property>
+            </emphasis>. It is presented as the classical tree view. Also you can use <emphasis>
+                <property>Overview</property>
+            </emphasis> that comes as a scrollable thumbnail.</para>
+        <figure>
+            <title>The Outline and Overview Views</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views1.png"
+                        scale="75"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+    <section id="the_properties_view">
+        <?dbhtml filename="the_properties_view.html"?>
+        <title>The Properties View</title>
+        <para> Here, we dwell on the JBDS <property>Properties view</property>.</para>
+        <para>Notice if it&apos;s not visible you can access it  by navigating <emphasis>
+            <property>Window &gt; Show view &gt; Properties</property>
+        </emphasis>. The view shows the relevant properties of the selected item. Some of these
+            properties may be directly editable in the properties view. An example of a directly
+            editable property is the name property of the process definition. As you can see in the
+            next figure, the name property of the process definition can be changed to <emphasis>
+                <property>jbay</property>
+            </emphasis>. You can also write a description for this property.</para>
+        <figure>
+            <title>The Properties of a Process Definition</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views2.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>Let&apos;s change the name of the first transition to <emphasis>
+            <property>to_auction</property>
+        </emphasis>. We repeat this name change for the second transition and name it <emphasis>
+            <property>to_end</property>
+        </emphasis>.</para>
+        <figure>
+            <title>Transitions Names</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views3.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+    
+    
+    <section id="direct_editing">
+        <?dbhtml filename="direct_editing.html"?>
+        <title>Direct Editing</title>
+        <para>Besides, some properties can be directly edited in the graphical editor. One example of this is
+            the <emphasis>
+                <property>Name</property>
+            </emphasis> property of nodes. You can edit this directly by selecting the node of which
+            you want to change the name and then click once inside this node. This enables an editor
+            in the node. We change the name of the node to <emphasis>
+                <property>auction</property>
+            </emphasis>.</para>
+        <figure>
+            <title>Directly Editing the Node Name</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views4.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+    <section id="the_source_view">
+        <?dbhtml filename="the_source_view.html"?>
+        <title>The Source View</title>
+        <para>Now that we have defined a simple process definition, we can have a look at the xml
+            that is being generated under the covers. To see this xml, click on the source tab of
+            the process definition editor.</para>
+        <figure>
+            <title>The Source View</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views5.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>This source tab is editable, so if you know your way around in jPDL, you can create or
+            tweak your process definitions directly in the xml source.</para>
+    </section>
+    <section id="the_design_view">
+        <?dbhtml filename="the_design_view.html"?>
+        <title>The Design View</title>
+        <para>One more way to edit your file is to use <property>Design view</property> that&apos;s available at the bottom of the file editor.
+            You can see it in the next picture:</para>
+        <figure>
+            <title>The Design View</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views6.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+    <section id="the_deployment_view">
+        <?dbhtml filename="the_deployment_view.html"?>
+        <title>The Deployment View</title>
+        <para>To adjust the deployment settings of the project you should switch to the next tab that opens the
+            <property>Deployment view</property>.</para>
+        <figure>
+            <title>The Deployment View</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views7.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+    <para>As we have already arranged the project, let's pass on to the next step.</para>
+
+</chapter>
