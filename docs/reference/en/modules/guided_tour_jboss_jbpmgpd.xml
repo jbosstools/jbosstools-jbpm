@@ -10,8 +10,8 @@
 		</keywordset>
 	</chapterinfo>
 	<title>A Guided Tour of JBoss jBPM GPD</title>
-	<para>In this chapter we suggest a step-by-step walk-through of creating and configuring your own
-		simple process. Let's start with organizing a new jBPM project.</para>
+	<para>In this chapter we suggest a step-by-step walk-through of creating and configuring your
+		own simple process. Let's try to organize a new jBPM project.</para>
 	<para>A wizard for creating a jBPM project is included in the GPD plugin. We have opted to
 		create a project based on a template already containing a number of advanced artifacts that
 		we will ignore for this section. In the future we will elaborate this wizard and offer the
@@ -37,10 +37,10 @@
 		</figure>
 		<para> Clicking <emphasis>
 				<property>Next</property>
-			</emphasis> brings us to the wizard page where we have to specify the name and location
-			for the project. We choose for example <emphasis>
-				<property>Hello jBPM</property>
-			</emphasis> as the name and accept the default location.</para>
+			</emphasis> brings us to the wizard page where it&apos;s necessary to specify the
+			name and location for the project. We choose, for example, <emphasis>
+				<property>HellojBPM</property>
+			</emphasis> as the name and accept the default location. </para>
 		<figure>
 			<title>Process Name and Location</title>
 			<mediaobject>
@@ -49,9 +49,24 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
+		<para>Thus, our project will be
+			created in the workspace root directory by default. If you want to change the directory
+			for your future project, deselect <emphasis>
+				<property>Use default location</property>
+			</emphasis> and click <emphasis>
+				<property>Browse...</property></emphasis> button to set needed location or simply type it.</para>
+		<para>On the next screen you&apos;ll be prompted to select the core jBPM location that we have defined in the previous chapter.</para>
+		<figure>
+			<title>Process Name and Location</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour2_b.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<para>Clicking on <emphasis>
 				<property>Finish</property>
-			</emphasis> results in the project being created. The wizard creates four source
+			</emphasis> results in the project being generated. The wizard creates four source
 			folders: one for the processes (<emphasis>
 				<property>src/main/jpdl</property>
 			</emphasis>), one for the java sources (<emphasis>
@@ -197,8 +212,8 @@
 				</figure>
 			</section>
 		</section>
-		<para>As the simple process is already defined, we can examine it more carefully. For
-			that JBDS provides a number of multiple editors and viewes.</para>
+		<para>As the simple process is already defined, we can examine it more carefully. For that
+			JBDS provides a number of multiple editors and viewes.</para>
 	</section>
-	
+
 </chapter>
