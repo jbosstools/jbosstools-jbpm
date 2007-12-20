@@ -149,7 +149,9 @@
 			</emphasis> and <emphasis>
 				<property>processdefinition.xml</property>
 			</emphasis>.</para>
-		<para>The first of these two contains the graphical information used by the process
+		<para>The  <emphasis>
+			<property>gpd.xml</property>
+		</emphasis> contains the graphical information used by the process
 			definition editor. The <emphasis>
 				<property>processdefinition.xml</property>
 			</emphasis> file contains the actual process definition info without the graphical
@@ -212,8 +214,7 @@
 				</figure>
 			</section>
 		</section>
-		<para>As the simple process is already defined, we can examine it more carefully. For that
-			JBDS provides a number of multiple editors and viewes.</para>
+		<para>Now, when you&apos;ve got background knowledge of simple project creation, let&apos;s move to more advanced tools.</para>
 	</section>
 
 </chapter>

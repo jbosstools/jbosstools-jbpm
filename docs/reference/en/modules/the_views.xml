@@ -9,7 +9,7 @@
     
     <title>The views</title>
     
-    <para>This chapter will explain you how to work with views and editors provided by JBDS.</para>
+    <para>Here, it will be explained how to work with views and editors provided by JBDS.</para>
     
     <section id="the_outline_view">
         <?dbhtml filename="the_outline_view.html"?>
