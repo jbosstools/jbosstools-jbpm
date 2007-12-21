@@ -98,7 +98,7 @@
 
      <row>
       <entry>
-       <link linkend="the_source_view">Support of XML code view</link>
+       <link linkend="source_mode">Support of XML code view</link>
       </entry>
       <entry>Shows the corresponding XML that&apos;s generated automatically in the Source view of the process
        definition editor when developing the process.</entry>
