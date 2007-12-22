@@ -13,7 +13,8 @@
     <title>Quick Howto Guide</title>
 
     <para>This chapter contains additional information related to the <property>JBoss jBPM</property>.</para>
-    <section>
+    
+    <section id="change_core_jbpm_inst">
         <title>Change the Default Core jBPM Installation</title>
 
         <para> You can change the default <property>jBPM</property> installation by means of the
