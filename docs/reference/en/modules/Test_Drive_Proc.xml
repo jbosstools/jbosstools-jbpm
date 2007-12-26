@@ -53,7 +53,7 @@
         </emphasis></para>
 
     <figure>
-        <title>Call the JUnit Test Class Creation wizard</title>
+        <title>Call the JUnit Test Case Creation wizard</title>
 
         <mediaobject>
             <imageobject>
@@ -64,9 +64,9 @@
 
     <para> And then <emphasis>
             <property>Java &gt; JUnit &gt; JUnit Test Case</property>
-        </emphasis> to call the specialized JUnite Test class creation wizard.</para>
+        </emphasis> to call the specialized JUnite Test case creation wizard.</para>
     <figure>
-        <title>Call the JUnit Test Class Creation wizard</title>
+        <title>Call the JUnit Test Case Creation wizard</title>
 
         <mediaobject>
             <imageobject>
@@ -90,26 +90,27 @@
     <para>By default JUnite 3 version of testing framework is selected. Of course, you can choose
         new advanced JUnit 4 version. In this case you&apos;ll be prompted to add new JUnit
         Library to your build path. To add it automatically just click on the appropriate link.</para>
-    
+
     <figure>
         <title>A First Test Scenario</title>
-        
+
         <mediaobject>
             <imageobject>
                 <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2b.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>
-    
+
     <para>Then, we call the test class <emphasis>
             <property>HelloTest</property>
-    </emphasis> and press <emphasis>
-        <property>Finish</property></emphasis> button to complete.</para>
-    
-    <para> Next, we should write a simple test scenario as shown on the next figure. Let&apos;s study the
-        code of this test case. </para>
+        </emphasis> and press <emphasis>
+            <property>Finish</property>
+        </emphasis> button to complete.</para>
 
-    <figure>
+    <para> Next, we should write a simple test scenario as shown on the next figure. Let&apos;s
+        study the code of this test case. </para>
+
+    <figure id="hello_test">
         <title>A First Test Scenario</title>
 
         <mediaobject>
@@ -159,8 +160,8 @@
     <para> Of course, this simple scenario was not very interesting, but the purpose of it was to
         show how you can reuse your development skills in a very straightforward way when doing
         process development. To see how more interesting processes and process test
-        scenario&apos;s can be developed, we suggest you to read the <property>JBoss jBPM User
-            Guide</property> and to study the API reference. Moreover some more examples will be
-        given later in this book.</para>
+        scenario&apos;s can be developed, we suggest you to read the <ulink
+           url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink> and to
+        study the API reference. Moreover some more examples will be given later in this book.</para>
 
 </chapter>

@@ -191,8 +191,8 @@
                     </imageobject>
                 </mediaobject>
             </figure>
-            <para>Then, as its value in the right column we can put the text <emphasis>This
-                    transition leads to the end state</emphasis>. </para>
+            <para>Then, we can put the text <emphasis>This
+                transition leads to the end state</emphasis> in the right column as its value.</para>
 
             <figure>
                 <title>Comment is added</title>
