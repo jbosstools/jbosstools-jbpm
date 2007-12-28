@@ -1,0 +1,79 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;6.&nbsp;Actions : The JBoss jBPM Integration Mechanism</title><link rel="stylesheet" href="css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="jBPM, , , , "><link rel="start" href="index.html" title="jBPM Tools Reference Guide"><link rel="up" href="index.html" title="jBPM Tools Reference Guide"><link rel="prev" href="Test_Drive_Proc_Development.html" title="Chapter&nbsp;5.&nbsp;Test Driven Process Development"><link rel="next" href="Quick_Howto_Guide.html" title="Chapter&nbsp;7.&nbsp;Quick Howto Guide"><script xmlns="http://www.w3.org/TR/xhtml1/transitional" type="text/javascript" src="script/toggle.js"></script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Actions : The JBoss jBPM Integration Mechanism</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Test_Drive_Proc_Development.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Quick_Howto_Guide.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="The_JBoss_jBPM_Int_Mech"></a>Chapter&nbsp;6.&nbsp;Actions : The JBoss jBPM Integration Mechanism</h2></div></div></div><p> In this chapter we will show how to do software integration with <span class="property">JBoss
+        jBPM</span>. The standard mechanism to implement this is to wrap the functionality you
+        want to integrate in a class that implements the <span class="emphasis"><em>
+            <span class="property">ActionHandler</span>
+        </em></span> interface. In order to demonstrate it let's specify Hello World action for our
+        process.</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e931"></a>6.1.&nbsp;Creating a Hello World Action</h2></div></div></div><p>Each Hello World process should integrate one or more Hello World actions, so this is
+            what we will be doing. We can integrate custom code at different points in the process
+            definition. To do this we have to specify an action handler, represented by an
+            implementation of the <span class="emphasis"><em>
+                <span class="property">ActionHandler</span>
+            </em></span> interface, and attach this piece of code to a particular event. These events
+            are amongst others, going over a transition, leaving or entering nodes, after and before
+            signalling. </p><p> To make things a little bit more concrete, let's create a new class called <span class="emphasis"><em>
+                <span class="property">HelloActionHandler</span>
+            </em></span>. For that firstly we'll create a new package <span class="emphasis"><em>
+                <span class="property">com.jbay.action</span>
+            </em></span> in the <span class="emphasis"><em>
+                <span class="property">src/java/main</span>
+            </em></span> folder of our project. Then, we should call New Class Creation wizard as
+            usual by right-clicking and navigating <span class="emphasis"><em>
+                <span class="property">New &gt; Class</span>
+            </em></span>. </p><div class="figure"><a name="d0e968"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_1.png" alt="Creating HelloActionHendler Class"></div></div><p class="title"><b>Figure&nbsp;6.1.&nbsp;Creating HelloActionHendler Class</b></p></div><br class="figure-break"><p>Notice that two first gaps have been filled automatically. Here, instead of <span class="emphasis"><em>
+                <span class="property">Package</span>
+            </em></span> option <span class="emphasis"><em>
+                <span class="property">Enclose type</span>
+            </em></span> option can be selected where a type in which to enclose a new class should
+            be specified.</p><p>In our case, we leave everything as it is, just type <span class="emphasis"><em>
+                <span class="property">HelloActionHandler</span>
+            </em></span> as a name of new class and add <span class="emphasis"><em>
+                <span class="property">org.jbpm.graph.ActionHendler</span>
+            </em></span> interface as it's shown in the picture above.</p><p>Thus, our <span class="emphasis"><em>
+                <span class="property">HelloActionHandler</span>
+            </em></span> implements the <span class="emphasis"><em>
+                <span class="property">ActionHandler</span>
+            </em></span> interface including the <span class="emphasis"><em>
+                <span class="property">execute</span>
+            </em></span> method as shown in the next figure. Here, we add a variable named <span class="emphasis"><em>
+                <span class="property">greeting</span>
+            </em></span> to the collection of process variables and put     a message in it :
+                <span class="emphasis"><em>"Hello from ActionHandler"</em></span>. </p><div class="figure"><a name="d0e1031"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png" alt="A Simple Hello Action"></div></div><p class="title"><b>Figure&nbsp;6.2.&nbsp;A Simple Hello Action</b></p></div><br class="figure-break"><p>Now, as we have <span class="emphasis"><em>
+                <span class="property">HelloActionHandler</span>
+            </em></span> class defined, let's explore how we can handle it.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1045"></a>6.2.&nbsp;Integrating the Hello World Action</h2></div></div></div><p>The main purpose of this chapter is to provide you with the steps associating our
+            Hello World action with a particular event and test the correctness of our actions as
+            well.</p><p> As good Testcity citizens we will first create a Unit Test that proves the behaviour
+            we want to achieve by adding the <span class="emphasis"><em>
+                <span class="property">ActionHandler</span>
+            </em></span> to the process. So we implement another test.</p><p>At first, let's return to the
+               code we already saw <a class="link" href="Test_Drive_Proc_Development.html#hello_test" title="Figure&nbsp;5.6.&nbsp;A First Test Scenario">in the previous chapter</a> and add new test method <span class="emphasis"><em>
+                   <span class="property">testActionHendler</span></em></span> to it. </p><div class="figure"><a name="d0e1068"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_3.png" alt="Create the Hello Action Test"></div></div><p class="title"><b>Figure&nbsp;6.3.&nbsp;Create the Hello Action Test</b></p></div><br class="figure-break"><p>We assert
+            that no variable called <span class="emphasis"><em>
+                <span class="property">greeting</span>
+            </em></span> exist. Then we give the process a signal to move it to the auction state. We
+            want to associate the execution of the action with the event of going over the
+            transition from the start state to the auction state. So after the signal, the process
+            should be in the auction state as in the previous scenario. But moreover, the <span class="emphasis"><em>
+                <span class="property">greeting</span>
+            </em></span> variable should exist and contain the string "Hello from
+            ActionHandler". That's what we assert in the last lines of the test
+            method.</p><p> Running the tests now results in a failure. The point is that we did not associate
+            the action with any particular event in the process definition, so the process variable
+            did not get set. </p><div class="figure"><a name="d0e1090"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_4.png" alt="Test Results Before Integration"></div></div><p class="title"><b>Figure&nbsp;6.4.&nbsp;Test Results Before Integration</b></p></div><br class="figure-break"><p> Let's do something about it and add an action to the first transition of our
+            sample process. To do this you can use the Actions tab in the Properties Editor that is
+            under the graphical canvas. Bring up the popup menu of the action element container and
+            chose New Action as it's shown on the figure below. The other way to add an action
+            to the transition is simply to use the dropdown menu that is available under the action
+            icon in the right upper corner of the Properties View.</p><div class="figure"><a name="d0e1098"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png" alt="Adding an Action to a Transition"></div></div><p class="title"><b>Figure&nbsp;6.5.&nbsp;Adding an Action to a Transition</b></p></div><br class="figure-break"><p>After adding the action a tabbed view with three pages will appear.</p><div class="figure"><a name="d0e1106"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png" alt="Configuration Dialog for an Action"></div></div><p class="title"><b>Figure&nbsp;6.6.&nbsp;Configuration Dialog for an Action</b></p></div><br class="figure-break"><p>The first of these three pages allows you to give the Action a name. The last page
+            contains some advanced attributes such as whether the Action is asynchronous. The
+            Details page is the most important. It allows to choose and configure the actual action
+            handler implementation. </p><div class="figure"><a name="d0e1114"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png" alt="The Details page of an Action Configuration Dialog"></div></div><p class="title"><b>Figure&nbsp;6.7.&nbsp;The Details page of an Action Configuration Dialog</b></p></div><br class="figure-break"><p>Clicking on the <span class="emphasis"><em>
+                <span class="property">Search...</span>
+            </em></span> button brings us to a Choose Class dialog.</p><div class="figure"><a name="d0e1128"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_8.png" alt="The Choose Action Handler Dialog"></div></div><p class="title"><b>Figure&nbsp;6.8.&nbsp;The Choose Action Handler Dialog</b></p></div><br class="figure-break"><p> We choose our previously created 'HelloActionHandler' class and
+            push the <span class="property">OK</span> button. After the selection of the action handler for
+            the action, we can run the test and observe it gives us a green light.</p><div class="figure"><a name="d0e1139"></a><div class="figure-contents"><div class="mediaobject"><img src="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_10.png" alt="Test Results"></div></div><p class="title"><b>Figure&nbsp;6.9.&nbsp;Test Results</b></p></div><br class="figure-break"><p>Tere we are. The above objective has been achieved.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1147"></a>6.3.&nbsp; Integration Points</h2></div></div></div><p> The different integration points in a process definition are thoroughly documented in
+            the <a class="ulink" href="http://docs.jboss.com/jbpm/v3/userguide/" target="_top">JBoss jBPM User Guide</a>. Instance nodes can contain many action
+            elements. Each of these will appear in the Action element list of the Actions tab. But
+            each Action also has a properties view of itself. You can navigate to this view by
+            selecting the added Action in the outline view. </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Test_Drive_Proc_Development.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Quick_Howto_Guide.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Test Driven Process Development&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Quick Howto Guide</td></tr></table></div></body></html>

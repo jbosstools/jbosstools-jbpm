@@ -73,7 +73,7 @@
                 <property>execute</property>
             </emphasis> method as shown in the next figure. Here, we add a variable named <emphasis>
                 <property>greeting</property>
-            </emphasis> to the collection of process variables and puts a message in it :
+            </emphasis> to the collection of process variables and put     a message in it :
                 <emphasis>&quot;Hello from ActionHandler&quot;</emphasis>. </para>
 
         <figure>

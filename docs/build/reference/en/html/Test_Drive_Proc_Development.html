@@ -1,0 +1,48 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;5.&nbsp;Test Driven Process Development</title><link rel="stylesheet" href="css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="jBPM, , , , "><link rel="start" href="index.html" title="jBPM Tools Reference Guide"><link rel="up" href="index.html" title="jBPM Tools Reference Guide"><link rel="prev" href="the_views.html" title="Chapter&nbsp;4.&nbsp;The views"><link rel="next" href="The_JBoss_jBPM_Int_Mech.html" title="Chapter&nbsp;6.&nbsp;Actions : The JBoss jBPM Integration Mechanism"><script xmlns="http://www.w3.org/TR/xhtml1/transitional" type="text/javascript" src="script/toggle.js"></script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;5.&nbsp;Test Driven Process Development</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="the_views.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="The_JBoss_jBPM_Int_Mech.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="Test_Drive_Proc_Development"></a>Chapter&nbsp;5.&nbsp;Test Driven Process Development</h2></div></div></div><p> One of the most important advantages of JBoss jBPM's lightweight approach to BPM
+        and workflow management is that developers can easily leverage their usual programming
+        skills and techniques. One of these well-known techniques is Unit Testing and Test Driven
+        Development. </p><p>In this chapter we will show how developers, making use of the JBoss jBPM GPD, can use a
+        technique we have baptized <span class="property">Test Driven Process Development</span> to create
+        process definitions and test their correctness. </p><p> When creating the <span class="emphasis"><em>
+            <span class="property">HellojBPM</span>
+        </em></span> project the Project Creation wizard has already put in place all the library
+        requirements we need to start writing the jBPM unit tests. They are contained in the jBPM
+        Library container and the most important of them is the <span class="emphasis"><em>
+            <span class="property">.jar</span>
+        </em></span> file containing the core jBPM classes. While working on the project you could
+        find them all in the Package Explorer.</p><div class="figure"><a name="d0e777"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc.png" alt="The jBPM Libraries"></div></div><p class="title"><b>Figure&nbsp;5.1.&nbsp;The jBPM Libraries</b></p></div><br class="figure-break"><p>It must be noted that it is possible to change the location of the core jBPM installation
+        by changing the preference settings. More on this <a class="link" href="Quick_Howto_Guide.html#change_core_jbpm_inst" title="7.1.&nbsp;Change the Default Core jBPM Installation">see
+            later</a> in this book.</p><p> With that extra knowledge on the project settings, you can create your first test. To do
+        this, we create the <span class="emphasis"><em>
+            <span class="property">com.jbay</span>
+        </em></span> package in the <span class="emphasis"><em>
+            <span class="property">test/java</span>
+        </em></span> source folder. Then we bring up the context menu on this package and select <span class="emphasis"><em>
+            <span class="property">New &gt; Other...</span>
+        </em></span></p><div class="figure"><a name="d0e807"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_1a.png" alt="Call the JUnit Test Case Creation wizard"></div></div><p class="title"><b>Figure&nbsp;5.2.&nbsp;Call the JUnit Test Case Creation wizard</b></p></div><br class="figure-break"><p> And then <span class="emphasis"><em>
+            <span class="property">Java &gt; JUnit &gt; JUnit Test Case</span>
+        </em></span> to call the specialized JUnite Test case creation wizard.</p><div class="figure"><a name="d0e821"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_1b.png" alt="Call the JUnit Test Case Creation wizard"></div></div><p class="title"><b>Figure&nbsp;5.3.&nbsp;Call the JUnit Test Case Creation wizard</b></p></div><br class="figure-break"><p>The wizard looks as follows:</p><div class="figure"><a name="d0e829"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_2a.png" alt="Create Test Dialog"></div></div><p class="title"><b>Figure&nbsp;5.4.&nbsp;Create Test Dialog</b></p></div><br class="figure-break"><p>By default JUnite 3 version of testing framework is selected. Of course, you can choose
+        new advanced JUnit 4 version. In this case you'll be prompted to add new JUnit
+        Library to your build path. To add it automatically just click on the appropriate link.</p><div class="figure"><a name="d0e837"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_2b.png" alt="A First Test Scenario"></div></div><p class="title"><b>Figure&nbsp;5.5.&nbsp;A First Test Scenario</b></p></div><br class="figure-break"><p>Then, we call the test class <span class="emphasis"><em>
+            <span class="property">HelloTest</span>
+        </em></span> and press <span class="emphasis"><em>
+            <span class="property">Finish</span>
+        </em></span> button to complete.</p><p> Next, we should write a simple test scenario as shown on the next figure. Let's
+        study the code of this test case. </p><div class="figure"><a name="hello_test"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_3.png" alt="A First Test Scenario"></div></div><p class="title"><b>Figure&nbsp;5.6.&nbsp;A First Test Scenario</b></p></div><br class="figure-break"><p>In the first line of the method, a jBPM process archive object is created. We use a
+        constructor accepting the filename of the archive. In our case it is the <span class="emphasis"><em>
+            <span class="property">hello</span>
+        </em></span> file we created earlier and which lives in the <span class="emphasis"><em>
+            <span class="property">src/main/jpdl</span>
+        </em></span> folder of our project. After asserting that this object is really created, we
+        extract a process definition object from it. This object is fed to the constructor of a
+        process instance object. We have a process instance object, but this process is not yet
+        started, so we can safely assert that its root token still resides in the start node. After
+        signalling the token will move to the next state and the process will be in the <span class="emphasis"><em>
+            <span class="property">auction</span>
+        </em></span> state. Finally another signal will end the process. </p><p> After writing this test we can check whether it works as expected by running it .</p><div class="figure"><a name="d0e887"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_4.png" alt="Running the Process Test"></div></div><p class="title"><b>Figure&nbsp;5.7.&nbsp;Running the Process Test</b></p></div><br class="figure-break"><p>All went well as we have a green light:</p><div class="figure"><a name="d0e895"></a><div class="figure-contents"><div class="mediaobject"><img src="images/Test_Drive_Proc/test_driv_proc_5.png" alt="Successful Test Run"></div></div><p class="title"><b>Figure&nbsp;5.8.&nbsp;Successful Test Run</b></p></div><br class="figure-break"><p> Of course, this simple scenario was not very interesting, but the purpose of it was to
+        show how you can reuse your development skills in a very straightforward way when doing
+        process development. To see how more interesting processes and process test
+        scenario's can be developed, we suggest you to read the <a class="ulink" href="http://docs.jboss.com/jbpm/v3/userguide/" target="_top">JBoss jBPM User Guide</a> and to
+        study the API reference. Moreover some more examples will be given later in this book.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="the_views.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="The_JBoss_jBPM_Int_Mech.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;4.&nbsp;The views&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;6.&nbsp;Actions : The JBoss jBPM Integration Mechanism</td></tr></table></div></body></html>
