@@ -89,8 +89,8 @@
             </mediaobject>
         </figure>
 
-        <para>The <property>General</property> page is a place where you can specify the name of
-            a Task and its description. For instance, let it be <emphasis>
+        <para>The <property>General</property> page is a place where you can specify the name of a
+            Task and its description. For instance, let it be <emphasis>
                 <property>approve oder</property>
             </emphasis> with appropriate description that you can see in the figure below.</para>
 
@@ -108,8 +108,9 @@
             that is a mandatory property for the Task. The due date is the date on which the task
             should be accomplished. Here you can also set a Task priority as well as signalling,
             notifying or blocking. The <emphasis>
-                <property>Blocking</property></emphasis> attribute indicates that the process will not be
-            able to continue if this task is still unaccomplished. The <emphasis>
+                <property>Blocking</property>
+            </emphasis> attribute indicates that the process will not be able to continue if this
+            task is still unaccomplished. The <emphasis>
                 <property>Generate Form...</property>
             </emphasis> button is for creating a simple task form that can be rendered by the jBPM
             console.</para>
@@ -126,11 +127,12 @@
 
         <para>For our example, we specify the due date as 2 business days, choose the high priority
             and also check the <emphasis>
-                <property>Signalling</property></emphasis> and <emphasis>
-                    <property>Notify</property></emphasis> attributes. It means that the Task should be
-            accomplished in 2 business days and the assignee will be notified by email when the task
-            is assigned. To specify how the Task should be assigned switch on to the
-                <property>Assignment</property> page.</para>
+                <property>Signalling</property>
+            </emphasis> and <emphasis>
+                <property>Notify</property>
+            </emphasis> attributes. It means that the Task should be accomplished in 2 business days
+            and the assignee will be notified by email when the task is assigned. To specify how the
+            Task should be assigned switch on to the <property>Assignment</property> page.</para>
 
         <figure>
             <title>The Task Assignment Page</title>
@@ -155,8 +157,8 @@
             </mediaobject>
         </figure>
 
-        <para>In our case, the assignee will be reminded by email after two business hours and continue
-            to get reminding every business hour after that.</para>
+        <para>In our case, the assignee will be reminded by email after two business hours and
+            continue to get reminding every business hour after that.</para>
         <para>In the next figure you can see our configuring generated into XML.</para>
         <figure>
             <title>The Task Reminder Page</title>
@@ -167,7 +169,10 @@
                 </imageobject>
             </mediaobject>
         </figure>
-        
+
     </section>
 
+    <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
+        workflow on the whole. Besides, for additional information you are welcome on <ulink
+            url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=217">our forum</ulink>.</para>
 </chapter>

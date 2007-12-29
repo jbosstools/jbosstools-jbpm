@@ -89,8 +89,10 @@
 
     <para>By default JUnite 3 version of testing framework is selected. Of course, you can choose
         new advanced JUnit 4 version. In this case you&apos;ll be prompted to add new JUnit
-        Library to your build path. To add it automatically just click on the appropriate link. In the <emphasis>
-            <property>Class under test</property></emphasis> section you can specify the class to test.</para>
+        Library to your build path. To add it automatically just click on the appropriate link. In
+        the <emphasis>
+            <property>Class under test</property>
+        </emphasis> section you can specify the class to test.</para>
 
     <figure>
         <title>A First Test Scenario</title>
@@ -162,7 +164,10 @@
         show how you can reuse your development skills in a very straightforward way when doing
         process development. To see how more interesting processes and process test
         scenario&apos;s can be developed, we suggest you to read the <ulink
-           url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink> and to
-        study the API reference. Moreover some more examples will be given later in this book.</para>
+            url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink> and to
+        study the API reference. You can find it in the jBPM download folder. (To get started we
+        downloaded jbpm-jpdl-3.2.2 in <link linkend="jboss_jbpm_runtime_installation">the second
+            chapter</link>. You should just remember where you extracted it.) All we&apos;ve mentioned are in the &apos;javadoc- *&apos; subfolders of the &apos;doc&apos; folder.
+        Moreover, some more examples will be given later in this book.</para>
 
 </chapter>
