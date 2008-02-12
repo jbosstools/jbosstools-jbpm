@@ -36,8 +36,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png"
-                        scalefit="1"/>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -51,14 +50,14 @@
         <para> You can add Tasks to Task nodes and then configure them in a similar manner as the
             Action configuration mechanism. Let&apos;s consider the process definition similar
             to the previous one that contains three nodes: Start state, Task node and End state. The
-            Properties view for selected Task node includes several tabs. </para>
+            <property>Properties view</property> for selected Task node includes several tabs. </para>
 
         <figure>
             <title>The Properties View of the selected Task Node</title>
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_2.png"
-                        scalefit="1"/>
+                        scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -71,25 +70,25 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_3.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
 
         <para>Every added Task has its own configuration possibilities. You can access them through
-            the Properties view as well.</para>
+            the <property>Properties view</property> as well.</para>
 
         <figure>
             <title>The Task properties</title>
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_4.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
 
-        <para>The <property>General</property> page is a place where you can specify the name of a
+        <para>The <property>General page</property> is a place where you can specify the name of a
             Task and its description. For instance, let it be <emphasis>
                 <property>approve oder</property>
             </emphasis> with appropriate description that you can see in the figure below.</para>
@@ -99,7 +98,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_5.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -120,7 +119,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_6.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -132,19 +131,19 @@
                 <property>Notify</property>
             </emphasis> attributes. It means that the Task should be accomplished in 2 business days
             and the assignee will be notified by email when the task is assigned. To specify how the
-            Task should be assigned switch on to the <property>Assignment</property> page.</para>
+            Task should be assigned switch on to the <property>Assignment page</property>.</para>
 
         <figure>
             <title>The Task Assignment Page</title>
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_7.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
 
-        <para>On the Reminder page you can specify whether the assignee will be reminded of the task
+        <para>On the <property>Reminder page</property> you can specify whether the assignee will be reminded of the task
             that awaits him.</para>
 
         <figure>
@@ -152,7 +151,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_8.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -165,7 +164,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_9.png"
-                        scalefit="1"/>
+                        scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>

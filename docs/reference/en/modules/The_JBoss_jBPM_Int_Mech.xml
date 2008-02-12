@@ -32,15 +32,15 @@
             signalling. </para>
 
         <para> To make things a little bit more concrete, let&apos;s create a new class called <emphasis>
-                <property>HelloActionHandler</property>
-            </emphasis>. For that firstly we&apos;ll create a new package <emphasis>
+                <property>HelloActionHandler</property>.
+            </emphasis> For that firstly we&apos;ll create a new package <emphasis>
                 <property>com.jbay.action</property>
             </emphasis> in the <emphasis>
                 <property>src/java/main</property>
             </emphasis> folder of our project. Then, we should call New Class Creation wizard as
             usual by right-clicking and navigating <emphasis>
-                <property>New > Class</property>
-            </emphasis>. </para>
+                <property>New > Class</property>.
+            </emphasis> </para>
 
         <figure>
             <title>Creating HelloActionHendler Class</title>
@@ -81,8 +81,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png"
-                        scale="75"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png" scale="75"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -127,8 +126,8 @@
             transition from the start state to the auction state. So after the signal, the process
             should be in the auction state as in the previous scenario. But moreover, the <emphasis>
                 <property>greeting</property>
-            </emphasis> variable should exist and contain the string &quot;Hello from
-            ActionHandler&quot;. That&apos;s what we assert in the last lines of the test
+            </emphasis> variable should exist and contain the string <emphasis>&quot;Hello from
+            ActionHandler&quot;</emphasis>. That&apos;s what we assert in the last lines of the test
             method.</para>
 
         
@@ -160,7 +159,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png" scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -172,7 +171,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png" scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -187,8 +186,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png"
-                        scale="75"/>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png" scale="80"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -220,7 +218,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_10.png"
-                        scale="75"/>
+                        scale="70"/>
                 </imageobject>
             </mediaobject>
         </figure>

@@ -27,7 +27,7 @@
         Library container and the most important of them is the <emphasis>
             <property>.jar</property>
         </emphasis> file containing the core jBPM classes. While working on the project you could
-        find them all in the Package Explorer.</para>
+        find them all in the <property>Package Explorer</property>.</para>
 
     <figure>
         <title>The jBPM Libraries</title>
@@ -99,7 +99,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2b.png" scale="75"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2b.png"/>
             </imageobject>
         </mediaobject>
     </figure>

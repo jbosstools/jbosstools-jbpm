@@ -136,7 +136,7 @@
 			<mediaobject>
 				<imageobject>
 					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png"
-						scale="75"/>
+						scale="60"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -147,8 +147,8 @@
 			with two .xml files : <emphasis>
 				<property>gpd.xml</property>
 			</emphasis> and <emphasis>
-				<property>processdefinition.xml</property>
-			</emphasis>.</para>
+				<property>processdefinition.xml</property>.
+			</emphasis></para>
 		<para>The  <emphasis>
 			<property>gpd.xml</property>
 		</emphasis> contains the graphical information used by the process
@@ -171,8 +171,8 @@
 				<?dbhtml filename="adding_the_nodes.html"?>
 				<title>Adding the Nodes</title>
 				<para>At first select respectively <emphasis>
-						<property>Start</property>
-					</emphasis>, <emphasis>
+						<property>Start</property>,
+					</emphasis> <emphasis>
 						<property>State</property>
 					</emphasis> and <emphasis>
 						<property>End</property>
@@ -182,8 +182,8 @@
 					<title>A Simple Process With Three Nodes</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png"
-								scale="75"/>
+					                <imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png"
+								scale="60"/>
 						</imageobject>
 					</mediaobject>
 				</figure>
@@ -208,7 +208,7 @@
 					<mediaobject>
 						<imageobject>
 							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png"
-								scale="75"/>
+								scale="60"/>
 						</imageobject>
 					</mediaobject>
 				</figure>

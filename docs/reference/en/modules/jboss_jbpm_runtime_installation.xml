@@ -23,8 +23,8 @@
  some situations with Sun-based VMs.</para></note>
  
  <para>Navigate to <emphasis>
-   <property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property>
-  </emphasis>. Here you can add, edit and remove JBoss jBPM installation locations. Click <emphasis>
+   <property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property>.
+  </emphasis> Here you can add, edit and remove JBoss jBPM installation locations. Click <emphasis>
    <property>Add</property>
   </emphasis> button. In the dialog that appeared enter a name for a newly added jBPM runtime and
   point to the correct location of this package on your harddrive. Click <emphasis>
