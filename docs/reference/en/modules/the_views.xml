@@ -19,7 +19,7 @@
         <title>The jPDL Perspective Views and Editors</title>
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/the_views/the_views.png" scale="60"/>
+                <imagedata fileref="images/the_views/the_views_0.png" scale="60"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -40,7 +40,7 @@
             <title>The Overview View</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/the_views/the_views1.png"/>
+                    <imagedata fileref="images/the_views/the_views_1.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -58,7 +58,7 @@
             <title>The Overview</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/the_views/the_views2.png"/>
+                    <imagedata fileref="images/the_views/the_views_2.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -79,7 +79,7 @@
             <title>The Properties View of selected Transition</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/the_views/the_views3.png"/>
+                    <imagedata fileref="images/the_views/the_views_3.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -98,7 +98,7 @@
             <title>The Properties View of Process Definition</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/the_views/the_views4.png"/>
+                    <imagedata fileref="images/the_views/the_views_4.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -127,7 +127,7 @@
                 <title>The Diagram mode</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views5.png"/>
+                        <imagedata fileref="images/the_views/the_views_5.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -153,7 +153,7 @@
                 <title>The Source Mode</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views6.png"/>
+                        <imagedata fileref="images/the_views/the_views_6.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -171,7 +171,7 @@
                 <title>The Design Mode</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views7.png"/>
+                        <imagedata fileref="images/the_views/the_views_7.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -189,7 +189,7 @@
                 <title>Adding a Comment</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views8.png"/>
+                        <imagedata fileref="images/the_views/the_views_8.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -200,7 +200,7 @@
                 <title>Comment is added</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views9.png"/>
+                        <imagedata fileref="images/the_views/the_views_9.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
@@ -218,7 +218,7 @@
                 <title>The Deployment Mode</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata fileref="images/the_views/the_views10.png"/>
+                        <imagedata fileref="images/the_views/the_views_10.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>

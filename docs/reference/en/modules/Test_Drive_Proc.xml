@@ -34,7 +34,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc.png"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -57,7 +57,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1a.png"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -70,7 +70,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1b.png"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_3.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -82,7 +82,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2a.png"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_4.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -99,7 +99,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2b.png"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_5.png"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -118,7 +118,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_3.png" scale="75"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_6.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -144,7 +144,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_4.png" scale="75"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_7.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>
@@ -155,7 +155,7 @@
 
         <mediaobject>
             <imageobject>
-                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_5.png" scale="75"/>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_8.png" scale="75"/>
             </imageobject>
         </mediaobject>
     </figure>

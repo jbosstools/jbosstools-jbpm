@@ -31,7 +31,7 @@
 			<title>New Project Dialog</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour1.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_1.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -45,7 +45,7 @@
 			<title>Process Name and Location</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour2.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_2.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -60,7 +60,7 @@
 			<title>Process Name and Location</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour2_b.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_9.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -82,7 +82,7 @@
 			<title>Layout of the Process Project</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour3.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_3.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -105,7 +105,7 @@
 			<title>The Select Wizard Page</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour4.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_4.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -122,7 +122,7 @@
 			<title>The Create New Process Definion Page</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour5.png"/>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_5.png"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
@@ -135,7 +135,7 @@
 			<title>The Process Definition Editor</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour6.png"
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_6.png"
 						scale="60"/>
 				</imageobject>
 			</mediaobject>
@@ -182,7 +182,7 @@
 					<title>A Simple Process With Three Nodes</title>
 					<mediaobject>
 						<imageobject>
-					                <imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour7.png"
+					                <imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_7.png"
 								scale="60"/>
 						</imageobject>
 					</mediaobject>
@@ -207,7 +207,7 @@
 					<title>A Simple Process With Transitions</title>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour8.png"
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_8.png"
 								scale="60"/>
 						</imageobject>
 					</mediaobject>
