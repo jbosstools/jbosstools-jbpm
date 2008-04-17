@@ -15,13 +15,15 @@
   jBPM</property> (business process management).</para>
  <para>The jBPM plugin (jBPM Designer) is already included in the <property>JBoss Tools</property>.
   To make it work, you should only download the jBPM runtime (<ulink
-   url="http://labs.jboss.com/jbossjbpm/downloads/">jbpm-jpdl-3.2.2</ulink> currently) and specify
-  the directory where you extracted the runtime either when you create a jBPM project or by using
-  the jBPM preference pages.</para>
+   url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=539054s"
+   >jbpm-jpdl-3.2.2</ulink> currently) and specify the directory where you extracted the runtime
+  either when you create a jBPM project or by using the jBPM preference pages.</para>
 
- <note><para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
- some situations with Sun-based VMs.</para></note>
- 
+ <note>
+  <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
+   some situations with Sun-based VMs.</para>
+ </note>
+
  <para>Navigate to <emphasis>
    <property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property>.
   </emphasis> Here you can add, edit and remove JBoss jBPM installation locations. Click <emphasis>

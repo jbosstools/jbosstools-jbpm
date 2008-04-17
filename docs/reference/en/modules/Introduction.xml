@@ -43,7 +43,8 @@
     <para>Write an example process test case</para>
    </listitem>
   </itemizedlist>
-  <para>If you have questions, please feel free to contact Koen Aers (koen.aers@jboss.com) or Tom Baeyens (tom.baeyens@jboss.com) for more
+  <para>If you have questions, please feel free to contact <ulink url="mailto:koen.aers@jboss.com"
+    >Koen Aers</ulink> or <ulink url="mailto:tom.baeyens@jboss.com">Tom Baeyens</ulink> for more
    information.</para>
  </section>
 
@@ -77,7 +78,7 @@
        <link linkend="GuidedTourJBossjBPMGPD">Support of Graphical Process Designer (GPD)</link>
       </entry>
       <entry>Is used for simplifying declarative process development and visualizations of all
-      actions.</entry>
+       actions.</entry>
      </row>
 
      <row>
@@ -100,8 +101,8 @@
       <entry>
        <link linkend="source_mode">Support of XML code view</link>
       </entry>
-      <entry>Shows the corresponding XML that&apos;s generated automatically in the Source view of the process
-       definition editor when developing the process.</entry>
+      <entry>Shows the corresponding XML that&apos;s generated automatically in the Source view
+       of the process definition editor when developing the process.</entry>
      </row>
 
      <row>
