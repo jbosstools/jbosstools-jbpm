@@ -57,7 +57,7 @@
 				<property>Browse...</property></emphasis> button to set needed location or simply type it.</para>
 		<para>On the next screen you&apos;ll be prompted to select the core jBPM location that we have defined in the previous chapter.</para>
 		<figure>
-			<title>Process Name and Location</title>
+			<title>Core jBPM Location Specifying</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_9.png"/>
