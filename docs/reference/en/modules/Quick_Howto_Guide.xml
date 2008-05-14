@@ -42,7 +42,7 @@
         </figure>
     </section>
 
-    <section> <!-- mark as new -->
+    <section revisionflag="added">
         <title>Configuring Task Nodes</title>
 
         <para>Here, we&apos;ll examine how you can configure the Task nodes in jBPM jPDL GPD.</para>
