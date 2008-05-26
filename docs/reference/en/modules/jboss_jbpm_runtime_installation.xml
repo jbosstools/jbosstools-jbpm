@@ -20,6 +20,7 @@
   either when you create a jBPM project or by using the jBPM preference pages.</para>
 
  <note>
+  <title>Note:</title>
   <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
    some situations with Sun-based VMs.</para>
  </note>
