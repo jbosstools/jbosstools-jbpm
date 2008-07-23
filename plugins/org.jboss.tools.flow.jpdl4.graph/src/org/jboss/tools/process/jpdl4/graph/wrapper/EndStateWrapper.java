@@ -2,7 +2,7 @@ package org.jboss.tools.process.jpdl4.graph.wrapper;
 
 import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
-import org.jboss.tools.process.jpdl4.core.EndState;
+import org.jboss.tools.flow.jpdl4.core.EndState;
 
 public class EndStateWrapper extends BaseNodeWrapper {
 

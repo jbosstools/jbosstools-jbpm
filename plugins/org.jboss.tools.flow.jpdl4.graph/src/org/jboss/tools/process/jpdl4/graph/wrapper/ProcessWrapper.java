@@ -2,8 +2,8 @@ package org.jboss.tools.process.jpdl4.graph.wrapper;
 
 import org.jboss.tools.flow.editor.core.AbstractRootWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
-import org.jboss.tools.process.jpdl4.core.Node;
-import org.jboss.tools.process.jpdl4.core.Process;
+import org.jboss.tools.flow.jpdl4.core.Node;
+import org.jboss.tools.flow.jpdl4.core.Process;
 
 public class ProcessWrapper extends AbstractRootWrapper {
 

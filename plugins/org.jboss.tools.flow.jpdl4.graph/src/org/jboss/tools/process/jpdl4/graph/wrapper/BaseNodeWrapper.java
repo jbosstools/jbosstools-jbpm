@@ -3,7 +3,7 @@ package org.jboss.tools.process.jpdl4.graph.wrapper;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
 import org.jboss.tools.flow.editor.core.AbstractNodeWrapper;
-import org.jboss.tools.process.jpdl4.core.Node;
+import org.jboss.tools.flow.jpdl4.core.Node;
 
 public abstract class BaseNodeWrapper extends AbstractNodeWrapper {
 	
