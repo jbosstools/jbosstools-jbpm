@@ -1,0 +1,56 @@
+package org.jboss.tools.process.jpdl4.graph.wrapper;
+
+import org.jboss.tools.flow.editor.core.AbstractRootWrapper;
+import org.jboss.tools.flow.editor.core.NodeWrapper;
+import org.jboss.tools.process.jpdl4.core.Node;
+import org.jboss.tools.process.jpdl4.core.Process;
+
+public class ProcessWrapper extends AbstractRootWrapper {
+
+	private static final long serialVersionUID = 400L;
+
+    public ProcessWrapper() {
+        setElement(new Process());
+    }
+
+    public Process getProcess() {
+        return (Process) getElement();
+    }
+    
+    public String getName() {
+        return getProcess().getName();
+    }
+    
+    public void setName(String name) {
+        getProcess().setName(name);
+    }
+    
+    public Integer getRouterLayout() {
+        Integer routerLayout = (Integer) getProcess().getMetaData("routerLayout");
+        if (routerLayout == null) {
+            return ROUTER_LAYOUT_MANUAL;
+        }
+        return routerLayout;
+    }
+    
+    public void internalSetRouterLayout(Integer routerLayout) {
+        getProcess().setMetaData("routerLayout", routerLayout);
+    }
+    
+    protected void internalAddElement(NodeWrapper element) {
+        Node node = ((BaseNodeWrapper) element).getNode();
+        long id = 0;
+        for (Node n: getProcess().getNodes()) {
+            if (n.getId() > id) {
+                id = n.getId();
+            }
+        }
+        node.setId(++id);
+        getProcess().addNode(node); 
+    }
+
+    protected void internalRemoveElement(NodeWrapper element) {
+        getProcess().removeNode(((BaseNodeWrapper) element).getNode()); 
+    }
+    
+}
