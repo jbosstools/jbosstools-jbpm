@@ -8,7 +8,7 @@
             extensions="jpdl4"
             icon="icons/processH.gif"
             contributorClass="org.jboss.tools.process.editor.GenericActionBarContributor"
-            class="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor"
+            class="org.jboss.tools.flow.jpdl4.graph.editor.JpdlEditor"
             id="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor">
       </editor>
    </extension>

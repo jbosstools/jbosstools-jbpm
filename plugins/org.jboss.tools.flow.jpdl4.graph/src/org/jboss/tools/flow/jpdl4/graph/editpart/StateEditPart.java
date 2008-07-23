@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.graph.editpart;
+package org.jboss.tools.flow.jpdl4.graph.editpart;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -7,7 +7,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.jboss.tools.flow.editor.editpart.ElementEditPart;
 import org.jboss.tools.flow.editor.figure.RoundedRectangleElementFigure;
-import org.jboss.tools.process.jpdl4.graph.Activator;
+import org.jboss.tools.flow.jpdl4.graph.Activator;
 
 public class StateEditPart extends ElementEditPart {
 

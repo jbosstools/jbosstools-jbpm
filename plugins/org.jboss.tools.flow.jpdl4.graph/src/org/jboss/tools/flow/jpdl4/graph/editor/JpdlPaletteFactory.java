@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.graph.editor;
+package org.jboss.tools.flow.jpdl4.graph.editor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.jboss.tools.flow.editor.PaletteFactory;
-import org.jboss.tools.process.jpdl4.graph.Activator;
-import org.jboss.tools.process.jpdl4.graph.wrapper.StartStateWrapper;
-import org.jboss.tools.process.jpdl4.graph.wrapper.StateWrapper;
-import org.jboss.tools.process.jpdl4.graph.wrapper.TransitionWrapperFactory;
+import org.jboss.tools.flow.jpdl4.graph.Activator;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapperFactory;
 
 public class JpdlPaletteFactory extends PaletteFactory {
     

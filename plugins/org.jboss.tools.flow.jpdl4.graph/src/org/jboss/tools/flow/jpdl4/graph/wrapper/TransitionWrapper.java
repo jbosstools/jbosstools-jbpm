@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.graph.wrapper;
+package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
 import java.util.ArrayList;
 import java.util.Iterator;

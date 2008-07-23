@@ -1,12 +1,12 @@
-package org.jboss.tools.process.jpdl4.graph.editpart;
+package org.jboss.tools.flow.jpdl4.graph.editpart;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.jboss.tools.flow.editor.editpart.RootEditPart;
-import org.jboss.tools.process.jpdl4.graph.wrapper.ProcessWrapper;
-import org.jboss.tools.process.jpdl4.graph.wrapper.StartStateWrapper;
-import org.jboss.tools.process.jpdl4.graph.wrapper.StateWrapper;
-import org.jboss.tools.process.jpdl4.graph.wrapper.TransitionWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.ProcessWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapper;
 
 public class JpdlEditPartFactory implements EditPartFactory {
     

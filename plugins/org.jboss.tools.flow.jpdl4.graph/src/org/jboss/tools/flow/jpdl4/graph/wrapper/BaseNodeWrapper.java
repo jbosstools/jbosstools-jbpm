@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.graph.wrapper;
+package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;

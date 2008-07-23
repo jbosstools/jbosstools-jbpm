@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.graph;
+package org.jboss.tools.flow.jpdl4.graph;
 
 /*
  * Copyright 2005 JBoss Inc
