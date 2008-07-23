@@ -1,4 +1,4 @@
-package org.jboss.tools.process.jpdl4.core;
+package org.jboss.tools.flow.jpdl4.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
