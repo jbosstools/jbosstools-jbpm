@@ -2,6 +2,7 @@ package org.jboss.tools.flow.jpdl4.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class Process {
@@ -38,6 +39,16 @@ public class Process {
 	public void removeNode(Node node) {
 		node.setNodeContainer(null);
 		nodes.remove(node);
+	}
+	
+	public StartState getStartState() {
+		for (Iterator<Node> iterator = nodes.iterator(); iterator.hasNext(); ) {
+			Node node = iterator.next();
+			if (node instanceof StartState) {
+				return (StartState)node;
+			}
+		}
+		return null;
 	}
 
 }
