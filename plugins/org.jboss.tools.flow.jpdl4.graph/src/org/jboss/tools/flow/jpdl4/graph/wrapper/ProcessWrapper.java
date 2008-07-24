@@ -4,6 +4,7 @@ import org.jboss.tools.flow.editor.core.AbstractRootWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
 import org.jboss.tools.flow.jpdl4.core.Node;
 import org.jboss.tools.flow.jpdl4.core.Process;
+import org.jboss.tools.flow.jpdl4.core.StartState;
 
 public class ProcessWrapper extends AbstractRootWrapper {
 
@@ -51,6 +52,13 @@ public class ProcessWrapper extends AbstractRootWrapper {
 
     protected void internalRemoveElement(NodeWrapper element) {
         getProcess().removeNode(((BaseNodeWrapper) element).getNode()); 
+    }
+    
+    public boolean acceptsElement(NodeWrapper element) {
+    	if (element.getElement() instanceof StartState) {
+    		return getProcess().getStartState() == null;
+    	}
+    	return super.acceptsElement(element); 
     }
     
 }

@@ -21,8 +21,4 @@ public class StartStateWrapper extends BaseNodeWrapper {
         return false;
     }
 
-    public boolean acceptsOutgoingConnection(AbstractConnectionWrapper connection, NodeWrapper target) {
-        return super.acceptsOutgoingConnection(connection, (BaseNodeWrapper)target)
-        	&& getOutgoingConnections().isEmpty();
-    }
 }

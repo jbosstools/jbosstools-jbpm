@@ -15,11 +15,6 @@ public class EndStateWrapper extends BaseNodeWrapper {
         return (EndState) getElement();
     }
     
-    public boolean acceptsIncomingConnection(AbstractConnectionWrapper connection, NodeWrapper source) {
-        return super.acceptsIncomingConnection(connection, (BaseNodeWrapper)source)
-    	&& getIncomingConnections().isEmpty();
-    }
-
     public boolean acceptsOutgoingConnection(AbstractConnectionWrapper connection, NodeWrapper target) {
         return false;
     }
