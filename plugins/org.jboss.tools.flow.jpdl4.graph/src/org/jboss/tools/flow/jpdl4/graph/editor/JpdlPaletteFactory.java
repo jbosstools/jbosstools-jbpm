@@ -9,6 +9,7 @@ import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.jboss.tools.flow.editor.PaletteFactory;
 import org.jboss.tools.flow.jpdl4.graph.Activator;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapperFactory;
@@ -33,15 +34,25 @@ public class JpdlPaletteFactory extends PaletteFactory {
         entries.add(combined);
         
         combined = new CombinedTemplateCreationEntry(
-            "State",
-            "Create a new State",
-            StateWrapper.class,
-            new SimpleFactory(StateWrapper.class),
-            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif")),
-            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif"))
-        );
+                "State",
+                "Create a new State",
+                StateWrapper.class,
+                new SimpleFactory(StateWrapper.class),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif"))
+            );
         entries.add(combined);
-                          
+                              
+        combined = new CombinedTemplateCreationEntry(
+                "End",
+                "Create a new End State",
+                EndStateWrapper.class,
+                new SimpleFactory(EndStateWrapper.class),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif"))
+            );
+        entries.add(combined);
+                                  
         return entries;
     }
     

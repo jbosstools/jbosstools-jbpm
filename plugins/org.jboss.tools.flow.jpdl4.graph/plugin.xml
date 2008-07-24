@@ -4,10 +4,10 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            name="RuleFlow Editor"
+            name="jPDL4 Editor"
             extensions="jpdl4"
-            icon="icons/processH.gif"
-            contributorClass="org.jboss.tools.process.editor.GenericActionBarContributor"
+            icon="icons/process.gif"
+            contributorClass="org.jboss.tools.flow.editor.GenericActionBarContributor"
             class="org.jboss.tools.flow.jpdl4.graph.editor.JpdlEditor"
             id="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor">
       </editor>
@@ -24,7 +24,7 @@
 	        toolbarPath="Process"
             icon="icons/processV.gif"
             tooltip="Auto layout the process (vertical)"
-            class="org.jboss.tools.process.editor.action.VerticalAutoLayoutAction"
+            class="org.jboss.tools.flow.editor.action.VerticalAutoLayoutAction"
          />
       </editorContribution>
       <editorContribution
@@ -36,7 +36,7 @@
 	        toolbarPath="Process"
             icon="icons/processH.gif"
             tooltip="Auto layout the process (horizontal)"
-            class="org.jboss.tools.process.editor.action.HorizontalAutoLayoutAction"
+            class="org.jboss.tools.flow.editor.action.HorizontalAutoLayoutAction"
          />
       </editorContribution>
    </extension>

@@ -3,6 +3,7 @@ package org.jboss.tools.flow.jpdl4.graph.editpart;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.jboss.tools.flow.editor.editpart.RootEditPart;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.ProcessWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
@@ -18,6 +19,8 @@ public class JpdlEditPartFactory implements EditPartFactory {
             result = new StartStateEditPart();
         } else if (model instanceof StateWrapper) {
             result = new StateEditPart();
+        } else if (model instanceof EndStateWrapper) {
+            result = new EndStateEditPart();
         } else if (model instanceof TransitionWrapper) {
             result = new TransitionEditPart();
         } else {

@@ -10,7 +10,7 @@ import org.jboss.tools.flow.jpdl4.graph.Activator;
 public class EndStateEditPart extends ElementEditPart {
 
     private static final Image ICON = ImageDescriptor.createFromURL(
-        Activator.getDefault().getBundle().getEntry("icons/start.gif")).createImage();
+        Activator.getDefault().getBundle().getEntry("icons/end.gif")).createImage();
     
     protected IFigure createFigure() {
         RectangleElementFigure figure = new RectangleElementFigure();
