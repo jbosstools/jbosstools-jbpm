@@ -1,8 +1,8 @@
 package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
+import org.jboss.tools.flow.common.core.Node;
 import org.jboss.tools.flow.editor.core.AbstractRootWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
-import org.jboss.tools.flow.jpdl4.core.Node;
 import org.jboss.tools.flow.jpdl4.core.Process;
 import org.jboss.tools.flow.jpdl4.core.StartState;
 

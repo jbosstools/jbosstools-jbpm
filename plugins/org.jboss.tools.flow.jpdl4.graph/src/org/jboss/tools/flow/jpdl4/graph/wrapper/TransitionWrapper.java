@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.jboss.tools.flow.common.core.Node;
 import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
-import org.jboss.tools.flow.jpdl4.core.Node;
 import org.jboss.tools.flow.jpdl4.core.Transition;
 
 public class TransitionWrapper extends AbstractConnectionWrapper {
