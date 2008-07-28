@@ -1,5 +1,7 @@
 package org.jboss.tools.flow.jpdl4.core;
 
-public class EndState extends Node {
+import org.jboss.tools.flow.common.core.AbstractNode;
+
+public class EndState extends AbstractNode {
 
 }

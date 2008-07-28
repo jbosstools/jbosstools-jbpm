@@ -6,3 +6,4 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: JBoss, a Division of Red Hat
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.jboss.tools.flow.jpdl4.core
+Require-Bundle: org.jboss.tools.flow.common.core;bundle-version="1.0.0"
