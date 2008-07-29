@@ -7,8 +7,6 @@ import org.jboss.tools.flow.jpdl4.core.StartState;
 
 public class StartStateWrapper extends DefaultNodeWrapper {
 
-    private static final long serialVersionUID = 1L;
-
     public StartStateWrapper() {
         setElement(new StartState());
         setName("Start");

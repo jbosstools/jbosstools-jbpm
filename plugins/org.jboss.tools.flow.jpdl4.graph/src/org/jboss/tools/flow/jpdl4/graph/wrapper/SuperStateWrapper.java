@@ -5,7 +5,6 @@ import org.jboss.tools.flow.common.core.Container;
 import org.jboss.tools.flow.common.core.Node;
 import org.jboss.tools.flow.editor.core.AbstractContainerWrapper;
 import org.jboss.tools.flow.editor.core.ContainerWrapper;
-import org.jboss.tools.flow.editor.core.DefaultNodeWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
 import org.jboss.tools.flow.jpdl4.core.Process;
 import org.jboss.tools.flow.jpdl4.core.StartState;
