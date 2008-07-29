@@ -1,10 +1,11 @@
 package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.jboss.tools.flow.common.core.Container;
 import org.jboss.tools.flow.common.core.Node;
-import org.jboss.tools.flow.common.core.NodeContainer;
 import org.jboss.tools.flow.editor.core.AbstractContainerWrapper;
 import org.jboss.tools.flow.editor.core.ContainerWrapper;
+import org.jboss.tools.flow.editor.core.DefaultNodeWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
 import org.jboss.tools.flow.jpdl4.core.Process;
 import org.jboss.tools.flow.jpdl4.core.StartState;
@@ -32,7 +33,7 @@ public class SuperStateWrapper extends AbstractContainerWrapper {
 	}
 	
 	protected void internalAddElement(NodeWrapper element) {
-        Node node = ((BaseNodeWrapper) element).getNode();
+        Node node = (Node)element.getElement();
         long id = 0;
         for (Node n: getProcess().getNodes()) {
             if (n.getId() > id) {
@@ -40,11 +41,11 @@ public class SuperStateWrapper extends AbstractContainerWrapper {
             }
         }
         node.setId(++id);
-        ((NodeContainer)getParent().getElement()).addNode(node); 
+        ((Container)getParent().getElement()).addNode(node); 
 	}
 
 	protected void internalRemoveElement(NodeWrapper element) {
-        getProcess().removeNode(((BaseNodeWrapper) element).getNode()); 
+        getProcess().removeNode((Node)element.getElement()); 
 	}
 
 	protected Rectangle internalGetConstraint() {

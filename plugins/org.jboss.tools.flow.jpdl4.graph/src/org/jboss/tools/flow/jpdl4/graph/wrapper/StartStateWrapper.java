@@ -1,10 +1,11 @@
 package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
 import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
+import org.jboss.tools.flow.editor.core.DefaultNodeWrapper;
 import org.jboss.tools.flow.editor.core.NodeWrapper;
 import org.jboss.tools.flow.jpdl4.core.StartState;
 
-public class StartStateWrapper extends BaseNodeWrapper {
+public class StartStateWrapper extends DefaultNodeWrapper {
 
     private static final long serialVersionUID = 1L;
 
