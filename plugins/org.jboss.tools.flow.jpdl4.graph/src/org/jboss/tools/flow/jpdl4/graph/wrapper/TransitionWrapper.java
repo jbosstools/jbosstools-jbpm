@@ -25,8 +25,8 @@ public class TransitionWrapper extends AbstractConnectionWrapper {
 	
 	public void connect(NodeWrapper source, NodeWrapper target) {
 		super.connect(source, target);
-		Node from = ((BaseNodeWrapper) getSource()).getNode();
-		Node to = ((BaseNodeWrapper) getTarget()).getNode();
+		Node from = (Node)getSource().getElement();
+		Node to = (Node)getTarget().getElement();
 		setElement(new Transition(from, to));		
 	}
 

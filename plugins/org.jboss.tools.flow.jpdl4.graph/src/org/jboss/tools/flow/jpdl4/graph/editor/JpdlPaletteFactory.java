@@ -12,6 +12,7 @@ import org.jboss.tools.flow.jpdl4.graph.Activator;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.SuperStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapperFactory;
 
 public class JpdlPaletteFactory extends PaletteFactory {
@@ -50,6 +51,16 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 new SimpleFactory(EndStateWrapper.class),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif"))
+            );
+        entries.add(combined);
+                                  
+        combined = new CombinedTemplateCreationEntry(
+                "Super State",
+                "Create a new Super State",
+                SuperStateWrapper.class,
+                new SimpleFactory(SuperStateWrapper.class),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/super.gif")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/super.gif"))
             );
         entries.add(combined);
                                   

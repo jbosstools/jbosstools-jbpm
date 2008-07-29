@@ -37,7 +37,7 @@ public class ProcessWrapper extends AbstractRootWrapper {
     }
     
     protected void internalAddElement(NodeWrapper element) {
-        Node node = ((BaseNodeWrapper) element).getNode();
+        Node node = (Node)element.getElement();
         long id = 0;
         for (Node n: getProcess().getNodes()) {
             if (n.getId() > id) {
@@ -49,7 +49,7 @@ public class ProcessWrapper extends AbstractRootWrapper {
     }
 
     protected void internalRemoveElement(NodeWrapper element) {
-        getProcess().removeNode(((BaseNodeWrapper) element).getNode()); 
+        getProcess().removeNode((Node)element.getElement()); 
     }
     
     public boolean acceptsElement(NodeWrapper element) {
