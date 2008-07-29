@@ -8,8 +8,6 @@ import org.jboss.tools.flow.jpdl4.core.StartState;
 
 public class ProcessWrapper extends AbstractRootWrapper {
 
-	private static final long serialVersionUID = 400L;
-
     public ProcessWrapper() {
         setElement(new Process());
     }
