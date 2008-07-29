@@ -6,7 +6,7 @@ import org.jboss.tools.flow.common.core.AbstractFlow;
 import org.jboss.tools.flow.common.core.Node;
 
 public class Process extends AbstractFlow {
-		
+	
 	public StartState getStartState() {
 		for (Iterator<Node> iterator = getNodes().iterator(); iterator.hasNext(); ) {
 			Node node = iterator.next();
