@@ -7,24 +7,18 @@ import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
 import org.eclipse.gef.palette.ConnectionCreationToolEntry;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
-import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.jboss.tools.flow.editor.PaletteFactory;
-import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
 import org.jboss.tools.flow.jpdl4.graph.Activator;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.SuperStateWrapper;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapperFactory;
+import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapper;
 
 public class JpdlPaletteFactory extends PaletteFactory {
     
-    public JpdlPaletteFactory() {
-        super(new TransitionWrapperFactory());
-    }
-
     protected List<PaletteEntry> createComponentEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();
         
@@ -71,14 +65,15 @@ public class JpdlPaletteFactory extends PaletteFactory {
         ToolEntry tool = new ConnectionCreationToolEntry(
                 "Transition",
                 "Creating a new Transition",
-                new CreationFactory() {
-                    public Object getNewObject() {
-                    	return connectionFactory.createElementConnection();
-                    }
-                    public Object getObjectType() {
-                    	return AbstractConnectionWrapper.class;
-                    }
-                },
+                new SimpleFactory(TransitionWrapper.class),
+//                new CreationFactory() {
+//                    public Object getNewObject() {
+//                    	return new TransitionWrapper();
+//                    }
+//                    public Object getObjectType() {
+//                    	return AbstractConnectionWrapper.class;
+//                    }
+//                },
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif"))
             );
