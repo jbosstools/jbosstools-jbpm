@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
+import org.eclipse.gef.palette.ConnectionCreationToolEntry;
 import org.eclipse.gef.palette.PaletteEntry;
+import org.eclipse.gef.palette.ToolEntry;
+import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.jboss.tools.flow.editor.PaletteFactory;
+import org.jboss.tools.flow.editor.core.AbstractConnectionWrapper;
 import org.jboss.tools.flow.jpdl4.graph.Activator;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
 import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
@@ -64,6 +68,22 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
                                   
+        ToolEntry tool = new ConnectionCreationToolEntry(
+                "Transition",
+                "Creating a new Transition",
+                new CreationFactory() {
+                    public Object getNewObject() {
+                    	return connectionFactory.createElementConnection();
+                    }
+                    public Object getObjectType() {
+                    	return AbstractConnectionWrapper.class;
+                    }
+                },
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif"))
+            );
+        entries.add(tool);
+            
         return entries;
     }
     
