@@ -13,32 +13,4 @@
       </editor>
    </extension>
 
-   <extension
-         point = "org.eclipse.ui.editorActions">
-      <editorContribution
-            id="org.jboss.tools.process.editor.action.VerticalAutoLayoutAction"
-            targetID="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor">
-	     <action
-	        id="org.jboss.tools.process.editor.action.VerticalAutoLayoutAction"
-            label="Auto Layout (Vertical)"
-	        toolbarPath="Process"
-            icon="icons/processV.gif"
-            tooltip="Auto layout the process (vertical)"
-            class="org.jboss.tools.flow.editor.action.VerticalAutoLayoutAction"
-         />
-      </editorContribution>
-      <editorContribution
-            id="org.jboss.tools.process.editor.action.HorizontalAutoLayoutAction"
-            targetID="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor">
-	     <action
-	        id="org.jboss.tools.process.editor.action.HorizontalAutoLayoutAction"
-            label="Auto Layout (Horizontal)"
-	        toolbarPath="Process"
-            icon="icons/processH.gif"
-            tooltip="Auto layout the process (horizontal)"
-            class="org.jboss.tools.flow.editor.action.HorizontalAutoLayoutAction"
-         />
-      </editorContribution>
-   </extension>
-   
 </plugin>
