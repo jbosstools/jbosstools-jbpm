@@ -7,7 +7,7 @@
             name="jPDL4 Editor"
             extensions="jpdl4"
             icon="icons/process.gif"
-            contributorClass="org.jboss.tools.flow.editor.GenericActionBarContributor"
+            contributorClass="org.jboss.tools.flow.common.editor.GenericActionBarContributor"
             class="org.jboss.tools.flow.jpdl4.editor.JpdlEditor"
             id="org.jboss.tools.process.jpdl4.graph.editor.JpdlEditor">
       </editor>
