@@ -2,8 +2,8 @@ package org.jboss.tools.flow.jpdl4.graph.wrapper;
 
 import org.jboss.tools.flow.editor.core.DefaultNodeWrapper;
 import org.jboss.tools.flow.editor.strategy.AcceptsIncomingConnectionStrategy;
-import org.jboss.tools.flow.jpdl4.core.StartState;
 import org.jboss.tools.flow.jpdl4.graph.strategy.StartStateAcceptsIncomingConnectionStrategy;
+import org.jboss.tools.flow.jpdl4.model.StartState;
 
 public class StartStateWrapper extends DefaultNodeWrapper {
 
