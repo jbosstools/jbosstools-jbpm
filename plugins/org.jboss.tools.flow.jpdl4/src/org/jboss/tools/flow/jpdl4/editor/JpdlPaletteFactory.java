@@ -1,4 +1,4 @@
-package org.jboss.tools.flow.jpdl4.graph.editor;
+package org.jboss.tools.flow.jpdl4.editor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.jboss.tools.flow.editor.PaletteFactory;
-import org.jboss.tools.flow.jpdl4.graph.Activator;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.EndStateWrapper;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.StartStateWrapper;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.StateWrapper;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.SuperStateWrapper;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.TransitionWrapper;
+import org.jboss.tools.flow.common.editor.PaletteFactory;
+import org.jboss.tools.flow.jpdl4.Activator;
+import org.jboss.tools.flow.jpdl4.wrapper.EndStateWrapper;
+import org.jboss.tools.flow.jpdl4.wrapper.StartStateWrapper;
+import org.jboss.tools.flow.jpdl4.wrapper.StateWrapper;
+import org.jboss.tools.flow.jpdl4.wrapper.SuperStateWrapper;
+import org.jboss.tools.flow.jpdl4.wrapper.TransitionWrapper;
 
 public class JpdlPaletteFactory extends PaletteFactory {
     

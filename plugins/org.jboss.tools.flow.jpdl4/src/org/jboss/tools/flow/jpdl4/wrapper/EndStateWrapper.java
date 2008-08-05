@@ -1,9 +1,9 @@
-package org.jboss.tools.flow.jpdl4.graph.wrapper;
+package org.jboss.tools.flow.jpdl4.wrapper;
 
-import org.jboss.tools.flow.editor.core.DefaultNodeWrapper;
-import org.jboss.tools.flow.editor.strategy.AcceptsOutgoingConnectionStrategy;
-import org.jboss.tools.flow.jpdl4.graph.strategy.EndStateAcceptsOutgoingConnectionStrategy;
+import org.jboss.tools.flow.common.strategy.AcceptsOutgoingConnectionStrategy;
+import org.jboss.tools.flow.common.wrapper.DefaultNodeWrapper;
 import org.jboss.tools.flow.jpdl4.model.EndState;
+import org.jboss.tools.flow.jpdl4.strategy.EndStateAcceptsOutgoingConnectionStrategy;
 
 public class EndStateWrapper extends DefaultNodeWrapper {
 

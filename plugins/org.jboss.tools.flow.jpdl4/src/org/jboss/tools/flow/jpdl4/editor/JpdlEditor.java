@@ -1,4 +1,4 @@
-package org.jboss.tools.flow.jpdl4.graph.editor;
+package org.jboss.tools.flow.jpdl4.editor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,9 +6,9 @@ import java.io.OutputStream;
 
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.gef.palette.PaletteRoot;
-import org.jboss.tools.flow.editor.GenericModelEditor;
-import org.jboss.tools.flow.jpdl4.graph.editpart.JpdlEditPartFactory;
-import org.jboss.tools.flow.jpdl4.graph.wrapper.ProcessWrapper;
+import org.jboss.tools.flow.common.editor.GenericModelEditor;
+import org.jboss.tools.flow.jpdl4.editpart.JpdlEditPartFactory;
+import org.jboss.tools.flow.jpdl4.wrapper.ProcessWrapper;
 
 public class JpdlEditor extends GenericModelEditor {
 

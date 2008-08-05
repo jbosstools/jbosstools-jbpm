@@ -1,7 +1,7 @@
-package org.jboss.tools.flow.jpdl4.graph.strategy;
+package org.jboss.tools.flow.jpdl4.strategy;
 
 import org.jboss.tools.flow.common.model.Container;
-import org.jboss.tools.flow.editor.strategy.AcceptsElementStrategy;
+import org.jboss.tools.flow.common.strategy.AcceptsElementStrategy;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.StartState;
 

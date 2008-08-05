@@ -1,8 +1,8 @@
-package org.jboss.tools.flow.jpdl4.graph.wrapper;
+package org.jboss.tools.flow.jpdl4.wrapper;
 
-import org.jboss.tools.flow.editor.core.DefaultFlowWrapper;
-import org.jboss.tools.flow.jpdl4.graph.strategy.ProcessAcceptsElementStrategy;
+import org.jboss.tools.flow.common.wrapper.DefaultFlowWrapper;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.strategy.ProcessAcceptsElementStrategy;
 
 public class ProcessWrapper extends DefaultFlowWrapper {
 

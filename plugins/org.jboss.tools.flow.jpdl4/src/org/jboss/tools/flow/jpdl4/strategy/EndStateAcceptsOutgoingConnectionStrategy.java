@@ -1,8 +1,8 @@
-package org.jboss.tools.flow.jpdl4.graph.strategy;
+package org.jboss.tools.flow.jpdl4.strategy;
 
 import org.jboss.tools.flow.common.model.Connection;
 import org.jboss.tools.flow.common.model.Node;
-import org.jboss.tools.flow.editor.strategy.AcceptsOutgoingConnectionStrategy;
+import org.jboss.tools.flow.common.strategy.AcceptsOutgoingConnectionStrategy;
 
 public class EndStateAcceptsOutgoingConnectionStrategy implements AcceptsOutgoingConnectionStrategy {
 
