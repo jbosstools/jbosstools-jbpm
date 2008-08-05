@@ -1,7 +1,7 @@
 package org.jboss.tools.flow.jpdl4.core;
 
-import org.jboss.tools.flow.common.core.DefaultConnection;
-import org.jboss.tools.flow.common.core.Node;
+import org.jboss.tools.flow.common.model.DefaultConnection;
+import org.jboss.tools.flow.common.model.Node;
 
 public class Transition extends DefaultConnection {
 

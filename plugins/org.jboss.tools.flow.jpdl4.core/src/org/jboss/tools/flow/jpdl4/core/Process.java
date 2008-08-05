@@ -2,8 +2,8 @@ package org.jboss.tools.flow.jpdl4.core;
 
 import java.util.Iterator;
 
-import org.jboss.tools.flow.common.core.DefaultFlow;
-import org.jboss.tools.flow.common.core.Node;
+import org.jboss.tools.flow.common.model.DefaultFlow;
+import org.jboss.tools.flow.common.model.Node;
 
 public class Process extends DefaultFlow {
 	
