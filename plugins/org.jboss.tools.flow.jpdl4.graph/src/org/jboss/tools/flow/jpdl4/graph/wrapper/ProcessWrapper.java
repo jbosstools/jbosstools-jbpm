@@ -7,9 +7,11 @@ import org.jboss.tools.flow.jpdl4.graph.strategy.ProcessAcceptsElementStrategy;
 public class ProcessWrapper extends DefaultFlowWrapper {
 
     public ProcessWrapper() {
-        setElement(new Process());
+    	Process process = new Process();
+        setElement(process);
         ProcessAcceptsElementStrategy acceptsElementStrategy = new ProcessAcceptsElementStrategy();
-        acceptsElementStrategy.setContainer((Process)getElement());
+        acceptsElementStrategy.setContainer(process);
+        setAcceptsElementStrategy(acceptsElementStrategy);
     }
 
 }

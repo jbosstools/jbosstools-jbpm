@@ -6,13 +6,9 @@ import org.jboss.tools.flow.jpdl4.core.State;
 public class StateWrapper extends DefaultNodeWrapper {
 
     public StateWrapper() {
-        setElement(new State());
-        getState().setName("State");
+    	State element = new State();
+        setElement(element);
+        element.setName("State");
     }
-    
-    public State getState() {
-        return (State) getElement();
-    }
-    
     
 }
