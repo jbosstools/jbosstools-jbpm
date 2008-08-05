@@ -66,14 +66,6 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Transition",
                 "Creating a new Transition",
                 new SimpleFactory(TransitionWrapper.class),
-//                new CreationFactory() {
-//                    public Object getNewObject() {
-//                    	return new TransitionWrapper();
-//                    }
-//                    public Object getObjectType() {
-//                    	return AbstractConnectionWrapper.class;
-//                    }
-//                },
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/transition.gif"))
             );
