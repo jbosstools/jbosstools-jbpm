@@ -7,8 +7,8 @@ import java.io.OutputStream;
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.jboss.tools.flow.common.editor.GenericModelEditor;
+import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.jpdl4.editpart.JpdlEditPartFactory;
-import org.jboss.tools.flow.jpdl4.wrapper.ProcessWrapper;
 
 public class JpdlEditor extends GenericModelEditor {
 
@@ -21,7 +21,7 @@ public class JpdlEditor extends GenericModelEditor {
     }
 
     protected Object createModel() {
-        return new ProcessWrapper();
+        return ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.process");
     }
     
     protected void writeModel(OutputStream os) throws IOException {

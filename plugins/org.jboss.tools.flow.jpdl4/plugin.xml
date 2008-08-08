@@ -20,5 +20,57 @@
             name="jBPM Process Definition Language">
       </language>
    </extension>
+   <extension
+         point="org.jboss.tools.flow.common.elements">
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Process"
+            id="org.jboss.tools.flow.jpdl4.process"
+            language="org.jboss.tools.flow.jpdl4"
+            name="Process Definition">
+         <flow
+               acceptsElementStrategy="org.jboss.tools.flow.jpdl4.strategy.ProcessAcceptsElementStrategy"></flow>
+      </element>
+      <element
+            class="org.jboss.tools.flow.common.model.DefaultContainer"
+            id="org.jboss.tools.flow.jpdl4.superState"
+            language="org.jboss.tools.flow.jpdl4"
+            name="Super State">
+         <container></container>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.StartState"
+            id="org.jboss.tools.flow.jpdl4.startState"
+            language="org.jboss.tools.flow.jpdl4"
+            name="Start">
+         <node
+               acceptsIncomingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.StartStateAcceptsIncomingConnectionStrategy">
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.EndState"
+            id="org.jboss.tools.flow.jpdl4.endState"
+            language="org.jboss.tools.flow.jpdl4"
+            name="End">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndStateAcceptsOutgoingConnectionStrategy">
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.State"
+            id="org.jboss.tools.flow.jpdl4.state"
+            language="org.jboss.tools.flow.jpdl4"
+            name="State">
+         <node></node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Transition"
+            id="org.jboss.tools.flow.jpdl4.transition"
+            language="org.jboss.tools.flow.jpdl4"
+            name="Transition">
+         <connection>
+            
+         </connection>
+      </element>
+   </extension>
 
 </plugin>
