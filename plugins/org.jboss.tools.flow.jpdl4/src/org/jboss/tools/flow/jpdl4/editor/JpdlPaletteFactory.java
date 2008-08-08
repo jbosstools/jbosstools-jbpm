@@ -11,10 +11,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.jboss.tools.flow.common.editor.PaletteFactory;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.jpdl4.Activator;
-import org.jboss.tools.flow.jpdl4.wrapper.EndStateWrapper;
-import org.jboss.tools.flow.jpdl4.wrapper.StartStateWrapper;
-import org.jboss.tools.flow.jpdl4.wrapper.StateWrapper;
-import org.jboss.tools.flow.jpdl4.wrapper.SuperStateWrapper;
 
 public class JpdlPaletteFactory extends PaletteFactory {
     
@@ -24,7 +20,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
             "Start",
             "Create a new Start State",
-            StartStateWrapper.class,
+            "org.jboss.tools.flow.jpdl4.startState",
             ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.startState"),
             ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/start.gif")),
             ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/start.gif"))
@@ -34,7 +30,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         combined = new CombinedTemplateCreationEntry(
                 "State",
                 "Create a new State",
-                StateWrapper.class,
+                "org.jboss.tools.flow.jpdl4.state",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.state"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/state.gif"))
@@ -44,7 +40,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         combined = new CombinedTemplateCreationEntry(
                 "End",
                 "Create a new End State",
-                EndStateWrapper.class,
+                "org.jboss.tools.flow.jpdl4.endState",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.endState"),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/end.gif"))
@@ -54,7 +50,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         combined = new CombinedTemplateCreationEntry(
                 "Super State",
                 "Create a new Super State",
-                SuperStateWrapper.class,
+                "org.jboss.tools.flow.jpdl4.superState",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.superState"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/super.gif")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/super.gif"))
