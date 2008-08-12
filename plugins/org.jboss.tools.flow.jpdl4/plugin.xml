@@ -24,6 +24,7 @@
          point="org.jboss.tools.flow.common.elements">
       <element
             class="org.jboss.tools.flow.jpdl4.model.Process"
+            figure="icons/process.gif"
             id="org.jboss.tools.flow.jpdl4.process"
             language="org.jboss.tools.flow.jpdl4"
             name="Process Definition">
@@ -32,6 +33,7 @@
       </element>
       <element
             class="org.jboss.tools.flow.common.model.DefaultContainer"
+            figure="icons/super.gif"
             id="org.jboss.tools.flow.jpdl4.superState"
             language="org.jboss.tools.flow.jpdl4"
             name="Super State">
@@ -39,31 +41,46 @@
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.StartState"
+            figure="icons/start.gif"
             id="org.jboss.tools.flow.jpdl4.startState"
             language="org.jboss.tools.flow.jpdl4"
             name="Start">
          <node
                acceptsIncomingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.StartStateAcceptsIncomingConnectionStrategy">
+            <figure>
+               <rectangle></rectangle>
+            </figure>
          </node>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.EndState"
+            figure="icons/end.gif"
             id="org.jboss.tools.flow.jpdl4.endState"
             language="org.jboss.tools.flow.jpdl4"
             name="End">
          <node
                acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndStateAcceptsOutgoingConnectionStrategy">
+            <figure>
+               <rectangle>
+                  
+               </rectangle>
+            </figure>
          </node>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.State"
+            figure="icons/state.gif"
             id="org.jboss.tools.flow.jpdl4.state"
             language="org.jboss.tools.flow.jpdl4"
             name="State">
-         <node></node>
+         <node>
+            <figure>
+               <rounded-rectangle></rounded-rectangle>
+            </figure></node>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.Transition"
+            figure="icons/transition.gif"
             id="org.jboss.tools.flow.jpdl4.transition"
             language="org.jboss.tools.flow.jpdl4"
             name="Transition">

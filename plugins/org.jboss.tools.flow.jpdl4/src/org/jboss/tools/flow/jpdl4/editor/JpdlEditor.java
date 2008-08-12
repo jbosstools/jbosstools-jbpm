@@ -7,13 +7,14 @@ import java.io.OutputStream;
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.jboss.tools.flow.common.editor.GenericModelEditor;
+import org.jboss.tools.flow.common.editpart.DefaultEditPartFactory;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
-import org.jboss.tools.flow.jpdl4.editpart.JpdlEditPartFactory;
 
 public class JpdlEditor extends GenericModelEditor {
 
     protected EditPartFactory createEditPartFactory() {
-        return new JpdlEditPartFactory();
+//        return new JpdlEditPartFactory();
+        return new DefaultEditPartFactory();
     }
 
     protected PaletteRoot createPalette() {
