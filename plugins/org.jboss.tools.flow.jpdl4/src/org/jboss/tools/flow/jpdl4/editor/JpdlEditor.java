@@ -13,7 +13,6 @@ import org.jboss.tools.flow.common.registry.ElementRegistry;
 public class JpdlEditor extends GenericModelEditor {
 
     protected EditPartFactory createEditPartFactory() {
-//        return new JpdlEditPartFactory();
         return new DefaultEditPartFactory();
     }
 
@@ -30,7 +29,6 @@ public class JpdlEditor extends GenericModelEditor {
     }
     
     protected void createModel(InputStream is) {
-        // TODO
         setModel(createModel());
     }
 }
