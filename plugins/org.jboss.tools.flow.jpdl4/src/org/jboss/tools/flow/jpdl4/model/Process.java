@@ -7,6 +7,11 @@ import org.jboss.tools.flow.common.model.Node;
 
 public class Process extends DefaultFlow {
 	
+	public Process() {
+		super();
+		setMetaData("xml", "process-definition");
+	}
+	
 	public StartState getStartState() {
 		for (Iterator<Node> iterator = getNodes().iterator(); iterator.hasNext(); ) {
 			Node node = iterator.next();

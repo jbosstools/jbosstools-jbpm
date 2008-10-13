@@ -5,8 +5,13 @@ import org.jboss.tools.flow.common.model.Node;
 
 public class Transition extends DefaultConnection {
 
+	public Transition() {
+		this(null, null);
+	}
+	
 	public Transition(Node from, Node to) {
 		super(from, to);
+		setMetaData("xml", "transition");
 	}
 	
 }
