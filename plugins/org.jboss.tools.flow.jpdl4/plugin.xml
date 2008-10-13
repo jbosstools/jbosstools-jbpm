@@ -74,7 +74,8 @@
          <node>
             <figure>
                <rounded-rectangle></rounded-rectangle>
-            </figure></node>
+            </figure>
+         </node>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.Transition"
