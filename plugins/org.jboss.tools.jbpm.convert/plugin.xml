@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin> 
+   	<extension point="org.eclipse.ui.exportWizards">
+		<category name="%category.name"
+                  id="org.jboss.tools.jbpm.convert.export.category"/>
+		<wizard name="%wizard.name"
+                icon="icons/sample.gif"
+                category="org.jboss.tools.jbpm.convert.export.category"
+                class="org.jboss.tools.jbpm.convert.b2j.wizard.B2JExportWizard"
+                id="org.jboss.tools.jbpm.convert.export.b2jexportwizard">
+			<description>%wizard.description</description>
+			<selection name="*.bpmn" class="org.eclipse.core.resources.IFile"/>
+		</wizard>
+	</extension>
+
+</plugin>
