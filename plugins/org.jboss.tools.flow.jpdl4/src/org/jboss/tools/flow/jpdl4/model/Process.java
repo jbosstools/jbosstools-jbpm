@@ -7,6 +7,8 @@ import org.jboss.tools.flow.common.model.Node;
 
 public class Process extends DefaultFlow {
 	
+	private Node initial = null;
+	
 	public Process() {
 		super();
 		setMetaData("xml", "process-definition");
@@ -20,6 +22,14 @@ public class Process extends DefaultFlow {
 			}
 		}
 		return null;
+	}
+	
+	public Node getInitial() {
+		return initial;
+	}
+	
+	public void setInitial(Node node) {
+		initial = node;
 	}
 
 }
