@@ -283,8 +283,8 @@ public class BPMN2JPDL extends BPMNTranslator {
 	}
 
 	/*
-	 * Translate a bpmn subprocess to a jpdl processstate and a new jpdl process
-	 * difinition
+	 * Translate a bpmn subprocess to a jpdl process-state and a new jpdl process
+	 * definition
 	 */
 	private void translateSubprocess(Element subProcess, Element element) {
 		Element processRoot = translateGraph(subProcess);

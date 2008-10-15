@@ -90,13 +90,30 @@ public class TranslateHelper {
 		} else {
 			String str = generateProcessName(graph.getParent());
 			if (str == null) {
-				return graph.attributeValue(B2JMessages.Dom_Element_Name);
+				return generateElementName(graph);
 			} else {
 				return str + B2JMessages.Folder_Name_Separator
-						+ graph.attributeValue(B2JMessages.Dom_Element_Name);
+						+ generateElementName(graph);
 			}
 		}
 
+	}
+	
+	/*
+	 * generate a element name
+	 */
+	public static String generateElementName(Element graph){	
+		String name = graph.attributeValue(B2JMessages.Dom_Element_Name);
+		if (name == null || "".equals(name)) {
+			name = "au_gen";
+		}
+		Integer i = nameMap.get(name);
+		if (i == null) {
+			nameMap.put(name, new Integer("1"));
+		} else {
+			nameMap.put(name, ++i);
+		}
+		return name;
 	}
 
 	/*
@@ -109,7 +126,7 @@ public class TranslateHelper {
 		String name = graph.attributeValue(B2JMessages.Dom_Element_Name);
 
 		if (name == null || "".equals(name)) {
-			name = "jboss_autogen";
+			name = "au_gen";
 			isOk = false;
 		}
 		Integer i = nameMap.get(name);

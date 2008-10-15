@@ -129,7 +129,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 
 	public IWizardPage getNextPage(IWizardPage page) {
 		if (page.getName()
-				.equals(B2JMessages.Bpmn_Pool_Choose_WizardPage_Name)) {
+				.equals(B2JMessages.Bpmn_Translate_Message_WizardPage_Name)) {
 			errorList = translateBpmnToStrings();
 			if (errorList.size() == 0) {
 				return locationPage;
