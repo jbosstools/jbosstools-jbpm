@@ -9,11 +9,6 @@ public class Process extends DefaultFlow {
 	
 	private Node initial = null;
 	
-	public Process() {
-		super();
-		setMetaData("xml", "process-definition");
-	}
-	
 	public StartState getStartState() {
 		for (Iterator<Node> iterator = getNodes().iterator(); iterator.hasNext(); ) {
 			Node node = iterator.next();
@@ -31,5 +26,5 @@ public class Process extends DefaultFlow {
 	public void setInitial(Node node) {
 		initial = node;
 	}
-
+	
 }

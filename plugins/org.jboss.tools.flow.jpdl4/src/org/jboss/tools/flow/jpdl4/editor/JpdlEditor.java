@@ -35,4 +35,5 @@ public class JpdlEditor extends GenericModelEditor {
     protected void createModel(InputStream is) {
         setModel(createModel());
     }
+    
 }
