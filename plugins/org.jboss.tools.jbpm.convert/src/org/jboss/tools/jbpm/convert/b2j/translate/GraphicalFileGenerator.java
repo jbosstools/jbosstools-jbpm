@@ -242,4 +242,12 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 
 	}
 
+	public List<Document> getGpdDefs() {
+		return gpdDefs;
+	}
+
+	public void setGpdDefs(List<Document> gpdDefs) {
+		this.gpdDefs = gpdDefs;
+	}
+
 }

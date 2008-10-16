@@ -35,20 +35,22 @@ public class B2JExportWizard extends BpmnToWizard {
 	private List<String> strForProcessList = new ArrayList<String>();
 	private List<String> strForGpdList = new ArrayList<String>();
 	private List<String> generatedFoldersList = new ArrayList<String>();
+	private List<String> generatedGpdFoldersList = new ArrayList<String>();
 
 	public void createGeneratedFile(boolean isOverWrite) {
 		String[] jpdlFolderNames = new String[this.generatedFoldersList.size()];
 
-		int i = 0;
-		for (String name : this.generatedFoldersList) {
-			jpdlFolderNames[i] = name;
-			i++;
-		}
-
 		String location = super.getContainerPath((IContainer) super
 				.getTargetLocationSelection().getFirstElement());
 
+		int i = 0;
 		if (this.strForProcessList.size() > 0) {
+			// get a jpdl folders array from jpdl folder list
+			for (String name : this.generatedFoldersList) {
+				jpdlFolderNames[i] = name;
+				i++;
+			}
+			
 			i = 0;
 			String[] strs = new String[strForProcessList.size()];
 			for (String pro : this.strForProcessList) {
@@ -65,6 +67,12 @@ public class B2JExportWizard extends BpmnToWizard {
 		}
 
 		if (this.strForGpdList.size() > 0) {
+			i = 0;
+			// get a gpd folders array from gpd folder list
+			for (String name : this.generatedGpdFoldersList) {
+				jpdlFolderNames[i] = name;
+				i++;
+			}
 			i = 0;
 			String[] strs = new String[strForGpdList.size()];
 			for (String pro : this.strForGpdList) {
@@ -105,6 +113,8 @@ public class B2JExportWizard extends BpmnToWizard {
 
 		warningList.addAll(translator.getWarnings());
 		errorList.addAll(translator.getErrors());
+		
+		
 
 		// generate jpdl gpd file from *.bpmn_diagram
 		Document bpmnDiagramDocument = null;
@@ -120,7 +130,11 @@ public class B2JExportWizard extends BpmnToWizard {
 				bpmnFileName);
 
 		this.setStrForGpdList(Arrays.asList(generator.translateToStrings()));
-
+			
+		for (Document def : generator.getGpdDefs()) {
+			this.generatedGpdFoldersList.add(def.getRootElement().attributeValue(B2JMessages.Dom_Element_Name));
+		}
+		
 		warningList.addAll(generator.getWarnings());
 		errorList.addAll(generator.getErrors());
 
