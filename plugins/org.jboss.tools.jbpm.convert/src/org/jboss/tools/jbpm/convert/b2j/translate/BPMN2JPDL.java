@@ -426,7 +426,7 @@ public class BPMN2JPDL extends BPMNTranslator {
 		// create a decision
 		Element decision = DomXmlWriter.addElement(element.getParent(),
 				B2JMessages.Jpdl_Decision_Element_Name);
-		String name = activity.attributeValue(B2JMessages.Dom_Element_Name)
+		String name = TranslateHelper.generateElementName(activity)
 				+ B2JMessages.Underline + B2JMessages.Loop_Decision;
 		DomXmlWriter.addAttribute(decision, B2JMessages.Dom_Element_Name, name);
 
