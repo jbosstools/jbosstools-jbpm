@@ -38,18 +38,21 @@ public class JpdlSerializer {
     
     private static void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
-    	buffer.append("\n");
-    	appendPadding(buffer, level);
     	if (element instanceof Transition) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
     		buffer.append("<transition");
     		Transition transition = (Transition)element;
     		if (transition.getTo() != null) {
+    			buffer.append(" ");
         		String value = transition.getTo().getName();
         		value = value == null ? "" : value;
         		buffer.append("to=\"" + value + "\"");
     		}
     		buffer.append(">");
     	} else if (element instanceof EndState) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("<end-state");
     		EndState endState = (EndState)element;
     		if (endState.getName() != null) {
@@ -59,6 +62,8 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof StartState) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("<start-state");
     		StartState startState = (StartState)element;
     		if (startState.getName() != null) {
@@ -68,6 +73,8 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof SuperState) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("<super-state");
     		SuperState superState = (SuperState)element;
     		if (superState.getName() != null) {
@@ -77,6 +84,8 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof State) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("<state");
     		State state = (State)element;
     		if (state.getName() != null) {
@@ -112,19 +121,29 @@ public class JpdlSerializer {
     
     private static void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
-    	buffer.append("\n");
-    	appendPadding(buffer, level);
     	if (element instanceof Transition) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
     		buffer.append("</transition>");
     	} else if (element instanceof EndState) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
     		buffer.append("</end-state>");
     	} else if (element instanceof StartState) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
     		buffer.append("</start-state>");
     	} else if (element instanceof SuperState) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("</super-state>");
     	} else if (element instanceof State) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
     		buffer.append("</state>");
     	} else if (element instanceof Process) {
+        	buffer.append("\n\n");
+        	appendPadding(buffer, level);
     		buffer.append("</process>");
     	}	
     }
@@ -134,14 +153,14 @@ public class JpdlSerializer {
         	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
         	List<NodeWrapper> children = containerWrapper.getElements();
         	for (NodeWrapper nodeWrapper : children) {
-        		appendToBuffer(buffer, nodeWrapper, ++level);
+        		appendToBuffer(buffer, nodeWrapper, level+1);
         	}
         }
         if (wrapper instanceof NodeWrapper) {
         	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
         	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
         	for (ConnectionWrapper connectionWrapper : children) {
-        		appendToBuffer(buffer, connectionWrapper, ++level);
+        		appendToBuffer(buffer, connectionWrapper, level+1);
         	}
         } 
     }

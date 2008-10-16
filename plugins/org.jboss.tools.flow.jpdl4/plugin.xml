@@ -32,7 +32,7 @@
                acceptsElementStrategy="org.jboss.tools.flow.jpdl4.strategy.ProcessAcceptsElementStrategy"></flow>
       </element>
       <element
-            class="org.jboss.tools.flow.common.model.DefaultContainer"
+            class="org.jboss.tools.flow.jpdl4.model.SuperState"
             figure="icons/super.gif"
             id="org.jboss.tools.flow.jpdl4.superState"
             language="org.jboss.tools.flow.jpdl4"
