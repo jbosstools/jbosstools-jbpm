@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %PLUGIN_NAME
-Bundle-SymbolicName: org.jboss.tools.jbpm.convert.bpmnto;singleton:=true
+Bundle-SymbolicName: org.jboss.tools.jbpm.convert;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Localization: plugin
 Bundle-Activator: org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin
