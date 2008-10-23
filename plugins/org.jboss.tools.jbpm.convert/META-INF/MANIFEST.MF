@@ -7,7 +7,7 @@ Bundle-Localization: plugin
 Bundle-Activator: org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.jboss.tools.common;bundle-version="2.0.0"
+ org.jboss.tools.common
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
