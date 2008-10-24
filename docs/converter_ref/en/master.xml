@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3CR3//EN"
+"http://www.oasis-open.org/docbook/xml/4.3CR3/docbookx.dtd"
+
+[<!ENTITY  overview SYSTEM "modules/overview.xml">
+<!ENTITY bpmn2jpdl SYSTEM "modules/bpmn2jpdl.xml">
+]>
+
+<book>
+    
+     <bookinfo>
+         <title>BPMN Convert User Guide</title>
+         <author><firstname>Grid</firstname><surname>Qian</surname><email>fqian@redhat.com</email></author>           
+         <pubdate>October 2008</pubdate>
+	     <copyright>
+	          <year>2008</year>
+	          <holder>JBoss, a division of Red Hat Inc.</holder>
+	     </copyright>
+         <releaseinfo>
+            Version: 3.0.0.beta1
+         </releaseinfo>
+<abstract>
+   <title/>
+       <para>
+           <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/bpmn_convert_guide/pdf/BPMN_Convert_Guide.pdf">PDF version</ulink>
+       </para>
+</abstract>
+
+
+    </bookinfo>
+    
+    <toc/> 
+    &overview;
+    &bpmn2jpdl;
+</book> 
