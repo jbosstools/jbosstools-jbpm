@@ -38,6 +38,9 @@ public class B2JExportWizard extends BpmnToWizard {
 	private List<String> generatedGpdFoldersList = new ArrayList<String>();
 
 	public void createGeneratedFile(boolean isOverWrite) {
+		if(!isOverWrite){
+			return;
+		}
 		String[] jpdlFolderNames = new String[this.generatedFoldersList.size()];
 
 		String location = super.getContainerPath((IContainer) super
@@ -81,7 +84,7 @@ public class B2JExportWizard extends BpmnToWizard {
 			}
 			try {
 				TranslateHelper.createFiles(location, bpmnFileName, strs,
-						jpdlFolderNames, B2JMessages.Gpd_Definition_Name, isOverWrite);
+						jpdlFolderNames, B2JMessages.Gpd_Definition_Name, false);
 			} catch (Exception e) {
 				BpmnToPlugin.getDefault().logError(e.getMessage());
 			}

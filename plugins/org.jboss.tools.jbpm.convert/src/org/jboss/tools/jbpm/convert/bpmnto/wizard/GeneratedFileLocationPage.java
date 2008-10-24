@@ -50,7 +50,7 @@ public class GeneratedFileLocationPage extends WizardPage {
 	private ISelection currentSelection;
 	private Button button;
 	private IWizard wizard;
-	private boolean isOverWrite;
+	private boolean isOverWrite = true;
 
 
 	protected GeneratedFileLocationPage(String pageName, String title,

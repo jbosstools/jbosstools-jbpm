@@ -53,12 +53,15 @@ public class BPMNToUtil {
 	public static File createFile(String parentFolder, String fileName,
 			String inputStr, boolean isOverWrite) throws IOException {
 		File child = new File(parentFolder, fileName);
+		if(isOverWrite){
+			deleteAll(child);
+		}
 		if (inputStr == null) {
-			if (!child.exists() || isOverWrite) {
+			if (!child.exists()) {
 				child.mkdir();
 			}
 		} else {
-			if (!child.exists() || isOverWrite) {
+			if (!child.exists()) {
 				child.createNewFile();
 			}
 			FileWriter childWriter = new FileWriter(child);
@@ -69,6 +72,20 @@ public class BPMNToUtil {
 
 		}
 		return child;
+	}
+
+	public static void deleteAll(File path) {
+		if (!path.exists())
+			return;
+		if (path.isFile()) {
+			path.delete();
+			return;
+		}
+		File[] files = path.listFiles();
+		for (int i = 0; i < files.length; i++) {
+			deleteAll(files[i]);
+		}
+		path.delete();
 	}
 
 	/*

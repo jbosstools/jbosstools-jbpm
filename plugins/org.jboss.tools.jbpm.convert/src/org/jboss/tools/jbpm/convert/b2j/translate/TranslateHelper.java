@@ -65,16 +65,16 @@ public class TranslateHelper {
 		File jpdlFolder = BPMNToUtil.createFile(parentFolder,
 				B2JMessages.Jpdl_Suffix, null, isOverWrite);
 		File diagramFolder = BPMNToUtil.createFile(
-				jpdlFolder.getAbsolutePath(), bpmnFileName, null, isOverWrite);
+				jpdlFolder.getAbsolutePath(), bpmnFileName, null, false);
 
 		File[] files = new File[strsForGenerate.length];
 		File processFolder = null;
 		int i = 0;
 		for (String str : strsForGenerate) {
 			processFolder = BPMNToUtil.createFile(diagramFolder
-					.getAbsolutePath(), fileFolders[i], null, isOverWrite);
+					.getAbsolutePath(), fileFolders[i], null, false);
 			files[i] = BPMNToUtil.createFile(processFolder.getAbsolutePath(),
-					fileName, str, isOverWrite);
+					fileName, str, false);
 			i++;
 		}
 		return files;
