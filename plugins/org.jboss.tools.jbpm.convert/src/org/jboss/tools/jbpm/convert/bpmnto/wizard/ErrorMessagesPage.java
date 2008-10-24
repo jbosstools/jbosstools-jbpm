@@ -31,6 +31,7 @@ public class ErrorMessagesPage extends WizardPage {
 
 	private TableViewer listViewer;
 
+
 	protected ErrorMessagesPage(String pageName, String title, String description) {
 		super(pageName);
 		this.setDescription(description);
@@ -43,7 +44,7 @@ public class ErrorMessagesPage extends WizardPage {
 		createListTitleArea(composite);
 		createListViewer(composite);
 		setControl(composite);
-
+		initializePage();
 	}
 	
 	private Label createListTitleArea(Composite composite) {
@@ -78,11 +79,10 @@ public class ErrorMessagesPage extends WizardPage {
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		return composite;
 	}
-
-	public boolean isPageComplete() {
-		return true;
-	}
 	
+	private void initializePage() {
+		this.setPageComplete(false);
+	}
 
 	public TableViewer getListViewer() {
 		return listViewer;
