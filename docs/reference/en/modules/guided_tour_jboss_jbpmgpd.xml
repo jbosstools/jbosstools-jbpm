@@ -49,13 +49,14 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
-		<para>Thus, our project will be
-			created in the workspace root directory by default. If you want to change the directory
-			for your future project, deselect <emphasis>
+		<para>Thus, our project will be created in the workspace root directory by default. If you
+			want to change the directory for your future project, deselect <emphasis>
 				<property>Use default location</property>
 			</emphasis> and click <emphasis>
-				<property>Browse...</property></emphasis> button to set needed location or simply type it.</para>
-		<para>On the next screen you&apos;ll be prompted to select the core jBPM location that we have defined in the previous chapter.</para>
+				<property>Browse...</property>
+			</emphasis> button to set needed location or simply type it.</para>
+		<para>On the next screen you&apos;ll be prompted to select the core jBPM location that
+			we have defined in the previous chapter.</para>
 		<figure>
 			<title>Core jBPM Location Specifying</title>
 			<mediaobject>
@@ -147,12 +148,11 @@
 			with two .xml files : <emphasis>
 				<property>gpd.xml</property>
 			</emphasis> and <emphasis>
-				<property>processdefinition.xml</property>.
-			</emphasis></para>
-		<para>The  <emphasis>
-			<property>gpd.xml</property>
-		</emphasis> contains the graphical information used by the process
-			definition editor. The <emphasis>
+				<property>processdefinition.xml</property>. </emphasis></para>
+		<para>The <emphasis>
+				<property>gpd.xml</property>
+			</emphasis> contains the graphical information used by the process definition editor.
+			The <emphasis>
 				<property>processdefinition.xml</property>
 			</emphasis> file contains the actual process definition info without the graphical
 			rendering info. At present, the GPD assumes that these two files are siblings. More
@@ -171,8 +171,8 @@
 				<?dbhtml filename="adding_the_nodes.html"?>
 				<title>Adding the Nodes</title>
 				<para>At first select respectively <emphasis>
-						<property>Start</property>,
-					</emphasis> <emphasis>
+						<property>Start</property>, </emphasis>
+					<emphasis>
 						<property>State</property>
 					</emphasis> and <emphasis>
 						<property>End</property>
@@ -182,7 +182,7 @@
 					<title>A Simple Process With Three Nodes</title>
 					<mediaobject>
 						<imageobject>
-					                <imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_7.png"
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_7.png"
 								scale="60"/>
 						</imageobject>
 					</mediaobject>
@@ -212,9 +212,10 @@
 						</imageobject>
 					</mediaobject>
 				</figure>
+				<para>Now, when you&apos;ve got background knowledge of simple project creation,
+					let&apos;s move to more advanced tools.</para>
 			</section>
 		</section>
-		<para>Now, when you&apos;ve got background knowledge of simple project creation, let&apos;s move to more advanced tools.</para>
 	</section>
 
 </chapter>

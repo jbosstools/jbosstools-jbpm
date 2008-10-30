@@ -24,17 +24,16 @@
         </mediaobject>
     </figure>
 
-    <para>As you can see in the picture above, the <property>jPDL perspective</property> contains a complete set of
-        functionality that&apos;s necessary for working on the jBPM project.</para>
+    <para>As you can see in the picture above, the <property>jPDL perspective</property> contains a
+        complete set of functionality that&apos;s necessary for working on the jBPM project.</para>
 
     <section id="the_outline_view">
         <?dbhtml filename="the_outline_view.html"?>
         <title>The Outline View</title>
         <para>To have a way to quickly see an outline of the process use the <emphasis>
-            <property>Outline view</property></emphasis> that is
-            presented as the classical tree. If it is not visible select <emphasis>
-                <property>Window &gt; Show view &gt; Outline</property>.
-            </emphasis></para>
+                <property>Outline view</property>
+            </emphasis> that is presented as the classical tree. If it is not visible select <emphasis>
+                <property>Window &gt; Show view &gt; Outline</property>. </emphasis></para>
 
         <figure>
             <title>The Overview View</title>
@@ -51,8 +50,9 @@
         <title>The Overview</title>
         <para>The main advantage of this view is that it gives visual representation of the whole
             currant-developing process. Besides, the <emphasis>
-                <property>Overview</property></emphasis> comes as a scrollable thumbnail which
-            enables a better navigation of the process structure if it&apos;s too large.</para>
+                <property>Overview</property>
+            </emphasis> comes as a scrollable thumbnail which enables a better navigation of the
+            process structure if it&apos;s too large.</para>
 
         <figure>
             <title>The Overview</title>
@@ -69,8 +69,7 @@
         <title>The Properties View</title>
         <para> Here, we dwell on the JBDS <property>Properties view</property>.</para>
         <para>Notice if it&apos;s not visible you can access it by navigating <emphasis>
-                <property>Window &gt; Show view &gt; Properties</property>.
-            </emphasis></para>
+                <property>Window &gt; Show view &gt; Properties</property>. </emphasis></para>
         <para>The view shows the relevant properties of the selected item in the tabbed form. Every
             item has its own set of properties, which can be directly editable in the Properties
             view or by brining up the context menu.</para>
@@ -86,11 +85,10 @@
 
         <para>For example, on the picture above the Properties view displays all the properties for
             a selected transition. Its name has been changed to <emphasis>
-                <property>to_auction</property>.
-            </emphasis> We&apos;ve done it directly in active General tab of the view. The same
-            way let&apos;s change the name for the second transition to <emphasis>
-                <property>to_end</property>.
-            </emphasis></para>
+                <property>to_auction</property>. </emphasis> We&apos;ve done it directly in
+            active General tab of the view. The same way let&apos;s change the name for the
+            second transition to <emphasis>
+                <property>to_end</property>. </emphasis></para>
         <para>If no one item is selected, the view represents the properties of the whole process
             definition. </para>
 
@@ -104,19 +102,18 @@
         </figure>
 
         <para>In this case, it contains six tabs. The first one is the <emphasis>
-            <property>General</property>.</emphasis> It allows to specify
-            a process name and add necessary description. To illustrate let&apos;s change the process
-            definition name to <emphasis>
-                <property>jbay</property>.
-            </emphasis></para>
+                <property>General</property>.</emphasis> It allows to specify a process name and add
+            necessary description. To illustrate let&apos;s change the process definition name
+            to <emphasis>
+                <property>jbay</property>. </emphasis></para>
     </section>
 
     <section id="jbpm_gpd_editor">
         <?dbhtml filename="direct_editing.html"?>
         <title>The jBPM Graphical Process Designer editor.</title>
-        <para>The <property>jBPM GPD editor</property> includes four modes: Diagram, Deployment, Design and Source, which
-            are available as switchable tabs at the bottom of the editor. Let&apos;s dwell on
-            each of them.</para>
+        <para>The <property>jBPM GPD editor</property> includes four modes: Diagram, Deployment,
+            Design and Source, which are available as switchable tabs at the bottom of the editor.
+            Let&apos;s dwell on each of them.</para>
 
         <section id="the_diagram_mode">
             <title>The Diagram mode</title>
@@ -132,14 +129,13 @@
                 </mediaobject>
             </figure>
 
-            <para>Besides, some properties can be directly edited in the <property>Diagram mode</property> of the
-                graphical editor. One example of this is the <emphasis>
+            <para>Besides, some properties can be directly edited in the <property>Diagram
+                mode</property> of the graphical editor. One example of this is the <emphasis>
                     <property>name</property>
                 </emphasis> property of nodes. You can edit this directly by selecting the node of
                 which you want to change the name and then click once inside this node. This enables
                 an editor in the node. We change the name of the node to <emphasis>
-                    <property>auction</property>.
-                </emphasis></para>
+                    <property>auction</property>. </emphasis></para>
         </section>
 
         <section id="source_mode">
@@ -157,9 +153,9 @@
                     </imageobject>
                 </mediaobject>
             </figure>
-            <para>The <property>Source mode</property> enables to easily manipulate our XML. That is manually inserting
-                and editing necessary elements or attributes. In addition, here you can take
-                advantage of content assist.</para>
+            <para>The <property>Source mode</property> enables to easily manipulate our XML. That is
+                manually inserting and editing necessary elements or attributes. In addition, here
+                you can take advantage of content assist.</para>
         </section>
 
         <section id="design_mode">
@@ -182,8 +178,7 @@
                 directly edited in the second column of the Design mode table.</para>
             <para>For instance, let’s add a comment on the second transition. For that, you should
                 bring up the context menu for it and choose <emphasis>
-                    <property>Add Before > Comment</property>.
-                </emphasis></para>
+                    <property>Add Before > Comment</property>. </emphasis></para>
 
             <figure>
                 <title>Adding a Comment</title>
@@ -193,8 +188,8 @@
                     </imageobject>
                 </mediaobject>
             </figure>
-            <para>Then, we can put the text <emphasis>This
-                transition leads to the end state</emphasis> in the right column as its value.</para>
+            <para>Then, we can put the text <emphasis>This transition leads to the end
+                state</emphasis> in the right column as its value.</para>
 
             <figure>
                 <title>Comment is added</title>
@@ -211,9 +206,10 @@
             <?dbhtml filename="the_deployment_view.html"?>
             <title>The Deployment Mode</title>
             <para>Finally, to adjust the deployment settings of the project you should switch on to
-                the tab that opens the <property>Deployment mode</property>. On the picture below the <property>Deployment mode</property> is
-                performed with default settings. Here, you can easily modify them or, if the
-                settings won&apos;t match your needs, to reset defaults. </para>
+                the tab that opens the <property>Deployment mode</property>. On the picture below
+                the <property>Deployment mode</property> is performed with default settings. Here,
+                you can easily modify them or, if the settings won&apos;t match your needs, to
+                reset defaults. </para>
             <figure>
                 <title>The Deployment Mode</title>
                 <mediaobject>
@@ -227,9 +223,8 @@
                     <property>Test Connections</property>
                 </emphasis> is necessary to make sure whether all your settings are valid before
                 deploying the process.</para>
+            <para>Now that we&apos;ve seen how to work with <property>jPDL
+                perspective</property>, let's pass on to the project testing.</para>
         </section>
-
     </section>
-
-    <para>Now that we&apos;ve seen how to work with <property>jPDL perspective</property>, let's pass on to the project testing.</para>
 </chapter>

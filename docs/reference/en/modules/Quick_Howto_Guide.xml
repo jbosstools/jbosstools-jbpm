@@ -42,7 +42,7 @@
         </figure>
     </section>
 
-    <section revisionflag="added">
+    <section>
         <title>Configuring Task Nodes</title>
 
         <para>Here, we&apos;ll examine how you can configure the Task nodes in jBPM jPDL GPD.</para>
@@ -168,10 +168,8 @@
                 </imageobject>
             </mediaobject>
         </figure>
-
+        <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
+            workflow on the whole. Besides, for additional information you are welcome on <ulink
+                url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=217">our forum</ulink>.</para>
     </section>
-
-    <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-        workflow on the whole. Besides, for additional information you are welcome on <ulink
-            url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=217">our forum</ulink>.</para>
 </chapter>
