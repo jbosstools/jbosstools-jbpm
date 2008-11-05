@@ -52,7 +52,8 @@ public class BpmnPoolsChoicePage extends WizardPage {
 	public BpmnPoolsChoicePage(String pageName, String title, String listTitle) {
 		super(pageName);
 		this.listTitle = listTitle;
-		this.setTitle(title);
+		this.setDescription(title);
+		this.setTitle(listTitle);
 	}
 
 	public void createControl(Composite parent) {
