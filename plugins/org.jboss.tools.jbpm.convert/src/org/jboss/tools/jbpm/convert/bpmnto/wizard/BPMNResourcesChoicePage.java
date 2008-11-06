@@ -13,7 +13,9 @@ package org.jboss.tools.jbpm.convert.bpmnto.wizard;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -32,8 +34,6 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
 import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
-import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
-import org.jboss.tools.jbpm.convert.bpmnto.wizard.ProjectFilter;
 
 /**
  * @author Grid Qian
@@ -41,7 +41,7 @@ import org.jboss.tools.jbpm.convert.bpmnto.wizard.ProjectFilter;
  * the wizardpage used by user to choose the bpmn file
  */
 public class BPMNResourcesChoicePage extends WizardPage {
-
+	
 	private TreeViewer viewer;
 	private ISelection currentSelection;
 	private IWizard wizard;
@@ -132,17 +132,45 @@ public class BPMNResourcesChoicePage extends WizardPage {
 }
 
 class ProjectFilter extends ViewerFilter {
+	private static String BPMN_FILE_EXT = "bpmn";
+	
 	@Override
 	public boolean select(Viewer viewer, Object parent, Object element) {
 		boolean res = false;
 		if (element instanceof IFile) {
 			IFile file = (IFile) element;
-			if (file.getFileExtension().equalsIgnoreCase("bpmn")) {
-				res = true;
+			if (file.getFileExtension().equalsIgnoreCase(BPMN_FILE_EXT)) {
+				res = file.getProject().isAccessible();
 			}
 		}
 		if (element instanceof IContainer) {
-			res = true;
+			IContainer container = (IContainer)element;
+			if (container.getProject().isAccessible()) {
+				res = hasBPMNResources(container);
+			}
+		}
+		return res;
+	}
+	
+	private boolean hasBPMNResources(IContainer container) {
+		boolean res = false;
+		try {
+			IResource[] resources = container.members();
+			for (int i = 0; i < resources.length; i++) {
+				if (resources[i] instanceof IFile
+					&& ((IFile)resources[i]).getFileExtension().equalsIgnoreCase(BPMN_FILE_EXT)) {
+					res = true;
+					break;
+				}
+				if (resources[i] instanceof IContainer) {
+					if (hasBPMNResources((IContainer)resources[i])) {
+						res = true;
+						break;
+					}
+				}
+			}
+		} catch (CoreException ce) {
+			// Ignore
 		}
 		return res;
 	}
