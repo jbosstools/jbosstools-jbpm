@@ -122,6 +122,9 @@ public class GeneratedFileLocationPage extends WizardPage {
 				// Select the parent project of this first bpmn file chosen
 				ITreeSelection node = (ITreeSelection) currentSelection;
 				TreePath[] paths = node.getPaths();
+				if(paths.length == 0) {
+					return;
+				}
 				TreePath projPath = new TreePath(new Object[] { paths[0]
 						.getFirstSegment() });
 				TreeSelection projSel = new TreeSelection(projPath);

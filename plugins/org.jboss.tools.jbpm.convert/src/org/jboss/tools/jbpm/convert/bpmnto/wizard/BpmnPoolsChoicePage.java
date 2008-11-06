@@ -39,7 +39,8 @@ import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
 /**
  * @author Grid Qian
  * 
- * the wizardpage used by user to choose the bpmn pool from a bpmn diagram
+ *         the wizardpage used by user to choose the bpmn pool from a bpmn
+ *         diagram
  */
 public class BpmnPoolsChoicePage extends WizardPage {
 
@@ -161,7 +162,11 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		if (listViewer == null) {
 			return;
 		}
-		listViewer.setInput(idMap.entrySet());
+		if (idMap != null) {
+			listViewer.setInput(idMap.entrySet());
+		} else {
+			listViewer.setInput(null);
+		}
 		wizard = this.getWizard();
 		List<String> poolIdList = ((BpmnToWizard) wizard).getPoolIdList();
 		if (poolIdList.size() == 0) {

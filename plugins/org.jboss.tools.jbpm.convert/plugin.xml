@@ -10,7 +10,6 @@
                 class="org.jboss.tools.jbpm.convert.b2j.wizard.B2JExportWizard"
                 id="org.jboss.tools.jbpm.convert.export.b2jexportwizard">
 			<description>%wizard.description</description>
-			<selection name="*.bpmn" class="org.eclipse.core.resources.IFile"/>
 		</wizard>
 	</extension>
 
