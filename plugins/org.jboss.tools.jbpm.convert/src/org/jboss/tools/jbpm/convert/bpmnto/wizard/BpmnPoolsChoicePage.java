@@ -11,9 +11,7 @@
 
 package org.jboss.tools.jbpm.convert.bpmnto.wizard;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -45,6 +43,8 @@ import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
 public class BpmnPoolsChoicePage extends WizardPage {
 
 	CheckboxTableViewer listViewer;
+	Button selectButton;
+	Button deselectButton;
 	String listTitle;
 	private Map<String, String> idMap;
 
@@ -92,10 +92,19 @@ public class BpmnPoolsChoicePage extends WizardPage {
 					(((BpmnToWizard) wizard)).getPoolIdList().add(
 							((Entry<String, String>) event.getElement())
 									.getKey());
+					deselectButton.setEnabled(true);
+					if ((((BpmnToWizard) wizard)).getPoolIdList().size() == idMap
+							.size()) {
+						selectButton.setEnabled(false);
+					}
 				} else {
 					(((BpmnToWizard) wizard)).getPoolIdList().remove(
 							((Entry<String, String>) event.getElement())
 									.getKey());
+					selectButton.setEnabled(true);
+					if ((((BpmnToWizard) wizard)).getPoolIdList().size() == 0) {
+						deselectButton.setEnabled(false);
+					}
 				}
 				changeComplete();
 			}
@@ -112,12 +121,14 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		buttonComposite.setLayoutData(new GridData(SWT.END, SWT.TOP, true,
 				false));
 
-		Button selectButton = createButton(buttonComposite,
+		selectButton = createButton(buttonComposite,
 				B2JMessages.Label_Select_All, false);
 
 		SelectionListener listener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				listViewer.setAllChecked(true);
+				selectButton.setEnabled(false);
+				deselectButton.setEnabled(true);
 				(((BpmnToWizard) wizard)).getPoolIdList()
 						.addAll(idMap.keySet());
 				changeComplete();
@@ -125,12 +136,14 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		};
 		selectButton.addSelectionListener(listener);
 
-		Button deselectButton = createButton(buttonComposite,
+		deselectButton = createButton(buttonComposite,
 				B2JMessages.Label_Deselect_All, false);
 
 		listener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				listViewer.setAllChecked(false);
+				selectButton.setEnabled(true);
+				deselectButton.setEnabled(false);
 				(((BpmnToWizard) wizard)).getPoolIdList().clear();
 				changeComplete();
 			}
@@ -166,24 +179,13 @@ public class BpmnPoolsChoicePage extends WizardPage {
 			listViewer.setInput(idMap.entrySet());
 		} else {
 			listViewer.setInput(null);
+			return;
 		}
 		wizard = this.getWizard();
-		List<String> poolIdList = ((BpmnToWizard) wizard).getPoolIdList();
-		if (poolIdList.size() == 0) {
-			listViewer.setAllChecked(false);
-		} else {
-			for (String id : poolIdList) {
-				Set<Entry<String, String>> set = idMap.entrySet();
-				Entry<String, String> selectedEntry = null;
-				for (Entry<String, String> entry : set) {
-					if (entry.getKey().equals(id)) {
-						selectedEntry = entry;
-						break;
-					}
-				}
-				listViewer.setChecked(selectedEntry, true);
-			}
-		}
+		(((BpmnToWizard) wizard)).getPoolIdList().addAll(idMap.keySet());
+		listViewer.setAllChecked(true);
+		selectButton.setEnabled(false);
+		deselectButton.setEnabled(true);
 	}
 
 	private Composite createDialogArea(Composite parent) {
