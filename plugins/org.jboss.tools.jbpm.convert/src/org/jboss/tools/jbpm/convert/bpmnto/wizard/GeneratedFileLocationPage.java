@@ -12,6 +12,7 @@
 package org.jboss.tools.jbpm.convert.bpmnto.wizard;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -36,8 +37,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
-import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
-import org.jboss.tools.jbpm.convert.bpmnto.wizard.ProFilter;
 
 /**
  * @author Grid Qian
@@ -180,6 +179,10 @@ public class GeneratedFileLocationPage extends WizardPage {
 class ProFilter extends ViewerFilter {
 	@Override
 	public boolean select(Viewer viewer, Object parent, Object element) {
-		return element instanceof IContainer;
+		if (element instanceof IContainer) {
+			return ((IContainer)element).getProject().isAccessible();
+		} else {
+			return false;
+		}
 	}
 }
