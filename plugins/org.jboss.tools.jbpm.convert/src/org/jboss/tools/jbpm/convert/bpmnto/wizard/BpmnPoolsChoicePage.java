@@ -65,7 +65,6 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		addSelectionButtons(composite);
 		setControl(composite);
 
-		initializePage();
 		initializeViewer();
 	}
 
@@ -167,10 +166,6 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		return button;
 	}
 
-	private void initializePage() {
-		setPageComplete(false);
-	}
-
 	private void initializeViewer() {
 		if (listViewer == null) {
 			return;
@@ -186,6 +181,7 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		listViewer.setAllChecked(true);
 		selectButton.setEnabled(false);
 		deselectButton.setEnabled(true);
+		changeComplete();
 	}
 
 	private Composite createDialogArea(Composite parent) {
