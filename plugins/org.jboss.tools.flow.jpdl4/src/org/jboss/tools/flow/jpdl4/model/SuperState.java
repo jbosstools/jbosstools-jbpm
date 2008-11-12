@@ -4,7 +4,4 @@ import org.jboss.tools.flow.common.model.DefaultContainer;
 
 public class SuperState extends DefaultContainer {
 
-	public SuperState() {
-		setMetaData("xml", "super-state");
-	}
 }
