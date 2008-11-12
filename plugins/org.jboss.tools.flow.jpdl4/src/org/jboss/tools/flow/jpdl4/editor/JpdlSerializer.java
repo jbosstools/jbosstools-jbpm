@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
@@ -25,6 +26,7 @@ public class JpdlSerializer {
     	appendToBuffer(buffer, wrapper, 0);
     	Writer writer = new OutputStreamWriter(os);
     	writer.write(buffer.toString());
+    	writer.close();
     	System.out.println(buffer.toString());
     }
     
@@ -39,10 +41,10 @@ public class JpdlSerializer {
     private static void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
     	if (element instanceof Transition) {
+    		Transition transition = (Transition)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<transition");
-    		Transition transition = (Transition)element;
     		if (transition.getTo() != null) {
     			buffer.append(" ");
         		String value = transition.getTo().getName();
@@ -51,10 +53,10 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof EndState) {
-        	buffer.append("\n\n");
+    		EndState endState = (EndState)element;
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<end-state");
-    		EndState endState = (EndState)element;
     		if (endState.getName() != null) {
     			buffer.append(" ");
     			String value = endState.getName();
@@ -62,10 +64,10 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof StartState) {
-        	buffer.append("\n\n");
+    		StartState startState = (StartState)element;
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<start-state");
-    		StartState startState = (StartState)element;
     		if (startState.getName() != null) {
     			buffer.append(" ");
     			String value = startState.getName();
@@ -73,10 +75,10 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof SuperState) {
-        	buffer.append("\n\n");
+    		SuperState superState = (SuperState)element;
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<super-state");
-    		SuperState superState = (SuperState)element;
     		if (superState.getName() != null) {
     			buffer.append(" ");
     			String value = superState.getName();
@@ -84,10 +86,10 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof State) {
-        	buffer.append("\n\n");
+    		State state = (State)element;
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<state");
-    		State state = (State)element;
     		if (state.getName() != null) {
     			buffer.append(" ");
     			String value = state.getName();
@@ -95,8 +97,8 @@ public class JpdlSerializer {
     		}
     		buffer.append(">");
     	} else if (element instanceof Process) {
-    		buffer.append("<process");
     		Process process = (Process)element;
+    		buffer.append("<process");
     		if (process.getInitial() != null) {
     			buffer.append(" ");
     			String value = process.getInitial().getName();
@@ -134,7 +136,7 @@ public class JpdlSerializer {
         	appendPadding(buffer, level);
     		buffer.append("</start-state>");
     	} else if (element instanceof SuperState) {
-        	buffer.append("\n\n");
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</super-state>");
     	} else if (element instanceof State) {
@@ -142,7 +144,7 @@ public class JpdlSerializer {
         	appendPadding(buffer, level);
     		buffer.append("</state>");
     	} else if (element instanceof Process) {
-        	buffer.append("\n\n");
+        	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</process>");
     	}	
@@ -159,10 +161,26 @@ public class JpdlSerializer {
         if (wrapper instanceof NodeWrapper) {
         	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
         	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
+        	appendLocation(buffer, (NodeWrapper)wrapper, level+1);
         	for (ConnectionWrapper connectionWrapper : children) {
         		appendToBuffer(buffer, connectionWrapper, level+1);
         	}
         } 
+    }
+    
+    private static void appendLocation(StringBuffer buffer, NodeWrapper wrapper, int level) {
+    	Rectangle constraint = wrapper.getConstraint();
+    	buffer.append("\n");
+    	appendPadding(buffer, level);
+    	buffer.append("<location x=\"");
+    	buffer.append(constraint.x);
+    	buffer.append("\" y=\"");
+    	buffer.append(constraint.y);
+    	buffer.append("\" w=\"");
+    	buffer.append(constraint.width);
+    	buffer.append("\" h=\"");
+    	buffer.append(constraint.height);
+    	buffer.append("\"/>");
     }
     
 }
