@@ -31,31 +31,27 @@
          <flow
                acceptsElementStrategy="org.jboss.tools.flow.jpdl4.strategy.ProcessAcceptsElementStrategy"></flow>
       </element>
-      <element
+<!--      <element
             class="org.jboss.tools.flow.jpdl4.model.SuperState"
-            figure="icons/super.gif"
+            figure="icons/exclusive.gif"
             id="org.jboss.tools.flow.jpdl4.superState"
             language="org.jboss.tools.flow.jpdl4"
             name="Super State">
          <container></container>
-      </element>
+      </element> -->
       <element
-            class="org.jboss.tools.flow.jpdl4.model.StartState"
-            figure="icons/start.gif"
-            id="org.jboss.tools.flow.jpdl4.startState"
-            language="org.jboss.tools.flow.jpdl4"
-            name="Start">
+            class="org.jboss.tools.flow.jpdl4.model.StartEvent"
+            id="org.jboss.tools.flow.jpdl4.startEvent"
+            language="org.jboss.tools.flow.jpdl4">
          <node
-               acceptsIncomingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.StartStateAcceptsIncomingConnectionStrategy">
-            <figure>
-               <rectangle></rectangle>
-            </figure>
+               acceptsIncomingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.StartEventAcceptsIncomingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.StartEventFigure"></figure>
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.EndState"
+            class="org.jboss.tools.flow.jpdl4.model.EndEvent"
             figure="icons/end.gif"
-            id="org.jboss.tools.flow.jpdl4.endState"
+            id="org.jboss.tools.flow.jpdl4.endEvent"
             language="org.jboss.tools.flow.jpdl4"
             name="End">
          <node
@@ -66,20 +62,16 @@
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.State"
-            figure="icons/state.gif"
-            id="org.jboss.tools.flow.jpdl4.state"
-            language="org.jboss.tools.flow.jpdl4"
-            name="State">
+            class="org.jboss.tools.flow.jpdl4.model.StateTask"
+            id="org.jboss.tools.flow.jpdl4.stateTask"
+            language="org.jboss.tools.flow.jpdl4">
          <node>
-            <figure>
-               <rounded-rectangle></rounded-rectangle>
-            </figure>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.StateTaskFigure"></figure>
          </node>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.Transition"
-            figure="icons/transition.gif"
+            figure="icons/sequence.gif"
             id="org.jboss.tools.flow.jpdl4.transition"
             language="org.jboss.tools.flow.jpdl4"
             name="Transition">
