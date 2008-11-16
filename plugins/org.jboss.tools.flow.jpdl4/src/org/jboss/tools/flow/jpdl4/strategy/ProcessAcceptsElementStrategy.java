@@ -3,7 +3,7 @@ package org.jboss.tools.flow.jpdl4.strategy;
 import org.jboss.tools.flow.common.model.Container;
 import org.jboss.tools.flow.common.strategy.AcceptsElementStrategy;
 import org.jboss.tools.flow.jpdl4.model.Process;
-import org.jboss.tools.flow.jpdl4.model.StartState;
+import org.jboss.tools.flow.jpdl4.model.StartEvent;
 
 public class ProcessAcceptsElementStrategy implements AcceptsElementStrategy {
 	
@@ -12,7 +12,7 @@ public class ProcessAcceptsElementStrategy implements AcceptsElementStrategy {
 	public boolean acceptsElement(Object element) {
 		if (process == null) {
 			return false;
-		} else if (element instanceof StartState) {
+		} else if (element instanceof StartEvent) {
 			return process.getStartState() == null;
 		} else {
 			return true;

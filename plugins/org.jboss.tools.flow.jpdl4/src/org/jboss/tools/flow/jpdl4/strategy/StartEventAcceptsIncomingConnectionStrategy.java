@@ -4,7 +4,7 @@ import org.jboss.tools.flow.common.model.Connection;
 import org.jboss.tools.flow.common.model.Node;
 import org.jboss.tools.flow.common.strategy.AcceptsIncomingConnectionStrategy;
 
-public class StartStateAcceptsIncomingConnectionStrategy implements AcceptsIncomingConnectionStrategy {
+public class StartEventAcceptsIncomingConnectionStrategy implements AcceptsIncomingConnectionStrategy {
 
 	public boolean acceptsIncomingConnection(Connection connection, Node source) {
 		return false;
