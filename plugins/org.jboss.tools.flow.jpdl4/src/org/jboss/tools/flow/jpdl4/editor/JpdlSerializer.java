@@ -12,10 +12,10 @@ import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.EndState;
+import org.jboss.tools.flow.jpdl4.model.EndEvent;
 import org.jboss.tools.flow.jpdl4.model.Process;
-import org.jboss.tools.flow.jpdl4.model.StartState;
-import org.jboss.tools.flow.jpdl4.model.State;
+import org.jboss.tools.flow.jpdl4.model.StartEvent;
+import org.jboss.tools.flow.jpdl4.model.StateTask;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
 import org.jboss.tools.flow.jpdl4.model.Transition;
 
@@ -52,8 +52,8 @@ public class JpdlSerializer {
         		buffer.append("to=\"" + value + "\"");
     		}
     		buffer.append(">");
-    	} else if (element instanceof EndState) {
-    		EndState endState = (EndState)element;
+    	} else if (element instanceof EndEvent) {
+    		EndEvent endState = (EndEvent)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<end-state");
@@ -63,11 +63,11 @@ public class JpdlSerializer {
     			buffer.append("name=\"" + value + "\"");
     		}
     		buffer.append(">");
-    	} else if (element instanceof StartState) {
-    		StartState startState = (StartState)element;
+    	} else if (element instanceof StartEvent) {
+    		StartEvent startState = (StartEvent)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("<start-state");
+    		buffer.append("<start");
     		if (startState.getName() != null) {
     			buffer.append(" ");
     			String value = startState.getName();
@@ -85,8 +85,8 @@ public class JpdlSerializer {
     			buffer.append("name=\"" + value + "\"");
     		}
     		buffer.append(">");
-    	} else if (element instanceof State) {
-    		State state = (State)element;
+    	} else if (element instanceof StateTask) {
+    		StateTask state = (StateTask)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<state");
@@ -127,19 +127,19 @@ public class JpdlSerializer {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</transition>");
-    	} else if (element instanceof EndState) {
+    	} else if (element instanceof EndEvent) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</end-state>");
-    	} else if (element instanceof StartState) {
+    	} else if (element instanceof StartEvent) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("</start-state>");
+    		buffer.append("</start>");
     	} else if (element instanceof SuperState) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</super-state>");
-    	} else if (element instanceof State) {
+    	} else if (element instanceof StateTask) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</state>");
