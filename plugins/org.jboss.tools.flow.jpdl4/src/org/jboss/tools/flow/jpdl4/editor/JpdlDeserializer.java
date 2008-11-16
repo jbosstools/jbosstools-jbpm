@@ -63,14 +63,20 @@ public class JpdlDeserializer {
 		NodeList nodeList = element.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node child = nodeList.item(i);
-			if ("start-state".equals(child.getNodeName())) {
-				wrapper.addElement(createStartStateWrapper((Element)child));
+			NodeWrapper result = null;
+			if ("start".equals(child.getNodeName())) {
+				result = createElementWrapper((Element)child, "org.jboss.tools.flow.jpdl4.startEvent");
+			} else if ("state".equals(child.getNodeName())) {
+				result = createElementWrapper((Element)child, "org.jboss.tools.flow.jpdl4.stateTask");
+			}
+			if (result != null) {
+				wrapper.addElement(result);
 			}
 		}
 	}
 	
-	private static NodeWrapper createStartStateWrapper(Element element) {
-		NodeWrapper result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.startState");
+	private static NodeWrapper createElementWrapper(Element element, String elementType) {
+		NodeWrapper result = (NodeWrapper)ElementRegistry.createWrapper(elementType);
 		if (result != null) {
 			addName(result, element);
 			addLocation(result, element);
