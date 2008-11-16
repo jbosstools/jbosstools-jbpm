@@ -9,11 +9,11 @@ public class Process extends DefaultFlow {
 	
 	private Node initial = null;
 	
-	public StartState getStartState() {
+	public StartEvent getStartState() {
 		for (Iterator<Node> iterator = getNodes().iterator(); iterator.hasNext(); ) {
 			Node node = iterator.next();
-			if (node instanceof StartState) {
-				return (StartState)node;
+			if (node instanceof StartEvent) {
+				return (StartEvent)node;
 			}
 		}
 		return null;
