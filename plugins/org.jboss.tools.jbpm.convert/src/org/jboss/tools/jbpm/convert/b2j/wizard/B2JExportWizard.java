@@ -38,9 +38,6 @@ public class B2JExportWizard extends BpmnToWizard {
 	private List<String> generatedGpdFoldersList = new ArrayList<String>();
 
 	public void createGeneratedFile(boolean isOverWrite) {
-		if(!isOverWrite){
-			return;
-		}
 		String[] jpdlFolderNames = new String[this.generatedFoldersList.size()];
 
 		String location = super.getContainerPath((IContainer) super

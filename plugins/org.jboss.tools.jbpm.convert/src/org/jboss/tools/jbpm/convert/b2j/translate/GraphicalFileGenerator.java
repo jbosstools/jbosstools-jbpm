@@ -32,14 +32,12 @@ import org.jboss.tools.jbpm.convert.b2j.translate.TranslateHelper;
  */
 public class GraphicalFileGenerator extends BPMNTranslator {
 
-	Document document;
-
+	private Document document;
 	// gpd.xml documents list
-	List<Document> gpdDefs = new ArrayList<Document>();
-
+	private List<Document> gpdDefs = new ArrayList<Document>();
 	// the pool of gpd.xml name
-	List<String> gpdPoolNames = new ArrayList<String>();
-	Map<String, Element> map = new HashMap<String, Element>();
+	private List<String> gpdPoolNames = new ArrayList<String>();
+	private Map<String, Element> map = new HashMap<String, Element>();
 
 	public GraphicalFileGenerator(Document bpmnDiagramDocument,
 			Map<String, Element> map, String rootLocation, String bpmnFileName) {

@@ -20,7 +20,6 @@ import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.wizard.IWizard;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -29,7 +28,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
 import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
@@ -40,42 +38,21 @@ import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
  *         the wizardpage used by user to choose the bpmn pool from a bpmn
  *         diagram
  */
-public class BpmnPoolsChoicePage extends WizardPage {
+public class BpmnPoolsChoicePage extends AbstractConvertWizardPage {
 
 	CheckboxTableViewer listViewer;
 	Button selectButton;
 	Button deselectButton;
-	String listTitle;
 	private Map<String, String> idMap;
 
 	private IWizard wizard;
 
-	public BpmnPoolsChoicePage(String pageName, String title, String listTitle) {
-		super(pageName);
-		this.listTitle = listTitle;
-		this.setDescription(title);
-		this.setTitle(listTitle);
+	public BpmnPoolsChoicePage(String pageName, String title,
+			String tableTitle, String description) {
+		super(pageName, title, tableTitle, description);
 	}
 
-	public void createControl(Composite parent) {
-		Composite composite = createDialogArea(parent);
-
-		createListTitleArea(composite);
-		createListViewer(composite);
-		addSelectionButtons(composite);
-		setControl(composite);
-
-		initializeViewer();
-	}
-
-	private Label createListTitleArea(Composite composite) {
-		Label label = new Label(composite, SWT.NONE);
-		label.setText(listTitle);
-		label.setFont(composite.getFont());
-		return label;
-	}
-
-	private void createListViewer(Composite composite) {
+	public void createTableViewer(Composite composite) {
 		listViewer = CheckboxTableViewer.newCheckList(composite, SWT.BORDER);
 		GridData data = new GridData(GridData.FILL_BOTH);
 		data.heightHint = 250;
@@ -110,7 +87,7 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		});
 	}
 
-	private void addSelectionButtons(Composite composite) {
+	public void addOtherAreas(Composite composite) {
 		Composite buttonComposite = new Composite(composite, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 0;
@@ -166,7 +143,7 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		return button;
 	}
 
-	private void initializeViewer() {
+	public void initializePage() {
 		if (listViewer == null) {
 			return;
 		}
@@ -184,19 +161,6 @@ public class BpmnPoolsChoicePage extends WizardPage {
 		changeComplete();
 	}
 
-	private Composite createDialogArea(Composite parent) {
-		// create a composite with standard margins and spacing
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 7;
-		layout.marginWidth = 7;
-		layout.verticalSpacing = 4;
-		layout.horizontalSpacing = 4;
-		composite.setLayout(layout);
-		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		return composite;
-	}
-
 	public void changeComplete() {
 		if (listViewer.getCheckedElements().length != 0) {
 			setPageComplete(true);
@@ -211,7 +175,7 @@ public class BpmnPoolsChoicePage extends WizardPage {
 
 	public void setIdMap(Map<String, String> idMap) {
 		this.idMap = idMap;
-		initializeViewer();
+		initializePage();
 	}
 
 }

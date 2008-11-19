@@ -58,6 +58,7 @@ public class B2JMessages {
 	public static String Bpmn_Pool_Choose_WizardPage_Name;
 	public static String Bpmn_Pool_Choose_WizardPage_Message;
 	public static String Bpmn_Pool_Choose_WizardPage_Title;
+	public static String Bpmn_Pool_Choose_WizardPage_ViewerTitle;
 	public static String Bpmn_GeneratedFile_Location_WizardPage_Name;
 	public static String Bpmn_GeneratedFile_Location_WizardPage_Message;
 	public static String Bpmn_GeneratedFile_Location_WizardPage_Title;

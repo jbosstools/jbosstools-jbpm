@@ -24,53 +24,30 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.IWizard;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
 import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 
 /**
  * @author Grid Qian
  * 
- * the wizardpage used by user to choose the bpmn file
+ *         the wizardpage used by user to choose the bpmn file
  */
-public class BPMNResourcesChoicePage extends WizardPage {
-	
+public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
+
 	private TreeViewer viewer;
 	private ISelection currentSelection;
 	private IWizard wizard;
 
 	public BPMNResourcesChoicePage(String pageName, String title,
-			String description) {
-		super(pageName);
-		this.setTitle(title);
-		this.setDescription(description);
+			String tableTitle, String description) {
+		super(pageName, title, tableTitle, description);
 	}
 
-	public void createControl(Composite parent) {
-		Composite composite = createDialogArea(parent);
-
-		createListTitleArea(composite);
-		createListViewer(composite);
-		super.setControl(composite);
-
-		initializePage();
-	}
-
-	private Label createListTitleArea(Composite composite) {
-		Label label = new Label(composite, SWT.NONE);
-		label.setText(B2JMessages.Bpmn_File_Choose_WizardPage_ViewerTitle);
-		label.setFont(composite.getFont());
-		return label;
-	}
-
-	private void createListViewer(Composite composite) {
+	public void createTableViewer(Composite composite) {
 		viewer = new TreeViewer(composite, SWT.BORDER | SWT.MULTI
 				| SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -89,7 +66,7 @@ public class BPMNResourcesChoicePage extends WizardPage {
 		});
 	}
 
-	private void initializePage() {
+	public void initializePage() {
 		wizard = this.getWizard();
 		viewer.setInput(ResourcesPlugin.getWorkspace());
 		if (this.currentSelection != null) {
@@ -105,23 +82,6 @@ public class BPMNResourcesChoicePage extends WizardPage {
 		return super.isPageComplete();
 	}
 
-	private void updateControls() {
-		super.getWizard().getContainer().updateButtons();
-	}
-
-	private Composite createDialogArea(Composite parent) {
-		// create a composite with standard margins and spacing
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 7;
-		layout.marginWidth = 7;
-		layout.verticalSpacing = 4;
-		layout.horizontalSpacing = 4;
-		composite.setLayout(layout);
-		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		return composite;
-	}
-
 	public void setSelection(ISelection selection) {
 		this.currentSelection = selection;
 	}
@@ -133,7 +93,7 @@ public class BPMNResourcesChoicePage extends WizardPage {
 
 class ProjectFilter extends ViewerFilter {
 	private static String BPMN_FILE_EXT = "bpmn";
-	
+
 	@Override
 	public boolean select(Viewer viewer, Object parent, Object element) {
 		boolean res = false;
@@ -144,26 +104,27 @@ class ProjectFilter extends ViewerFilter {
 			}
 		}
 		if (element instanceof IContainer) {
-			IContainer container = (IContainer)element;
+			IContainer container = (IContainer) element;
 			if (container.getProject().isAccessible()) {
 				res = hasBPMNResources(container);
 			}
 		}
 		return res;
 	}
-	
+
 	private boolean hasBPMNResources(IContainer container) {
 		boolean res = false;
 		try {
 			IResource[] resources = container.members();
 			for (int i = 0; i < resources.length; i++) {
 				if (resources[i] instanceof IFile
-					&& ((IFile)resources[i]).getFileExtension().equalsIgnoreCase(BPMN_FILE_EXT)) {
+						&& ((IFile) resources[i]).getFileExtension()
+								.equalsIgnoreCase(BPMN_FILE_EXT)) {
 					res = true;
 					break;
 				}
 				if (resources[i] instanceof IContainer) {
-					if (hasBPMNResources((IContainer)resources[i])) {
+					if (hasBPMNResources((IContainer) resources[i])) {
 						res = true;
 						break;
 					}

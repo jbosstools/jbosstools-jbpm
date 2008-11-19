@@ -37,7 +37,7 @@ import org.jboss.tools.jbpm.convert.bpmnto.wizard.BPMNResourcesChoicePage;
 /**
  * @author Grid Qian
  * 
- * the wizard for bpmn translation
+ *         the wizard for bpmn translation
  */
 public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 
@@ -52,6 +52,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	private IStructuredSelection targetLocationSelection;
 	// bpmn pool id:name map
 	private Map<String, String> idMap;
+	private boolean isOverWrite = true;
 
 	protected String bpmnFileName;
 	protected String bpmnFileParentPath;
@@ -70,19 +71,23 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 		bpmnResPage = new BPMNResourcesChoicePage(
 				B2JMessages.Bpmn_File_Choose_WizardPage_Name,
 				B2JMessages.Bpmn_File_Choose_WizardPage_Title,
+				B2JMessages.Bpmn_File_Choose_WizardPage_ViewerTitle,
 				B2JMessages.Bpmn_File_Choose_WizardPage_Message);
 		bpmnResPage.setSelection(selection);
 		poolsPage = new BpmnPoolsChoicePage(
 				B2JMessages.Bpmn_Pool_Choose_WizardPage_Name,
 				B2JMessages.Bpmn_Pool_Choose_WizardPage_Title,
+				B2JMessages.Bpmn_Pool_Choose_WizardPage_ViewerTitle,
 				B2JMessages.Bpmn_Pool_Choose_WizardPage_Message);
 		errorPage = new ErrorMessagesPage(
 				B2JMessages.Bpmn_Translate_Message_WizardPage_Name,
 				B2JMessages.Bpmn_Translate_Message_WizardPage_Title,
+				B2JMessages.Bpmn_Translate_Message_WizardpageViewer_Title,
 				B2JMessages.Bpmn_Translate_Message_WizardPage_Message);
 		locationPage = new GeneratedFileLocationPage(
 				B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_Name,
 				B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_Title,
+				B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_ViewerTitle,
 				B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_Message);
 		locationPage.setSelection(selection);
 		addPage(bpmnResPage);
@@ -128,11 +133,10 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	}
 
 	public IWizardPage getNextPage(IWizardPage page) {
-		if (page.getName()
-				.equals(B2JMessages.Bpmn_Pool_Choose_WizardPage_Name)) {
+		if (page.getName().equals(B2JMessages.Bpmn_Pool_Choose_WizardPage_Name)) {
 			errorList = translateBpmnToStrings();
 			errorPage.setPageComplete(true);
-			
+
 			if (errorList.size() == 0) {
 				return locationPage;
 			}
@@ -145,16 +149,15 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	}
 
 	public boolean performFinish() {
-		
-		createGeneratedFile(locationPage.isOverWrite());
+		createGeneratedFile(this.isOverWrite());
 		refreshWorkspace();
 		return true;
 	}
 
 	/*
 	 * do the translation from bpmn to string list the sub class need to create
-	 * a string list to reserve these strings 
-	 * the return list is error or warning messages
+	 * a string list to reserve these strings the return list is error or
+	 * warning messages
 	 */
 	public abstract List<String> translateBpmnToStrings();
 
@@ -240,5 +243,13 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	public void setTargetLocationSelection(
 			IStructuredSelection targetLocationSelection) {
 		this.targetLocationSelection = targetLocationSelection;
+	}
+	
+	public boolean isOverWrite() {
+		return isOverWrite;
+	}
+
+	public void setOverWrite(boolean isOverWrite) {
+		this.isOverWrite = isOverWrite;
 	}
 }

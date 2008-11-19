@@ -32,18 +32,9 @@ import org.jboss.tools.jbpm.convert.b2j.translate.TranslateHelper;
  */
 public class BPMN2JPDL extends BPMNTranslator {
 
-	Document bpmnDocument;
-	List<Document> processDefs = new ArrayList<Document>();
-
-	Map<String, Element> map = new HashMap<String, Element>();
-
-	public Map<String, Element> getMap() {
-		return map;
-	}
-
-	public void setMap(Map<String, Element> map) {
-		this.map = map;
-	}
+	private Document bpmnDocument;
+	private List<Document> processDefs = new ArrayList<Document>();
+	private Map<String, Element> map = new HashMap<String, Element>();
 
 	public BPMN2JPDL() {
 	}
@@ -408,14 +399,7 @@ public class BPMN2JPDL extends BPMNTranslator {
 			warnings.add(B2JMessages.Translate_Warning_Bpmn_Element_Name
 					+ edge.attributeValue(B2JMessages.Bpmn_Element_ID));
 		}
-		transition
-				.addAttribute(
-						B2JMessages.To,
-						map
-								.get(
-										edge
-												.attributeValue(B2JMessages.Bpmn_FlowTarget_Attribute_Name))
-								.attributeValue(B2JMessages.Dom_Element_Name));
+		transition.addAttribute(B2JMessages.To,map.get(edge.attributeValue(B2JMessages.Bpmn_FlowTarget_Attribute_Name)).attributeValue(B2JMessages.Dom_Element_Name));
 	}
 
 	/*
@@ -463,4 +447,11 @@ public class BPMN2JPDL extends BPMNTranslator {
 		this.processDefs = processDefs;
 	}
 
+	public Map<String, Element> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, Element> map) {
+		this.map = map;
+	}
 }
