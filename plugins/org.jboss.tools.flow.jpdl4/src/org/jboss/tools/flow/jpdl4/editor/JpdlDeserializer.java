@@ -116,6 +116,8 @@ public class JpdlDeserializer {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.stateTask");
 			} else if ("end".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.endEvent");
+			} else if ("exclusive".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.exclusiveGateway");
 			}
 			if (result != null) {
 				wrapper.addElement(result);
