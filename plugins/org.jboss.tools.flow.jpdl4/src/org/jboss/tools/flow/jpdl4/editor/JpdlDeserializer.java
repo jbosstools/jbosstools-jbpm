@@ -156,13 +156,6 @@ public class JpdlDeserializer {
 		return result;
 	}
 	
-	private static void addTo(ConnectionWrapper wrapper, Element element) {
-		String to = element.getAttribute("to");
-		if (to != null) {
-			wrapper.getElement().setMetaData("to", to);
-		}
-	}
-	
 	private static void addGraphics(ConnectionWrapper wrapper, Element element) {
 		String graphics = element.getAttribute("g");
 		if (graphics != null) {
