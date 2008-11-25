@@ -17,7 +17,7 @@ import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.StateTask;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
-import org.jboss.tools.flow.jpdl4.model.Transition;
+import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 
 public class JpdlSerializer {
 
@@ -40,11 +40,11 @@ public class JpdlSerializer {
     
     private static void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
-    	if (element instanceof Transition) {
-    		Transition transition = (Transition)element;
+    	if (element instanceof SequenceFlow) {
+    		SequenceFlow transition = (SequenceFlow)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("<transition");
+    		buffer.append("<flow");
     		if (transition.getTo() != null) {
     			buffer.append(" ");
         		String value = transition.getTo().getName();
@@ -56,12 +56,13 @@ public class JpdlSerializer {
     		EndEvent endState = (EndEvent)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("<end-state");
+    		buffer.append("<end");
     		if (endState.getName() != null) {
     			buffer.append(" ");
     			String value = endState.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     		buffer.append(">");
     	} else if (element instanceof StartEvent) {
     		StartEvent startState = (StartEvent)element;
@@ -73,6 +74,7 @@ public class JpdlSerializer {
     			String value = startState.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     		buffer.append(">");
     	} else if (element instanceof SuperState) {
     		SuperState superState = (SuperState)element;
@@ -95,6 +97,7 @@ public class JpdlSerializer {
     			String value = state.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     		buffer.append(">");
     	} else if (element instanceof Process) {
     		Process process = (Process)element;
@@ -123,14 +126,14 @@ public class JpdlSerializer {
     
     private static void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
-    	if (element instanceof Transition) {
+    	if (element instanceof SequenceFlow) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("</transition>");
+    		buffer.append("</flow>");
     	} else if (element instanceof EndEvent) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
-    		buffer.append("</end-state>");
+    		buffer.append("</end>");
     	} else if (element instanceof StartEvent) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
@@ -161,26 +164,23 @@ public class JpdlSerializer {
         if (wrapper instanceof NodeWrapper) {
         	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
         	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
-        	appendLocation(buffer, (NodeWrapper)wrapper, level+1);
         	for (ConnectionWrapper connectionWrapper : children) {
         		appendToBuffer(buffer, connectionWrapper, level+1);
         	}
         } 
     }
     
-    private static void appendLocation(StringBuffer buffer, NodeWrapper wrapper, int level) {
+    private static void appendNodeGraphics(StringBuffer buffer, NodeWrapper wrapper) {
     	Rectangle constraint = wrapper.getConstraint();
-    	buffer.append("\n");
-    	appendPadding(buffer, level);
-    	buffer.append("<location x=\"");
+    	buffer.append(" g=\"");
     	buffer.append(constraint.x);
-    	buffer.append("\" y=\"");
+    	buffer.append(",");
     	buffer.append(constraint.y);
-    	buffer.append("\" w=\"");
+    	buffer.append(",");
     	buffer.append(constraint.width);
-    	buffer.append("\" h=\"");
+    	buffer.append(",");
     	buffer.append(constraint.height);
-    	buffer.append("\"/>");
+    	buffer.append("\"");
     }
     
 }
