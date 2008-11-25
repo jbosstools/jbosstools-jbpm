@@ -50,15 +50,11 @@
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.EndEvent"
-            figure="icons/end.gif"
             id="org.jboss.tools.flow.jpdl4.endEvent"
-            language="org.jboss.tools.flow.jpdl4"
-            name="End">
+            language="org.jboss.tools.flow.jpdl4">
          <node
                acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndStateAcceptsOutgoingConnectionStrategy">
-            <figure>
-               <rectangle></rectangle>
-            </figure>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.EndEventFigure"></figure>
          </node>
       </element>
       <element
@@ -70,11 +66,11 @@
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.Transition"
+            class="org.jboss.tools.flow.jpdl4.model.SequenceFlow"
             figure="icons/sequence.gif"
-            id="org.jboss.tools.flow.jpdl4.transition"
+            id="org.jboss.tools.flow.jpdl4.sequenceFlow"
             language="org.jboss.tools.flow.jpdl4"
-            name="Transition">
+            name="Flow">
          <connection></connection>
       </element>
    </extension>
