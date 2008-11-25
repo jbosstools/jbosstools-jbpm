@@ -1,12 +1,16 @@
 package org.jboss.tools.flow.jpdl4.editor;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Flow;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
+import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
+import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
@@ -43,13 +47,54 @@ public class JpdlDeserializer {
 	private static FlowWrapper createProcessWrapper(Element element) {
 		FlowWrapper result = (FlowWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.process");
 		if (result != null) {
+			result.getElement().setMetaData("flows", new ArrayList<ConnectionWrapper>());
 			addName(result, element);
-			addChildren(result, element);
+			addNodes(result, element);
+			resolveSequenceFlowTargets(result);
+			result.getElement().setMetaData("flows", null);
 		}
 		return result;
 	}
 	
-	private static void addName(Wrapper wrapper, Element element) {
+	@SuppressWarnings("unchecked")
+	private static void resolveSequenceFlowTargets(FlowWrapper flowWrapper) {
+		ArrayList<ConnectionWrapper> flows = (ArrayList<ConnectionWrapper>)flowWrapper.getElement().getMetaData("flows");
+		for (ConnectionWrapper flow : flows) {
+			resolveSequenceFlowTarget(flow);
+		}		
+	}
+	
+	private static void resolveSequenceFlowTarget(ConnectionWrapper connectionWrapper) {
+		String to = (String)connectionWrapper.getElement().getMetaData("to");
+		if (to == null) {
+			Logger.logInfo("Ignoring sequenceflow without target");	
+			return;
+		}
+		connectionWrapper.getElement().setMetaData("to", null);
+		NodeWrapper source = (NodeWrapper)connectionWrapper.getElement().getMetaData("from");
+		if (source == null) {
+			Logger.logInfo("Ignoring sequenceflow without source");
+			return;
+		}
+		connectionWrapper.getElement().setMetaData("from", null);
+		FlowWrapper flowWrapper = source.getParent().getFlowWrapper();
+		NodeWrapper target = getNamedNode(to, flowWrapper);
+		if (target != null) {
+			connectionWrapper.connect(source, target);
+		} else {
+			Logger.logInfo("Ignoring unknown target " + to + " while resolving sequenceflow target.");
+		}
+	}
+	
+	private static NodeWrapper getNamedNode(String name, FlowWrapper flowWrapper) {
+		if (name == null) return null;
+		for (NodeWrapper nodeWrapper : flowWrapper.getElements()) {
+			if (name.equals(nodeWrapper.getName())) return nodeWrapper;
+		}
+		return null;
+	}
+	
+	private static void addName(Wrapper wrapper,  Element element) {
 		String name = element.getAttribute("name");
 		if (name == null) return;
 		if (wrapper instanceof FlowWrapper) {
@@ -59,55 +104,100 @@ public class JpdlDeserializer {
 		}
 	}
 	
-	private static void addChildren(FlowWrapper wrapper, Element element) {
+	private static void addNodes(FlowWrapper wrapper, Element element) {
 		NodeList nodeList = element.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node child = nodeList.item(i);
 			NodeWrapper result = null;
 			if ("start".equals(child.getNodeName())) {
-				result = createElementWrapper((Element)child, "org.jboss.tools.flow.jpdl4.startEvent");
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.startEvent");
 			} else if ("state".equals(child.getNodeName())) {
-				result = createElementWrapper((Element)child, "org.jboss.tools.flow.jpdl4.stateTask");
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.stateTask");
+			} else if ("end".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.endEvent");
 			}
 			if (result != null) {
 				wrapper.addElement(result);
+				addName(result, (Element)child);
+				addGraphics(result, (Element)child);
+				addSequenceFlow(result, (Element)child);
 			}
 		}
 	}
 	
-	private static NodeWrapper createElementWrapper(Element element, String elementType) {
-		NodeWrapper result = (NodeWrapper)ElementRegistry.createWrapper(elementType);
+	@SuppressWarnings("unchecked")
+	private static void addSequenceFlow(NodeWrapper wrapper, Element element) {
+		NodeList nodeList = element.getElementsByTagName("flow");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node child = nodeList.item(i);
+			ConnectionWrapper result = 
+				createConnectionWrapper((Element)child, "org.jboss.tools.flow.jpdl4.sequenceFlow");
+			if (result != null) {
+				result.getElement().setMetaData("from", wrapper);
+				String to = ((Element)child).getAttribute("to");
+				result.getElement().setMetaData("to", to);
+				ContainerWrapper parent = wrapper.getParent();
+				FlowWrapper flowWrapper = parent.getFlowWrapper();
+				ArrayList<ConnectionWrapper> flows = 
+					(ArrayList<ConnectionWrapper>)flowWrapper.getElement().getMetaData("flows");
+				flows.add(result);
+				addName(result, (Element)child);
+			}
+		}
+	}
+	
+	
+	private static ConnectionWrapper createConnectionWrapper(Element element, String elementType) {
+		ConnectionWrapper result = (ConnectionWrapper)ElementRegistry.createWrapper(elementType);
 		if (result != null) {
 			addName(result, element);
-			addLocation(result, element);
+			addTo(result, element);
+			addGraphics(result, element);
 		}
 		return result;
 	}
 	
-	private static void addLocation(NodeWrapper wrapper, Element element) {
-		NodeList nodelist = element.getElementsByTagName("location");
+	private static void addTo(ConnectionWrapper wrapper, Element element) {
+		String to = element.getAttribute("to");
+		if (to != null) {
+			wrapper.getElement().setMetaData("to", to);
+		}
+	}
+	
+	private static void addGraphics(ConnectionWrapper wrapper, Element element) {
+		
+	}
+	
+	private static void addGraphics(NodeWrapper wrapper, Element element) {
+		String graphics = element.getAttribute("g");
 		Rectangle constraint = new Rectangle(0, 0, 80, 40);
-		if (nodelist.getLength() >= 1) {
-			Element location = (Element)nodelist.item(0);
-			constraint.x = convertAttributeToInt(location, "x");
-			constraint.y = convertAttributeToInt(location, "y");
-			constraint.height = convertAttributeToInt(location, "h");
-			constraint.width = convertAttributeToInt(location, "w");
+		if (graphics != null) {
+			StringTokenizer tokenizer = new StringTokenizer(graphics, ",");
+			if (tokenizer.countTokens() != 4) {
+				Logger.logInfo(
+						"Wrong info in attribute 'g' for element '" + 
+						element.getNodeName() + "'" +
+						" with name '" +
+						element.getAttribute("name") +
+						"'. Using defaults." );
+			} else {
+				constraint.x = convertStringToInt(tokenizer.nextToken());
+				constraint.y = convertStringToInt(tokenizer.nextToken());
+				constraint.width = convertStringToInt(tokenizer.nextToken());
+				constraint.height = convertStringToInt(tokenizer.nextToken());
+			}
 		}
 		wrapper.setConstraint(constraint);
 	}
 	
-	private static int convertAttributeToInt(Element element, String attributeName) {
+	private static int convertStringToInt(String str) {
 		int result = 0;
-		String str = element.getAttribute(attributeName);
-		if (str != null) {
-			try {
-				result = new Integer(str).intValue();
-			} catch (NumberFormatException e) {
-				Logger.logError(attributeName + " is not correctly formatted.", e);
-			}
+		try {
+			result = new Integer(str).intValue();
+		} catch (NumberFormatException e) {
+			Logger.logError("Error while converting " + str + " to an integer.", e);
 		}
 		return result;
 	}
-
+	
 }
