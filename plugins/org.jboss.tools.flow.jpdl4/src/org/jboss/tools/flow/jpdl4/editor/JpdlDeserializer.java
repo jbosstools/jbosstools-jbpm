@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Flow;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
@@ -141,7 +142,6 @@ public class JpdlDeserializer {
 				ArrayList<ConnectionWrapper> flows = 
 					(ArrayList<ConnectionWrapper>)flowWrapper.getElement().getMetaData("flows");
 				flows.add(result);
-				addName(result, (Element)child);
 			}
 		}
 	}
@@ -151,7 +151,6 @@ public class JpdlDeserializer {
 		ConnectionWrapper result = (ConnectionWrapper)ElementRegistry.createWrapper(elementType);
 		if (result != null) {
 			addName(result, element);
-			addTo(result, element);
 			addGraphics(result, element);
 		}
 		return result;
@@ -165,6 +164,23 @@ public class JpdlDeserializer {
 	}
 	
 	private static void addGraphics(ConnectionWrapper wrapper, Element element) {
+		String graphics = element.getAttribute("g");
+		if (graphics != null) {
+			StringTokenizer bendpoints = new StringTokenizer(graphics, ";");
+			int index = 0;
+			while (bendpoints.hasMoreTokens()) {
+				StringTokenizer bendpoint = new StringTokenizer(bendpoints.nextToken(), ",");
+				if (bendpoint.countTokens() != 2) {
+					Logger.logInfo(
+							"Wrong info in attribute 'g' while determining bendpoints.");
+				} else {
+					int x = convertStringToInt(bendpoint.nextToken());
+					int y = convertStringToInt(bendpoint.nextToken());
+					wrapper.addBendpoint(index++, new Point(x, y));
+				}
+	
+			}
+		}
 		
 	}
 	
