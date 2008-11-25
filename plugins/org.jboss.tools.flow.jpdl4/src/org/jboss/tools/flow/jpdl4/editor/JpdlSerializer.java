@@ -14,6 +14,7 @@ import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.EndEvent;
+import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.StateTask;
@@ -28,7 +29,7 @@ public class JpdlSerializer {
     	Writer writer = new OutputStreamWriter(os);
     	writer.write(buffer.toString());
     	writer.close();
-    	System.out.println(buffer.toString());
+//    	System.out.println(buffer.toString());
     }
     
     private static void appendToBuffer(StringBuffer buffer, Wrapper wrapper, int level) {
@@ -101,6 +102,18 @@ public class JpdlSerializer {
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     		buffer.append(">");
+    	} else if (element instanceof ExclusiveGateway) {
+    		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)element;
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("<exclusive");
+    		if (exclusiveGateway.getName() != null) {
+    			buffer.append(" ");
+    			String value = exclusiveGateway.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    		buffer.append(">");
     	} else if (element instanceof Process) {
     		Process process = (Process)element;
     		buffer.append("<process");
@@ -148,6 +161,10 @@ public class JpdlSerializer {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</state>");
+    	} else if (element instanceof ExclusiveGateway) {
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("</exclusive>");
     	} else if (element instanceof Process) {
         	buffer.append("\n");
         	appendPadding(buffer, level);
