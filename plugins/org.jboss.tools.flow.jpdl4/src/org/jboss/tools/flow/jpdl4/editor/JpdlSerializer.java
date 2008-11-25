@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
@@ -51,6 +52,7 @@ public class JpdlSerializer {
         		value = value == null ? "" : value;
         		buffer.append("to=\"" + value + "\"");
     		}
+    		appendConnectionGraphics(buffer, (ConnectionWrapper)wrapper);
     		buffer.append(">");
     	} else if (element instanceof EndEvent) {
     		EndEvent endState = (EndEvent)element;
@@ -180,6 +182,19 @@ public class JpdlSerializer {
     	buffer.append(constraint.width);
     	buffer.append(",");
     	buffer.append(constraint.height);
+    	buffer.append("\"");
+    }
+    
+    private static void appendConnectionGraphics(StringBuffer buffer, ConnectionWrapper wrapper) {
+    	List<Point> bendPoints = wrapper.getBendpoints();
+    	if (bendPoints.size() == 0) return;
+    	buffer.append(" g=\"");
+    	for (int i = 0; i < bendPoints.size(); i++) {
+    		buffer.append(bendPoints.get(i).x);
+    		buffer.append(",");
+    		buffer.append(bendPoints.get(i).y);
+    		if (i < bendPoints.size() - 1) buffer.append(";");
+    	}
     	buffer.append("\"");
     }
     
