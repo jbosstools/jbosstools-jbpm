@@ -16,9 +16,16 @@ import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 public class BpmnConvertTest extends TestCase {
 
 	public void testConvert() throws IOException {
-		String absolutePath = Platform.getBundle(
-				"org.jboss.tools.jbpm.convert.test").getLocation()
-				.substring(16);
+		String absolutePath = "";
+		if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+			absolutePath = Platform.getBundle(
+					"org.jboss.tools.jbpm.convert.test").getLocation()
+					.substring(16);
+		} else {
+			absolutePath = Platform.getBundle(
+					"org.jboss.tools.jbpm.convert.test").getLocation()
+					.substring(15);
+		}
 		String bpmnfilePath = absolutePath + "testfile";
 		String expectedPath = absolutePath + "resultfile";
 		File[] bpmnFiles = listAll(bpmnfilePath);
@@ -52,7 +59,7 @@ public class BpmnConvertTest extends TestCase {
 				if (!compareWithExpectedResult(tmpLocation + File.separator
 						+ "jpdl" + File.separator + name, expectedPath
 						+ File.separator + name)) {
-					System.out.println("the testing bpmn named  /" + str1
+					System.out.println("the testing bpmn named  /" + name
 							+ " tranformation is failure");
 					assertEquals(true, false);
 
