@@ -2,14 +2,33 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+     <content-type 
+           base-type="org.eclipse.core.runtime.xml"
+           file-extensions="xml"
+           id="org.jboss.tools.flow.jpdl4"
+           name="jPDL 4 File"
+           priority="normal">
+        <describer 
+              class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+           <parameter 
+                 name="element" 
+                 value="process">
+           </parameter>
+        </describer>
+     </content-type>
+   </extension>
    <extension point="org.eclipse.ui.editors">
       <editor
             name="jPDL4 Editor"
-            extensions="jpdl4"
             icon="icons/process.gif"
             contributorClass="org.jboss.tools.flow.common.editor.GenericActionBarContributor"
             class="org.jboss.tools.flow.jpdl4.editor.JpdlEditor"
             id="org.jboss.tools.flow.jpdl4.editor">
+         <contentTypeBinding
+               contentTypeId="org.jboss.tools.flow.jpdl4">
+         </contentTypeBinding>
       </editor>
    </extension>
    <extension
@@ -81,6 +100,19 @@
             name="Flow">
          <connection></connection>
       </element>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.jboss.tools.flow.jpdl4"
+            name="jBPM">
+      </category>
+      <wizard
+            class="org.jboss.tools.flow.jpdl4.wizard.NewJpdl4FileWizard"
+            icon="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.file"
+            name="jPDL4 File">
+      </wizard>
    </extension>
 
 </plugin>

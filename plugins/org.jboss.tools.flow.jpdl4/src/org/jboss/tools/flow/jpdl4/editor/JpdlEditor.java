@@ -33,7 +33,13 @@ public class JpdlEditor extends GenericModelEditor {
     }
     
     protected void createModel(InputStream is) {
-    	setModel(JpdlDeserializer.deserialize(is));
+    	boolean empty = true;
+    	try {
+    		empty = is.available() == 0;
+    	} catch (IOException e) {
+    		// ignored
+    	}
+    	setModel(empty ? createModel() : JpdlDeserializer.deserialize(is));
     }
     
 }
