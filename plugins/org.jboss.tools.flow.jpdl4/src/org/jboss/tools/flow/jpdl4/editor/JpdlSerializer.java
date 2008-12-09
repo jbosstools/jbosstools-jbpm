@@ -116,7 +116,9 @@ public class JpdlSerializer {
     		buffer.append(">");
     	} else if (element instanceof Process) {
     		Process process = (Process)element;
+    		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
     		buffer.append("<process");
+    		buffer.append(" xmlns=\"http://jbpm.org/4/jpdl\"");
     		if (process.getInitial() != null) {
     			buffer.append(" ");
     			String value = process.getInitial().getName();
