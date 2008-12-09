@@ -14,3 +14,4 @@ Import-Package: junit.framework,
  org.eclipse.emf.ecore.xmi.impl,
  org.osgi.framework
 Bundle-ActivationPolicy: lazy
+Bundle-Vendor: JBoss, a division of Red Hat
