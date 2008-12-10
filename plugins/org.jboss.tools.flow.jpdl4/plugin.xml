@@ -108,6 +108,7 @@
             name="jBPM">
       </category>
       <wizard
+            category="org.jboss.tools.flow.jpdl4"
             class="org.jboss.tools.flow.jpdl4.wizard.NewJpdl4FileWizard"
             icon="icons/process.gif"
             id="org.jboss.tools.flow.jpdl4.file"
