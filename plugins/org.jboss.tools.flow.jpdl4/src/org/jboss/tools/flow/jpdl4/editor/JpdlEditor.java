@@ -12,6 +12,8 @@ import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 
 public class JpdlEditor extends GenericModelEditor {
+	
+	public static String ID = "org.jboss.tools.flow.jpdl4.editor";
 
     protected EditPartFactory createEditPartFactory() {
         return new DefaultEditPartFactory();
