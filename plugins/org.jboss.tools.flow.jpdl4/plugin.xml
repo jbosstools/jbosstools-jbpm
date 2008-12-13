@@ -93,6 +93,22 @@
          </node>
       </element>
       <element
+            class="org.jboss.tools.flow.jpdl4.model.ParallelForkGateway"
+            id="org.jboss.tools.flow.jpdl4.parallelForkGateway"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ParallelGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ParallelJoinGateway"
+            id="org.jboss.tools.flow.jpdl4.parallelJoinGateway"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ParallelGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
             class="org.jboss.tools.flow.jpdl4.model.SequenceFlow"
             figure="icons/sequence.gif"
             id="org.jboss.tools.flow.jpdl4.sequenceFlow"

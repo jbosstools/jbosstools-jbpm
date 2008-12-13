@@ -15,6 +15,8 @@ import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.EndEvent;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
+import org.jboss.tools.flow.jpdl4.model.ParallelForkGateway;
+import org.jboss.tools.flow.jpdl4.model.ParallelJoinGateway;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.StateTask;
@@ -114,6 +116,30 @@ public class JpdlSerializer {
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     		buffer.append(">");
+    	} else if (element instanceof ParallelForkGateway) {
+    		ParallelForkGateway parallelForkGateway = (ParallelForkGateway)element;
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("<fork");
+    		if (parallelForkGateway.getName() != null) {
+    			buffer.append(" ");
+    			String value = parallelForkGateway.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    		buffer.append(">");
+    	} else if (element instanceof ParallelJoinGateway) {
+    		ParallelJoinGateway parallelJoinGateway = (ParallelJoinGateway)element;
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("<join");
+    		if (parallelJoinGateway.getName() != null) {
+    			buffer.append(" ");
+    			String value = parallelJoinGateway.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    		buffer.append(">");
     	} else if (element instanceof Process) {
     		Process process = (Process)element;
     		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
@@ -167,6 +193,14 @@ public class JpdlSerializer {
     		buffer.append("\n");
     		appendPadding(buffer, level);
     		buffer.append("</exclusive>");
+    	} else if (element instanceof ParallelForkGateway) {
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("</fork>");
+    	} else if (element instanceof ParallelJoinGateway) {
+    		buffer.append("\n");
+    		appendPadding(buffer, level);
+    		buffer.append("</join>");
     	} else if (element instanceof Process) {
         	buffer.append("\n");
         	appendPadding(buffer, level);

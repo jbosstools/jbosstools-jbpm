@@ -118,6 +118,10 @@ public class JpdlDeserializer {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.endEvent");
 			} else if ("exclusive".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.exclusiveGateway");
+			} else if ("join".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.parallelJoinGateway");
+			} else if ("fork".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.parallelForkGateway");
 			}
 			if (result != null) {
 				wrapper.addElement(result);
