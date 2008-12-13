@@ -10,10 +10,8 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.jboss.tools.flow.jpdl4.Logger;
-import org.jboss.tools.flow.jpdl4.editor.JpdlEditor;
 
 public class NewJpdl4FileWizard extends Wizard implements IWorkbenchWizard {
 	
