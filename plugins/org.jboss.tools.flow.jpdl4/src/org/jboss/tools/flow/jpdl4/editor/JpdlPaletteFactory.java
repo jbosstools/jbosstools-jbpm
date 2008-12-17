@@ -70,8 +70,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
             "Create a new Start Event",
             "org.jboss.tools.flow.jpdl4.startEvent",
             ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.startEvent"),
-            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/start_event_empty.png")),
-            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/start_event_empty.png"))
+            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/start_event_empty.png")),
+            ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/start_event_empty.png"))
         );
         entries.add(combined);        
         combined = new CombinedTemplateCreationEntry(
@@ -79,8 +79,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new End Event",
                 "org.jboss.tools.flow.jpdl4.endEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.endEvent"),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/end_event_terminate.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/end_event_terminate.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/end_event_terminate.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/end_event_terminate.png"))
             );
         entries.add(combined);                                  
         return entries;
@@ -93,8 +93,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Wait State Task",
                 "org.jboss.tools.flow.jpdl4.stateTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.stateTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/task_empty.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/task_empty.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         return entries;
@@ -107,8 +107,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Exclusive Gateway",
                 "org.jboss.tools.flow.jpdl4.exclusiveGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.exclusiveGateway"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_exclusive.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_exclusive.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_exclusive.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/gateway_exclusive.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -116,8 +116,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Parallel Fork Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelForkGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelForkGateway"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_parallel.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_parallel.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_parallel.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/gateway_parallel.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -125,8 +125,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Parallel Join Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelJoinGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelJoinGateway"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_parallel.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/gateway_parallel.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_parallel.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/gateway_parallel.png"))
             );
         entries.add(combined);
         return entries;
@@ -138,8 +138,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Sequence",
                 "Creating a new Sequence Flow",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sequenceFlow"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/flow_sequence.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/small/flow_sequence.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/flow_sequence.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/flow_sequence.png"))
             );
         entries.add(tool);
         return entries;

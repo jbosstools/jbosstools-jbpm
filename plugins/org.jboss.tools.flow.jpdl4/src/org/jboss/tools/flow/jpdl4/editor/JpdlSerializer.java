@@ -18,10 +18,10 @@ import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.ParallelForkGateway;
 import org.jboss.tools.flow.jpdl4.model.ParallelJoinGateway;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.StateTask;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
-import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 
 public class JpdlSerializer {
 
@@ -38,8 +38,15 @@ public class JpdlSerializer {
     	Object object = wrapper.getElement();
         if (!(object instanceof Element)) return;
        	appendOpening(buffer, wrapper, level);
-       	appendBody(buffer, wrapper, level);
-        appendClosing(buffer, wrapper, level);    	
+       	StringBuffer body = new StringBuffer();
+       	appendBody(body, wrapper, level);
+       	if (body.length() > 0) {
+       		buffer.append(">");
+       		buffer.append(body);
+       		appendClosing(buffer, wrapper, level);
+       	} else {
+       		buffer.append("/>");
+       	}
     }
     
     private static void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
@@ -56,90 +63,82 @@ public class JpdlSerializer {
         		buffer.append("to=\"" + value + "\"");
     		}
     		appendConnectionGraphics(buffer, (ConnectionWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof EndEvent) {
     		EndEvent endState = (EndEvent)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<end");
-    		if (endState.getName() != null) {
+    		if (!isEmpty(endState.getName())) {
     			buffer.append(" ");
     			String value = endState.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof StartEvent) {
     		StartEvent startState = (StartEvent)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<start");
-    		if (startState.getName() != null) {
+    		if (!isEmpty(startState.getName())) {
     			buffer.append(" ");
     			String value = startState.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof SuperState) {
     		SuperState superState = (SuperState)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<super-state");
-    		if (superState.getName() != null) {
+    		if (!isEmpty(superState.getName())) {
     			buffer.append(" ");
     			String value = superState.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
-    		buffer.append(">");
     	} else if (element instanceof StateTask) {
     		StateTask state = (StateTask)element;
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("<state");
-    		if (state.getName() != null) {
+    		if (!isEmpty(state.getName())) {
     			buffer.append(" ");
     			String value = state.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof ExclusiveGateway) {
     		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)element;
     		buffer.append("\n");
     		appendPadding(buffer, level);
     		buffer.append("<exclusive");
-    		if (exclusiveGateway.getName() != null) {
+    		if (!isEmpty(exclusiveGateway.getName())) {
     			buffer.append(" ");
     			String value = exclusiveGateway.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof ParallelForkGateway) {
     		ParallelForkGateway parallelForkGateway = (ParallelForkGateway)element;
     		buffer.append("\n");
     		appendPadding(buffer, level);
     		buffer.append("<fork");
-    		if (parallelForkGateway.getName() != null) {
+    		if (!isEmpty(parallelForkGateway.getName())) {
     			buffer.append(" ");
     			String value = parallelForkGateway.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof ParallelJoinGateway) {
     		ParallelJoinGateway parallelJoinGateway = (ParallelJoinGateway)element;
     		buffer.append("\n");
     		appendPadding(buffer, level);
     		buffer.append("<join");
-    		if (parallelJoinGateway.getName() != null) {
+    		if (!isEmpty(parallelJoinGateway.getName())) {
     			buffer.append(" ");
     			String value = parallelJoinGateway.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
-    		buffer.append(">");
     	} else if (element instanceof Process) {
     		Process process = (Process)element;
     		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
@@ -151,14 +150,17 @@ public class JpdlSerializer {
     			value = value == null ? "" : value;
     			buffer.append("initial=\"" + value + "\"");
     		}
-    		if (process.getName() != null) {
+    		if (!isEmpty(process.getName())) {
     			buffer.append(" ");
     			String value = process.getName();
     			buffer.append("name=\"" + value + "\"");
     		}
-    		buffer.append(">");
     	}
     	
+    }
+    
+    private static boolean isEmpty(String str) {
+    	return str == null || "".equals(str);
     }
     
     private static void appendPadding(StringBuffer buffer, int level) {
