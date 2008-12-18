@@ -66,7 +66,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createEventEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();       
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-            "Start",
+            "Start Event",
             "Create a new Start Event",
             "org.jboss.tools.flow.jpdl4.startEvent",
             ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.startEvent"),
@@ -75,12 +75,30 @@ public class JpdlPaletteFactory extends PaletteFactory {
         );
         entries.add(combined);        
         combined = new CombinedTemplateCreationEntry(
-                "End",
-                "Create a new End Event",
-                "org.jboss.tools.flow.jpdl4.endEvent",
-                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.endEvent"),
+                "Terminate End Event",
+                "Create a new terminating end event",
+                "org.jboss.tools.flow.jpdl4.terminateEndEvent",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.terminateEndEvent"),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/end_event_terminate.png")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/end_event_terminate.png"))
+            );
+        entries.add(combined);                                  
+        combined = new CombinedTemplateCreationEntry(
+                "Cancel End Event",
+                "Create a new cancel end event",
+                "org.jboss.tools.flow.jpdl4.cancelEndEvent",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.cancelEndEvent"),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/end_event_cancel.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/end_event_cancel.png"))
+            );
+        entries.add(combined);                                  
+        combined = new CombinedTemplateCreationEntry(
+                "Error End Event",
+                "Create a new error end event",
+                "org.jboss.tools.flow.jpdl4.errorEndEvent",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.errorEndEvent"),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/end_event_error.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/end_event_error.png"))
             );
         entries.add(combined);                                  
         return entries;
@@ -89,12 +107,39 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createTaskEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "Wait State",
+                "Wait State Task",
                 "Create a new Wait State Task",
-                "org.jboss.tools.flow.jpdl4.stateTask",
-                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.stateTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+                "org.jboss.tools.flow.jpdl4.waitTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.waitTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_wait.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_wait.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "HQL Task",
+                "Create a new HQL Task",
+                "org.jboss.tools.flow.jpdl4.hqlTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.hqlTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_hql.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_hql.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "SQL Task",
+                "Create a new SQL Task",
+                "org.jboss.tools.flow.jpdl4.sqlTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sqlTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_sql.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_sql.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "Java Task",
+                "Create a new Java Task",
+                "org.jboss.tools.flow.jpdl4.javaTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.javaTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_java.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_java.png"))
             );
         entries.add(combined);
         return entries;
@@ -103,7 +148,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createGatewayEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "Exclusive",
+                "Exclusive Gateway",
                 "Create a new Exclusive Gateway",
                 "org.jboss.tools.flow.jpdl4.exclusiveGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.exclusiveGateway"),                
@@ -112,7 +157,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Parallel Fork",
+                "Fork Parallel Gateway",
                 "Create a new Parallel Fork Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelForkGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelForkGateway"),                
@@ -121,7 +166,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Parallel Join",
+                "Join Parallel Gateway",
                 "Create a new Parallel Join Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelJoinGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelJoinGateway"),                
@@ -135,7 +180,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createFlowEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         ToolEntry tool = new ConnectionCreationToolEntry(
-                "Sequence",
+                "Sequence Flow",
                 "Creating a new Sequence Flow",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sequenceFlow"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/flow_sequence.png")),

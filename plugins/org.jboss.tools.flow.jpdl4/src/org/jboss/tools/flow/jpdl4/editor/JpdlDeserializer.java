@@ -112,10 +112,20 @@ public class JpdlDeserializer {
 			NodeWrapper result = null;
 			if ("start".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.startEvent");
-			} else if ("state".equals(child.getNodeName())) {
-				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.stateTask");
 			} else if ("end".equals(child.getNodeName())) {
-				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.endEvent");
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.terminateEndEvent");
+			} else if ("end-error".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.errorEndEvent");
+			} else if ("end-cancel".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.cancelEndEvent");
+			} else if ("state".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.waitTask");
+			} else if ("hql".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.hqlTask");
+			} else if ("sql".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.sqlTask");
+			} else if ("java".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.javaTask");
 			} else if ("exclusive".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.exclusiveGateway");
 			} else if ("join".equals(child.getNodeName())) {

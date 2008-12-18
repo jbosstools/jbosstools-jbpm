@@ -68,20 +68,62 @@
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.EndEvent"
-            id="org.jboss.tools.flow.jpdl4.endEvent"
+            class="org.jboss.tools.flow.jpdl4.model.TerminateEndEvent"
+            id="org.jboss.tools.flow.jpdl4.terminateEndEvent"
             language="org.jboss.tools.flow.jpdl4">
          <node
-               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndStateAcceptsOutgoingConnectionStrategy">
-            <figure class="org.jboss.tools.flow.jpdl4.figure.EndEventFigure"></figure>
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TerminateEndEventFigure"></figure>
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.StateTask"
-            id="org.jboss.tools.flow.jpdl4.stateTask"
+            class="org.jboss.tools.flow.jpdl4.model.CancelEndEvent"
+            id="org.jboss.tools.flow.jpdl4.cancelEndEvent"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.CancelEndEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ErrorEndEvent"
+            id="org.jboss.tools.flow.jpdl4.errorEndEvent"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ErrorEndEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.WaitTask"
+            id="org.jboss.tools.flow.jpdl4.waitTask"
             language="org.jboss.tools.flow.jpdl4">
          <node>
-            <figure class="org.jboss.tools.flow.jpdl4.figure.StateTaskFigure"></figure>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.HqlTask"
+            id="org.jboss.tools.flow.jpdl4.hqlTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.SqlTask"
+            id="org.jboss.tools.flow.jpdl4.sqlTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.JavaTask"
+            id="org.jboss.tools.flow.jpdl4.javaTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
       </element>
       <element
@@ -93,7 +135,7 @@
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.ParallelForkGateway"
+            class="org.jboss.tools.flow.jpdl4.model.ForkParallelGateway"
             id="org.jboss.tools.flow.jpdl4.parallelForkGateway"
             language="org.jboss.tools.flow.jpdl4">
          <node>
@@ -101,7 +143,7 @@
          </node>
       </element>
       <element
-            class="org.jboss.tools.flow.jpdl4.model.ParallelJoinGateway"
+            class="org.jboss.tools.flow.jpdl4.model.JoinParallelGateway"
             id="org.jboss.tools.flow.jpdl4.parallelJoinGateway"
             language="org.jboss.tools.flow.jpdl4">
          <node>

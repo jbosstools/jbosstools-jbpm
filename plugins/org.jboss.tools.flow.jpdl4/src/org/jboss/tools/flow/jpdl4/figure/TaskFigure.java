@@ -5,7 +5,7 @@ import org.eclipse.draw2d.Graphics;
 import org.eclipse.swt.graphics.Color;
 import org.jboss.tools.flow.common.figure.RoundedRectangleElementFigure;
 
-public class StateTaskFigure extends RoundedRectangleElementFigure {
+public class TaskFigure extends RoundedRectangleElementFigure {
 	
 	private static final Color veryLightBlue = new Color(null, 246, 247, 255);
 	private static final Color lightBlue = new Color(null, 3, 104, 154);
