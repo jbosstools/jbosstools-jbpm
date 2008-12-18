@@ -1,4 +1,4 @@
-package org.jboss.tools.jbpm.convert.test;
+package org.jboss.tools.jbpm.convert;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
