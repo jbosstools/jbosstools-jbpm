@@ -50,6 +50,8 @@ public class B2JMessages {
 	public static String Bpmn_FlowSource_Attribute_Name;
 	public static String Bpmn_FlowTarget_Attribute_Name;
 	public static String Bpmn_FlowDefault_Attribute_Name;
+	public static String Bpmn_FlowOutgoings_Attribute_Name;
+	public static String Bpmn_FlowIncomings_Attribute_Name;
 	public static String Bpmn_Wizard_Title;
 	public static String Bpmn_File_Choose_WizardPage_Name;
 	public static String Bpmn_File_Choose_WizardPage_Title;

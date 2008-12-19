@@ -28,13 +28,19 @@ import org.jboss.tools.jbpm.convert.b2j.translate.TranslateHelper;
 /**
  * @author Grid Qian
  * 
- *         this is a translator for bpmn ->jpdl
+ *         this is a translator for bpmn -> jpdl
  */
 public class BPMN2JPDL extends BPMNTranslator {
 
 	private Document bpmnDocument;
 	private List<Document> processDefs = new ArrayList<Document>();
+	
+	// map: bpmn element's(activity) id to jpdl element
 	private Map<String, Element> map = new HashMap<String, Element>();
+	// map: bpmn outgoingEdges element's(sequenceEdges) id to bpmn element's(activity) id
+	private Map<String, String> sourceMap = new HashMap<String, String>();
+	// map: bpmn incomingEdges element's(sequenceEdges) id to bpmn element's(activity) id
+	private Map<String, String> targetMap = new HashMap<String, String>();
 
 	public BPMN2JPDL() {
 	}
@@ -150,13 +156,37 @@ public class BPMN2JPDL extends BPMNTranslator {
 		for (Object activity : graph.elements()) {
 			if (B2JMessages.Bpmn_Vertice_Element_Name
 					.equals(((Element) activity).getName())) {
-				translateActivity(((Element) activity), processRoot);
+				translateActivity((Element) activity, processRoot);
+				getSequenceFlowInfo((Element)activity);
 			}
 		}
 		translateSequenceFlows(graph, processRoot);
 		processDefs.add(processDef);
 
 		return processRoot;
+	}
+
+	/*
+	 * get Incomingedges and Outgoingedges Map from the activity element
+	 */
+	private void getSequenceFlowInfo(Element activity) {
+		String id = activity.attributeValue(B2JMessages.Dom_Element_ID);
+		String ins = activity.attributeValue(B2JMessages.Bpmn_FlowIncomings_Attribute_Name);
+		String outs = activity.attributeValue(B2JMessages.Bpmn_FlowOutgoings_Attribute_Name);
+		String[] inArray = null;
+		String[] outArray = null;
+		if(ins != null){
+			inArray = ins.split(" ");
+			for(String in : inArray){
+				targetMap.put(in, id);
+			}
+		}
+		if(outs != null){
+			outArray = outs.split(" ");
+			for(String out : outArray){
+				sourceMap.put(out, id);
+			}
+		}	
 	}
 
 	/*
@@ -380,8 +410,7 @@ public class BPMN2JPDL extends BPMNTranslator {
 	 */
 	private void translateSequenceFlow(Element edge, Element processRoot) {
 
-		Element source = map.get(edge
-				.attributeValue(B2JMessages.Bpmn_FlowSource_Attribute_Name));
+		Element source = map.get(sourceMap.get(edge.attributeValue(B2JMessages.Dom_Element_ID)));
 
 		Element transition = null;
 		if ("true".equals(edge
@@ -399,7 +428,7 @@ public class BPMN2JPDL extends BPMNTranslator {
 			warnings.add(B2JMessages.Translate_Warning_Bpmn_Element_Name
 					+ edge.attributeValue(B2JMessages.Bpmn_Element_ID));
 		}
-		transition.addAttribute(B2JMessages.To,map.get(edge.attributeValue(B2JMessages.Bpmn_FlowTarget_Attribute_Name)).attributeValue(B2JMessages.Dom_Element_Name));
+		transition.addAttribute(B2JMessages.To,map.get(targetMap.get(edge.attributeValue(B2JMessages.Dom_Element_ID))).attributeValue(B2JMessages.Dom_Element_Name));
 	}
 
 	/*
