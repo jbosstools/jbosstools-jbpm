@@ -2,9 +2,7 @@ package org.jboss.tools.jbpm.convert;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.jboss.tools.jmx.core.tests.DefaultMBeanServerConnectionFactoryTest;
-import org.jboss.tools.jmx.core.tests.DefaultProviderTest;
-import org.jboss.tools.jmx.core.tests.NodeBuilderTestCase;
+import org.jboss.tools.jbpm.convert.test.BpmnConvertTest;
 
 
 public class JBPMConvertAllTests {
