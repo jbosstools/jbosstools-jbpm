@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <process-definition xmlns="urn:jbpm.org:jpdl-3.2" name="Policy Pricing">
-  <node name="Price Policy">    <transition name="au_gen_3" to="   Price Calculated ?"/>  </node>  <start-state name="au_gen">    <transition name="au_gen_2" to="Price Policy"/>  </start-state>  <decision name="   Price Calculated ?">    <transition name="false" to="au_gen_1"/>    <transition name="true" to="Review Pricing"/>  </decision>  <node name="Review Pricing">    <transition name="au_gen_4" to="au_gen_1"/>  </node>  <end-state name="au_gen_1"/></process-definition>
+  <node name="Price Policy">    <edge name="to_nodename_3" to="   Price Calculated ?"/>  </node>  <start-state name="to_nodename">    <edge name="to_nodename_2" to="Price Policy"/>  </start-state>  <decision name="   Price Calculated ?">    <edge name="false" to="to_nodename_1"/>    <edge name="true" to="Review Pricing"/>  </decision>  <node name="Review Pricing">    <edge name="to_nodename_4" to="to_nodename_1"/>  </node>  <end-state name="to_nodename_1"/></process-definition>
