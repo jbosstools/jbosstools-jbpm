@@ -126,7 +126,7 @@ public class TranslateHelper {
 		String name = graph.attributeValue(B2JMessages.Dom_Element_Name);
 
 		if (name == null || "".equals(name)) {
-			name = "au_gen";
+			name = "to_nodename";
 			isOk = false;
 		}
 		Integer i = nameMap.get(name);
