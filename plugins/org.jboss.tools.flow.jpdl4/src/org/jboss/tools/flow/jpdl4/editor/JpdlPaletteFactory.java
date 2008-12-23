@@ -66,7 +66,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createEventEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();       
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-            "Start Event",
+            "Start",
             "Create a new Start Event",
             "org.jboss.tools.flow.jpdl4.startEvent",
             ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.startEvent"),
@@ -75,7 +75,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         );
         entries.add(combined);        
         combined = new CombinedTemplateCreationEntry(
-                "Terminate End Event",
+                "Terminate",
                 "Create a new terminating end event",
                 "org.jboss.tools.flow.jpdl4.terminateEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.terminateEndEvent"),
@@ -84,7 +84,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "Cancel End Event",
+                "Cancel",
                 "Create a new cancel end event",
                 "org.jboss.tools.flow.jpdl4.cancelEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.cancelEndEvent"),
@@ -93,7 +93,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "Error End Event",
+                "Error",
                 "Create a new error end event",
                 "org.jboss.tools.flow.jpdl4.errorEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.errorEndEvent"),
@@ -107,7 +107,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createTaskEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "Wait State Task",
+                "Wait",
                 "Create a new Wait State Task",
                 "org.jboss.tools.flow.jpdl4.waitTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.waitTask"),                
@@ -116,7 +116,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "HQL Task",
+                "HQL",
                 "Create a new HQL Task",
                 "org.jboss.tools.flow.jpdl4.hqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.hqlTask"),                
@@ -125,7 +125,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "SQL Task",
+                "SQL",
                 "Create a new SQL Task",
                 "org.jboss.tools.flow.jpdl4.sqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sqlTask"),                
@@ -134,12 +134,39 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Java Task",
+                "Java",
                 "Create a new Java Task",
                 "org.jboss.tools.flow.jpdl4.javaTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.javaTask"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_java.png")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_java.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "Script",
+                "Create a new Script Task",
+                "org.jboss.tools.flow.jpdl4.scriptTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.scriptTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "ESB",
+                "Create a new Service Task",
+                "org.jboss.tools.flow.jpdl4.serviceTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.serviceTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "Task",
+                "Create a new Human Task",
+                "org.jboss.tools.flow.jpdl4.humanTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.humanTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         return entries;

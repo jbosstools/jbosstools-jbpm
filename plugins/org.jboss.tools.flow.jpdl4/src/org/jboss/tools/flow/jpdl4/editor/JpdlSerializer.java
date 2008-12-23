@@ -18,10 +18,13 @@ import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HqlTask;
+import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
+import org.jboss.tools.flow.jpdl4.model.ServiceTask;
 import org.jboss.tools.flow.jpdl4.model.SqlTask;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
@@ -166,6 +169,39 @@ public class JpdlSerializer {
     			buffer.append("name=\"" + value + "\"");
     		}
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    	} else if (element instanceof ScriptTask) {
+    		ScriptTask scriptTask = (ScriptTask)element;
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("<script");
+    		if (!isEmpty(scriptTask.getName())) {
+    			buffer.append(" ");
+    			String value = scriptTask.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    	} else if (element instanceof ServiceTask) {
+    		ServiceTask serviceTask = (ServiceTask)element;
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("<esb");
+    		if (!isEmpty(serviceTask.getName())) {
+    			buffer.append(" ");
+    			String value = serviceTask.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
+    	} else if (element instanceof HumanTask) {
+    		HumanTask humanTask = (HumanTask)element;
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("<task");
+    		if (!isEmpty(humanTask.getName())) {
+    			buffer.append(" ");
+    			String value = humanTask.getName();
+    			buffer.append("name=\"" + value + "\"");
+    		}
+    		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ExclusiveGateway) {
     		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)element;
     		buffer.append("\n");
@@ -271,6 +307,18 @@ public class JpdlSerializer {
         	buffer.append("\n");
         	appendPadding(buffer, level);
     		buffer.append("</java>");
+    	} else if (element instanceof ScriptTask) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("</script>");
+    	} else if (element instanceof ServiceTask) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("</esb>");
+    	} else if (element instanceof HumanTask) {
+        	buffer.append("\n");
+        	appendPadding(buffer, level);
+    		buffer.append("</task>");
     	} else if (element instanceof ExclusiveGateway) {
     		buffer.append("\n");
     		appendPadding(buffer, level);

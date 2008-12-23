@@ -126,6 +126,12 @@ public class JpdlDeserializer {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.sqlTask");
 			} else if ("java".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.javaTask");
+			} else if ("script".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.scriptTask");
+			} else if ("esb".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.serviceTask");
+			} else if ("task".equals(child.getNodeName())) {
+				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.humanTask");
 			} else if ("exclusive".equals(child.getNodeName())) {
 				result = (NodeWrapper)ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.exclusiveGateway");
 			} else if ("join".equals(child.getNodeName())) {

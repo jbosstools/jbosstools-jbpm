@@ -127,6 +127,30 @@
          </node>
       </element>
       <element
+            class="org.jboss.tools.flow.jpdl4.model.ScriptTask"
+            id="org.jboss.tools.flow.jpdl4.scriptTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ServiceTask"
+            id="org.jboss.tools.flow.jpdl4.serviceTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.HumanTask"
+            id="org.jboss.tools.flow.jpdl4.humanTask"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
             class="org.jboss.tools.flow.jpdl4.model.ExclusiveGateway"
             id="org.jboss.tools.flow.jpdl4.exclusiveGateway"
             language="org.jboss.tools.flow.jpdl4">
