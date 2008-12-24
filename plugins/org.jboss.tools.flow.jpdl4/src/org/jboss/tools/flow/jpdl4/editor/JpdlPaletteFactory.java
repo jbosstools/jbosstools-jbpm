@@ -66,7 +66,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createEventEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();       
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-            "Start",
+            "start",
             "Create a new Start Event",
             "org.jboss.tools.flow.jpdl4.startEvent",
             ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.startEvent"),
@@ -75,7 +75,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         );
         entries.add(combined);        
         combined = new CombinedTemplateCreationEntry(
-                "Terminate",
+                "end",
                 "Create a new terminating end event",
                 "org.jboss.tools.flow.jpdl4.terminateEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.terminateEndEvent"),
@@ -84,7 +84,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "Cancel",
+                "cancel",
                 "Create a new cancel end event",
                 "org.jboss.tools.flow.jpdl4.cancelEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.cancelEndEvent"),
@@ -93,7 +93,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "Error",
+                "error",
                 "Create a new error end event",
                 "org.jboss.tools.flow.jpdl4.errorEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.errorEndEvent"),
@@ -107,7 +107,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createTaskEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "Wait",
+                "wait",
                 "Create a new Wait State Task",
                 "org.jboss.tools.flow.jpdl4.waitTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.waitTask"),                
@@ -116,7 +116,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "HQL",
+                "hql",
                 "Create a new HQL Task",
                 "org.jboss.tools.flow.jpdl4.hqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.hqlTask"),                
@@ -125,7 +125,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "SQL",
+                "sql",
                 "Create a new SQL Task",
                 "org.jboss.tools.flow.jpdl4.sqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sqlTask"),                
@@ -134,7 +134,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Java",
+                "java",
                 "Create a new Java Task",
                 "org.jboss.tools.flow.jpdl4.javaTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.javaTask"),                
@@ -143,7 +143,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Script",
+                "script",
                 "Create a new Script Task",
                 "org.jboss.tools.flow.jpdl4.scriptTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.scriptTask"),                
@@ -152,7 +152,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "ESB",
+                "esb",
                 "Create a new Service Task",
                 "org.jboss.tools.flow.jpdl4.serviceTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.serviceTask"),                
@@ -161,7 +161,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Task",
+                "task",
                 "Create a new Human Task",
                 "org.jboss.tools.flow.jpdl4.humanTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.humanTask"),                
@@ -175,7 +175,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createGatewayEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "Exclusive Gateway",
+                "exclusive",
                 "Create a new Exclusive Gateway",
                 "org.jboss.tools.flow.jpdl4.exclusiveGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.exclusiveGateway"),                
@@ -184,7 +184,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Fork Parallel Gateway",
+                "fork",
                 "Create a new Parallel Fork Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelForkGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelForkGateway"),                
@@ -193,7 +193,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "Join Parallel Gateway",
+                "join",
                 "Create a new Parallel Join Gateway",
                 "org.jboss.tools.flow.jpdl4.parallelJoinGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelJoinGateway"),                
@@ -207,7 +207,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createFlowEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         ToolEntry tool = new ConnectionCreationToolEntry(
-                "Sequence Flow",
+                "flow",
                 "Creating a new Sequence Flow",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sequenceFlow"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/flow_sequence.png")),
