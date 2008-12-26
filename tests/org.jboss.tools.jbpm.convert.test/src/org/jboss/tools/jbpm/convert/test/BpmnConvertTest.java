@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.dom4j.Document;
 import org.eclipse.core.runtime.Platform;
 import org.jboss.tools.jbpm.convert.b2j.translate.*;
-import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 
 public class BpmnConvertTest extends TestCase {
 
@@ -37,22 +35,14 @@ public class BpmnConvertTest extends TestCase {
 		for (int i = 0; i < bpmnFiles.length; i++) {
 			String name = bpmnFiles[i].getName();
 			String path = bpmnFiles[i].getParentFile().getAbsolutePath();
-			Document bpmnDocument = null;
-			Document bpmnDiagramDocument = null;
-			try {
-				bpmnDocument = getDocument(path, name);
-				bpmnDiagramDocument = getDocument(path, TranslateHelper
-						.getBpmnDiagramName(name));
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+
 			String tmpLocation = getTempDir().getAbsolutePath();
 
-			jpdltranformer = new BPMN2JPDL(name, path, bpmnDocument);
+			jpdltranformer = new BPMN2JPDL(name, path);
 			jpdltranformer.translateToFiles(tmpLocation);
 
-			gpdtranformer = new GraphicalFileGenerator(bpmnDiagramDocument,
-					jpdltranformer.getMap(), path, name);
+			gpdtranformer = new GraphicalFileGenerator(jpdltranformer.getMap(),
+					path, TranslateHelper.getBpmnDiagramName(name));
 			gpdtranformer.translateToFiles(tmpLocation);
 
 			try {
@@ -175,16 +165,6 @@ public class BpmnConvertTest extends TestCase {
 				list(list, files[i]);
 			}
 		}
-	}
-
-	/*
-	 * get the dom document from a given path and file name
-	 */
-	public Document getDocument(String bpmnFileParentPath, String bpmnFileName)
-			throws Exception {
-		Document bpmnDocument = null;
-		bpmnDocument = BPMNToUtil.parse(bpmnFileParentPath, bpmnFileName);
-		return bpmnDocument;
 	}
 
 	public File getTempDir() {
