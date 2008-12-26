@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.dom4j.*;
 import org.dom4j.io.*;
-import org.jboss.tools.jbpm.convert.bpmnto.util.DomXmlWriter;
 
 /**
  * @author Grid Qian

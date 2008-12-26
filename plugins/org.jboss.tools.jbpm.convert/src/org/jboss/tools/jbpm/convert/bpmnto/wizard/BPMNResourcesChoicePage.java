@@ -11,6 +11,8 @@
 
 package org.jboss.tools.jbpm.convert.bpmnto.wizard;
 
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -29,7 +31,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 
 /**
  * @author Grid Qian
@@ -77,7 +78,7 @@ public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
 	@Override
 	public boolean isPageComplete() {
 		if (viewer != null) {
-			return BPMNToUtil.checkSelectedResources(viewer.getSelection());
+			return this.checkSelectedResources(viewer.getSelection());
 		}
 		return super.isPageComplete();
 	}
@@ -88,6 +89,31 @@ public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
 
 	public ISelection getSelection() {
 		return currentSelection;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean checkSelectedResources(ISelection selectedResources) {
+		boolean res = true;
+		if (selectedResources instanceof IStructuredSelection
+				&& !selectedResources.isEmpty()) {
+			IStructuredSelection ss = (IStructuredSelection) selectedResources;
+			for (Iterator it = ss.iterator(); it.hasNext();) {
+				Object o = it.next();
+				if (o instanceof IFile) {
+					if (!((IFile) o).getFileExtension()
+							.equalsIgnoreCase("bpmn")) {
+						res = false;
+						break;
+					}
+				} else {
+					res = false;
+					break;
+				}
+			}
+		} else {
+			res = false;
+		}
+		return res;
 	}
 }
 

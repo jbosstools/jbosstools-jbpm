@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.dom4j.Document;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -117,7 +116,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 			bpmnFileParentPath = bpmnFile.getParent().getLocation()
 					.toOSString();
 			try {
-				idMap = BPMNToUtil.getPoolIDsFromDocument(getDocument(
+				idMap = BPMNToUtil.getPoolIDsFromDocument(BPMNToUtil.parse(
 						bpmnFileParentPath, bpmnFileName));
 				poolIdList.clear();
 			} catch (Exception e) {
@@ -173,15 +172,6 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 		return container.getLocation().toOSString();
 	}
 
-	/*
-	 * get the dom document from a given path and file name
-	 */
-	public Document getDocument(String bpmnFileParentPath, String bpmnFileName)
-			throws Exception {
-		Document bpmnDocument = null;
-		bpmnDocument = BPMNToUtil.parse(bpmnFileParentPath, bpmnFileName);
-		return bpmnDocument;
-	}
 
 	/*
 	 * refresh eclipse workspace

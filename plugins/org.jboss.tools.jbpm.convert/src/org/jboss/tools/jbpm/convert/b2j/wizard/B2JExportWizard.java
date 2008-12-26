@@ -22,7 +22,9 @@ import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
 import org.jboss.tools.jbpm.convert.b2j.translate.TranslateHelper;
 import org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin;
 import org.jboss.tools.jbpm.convert.b2j.translate.BPMN2JPDL;
+import org.jboss.tools.jbpm.convert.b2j.translate.Constants;
 import org.jboss.tools.jbpm.convert.b2j.translate.GraphicalFileGenerator;
+import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 import org.jboss.tools.jbpm.convert.bpmnto.wizard.BpmnToWizard;
 
 /**
@@ -60,7 +62,7 @@ public class B2JExportWizard extends BpmnToWizard {
 			try {
 				TranslateHelper.createFiles(location, bpmnFileName, strs,
 						jpdlFolderNames,
-						B2JMessages.Jpdl_Process_Definition_Name, isOverWrite);
+						Constants.Jpdl_Process_Definition_Name, isOverWrite);
 			} catch (Exception e) {
 				BpmnToPlugin.getDefault().logError(e.getMessage());
 			}
@@ -81,7 +83,7 @@ public class B2JExportWizard extends BpmnToWizard {
 			}
 			try {
 				TranslateHelper.createFiles(location, bpmnFileName, strs,
-						jpdlFolderNames, B2JMessages.Gpd_Definition_Name, false);
+						jpdlFolderNames, Constants.Gpd_Definition_Name, false);
 			} catch (Exception e) {
 				BpmnToPlugin.getDefault().logError(e.getMessage());
 			}
@@ -95,7 +97,7 @@ public class B2JExportWizard extends BpmnToWizard {
 
 		Document bpmnDocument = null;
 		try {
-			bpmnDocument = getDocument(bpmnFileParentPath, bpmnFileName);
+			bpmnDocument = BPMNToUtil.parse(bpmnFileParentPath, bpmnFileName);
 		} catch (Exception e) {
 			errorList.add(NLS.bind(B2JMessages.Translate_Error_File_CanNotRead,
 					bpmnFileName));
@@ -119,7 +121,7 @@ public class B2JExportWizard extends BpmnToWizard {
 		// generate jpdl gpd file from *.bpmn_diagram
 		Document bpmnDiagramDocument = null;
 		try {
-			bpmnDiagramDocument = getDocument(bpmnFileParentPath,
+			bpmnDiagramDocument = BPMNToUtil.parse(bpmnFileParentPath,
 					TranslateHelper.getBpmnDiagramName(bpmnFileName));
 		} catch (Exception e) {
 			errorList.add(NLS.bind(B2JMessages.Translate_Error_File_CanNotRead,
@@ -132,7 +134,7 @@ public class B2JExportWizard extends BpmnToWizard {
 		this.setStrForGpdList(Arrays.asList(generator.translateToStrings()));
 			
 		for (Document def : generator.getGpdDefs()) {
-			this.generatedGpdFoldersList.add(def.getRootElement().attributeValue(B2JMessages.Dom_Element_Name));
+			this.generatedGpdFoldersList.add(def.getRootElement().attributeValue(Constants.Dom_Element_Name));
 		}
 		
 		warningList.addAll(generator.getWarnings());

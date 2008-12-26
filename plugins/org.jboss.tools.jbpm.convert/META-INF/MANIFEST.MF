@@ -16,8 +16,7 @@ Bundle-ClassPath: .,
 Bundle-Vendor: %PLUGIN_PROVIDER
 Import-Package: org.eclipse.core.resources,
  org.eclipse.ui.model
-Export-Package: org.dom4j,
- org.jboss.tools.jbpm.convert.b2j.translate,
+Export-Package: org.jboss.tools.jbpm.convert.b2j.translate,
  org.jboss.tools.jbpm.convert.bpmnto,
  org.jboss.tools.jbpm.convert.bpmnto.translate,
  org.jboss.tools.jbpm.convert.bpmnto.util,

@@ -19,10 +19,9 @@ import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin;
 import org.jboss.tools.jbpm.convert.bpmnto.translate.BPMNTranslator;
+import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
 import org.jboss.tools.jbpm.convert.bpmnto.util.DomXmlWriter;
-import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
 import org.jboss.tools.jbpm.convert.b2j.translate.TranslateHelper;
 
 /**
@@ -41,10 +40,13 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 
 	public GraphicalFileGenerator(Document bpmnDiagramDocument,
 			Map<String, Element> map, String rootLocation, String bpmnFileName) {
-		this.rootLocation = rootLocation;
-		this.bpmnFileName = bpmnFileName;
+		super(bpmnFileName, rootLocation, null);
 		this.document = bpmnDiagramDocument;
 		this.map = map;
+	}
+	
+	public GraphicalFileGenerator(Map<String, Element> map, String rootLocation, String bpmnFileName) {
+		this(null, map, rootLocation, bpmnFileName);
 	}
 
 	/*
@@ -59,7 +61,7 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 				strForProcessDefs[i] = DomXmlWriter.toString(def);
 			} catch (IOException e) {
 				this.errors
-						.add(B2JMessages.Translate_Error_GpdFile_CanNotGenerate
+						.add(Constants.Translate_Error_GpdFile_CanNotGenerate
 								+ e.getMessage());
 			}
 			i++;
@@ -76,29 +78,17 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 		int i = 0;
 		for (Document def : gpdDefs) {
 			gpdFileNames[i] = def.getRootElement().attributeValue(
-					B2JMessages.Dom_Element_Name);
+					Constants.Dom_Element_Name);
 			i++;
 		}
 
 		try {
 			TranslateHelper.createFiles(fileLocation, bpmnFileName,
 					strForGpdDefs, gpdFileNames,
-					B2JMessages.Gpd_Definition_Name, false);
+					Constants.Gpd_Definition_Name, false);
 		} catch (Exception e) {
-			errors.add(B2JMessages.Translate_Error_GpdFile_CanNotWrite
+			errors.add(Constants.Translate_Error_GpdFile_CanNotWrite
 					+ e.getMessage());
-		}
-
-		if (errors.size() != 0) {
-			for (String str : errors) {
-				BpmnToPlugin.getDefault().logError(str);
-			}
-		}
-
-		if (warnings.size() != 0) {
-			for (String str : warnings) {
-				BpmnToPlugin.getDefault().logWarning(str);
-			}
 		}
 	}
 
@@ -106,9 +96,19 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 	 * translate the graphical bpmn_diagram document
 	 */
 	public void translateDiagram() {
+		
+		if(document == null) {
+			try {
+				document = BPMNToUtil.parse(rootLocation, bpmnFileName);
+			} catch (Exception e) {
+				errors.add(Constants.Translate_Error_File_CanNotRead
+						+ e.getMessage());
+			}
+		}
+		
 		Element rootElement = document.getRootElement();
 		List<Element> eleList = DomXmlWriter.getElementsByName(rootElement,
-				B2JMessages.Gpd_Element_Name);
+				Constants.Gpd_Element_Name);
 
 		for (String bpmnID : map.keySet()) {
 			if (bpmnID != null) {
@@ -121,43 +121,43 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 				Element bpmnGpdEle = TranslateHelper.getDiagramLayoutElement(
 						bpmnID, eleList);
 				if (bpmnGpdEle == null) {
-					if (bpmnID.endsWith(B2JMessages.Bpmn_Vertice_Element_Name)) {
+					if (bpmnID.endsWith(Constants.Bpmn_Vertice_Element_Name)) {
 						bpmnGpdEle = TranslateHelper.getDiagramLayoutElement(
 								TranslateHelper.getPureBpmnID(bpmnID,
-										B2JMessages.Bpmn_Vertice_Element_Name),
+										Constants.Bpmn_Vertice_Element_Name),
 								eleList);
 						xIncre = 150;
 						yIncre = 50;
 					} else if (bpmnID
-							.endsWith(B2JMessages.Jpdl_Element_Decision_Suffix)) {
+							.endsWith(Constants.Jpdl_Element_Decision_Suffix)) {
 						bpmnGpdEle = TranslateHelper
 								.getDiagramLayoutElement(
 										TranslateHelper
 												.getPureBpmnID(
 														bpmnID,
-														B2JMessages.Jpdl_Element_Decision_Suffix),
+														Constants.Jpdl_Element_Decision_Suffix),
 										eleList);
 						xIncre = 150;
 						yIncre = 100;
 					} else if (bpmnID
-							.endsWith(B2JMessages.Jpdl_Element_Complete_Suffix)) {
+							.endsWith(Constants.Jpdl_Element_Complete_Suffix)) {
 						bpmnGpdEle = TranslateHelper
 								.getDiagramLayoutElement(
 										TranslateHelper
 												.getPureBpmnID(
 														bpmnID,
-														B2JMessages.Jpdl_Element_Complete_Suffix),
+														Constants.Jpdl_Element_Complete_Suffix),
 										eleList);
 						xIncre = 300;
 						yIncre = 0;
 					} else if (bpmnID
-							.endsWith(B2JMessages.Jpdl_Element_Cancel_Suffix)) {
+							.endsWith(Constants.Jpdl_Element_Cancel_Suffix)) {
 						bpmnGpdEle = TranslateHelper
 								.getDiagramLayoutElement(
 										TranslateHelper
 												.getPureBpmnID(
 														bpmnID,
-														B2JMessages.Jpdl_Element_Cancel_Suffix),
+														Constants.Jpdl_Element_Cancel_Suffix),
 										eleList);
 						xIncre = 300;
 						yIncre = 200;
@@ -181,8 +181,8 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 
 		// if not translate, then translate the pool of the element
 		if (!gpdPoolNames.contains(jpdlEle.getParent().attributeValue(
-				B2JMessages.Dom_Element_Name))
-				&& B2JMessages.Jpdl_Process_Definition_Element_Name
+				Constants.Dom_Element_Name))
+				&& Constants.Jpdl_Process_Definition_Element_Name
 						.equals(jpdlEle.getParent().getName())) {
 			translatePool(eleList, jpdlEle);
 		}
@@ -191,21 +191,21 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 		Element poolEle = null;
 		for (Document doc : gpdDefs) {
 			if (doc.getRootElement().attributeValue(
-					B2JMessages.Dom_Element_Name).equals(
+					Constants.Dom_Element_Name).equals(
 					jpdlEle.getParent().attributeValue(
-							B2JMessages.Dom_Element_Name))) {
+							Constants.Dom_Element_Name))) {
 				poolEle = doc.getRootElement();
 			}
 		}
 		Element pgdEle = TranslateHelper.createNode(poolEle,
-				B2JMessages.Jpdl_Node_Element_Name, jpdlEle);
+				Constants.Jpdl_Node_Element_Name, jpdlEle);
 
 		TranslateHelper.mapXY(pgdEle, xy[0], xy[1]);
 
 		// translate the sequence flow of the element
-		for (Object ele : jpdlEle.elements(B2JMessages.Jpdl_Transition_Element)) {
+		for (Object ele : jpdlEle.elements(Constants.Jpdl_Transition_Element)) {
 			TranslateHelper.createTransition(pgdEle,
-					B2JMessages.Jpdl_Transition_Element, (Element) ele);
+					Constants.Gpd_Transition_Element, (Element) ele);
 		}
 	}
 
@@ -215,7 +215,7 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 		for (String id : map.keySet()) {
 			if (map.get(id) == jpdlEle.getParent()) {
 				poolBpmnID = TranslateHelper.getPureBpmnID(id,
-						B2JMessages.Bpmn_Pool_Element_Name);
+						Constants.Bpmn_Pool_Element_Name);
 				break;
 			}
 		}
@@ -224,18 +224,18 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 			Element poolBpmnGpdEle = TranslateHelper.getDiagramLayoutElement(
 					poolBpmnID, eleList);
 			Document processDiagramDef = DomXmlWriter.createDomTree(false,
-					null, B2JMessages.Gpd_Process_Diagram_Name);
+					null, Constants.Gpd_Process_Diagram_Name);
 			Element poolEle = processDiagramDef.getRootElement();
-			DomXmlWriter.mapAttribute(poolEle, B2JMessages.Dom_Element_Name,
+			DomXmlWriter.mapAttribute(poolEle, Constants.Dom_Element_Name,
 					jpdlEle.getParent());
 			DomXmlWriter.mapAttribute(poolEle,
-					B2JMessages.Width_Attribute_Name, poolBpmnGpdEle);
+					Constants.Width_Attribute_Name, poolBpmnGpdEle);
 			DomXmlWriter.mapAttribute(poolEle,
-					B2JMessages.Height_Attribute_Name, poolBpmnGpdEle);
+					Constants.Height_Attribute_Name, poolBpmnGpdEle);
 
 			gpdDefs.add(processDiagramDef);
 			gpdPoolNames.add(poolEle
-					.attributeValue(B2JMessages.Dom_Element_Name));
+					.attributeValue(Constants.Dom_Element_Name));
 		}
 
 	}

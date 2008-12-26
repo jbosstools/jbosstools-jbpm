@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.xml.parsers.SAXParser;
@@ -28,15 +27,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.jboss.tools.jbpm.convert.b2j.messages.B2JMessages;
-import org.jboss.tools.jbpm.convert.bpmnto.util.BPMNToUtil;
+import org.jboss.tools.jbpm.convert.b2j.translate.Constants;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -164,49 +155,14 @@ public class BPMNToUtil {
 	public static Map<String, String> getPoolIDsFromDocument(Document document) {
 		Map<String, String> poolIDMap = new HashMap<String, String>();
 		Element diagram = document.getRootElement();
-		for (Object pool : diagram.elements(B2JMessages.Bpmn_Pool_Element_Name)) {
-			if (((Element) pool).attributeValue(B2JMessages.Bpmn_Element_ID) != null) {
+		for (Object pool : diagram.elements(Constants.Bpmn_Pool_Element_Name)) {
+			if (((Element) pool).attributeValue(Constants.Bpmn_Element_ID) != null) {
 				poolIDMap.put(((Element) pool)
-						.attributeValue(B2JMessages.Bpmn_Element_ID),
+						.attributeValue(Constants.Bpmn_Element_ID),
 						((Element) pool)
-								.attributeValue(B2JMessages.Dom_Element_Name));
+								.attributeValue(Constants.Dom_Element_Name));
 			}
 		}
 		return poolIDMap;
-	}
-
-	public static Composite createComposite(Composite parent, int numColumns) {
-		Composite composite = new Composite(parent, SWT.NULL);
-
-		GridLayout layout = new GridLayout();
-		layout.numColumns = numColumns;
-		composite.setLayout(layout);
-		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		return composite;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static boolean checkSelectedResources(ISelection selectedResources) {
-		boolean res = true;
-		if (selectedResources instanceof IStructuredSelection
-				&& !selectedResources.isEmpty()) {
-			IStructuredSelection ss = (IStructuredSelection) selectedResources;
-			for (Iterator it = ss.iterator(); it.hasNext();) {
-				Object o = it.next();
-				if (o instanceof IFile) {
-					if (!((IFile) o).getFileExtension()
-							.equalsIgnoreCase("bpmn")) {
-						res = false;
-						break;
-					}
-				} else {
-					res = false;
-					break;
-				}
-			}
-		} else {
-			res = false;
-		}
-		return res;
 	}
 }
