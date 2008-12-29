@@ -168,6 +168,10 @@ public class BpmnPoolsChoicePage extends AbstractConvertWizardPage {
 			setPageComplete(false);
 		}
 	}
+	
+    public boolean canFlipToNextPage() {
+        return isPageComplete();
+    }
 
 	public Map<String, String> getIdMap() {
 		return idMap;

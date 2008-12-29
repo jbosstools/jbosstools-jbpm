@@ -105,7 +105,7 @@ public class GeneratedFileLocationPage extends AbstractConvertWizardPage {
 	}
 
 	public boolean isPageComplete() {
-		if (viewer != null && viewer.getSelection() == null) {
+		if (viewer == null || viewer.getSelection() == null) {
 			return false;
 		}
 		return true;

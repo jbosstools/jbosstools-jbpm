@@ -56,5 +56,9 @@ public class ErrorMessagesPage extends AbstractConvertWizardPage {
 	public void setListViewer(TableViewer listViewer) {
 		this.listViewer = listViewer;
 	}
+	
+	public boolean isPageComplete() {
+		return true;
+	}
 
 }

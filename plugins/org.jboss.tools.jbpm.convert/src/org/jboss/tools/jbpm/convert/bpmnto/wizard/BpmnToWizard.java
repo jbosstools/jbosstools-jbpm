@@ -52,6 +52,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	// bpmn pool id:name map
 	private Map<String, String> idMap;
 	private boolean isOverWrite = true;
+	private boolean isDoTranslation = false;
 
 	protected String bpmnFileName;
 	protected String bpmnFileParentPath;
@@ -134,8 +135,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	public IWizardPage getNextPage(IWizardPage page) {
 		if (page.getName().equals(B2JMessages.Bpmn_Pool_Choose_WizardPage_Name)) {
 			errorList = translateBpmnToStrings();
-			errorPage.setPageComplete(true);
-
+			isDoTranslation = true;
 			if (errorList.size() == 0) {
 				return locationPage;
 			}
@@ -148,6 +148,9 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	}
 
 	public boolean performFinish() {
+		if(!isDoTranslation){
+			translateBpmnToStrings();
+		}
 		createGeneratedFile(this.isOverWrite());
 		refreshWorkspace();
 		return true;
