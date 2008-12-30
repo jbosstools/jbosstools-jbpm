@@ -113,8 +113,10 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 		for (String bpmnID : map.keySet()) {
 			if (bpmnID != null) {
 				// when translate bpmn loop activity, we create a mock
-				// structure and when translate bpmn transaction, we create a
-				// mock structure too. For these reason, we need to give a (x,y)
+				// structure
+				// when translate bpmn transaction, we create a
+				// mock structure too. 
+				// For these reasons, we need to give a (x,y)
 				// increment to avoid two element overlap
 				int xIncre = 0;
 				int yIncre = 0;
@@ -161,10 +163,9 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 										eleList);
 						xIncre = 300;
 						yIncre = 200;
+					} else if(bpmnID.endsWith(Constants.Bpmn_Pool_Element_Name)){
+						continue;
 					}
-				}
-				if (bpmnGpdEle == null) {
-					continue;
 				}
 				translateGraphicalElement(TranslateHelper.getXY(bpmnGpdEle,
 						xIncre, yIncre), map.get(bpmnID), eleList);
@@ -179,7 +180,7 @@ public class GraphicalFileGenerator extends BPMNTranslator {
 			return;
 		}
 
-		// if not translate, then translate the pool of the element
+		// if not translate the element's pool, then translate the pool of the element
 		if (!gpdPoolNames.contains(jpdlEle.getParent().attributeValue(
 				Constants.Dom_Element_Name))
 				&& Constants.Jpdl_Process_Definition_Element_Name

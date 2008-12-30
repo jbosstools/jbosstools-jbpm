@@ -152,7 +152,7 @@ public class TranslateHelper {
 
 	/*
 	 * select the elements from process. These elements have no transitions sub
-	 * element or have transtions to end-state.
+	 * element or have transitions to end-state.
 	 */
 	public static List<Element> locateLastElements(Element processRoot) {
 		List<Element> list = new ArrayList<Element>();
@@ -164,16 +164,14 @@ public class TranslateHelper {
 				Element subEle = ((Element) ele)
 						.element(Constants.Jpdl_Transition_Element);
 				if (subEle != null
-						&& endState
-								.attributeValue(Constants.Dom_Element_Name)
+						&& endState.attributeValue(Constants.Dom_Element_Name)
 								.equals(subEle.attributeValue(Constants.To))) {
 					list.add((Element) ele);
 				}
 			}
 		} else {
 			for (Object ele : processRoot.elements()) {
-				if (((Element) ele)
-						.element(Constants.Jpdl_Transition_Element) == null) {
+				if (((Element) ele).element(Constants.Jpdl_Transition_Element) == null) {
 					list.add((Element) ele);
 				}
 			}
@@ -189,8 +187,7 @@ public class TranslateHelper {
 			List<Element> eleList) {
 		Element element = null;
 		for (Element ele : eleList) {
-			String str = ele
-					.attributeValue(Constants.Bpmn_Href_Attribute_Name);
+			String str = ele.attributeValue(Constants.Bpmn_Href_Attribute_Name);
 			if (str != null && str.contains(bpmnID)) {
 				element = ele;
 				break;
@@ -228,8 +225,7 @@ public class TranslateHelper {
 			String width, String height) {
 		Element ele = DomXmlWriter.addElement(parentEle, name);
 		DomXmlWriter.addAttribute(ele, Constants.Width_Attribute_Name, width);
-		DomXmlWriter.addAttribute(ele, Constants.Height_Attribute_Name,
-				height);
+		DomXmlWriter.addAttribute(ele, Constants.Height_Attribute_Name, height);
 		return ele;
 	}
 
@@ -267,14 +263,19 @@ public class TranslateHelper {
 	 */
 	public static String[] getXY(Element bpmnGpdEle, int xIncre, int yIncre) {
 		String xy[] = new String[2];
-		xy[0] = String.valueOf(Integer.parseInt(bpmnGpdEle
-				.attributeValue(Constants.X_Attribute_Name) == null ? "0"
-				: bpmnGpdEle.attributeValue(Constants.X_Attribute_Name))
-				+ xIncre);
-		xy[1] = String.valueOf(Integer.parseInt(bpmnGpdEle
-				.attributeValue(Constants.Y_Attribute_Name) == null ? "0"
-				: bpmnGpdEle.attributeValue(Constants.Y_Attribute_Name))
-				+ yIncre);
+		if (bpmnGpdEle == null) {
+			xy[0] = String.valueOf(xIncre);
+			xy[1] = String.valueOf(yIncre);
+		} else {
+			xy[0] = String.valueOf(Integer.parseInt(bpmnGpdEle
+					.attributeValue(Constants.X_Attribute_Name) == null ? "0"
+					: bpmnGpdEle.attributeValue(Constants.X_Attribute_Name))
+					+ xIncre);
+			xy[1] = String.valueOf(Integer.parseInt(bpmnGpdEle
+					.attributeValue(Constants.Y_Attribute_Name) == null ? "0"
+					: bpmnGpdEle.attributeValue(Constants.Y_Attribute_Name))
+					+ yIncre);
+		}
 		return xy;
 	}
 
