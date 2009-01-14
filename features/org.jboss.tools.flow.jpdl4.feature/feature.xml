@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.jboss.tools.flow.jpdl4.feature"
-      label="jPDL4 Feature"
+      label="%featureName"
       version="1.0.0"
-      provider-name="JBoss, a Division of Red Hat">
+      provider-name="%providerName">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
