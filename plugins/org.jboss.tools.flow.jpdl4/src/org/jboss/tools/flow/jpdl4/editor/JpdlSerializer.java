@@ -3,8 +3,19 @@ package org.jboss.tools.flow.jpdl4.editor;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -13,6 +24,7 @@ import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.CancelEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
@@ -30,9 +42,22 @@ import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
 import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
 import org.jboss.tools.flow.jpdl4.model.WaitTask;
+import org.w3c.dom.Node;
 
 public class JpdlSerializer {
-
+	
+	private static TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	private static Transformer transformer = null;
+	
+	static {
+		try {
+			transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		} catch (TransformerConfigurationException e) {				
+			Logger.logError("Error while creating XML tranformer.", e);	
+		}
+	}
+	
     public void serialize(Wrapper wrapper, OutputStream os) throws IOException {
     	StringBuffer buffer = new StringBuffer();
     	appendToBuffer(buffer, wrapper, 0);
@@ -56,12 +81,41 @@ public class JpdlSerializer {
        	}
     }
     
-    private void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
+    
+    
+    private void appendNodeList(StringBuffer buffer, ArrayList<Node> nodeList) {
+    	if (transformer == null) {
+    		Logger.logInfo("Skipping append nodes as transformer is not initialized.");
+    		return;
+    	}
+    	DOMSource domSource = new DOMSource();
+    	for (Node node : nodeList) {
+        	StringWriter writer = new StringWriter();
+        	domSource.setNode(node);
+        	Result result = new StreamResult(writer);
+        	try {
+				transformer.transform(domSource, result);
+			} catch (TransformerException e) {
+				Logger.logError("Exception while transforming xml.", e);
+			}
+    		buffer.append(writer.getBuffer());
+    	}
+    }
+    
+    @SuppressWarnings("unchecked")
+	private void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
+    	ArrayList<Node> leadingNodeList = (ArrayList<Node>)element.getMetaData("leadingNodes");
+    	boolean appendLeadingNodes = leadingNodeList != null && !leadingNodeList.isEmpty();
+    	if (appendLeadingNodes) {
+    		appendNodeList(buffer, leadingNodeList);
+    	}
     	if (element instanceof SequenceFlow) {
     		SequenceFlow transition = (SequenceFlow)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<flow");
     		if (transition.getTo() != null) {
     			buffer.append(" ");
@@ -72,8 +126,10 @@ public class JpdlSerializer {
     		appendConnectionGraphics(buffer, (ConnectionWrapper)wrapper);
     	} else if (element instanceof TerminateEndEvent) {
     		TerminateEndEvent terminateEndEvent = (TerminateEndEvent)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<end");
     		if (!isEmpty(terminateEndEvent.getName())) {
     			buffer.append(" ");
@@ -83,8 +139,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ErrorEndEvent) {
     		ErrorEndEvent errorEndEvent = (ErrorEndEvent)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<end-error");
     		if (!isEmpty(errorEndEvent.getName())) {
     			buffer.append(" ");
@@ -94,8 +152,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof CancelEndEvent) {
     		CancelEndEvent cancelEndEvent = (CancelEndEvent)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<end-cancel");
     		if (!isEmpty(cancelEndEvent.getName())) {
     			buffer.append(" ");
@@ -105,8 +165,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof StartEvent) {
     		StartEvent startEvent = (StartEvent)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<start");
     		if (!isEmpty(startEvent.getName())) {
     			buffer.append(" ");
@@ -116,8 +178,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof SuperState) {
     		SuperState superState = (SuperState)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<super-state");
     		if (!isEmpty(superState.getName())) {
     			buffer.append(" ");
@@ -126,8 +190,10 @@ public class JpdlSerializer {
     		}
     	} else if (element instanceof WaitTask) {
     		WaitTask waitTask = (WaitTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<state");
     		if (!isEmpty(waitTask.getName())) {
     			buffer.append(" ");
@@ -137,8 +203,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof HqlTask) {
     		HqlTask hqlTask = (HqlTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<hql");
     		if (!isEmpty(hqlTask.getName())) {
     			buffer.append(" ");
@@ -148,8 +216,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof SqlTask) {
     		SqlTask sqlTask = (SqlTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<sql");
     		if (!isEmpty(sqlTask.getName())) {
     			buffer.append(" ");
@@ -159,8 +229,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof JavaTask) {
     		JavaTask javaTask = (JavaTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<java");
     		if (!isEmpty(javaTask.getName())) {
     			buffer.append(" ");
@@ -170,8 +242,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ScriptTask) {
     		ScriptTask scriptTask = (ScriptTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<script");
     		if (!isEmpty(scriptTask.getName())) {
     			buffer.append(" ");
@@ -181,8 +255,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ServiceTask) {
     		ServiceTask serviceTask = (ServiceTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<esb");
     		if (!isEmpty(serviceTask.getName())) {
     			buffer.append(" ");
@@ -192,8 +268,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof HumanTask) {
     		HumanTask humanTask = (HumanTask)element;
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<task");
     		if (!isEmpty(humanTask.getName())) {
     			buffer.append(" ");
@@ -203,8 +281,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ExclusiveGateway) {
     		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)element;
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<exclusive");
     		if (!isEmpty(exclusiveGateway.getName())) {
     			buffer.append(" ");
@@ -214,8 +294,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof ForkParallelGateway) {
     		ForkParallelGateway parallelForkGateway = (ForkParallelGateway)element;
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<fork");
     		if (!isEmpty(parallelForkGateway.getName())) {
     			buffer.append(" ");
@@ -225,8 +307,10 @@ public class JpdlSerializer {
     		appendNodeGraphics(buffer, (NodeWrapper)wrapper);
     	} else if (element instanceof JoinParallelGateway) {
     		JoinParallelGateway parallelJoinGateway = (JoinParallelGateway)element;
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendLeadingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("<join");
     		if (!isEmpty(parallelJoinGateway.getName())) {
     			buffer.append(" ");
@@ -264,75 +348,115 @@ public class JpdlSerializer {
     	}
     }
     
-    private void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
+    @SuppressWarnings("unchecked")
+	private void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
+    	ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
+    	boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
+    	if (appendTrailingNodes) {
+    		appendNodeList(buffer, trailingNodeList);
+    	}
     	if (element instanceof SequenceFlow) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</flow>");
     	} else if (element instanceof TerminateEndEvent) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</end>");
     	} else if (element instanceof ErrorEndEvent) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</end-error>");
     	} else if (element instanceof CancelEndEvent) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</end-cancel>");
     	} else if (element instanceof StartEvent) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
-    		buffer.append("</start>");
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
+   		buffer.append("</start>");
     	} else if (element instanceof SuperState) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</super-state>");
     	} else if (element instanceof WaitTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</state>");
     	} else if (element instanceof HqlTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</hql>");
     	} else if (element instanceof SqlTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</sql>");
     	} else if (element instanceof JavaTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</java>");
     	} else if (element instanceof ScriptTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</script>");
     	} else if (element instanceof ServiceTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</esb>");
     	} else if (element instanceof HumanTask) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</task>");
     	} else if (element instanceof ExclusiveGateway) {
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</exclusive>");
     	} else if (element instanceof ForkParallelGateway) {
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</fork>");
     	} else if (element instanceof JoinParallelGateway) {
-    		buffer.append("\n");
-    		appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</join>");
     	} else if (element instanceof Process) {
-        	buffer.append("\n");
-        	appendPadding(buffer, level);
+    		if (!appendTrailingNodes) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level);
+    		}
     		buffer.append("</process>");
     	}	
     }
