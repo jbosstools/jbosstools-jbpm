@@ -33,16 +33,15 @@ import org.jboss.tools.flow.jpdl4.model.WaitTask;
 
 public class JpdlSerializer {
 
-    public static void serialize(Wrapper wrapper, OutputStream os) throws IOException {
+    public void serialize(Wrapper wrapper, OutputStream os) throws IOException {
     	StringBuffer buffer = new StringBuffer();
     	appendToBuffer(buffer, wrapper, 0);
     	Writer writer = new OutputStreamWriter(os);
     	writer.write(buffer.toString());
     	writer.close();
-//    	System.out.println(buffer.toString());
     }
     
-    private static void appendToBuffer(StringBuffer buffer, Wrapper wrapper, int level) {
+    private void appendToBuffer(StringBuffer buffer, Wrapper wrapper, int level) {
     	Object object = wrapper.getElement();
         if (!(object instanceof Element)) return;
        	appendOpening(buffer, wrapper, level);
@@ -57,7 +56,7 @@ public class JpdlSerializer {
        	}
     }
     
-    private static void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
+    private void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
     	if (element instanceof SequenceFlow) {
     		SequenceFlow transition = (SequenceFlow)element;
@@ -255,17 +254,17 @@ public class JpdlSerializer {
     	
     }
     
-    private static boolean isEmpty(String str) {
+    private boolean isEmpty(String str) {
     	return str == null || "".equals(str);
     }
     
-    private static void appendPadding(StringBuffer buffer, int level) {
+    private void appendPadding(StringBuffer buffer, int level) {
     	for (int i = 0; i < level; i++) {
     		buffer.append("   ");
     	}
     }
     
-    private static void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
+    private void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
     	if (element instanceof SequenceFlow) {
         	buffer.append("\n");
@@ -338,7 +337,7 @@ public class JpdlSerializer {
     	}	
     }
     
-    private static void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
         if (wrapper instanceof ContainerWrapper) {
         	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
         	List<NodeWrapper> children = containerWrapper.getElements();
@@ -355,7 +354,7 @@ public class JpdlSerializer {
         } 
     }
     
-    private static void appendNodeGraphics(StringBuffer buffer, NodeWrapper wrapper) {
+    private void appendNodeGraphics(StringBuffer buffer, NodeWrapper wrapper) {
     	Rectangle constraint = wrapper.getConstraint();
     	buffer.append(" g=\"");
     	buffer.append(constraint.x);
@@ -368,7 +367,7 @@ public class JpdlSerializer {
     	buffer.append("\"");
     }
     
-    private static void appendConnectionGraphics(StringBuffer buffer, ConnectionWrapper wrapper) {
+    private void appendConnectionGraphics(StringBuffer buffer, ConnectionWrapper wrapper) {
     	List<Point> bendPoints = wrapper.getBendpoints();
     	if (bendPoints.size() == 0) return;
     	buffer.append(" g=\"");

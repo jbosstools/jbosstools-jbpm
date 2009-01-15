@@ -30,7 +30,7 @@ public class JpdlEditor extends GenericModelEditor {
     protected void writeModel(OutputStream os) throws IOException {
         Object object = getModel();
         if (object instanceof Wrapper) {
-        	JpdlSerializer.serialize((Wrapper)object, os);
+        	new JpdlSerializer().serialize((Wrapper)object, os);
         }
     }
     
@@ -41,7 +41,7 @@ public class JpdlEditor extends GenericModelEditor {
     	} catch (IOException e) {
     		// ignored
     	}
-    	setModel(empty ? createModel() : JpdlDeserializer.deserialize(is));
+    	setModel(empty ? createModel() : new JpdlDeserializer().deserialize(is));
     }
     
 }
