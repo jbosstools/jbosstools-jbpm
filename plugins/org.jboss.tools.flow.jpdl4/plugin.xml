@@ -198,4 +198,30 @@
       </wizard>
    </extension>
 
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor contributorId="org.jboss.tools.flow.jpdl4.editor">
+         <propertyCategory category="advanced"/>
+      </propertyContributor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.jboss.tools.flow.jpdl4.editor">
+         <propertyTab
+               category="advanced"
+               id="org.jboss.tools.jpdl4.advanced"
+               label="Advanced"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="org.jboss.tools.flow.jpdl4.editor">
+          <propertySection
+               class="org.eclipse.ui.views.properties.tabbed.AdvancedPropertySection"
+               id="org.jboss.tools.jpdl4.advanced"
+               tab="org.jboss.tools.jpdl4.advanced">
+            <input type="java.lang.Object"/>
+         </propertySection>
+      </propertySections>
+   </extension> 
+
 </plugin>

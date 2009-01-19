@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.jboss.tools.flow.common.model.DefaultFlow;
 import org.jboss.tools.flow.common.model.Node;
+import org.jboss.tools.flow.jpdl4.util.Jpdl4Helper;
 
 public class Process extends DefaultFlow {
 	
@@ -27,4 +28,9 @@ public class Process extends DefaultFlow {
 		initial = node;
 	}
 	
+	public void removeNode(Node node) {
+		Jpdl4Helper.mergeLeadingNodes(node);
+		super.removeNode(node);
+	}
+
 }
