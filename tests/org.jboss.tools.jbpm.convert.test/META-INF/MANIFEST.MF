@@ -15,3 +15,5 @@ Import-Package: junit.framework,
  org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %BundleProvider
+Export-Package: org.jboss.tools.jbpm.convert,
+ org.jboss.tools.jbpm.convert.test
