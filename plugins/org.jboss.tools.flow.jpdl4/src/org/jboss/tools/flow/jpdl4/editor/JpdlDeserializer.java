@@ -22,28 +22,36 @@ import org.w3c.dom.NodeList;
 
 public class JpdlDeserializer {
 	
-	interface AttributeHandler {
-		void processAttributes(Wrapper wrapper, Element element);
+	interface AttributeDeserializer {
+		void deserializeAttributes(Wrapper wrapper, Element element);
 	}
 	
-	interface ChildNodeHandler {
-		Wrapper processChildNode(Wrapper parent, Node node);
+	interface ChildNodeDeserializer {
+		Wrapper deserializeChildNode(Wrapper parent, Node node);
 	}
 	
 	interface PostProcessor {
 		void postProcess(Wrapper wrapper);
 	}
 	
-	class ProcessAttributeHandler implements AttributeHandler {
-		public void processAttributes(Wrapper wrapper, Element element) {
+	class DefaultAttributeDeserializer implements AttributeDeserializer {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			wrapper.getElement().setMetaData("attributes", element.getAttributes());
+		}
+	}
+	
+	class ProcessAttributeHandler extends DefaultAttributeDeserializer {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
 			if (!(wrapper instanceof FlowWrapper)) return;
 			FlowWrapper flowWrapper = (FlowWrapper)wrapper;
 			((Flow)flowWrapper.getElement()).setName(element.getAttribute("name"));
 		}
 	}
 	
-	class NodeAttributeHandler implements AttributeHandler {
-		public void processAttributes(Wrapper wrapper, Element element) {
+	class NodeAttributeHandler extends DefaultAttributeDeserializer {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
 			if (!(wrapper instanceof NodeWrapper)) return;
 			NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
 			addGraphics(nodeWrapper, element);
@@ -51,8 +59,9 @@ public class JpdlDeserializer {
 		}
 	}
 	
-	class ConnectionAttributeHandler implements AttributeHandler {
-		public void processAttributes(Wrapper wrapper, Element element) {
+	class ConnectionAttributeHandler extends DefaultAttributeDeserializer {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
 			if (!(wrapper instanceof ConnectionWrapper)) return;
 			ConnectionWrapper connectionWrapper = (ConnectionWrapper)wrapper;
 			addGraphics(connectionWrapper, element);
@@ -60,8 +69,8 @@ public class JpdlDeserializer {
 		}
 	}
 	
-	class ProcessChildNodeHandler implements ChildNodeHandler {
-		public Wrapper processChildNode(Wrapper parent, Node node) {
+	class ProcessChildNodeHandler implements ChildNodeDeserializer {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
 			Wrapper result = null;
 			if (!(parent instanceof FlowWrapper)) return result;
 			FlowWrapper flowWrapper = (FlowWrapper)parent;
@@ -75,9 +84,9 @@ public class JpdlDeserializer {
 		}
 	}
 	
-	class NodeChildNodeHandler implements ChildNodeHandler {
+	class NodeChildNodeHandler implements ChildNodeDeserializer {
 		@SuppressWarnings("unchecked")
-		public Wrapper processChildNode(Wrapper parent, Node node) {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
 			Wrapper result = null;
 			if (!(parent instanceof NodeWrapper)) return result;
 			NodeWrapper nodeWrapper = (NodeWrapper)parent;
@@ -139,16 +148,16 @@ public class JpdlDeserializer {
 		if (elementId == null) return null;
 		Wrapper result = ElementRegistry.createWrapper(elementId);
 		if (result == null) return null;
-		AttributeHandler attributeHandler = getAttributeHandler(result);
+		AttributeDeserializer attributeHandler = getAttributeHandler(result);
 		if (attributeHandler != null) {
-			attributeHandler.processAttributes(result, element);
+			attributeHandler.deserializeAttributes(result, element);
 		}
-		ChildNodeHandler childNodeHandler = getChildNodeHandler(result);
+		ChildNodeDeserializer childNodeHandler = getChildNodeHandler(result);
 		if (childNodeHandler != null) {
 			NodeList nodeList = element.getChildNodes();
 			ArrayList<Node> unknownNodeList = new ArrayList<Node>();
 			for (int i = 0; i < nodeList.getLength(); i++) {
-				Wrapper childWrapper = childNodeHandler.processChildNode(result, nodeList.item(i));		
+				Wrapper childWrapper = childNodeHandler.deserializeChildNode(result, nodeList.item(i));		
 				if (childWrapper != null) {
 					childWrapper.getElement().setMetaData("leadingNodes", unknownNodeList);
 					unknownNodeList = new ArrayList<Node>();
@@ -172,7 +181,7 @@ public class JpdlDeserializer {
 		return null;
 	}
 	
-	private AttributeHandler getAttributeHandler(Wrapper wrapper) {
+	private AttributeDeserializer getAttributeHandler(Wrapper wrapper) {
 		if (wrapper instanceof FlowWrapper) {
 			return new ProcessAttributeHandler();
 		} else if (wrapper instanceof NodeWrapper) {
@@ -183,7 +192,7 @@ public class JpdlDeserializer {
 		return null;
 	}
 	
-	private ChildNodeHandler getChildNodeHandler(Wrapper wrapper) {
+	private ChildNodeDeserializer getChildNodeHandler(Wrapper wrapper) {
 		if (wrapper instanceof FlowWrapper) {
 			return new ProcessChildNodeHandler();
 		} else if (wrapper instanceof NodeWrapper) {
