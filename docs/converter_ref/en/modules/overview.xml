@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<chapter id="overview" revisionflag="overview">
+<chapter id="overview">
    <title>BPMN Convert Overview</title>
 
     <para>JBoss BPMN Convert module is a tool. Users can use it to translate a BPMN file to something else.</para>
