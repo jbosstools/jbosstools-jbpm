@@ -17,3 +17,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %BundleProvider
 Export-Package: org.jboss.tools.jbpm.convert,
  org.jboss.tools.jbpm.convert.test
+Bundle-ClassPath: jbpm-convert-test.jar
