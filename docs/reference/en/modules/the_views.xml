@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter id="the_views" xreflabel="the_views" role="updated">
+<chapter id="the_views" xreflabel="the_views">
     <?dbhtml filename="the_views.html"?>
     <chapterinfo>
         <keywordset>
@@ -64,7 +64,7 @@
         </figure>
     </section>
 
-    <section id="the_properties_view" role="updated">
+    <section id="the_properties_view">
         <?dbhtml filename="the_properties_view.html"?>
         <title>The Properties View</title>
         <para> Here, we dwell on the JBDS <property>Properties view</property>.</para>
@@ -108,7 +108,7 @@
                 <property>jbay</property>. </emphasis></para>
     </section>
 
-    <section id="jbpm_gpd_editor" role="updated">
+    <section id="jbpm_gpd_editor">
         <?dbhtml filename="direct_editing.html"?>
         <title>The jBPM Graphical Process Designer editor.</title>
         <para>The <property>jBPM GPD editor</property> includes four modes: Diagram, Deployment,
