@@ -1,9 +1,15 @@
 package org.jboss.tools.flow.jpdl4.model;
 
+import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.jboss.tools.flow.common.model.DefaultConnection;
 import org.jboss.tools.flow.common.model.Node;
+import org.jboss.tools.flow.common.properties.IPropertyId;
 
 public class SequenceFlow extends DefaultConnection {
+	
+	private String name;
 
 	public SequenceFlow() {
 		this(null, null);
@@ -11,6 +17,56 @@ public class SequenceFlow extends DefaultConnection {
 	
 	public SequenceFlow(Node from, Node to) {
 		super(from, to);
+		setMetaData("propertySource", new PropertySource());
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	private class PropertySource implements IPropertySource, IPropertyId {
+		
+		private IPropertyDescriptor[] propertyDescriptors = new IPropertyDescriptor[] {
+				new TextPropertyDescriptor(NAME, "Name") {}
+		};
+
+		public Object getEditableValue() {
+			return null;
+		}
+
+		public IPropertyDescriptor[] getPropertyDescriptors() {
+			return propertyDescriptors;
+		}
+
+		public Object getPropertyValue(Object id) {
+			if (NAME.equals(id)) {
+				return getName() != null ? getName() : "";
+			} 
+			return null;
+		}
+
+		public boolean isPropertySet(Object id) {
+			if (NAME.equals(id)) {
+				return getName() != null;
+			}
+			return false;
+		}
+
+		public void resetPropertyValue(Object id) {
+		}
+
+		public void setPropertyValue(Object id, Object value) {
+			if (NAME.equals(id)) {
+				if (value instanceof String) {
+					setName((String)value);
+				}
+			} 
+		}
+		
 	}
 		
 }
