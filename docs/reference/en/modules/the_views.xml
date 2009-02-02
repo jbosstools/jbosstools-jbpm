@@ -12,7 +12,7 @@
     <para>Here, it will be explained how to work with views and editors provided by JBDS.</para>
     <para>The views are used for representation and navigation the resources you are working on at
         the moment. One of the advantages of all the views is that all modifications made in the
-        currant-active file are immediately displayed in them. Let’s get acquainted more closely
+        current active file are immediately displayed in them. Let’s get acquainted more closely
         with those that the <property>jPDL perspective</property> provides. </para>
 
     <figure>
@@ -49,7 +49,7 @@
         <?dbhtml filename="the_outline_view.html"?>
         <title>The Overview</title>
         <para>The main advantage of this view is that it gives visual representation of the whole
-            currant-developing process. Besides, the <emphasis>
+            current developing process. Besides, the <emphasis>
                 <property>Overview</property>
             </emphasis> comes as a scrollable thumbnail which enables a better navigation of the
             process structure if it&apos;s too large.</para>
