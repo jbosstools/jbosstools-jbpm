@@ -43,14 +43,14 @@ public class SequenceFlow extends DefaultConnection {
 		}
 
 		public Object getPropertyValue(Object id) {
-			if (NAME.equals(id)) {
+			if (NAME.equals(id) || LABEL.equals(id)) {
 				return getName() != null ? getName() : "";
-			} 
+			}
 			return null;
 		}
 
 		public boolean isPropertySet(Object id) {
-			if (NAME.equals(id)) {
+			if (NAME.equals(id) || LABEL.equals(id)) {
 				return getName() != null;
 			}
 			return false;
@@ -60,7 +60,7 @@ public class SequenceFlow extends DefaultConnection {
 		}
 
 		public void setPropertyValue(Object id, Object value) {
-			if (NAME.equals(id)) {
+			if (NAME.equals(id) || LABEL.equals(id)) {
 				if (value instanceof String) {
 					setName((String)value);
 				}

@@ -28,20 +28,9 @@ public class Process extends DefaultFlow {
 		initial = node;
 	}
 	
-	public void addNode(Node node) {
-		if (node.getName() == null || "".equals(node.getName())) {
-			node.setName(getInitialName(node));
-		}
-		super.addNode(node);
-	}
-	
 	public void removeNode(Node node) {
 		Jpdl4Helper.mergeLeadingNodes(node);
 		super.removeNode(node);
 	}
 	
-	private String getInitialName(Node node) {
-		return Jpdl4Helper.getLabel(node, this);
-	}
-
 }

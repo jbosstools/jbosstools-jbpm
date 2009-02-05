@@ -11,6 +11,7 @@ import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributo
 import org.jboss.tools.flow.common.editor.GenericModelEditor;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.editpart.JpdlEditPartFactory;
 import org.jboss.tools.flow.jpdl4.properties.JpdlPropertySheetPage;
 
 public class JpdlEditor extends GenericModelEditor implements ITabbedPropertySheetPageContributor {
@@ -21,7 +22,9 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
         return new JpdlPaletteFactory().createPalette();
     }
     
-    
+    protected org.eclipse.gef.EditPartFactory createEditPartFactory() {
+        return new JpdlEditPartFactory();
+    }
 
     protected Object createModel() {
         return ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.process");
