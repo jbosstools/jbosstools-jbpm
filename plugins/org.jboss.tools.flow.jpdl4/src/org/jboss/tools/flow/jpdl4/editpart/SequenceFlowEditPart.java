@@ -8,6 +8,7 @@ import org.jboss.tools.flow.common.editpart.ConnectionEditPart;
 import org.jboss.tools.flow.common.policy.ElementDirectEditPolicy;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.LabelWrapper;
+import org.jboss.tools.flow.common.wrapper.ModelEvent;
 
 public class SequenceFlowEditPart extends ConnectionEditPart {
 
@@ -35,4 +36,8 @@ public class SequenceFlowEditPart extends ConnectionEditPart {
     	}
     }
     
+    public void modelChanged(ModelEvent event) {
+        refresh();
+    }
+
 }
