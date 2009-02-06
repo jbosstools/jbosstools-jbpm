@@ -23,5 +23,9 @@ public class JpdlEditPartFactory extends EditPartFactory {
     	return new ProcessEditPart();
     }
     
+    protected EditPart createConnectionEditPart(Element element) {
+    	return new SequenceFlowEditPart();
+    }
+    
     
 }
