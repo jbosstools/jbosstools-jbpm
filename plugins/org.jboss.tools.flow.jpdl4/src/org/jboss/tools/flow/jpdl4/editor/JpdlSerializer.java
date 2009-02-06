@@ -182,6 +182,7 @@ public class JpdlSerializer {
     class SequenceFlowWrapperSerializer extends AbstractWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		ArrayList<String> result = new ArrayList<String>();
+    		result.add("name");
     		result.add("to");
     		result.add("g");
     		return result;
@@ -190,11 +191,19 @@ public class JpdlSerializer {
     		if (!(wrapper instanceof ConnectionWrapper)) return;
     		Element element = wrapper.getElement();
     		if (!(element instanceof SequenceFlow)) return;
-    		if ("to".equals(attributeName)) {
+    		if ("name".equals(attributeName)) { 
+    			appendName(buffer, (SequenceFlow)element);
+    		} else if ("to".equals(attributeName)) {
 				appendTo(buffer, (SequenceFlow)element);
 			} else if ("g".equals(attributeName)) {
 				appendGraphics(buffer, (ConnectionWrapper)wrapper);
     		}
+    	}
+    	protected void appendName(StringBuffer buffer, SequenceFlow sequenceFlow) {
+    		if (sequenceFlow.getName() == null) return;
+    		String value = sequenceFlow.getName();
+    		if (value == null || "".equals(sequenceFlow)) return;
+    		buffer.append(" name=\"" + value + "\"");
     	}
 		protected void appendTo(StringBuffer buffer, SequenceFlow sequenceFlow) {
 			if (sequenceFlow.getTo() == null) return;

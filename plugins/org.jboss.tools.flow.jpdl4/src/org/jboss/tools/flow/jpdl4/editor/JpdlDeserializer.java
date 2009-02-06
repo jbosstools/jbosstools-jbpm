@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Flow;
+import org.jboss.tools.flow.common.properties.IPropertyId;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
@@ -66,6 +67,7 @@ public class JpdlDeserializer {
 			ConnectionWrapper connectionWrapper = (ConnectionWrapper)wrapper;
 			addGraphics(connectionWrapper, element);
 			connectionWrapper.getElement().setMetaData("to", element.getAttribute("to"));
+			connectionWrapper.setPropertyValue(IPropertyId.NAME, element.getAttribute("name"));
 		}
 	}
 	
