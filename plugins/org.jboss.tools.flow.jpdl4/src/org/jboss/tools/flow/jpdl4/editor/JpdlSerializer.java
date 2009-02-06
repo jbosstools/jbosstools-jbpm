@@ -24,6 +24,7 @@ import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
+import org.jboss.tools.flow.common.wrapper.LabelWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
@@ -212,15 +213,31 @@ public class JpdlSerializer {
     		buffer.append(" to=\"" + value + "\"");
 		}
 		protected void appendGraphics(StringBuffer buffer, ConnectionWrapper wrapper) {
+	    	StringBuffer bendPointBuffer = new StringBuffer();
 	    	List<Point> bendPoints = wrapper.getBendpoints();
-	    	if (bendPoints == null || bendPoints.size() == 0) return;
-	    	buffer.append(" g=\"");
-	    	for (int i = 0; i < bendPoints.size(); i++) {
-	    		buffer.append(bendPoints.get(i).x);
-	    		buffer.append(",");
-	    		buffer.append(bendPoints.get(i).y);
-	    		if (i < bendPoints.size() - 1) buffer.append(";");
+	    	if (bendPoints != null && bendPoints.size() > 0) {
+	    		for (int i = 0; i < bendPoints.size(); i++) {
+	    			bendPointBuffer.append(bendPoints.get(i).x);
+	    			bendPointBuffer.append(",");
+	    			bendPointBuffer.append(bendPoints.get(i).y);
+	    			if (i < bendPoints.size() - 1) bendPointBuffer.append(";");
+	    		}	    		
 	    	}
+	    	StringBuffer labelBuffer = new StringBuffer();
+	    	LabelWrapper labelWrapper = wrapper.getLabel();
+	    	if (labelWrapper != null) {
+	    		Point location = labelWrapper.getLocation();
+	    		if (location != null) {
+	    			labelBuffer.append(location.x);
+	    			labelBuffer.append(',');
+	    			labelBuffer.append(location.y);
+	    		}
+	    	}	    	
+	    	if (bendPointBuffer.length() + labelBuffer.length() == 0) return;
+	    	buffer.append(" g=\"");
+	    	buffer.append(bendPointBuffer);
+	    	if (bendPointBuffer.length() > 0) buffer.append(':');
+	    	buffer.append(labelBuffer);
 	    	buffer.append("\"");
 		}
     }

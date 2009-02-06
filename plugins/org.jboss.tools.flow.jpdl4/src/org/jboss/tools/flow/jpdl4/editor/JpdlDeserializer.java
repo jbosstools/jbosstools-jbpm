@@ -234,22 +234,48 @@ public class JpdlDeserializer {
 	private void addGraphics(ConnectionWrapper wrapper, Element element) {
 		String graphics = element.getAttribute("g");
 		if (graphics != null) {
-			StringTokenizer bendpoints = new StringTokenizer(graphics, ";");
-			int index = 0;
-			while (bendpoints.hasMoreTokens()) {
-				StringTokenizer bendpoint = new StringTokenizer(bendpoints.nextToken(), ",");
-				if (bendpoint.countTokens() != 2) {
-					Logger.logInfo(
-							"Wrong info in attribute 'g' while determining bendpoints.");
-				} else {
-					int x = convertStringToInt(bendpoint.nextToken());
-					int y = convertStringToInt(bendpoint.nextToken());
-					wrapper.addBendpoint(index++, new Point(x, y));
-				}
-	
+			int pos = graphics.lastIndexOf(':');
+			String labelInfo, bendpointInfo = null;
+			if (pos != -1) {
+				labelInfo = graphics.substring(pos + 1);
+				bendpointInfo = graphics.substring(0, pos);
+			} else {
+				labelInfo = graphics;
+			}
+			if (labelInfo != null) {
+				addLabelInfo(wrapper, labelInfo);
+			}
+			if (bendpointInfo != null) {
+				addBendpointInfo(wrapper, bendpointInfo);
 			}
 		}
-		
+	}
+	
+	private void addBendpointInfo(ConnectionWrapper wrapper, String bendpointInfo) {
+		StringTokenizer bendpoints = new StringTokenizer(bendpointInfo, ";");
+		int index = 0;
+		while (bendpoints.hasMoreTokens()) {
+			StringTokenizer bendpoint = new StringTokenizer(bendpoints.nextToken(), ",");
+			if (bendpoint.countTokens() != 2) {
+				Logger.logInfo(
+						"Wrong info in attribute 'g' while determining bendpoints.");
+			} else {
+				int x = convertStringToInt(bendpoint.nextToken());
+				int y = convertStringToInt(bendpoint.nextToken());
+				wrapper.addBendpoint(index++, new Point(x, y));
+			}
+		}
+	}
+	
+	private void addLabelInfo(ConnectionWrapper wrapper, String labelInfo) {
+		StringTokenizer label = new StringTokenizer(labelInfo, ",");
+		if (label.countTokens() != 2) {
+			Logger.logInfo("Wrong info in attribute 'g' while determining label location.");
+		} else {
+			int x = convertStringToInt(label.nextToken());
+			int y = convertStringToInt(label.nextToken());
+			wrapper.getLabel().setLocation(new Point(x, y));
+		}
 	}
 	
 	private void addGraphics(NodeWrapper wrapper, Element element) {
