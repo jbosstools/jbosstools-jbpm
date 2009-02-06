@@ -4,6 +4,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
+import org.eclipse.gef.requests.DirectEditRequest;
 import org.jboss.tools.flow.common.editpart.ConnectionEditPart;
 import org.jboss.tools.flow.common.policy.ElementDirectEditPolicy;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
@@ -19,19 +20,19 @@ public class SequenceFlowEditPart extends ConnectionEditPart {
     
     public void performRequest(Request request) {
         if (request.getType() == RequestConstants.REQ_DIRECT_EDIT) {
-            performDirectEdit(request);
+            performDirectEdit();
          } else {
             super.performRequest(request);
         }
     }
     
-    protected void performDirectEdit(Request request) {
+    protected void performDirectEdit() {
     	ConnectionWrapper connectionWrapper = getElementConnection();
     	LabelWrapper labelWrapper = connectionWrapper.getLabel();
     	if (labelWrapper != null) {
     		EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(labelWrapper);
     		if (editPart != null) {
-    			editPart.performRequest(request);
+    			editPart.performRequest(new DirectEditRequest());
     		}
     	}
     }
