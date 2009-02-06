@@ -2,7 +2,6 @@ package org.jboss.tools.flow.jpdl4.editpart;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.requests.DirectEditRequest;
 import org.jboss.tools.flow.common.editpart.NodeEditPart;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
