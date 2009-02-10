@@ -10,6 +10,7 @@ import org.jboss.tools.flow.common.properties.IPropertyId;
 public class SequenceFlow extends DefaultConnection {
 	
 	private String name;
+	private boolean conditional = false;
 
 	public SequenceFlow() {
 		this(null, null);
@@ -26,6 +27,18 @@ public class SequenceFlow extends DefaultConnection {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setConditional(boolean conditional) {
+		this.conditional = conditional;
+	}
+	
+	public boolean isConditional() {
+		return conditional;
+	}
+	
+	public boolean isDefault() {
+		return true;
 	}
 	
 	private class PropertySource implements IPropertySource, IPropertyId {

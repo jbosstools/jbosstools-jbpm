@@ -225,7 +225,7 @@ public class JpdlSerializer {
 	    	}
 	    	StringBuffer labelBuffer = new StringBuffer();
 	    	LabelWrapper labelWrapper = wrapper.getLabel();
-	    	if (labelWrapper != null) {
+	    	if (labelWrapper != null && !isEmpty(labelWrapper.getText())) {
 	    		Point location = labelWrapper.getLocation();
 	    		if (location != null) {
 	    			labelBuffer.append(location.x);
@@ -426,6 +426,10 @@ public class JpdlSerializer {
 			buffer.append("\n");
 			appendPadding(buffer, level);
     	}
+    }
+    
+    private boolean isEmpty(String str) {
+    	return str == null || "".equals(str);
     }
     
 }
