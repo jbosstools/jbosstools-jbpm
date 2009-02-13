@@ -7,7 +7,7 @@ import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.policy.ProcessNodeGraphicalNodeEditPolicy;
 
-public class ProcessNodeEditPart extends NodeEditPart {
+public class ProcessNodeGraphicalEditPart extends NodeEditPart implements JpdlGraphicalEditPart {
 	
     protected void createEditPolicies() {
     	super.createEditPolicies();
@@ -18,9 +18,9 @@ public class ProcessNodeEditPart extends NodeEditPart {
     	super.modelChanged(event);
         if (event.getChange() == Wrapper.ADD_INCOMING_CONNECTION) {
             Object object = getViewer().getEditPartRegistry().get(event.getChangedObject());
-            if (object != null && object instanceof SequenceFlowEditPart) {
+            if (object != null && object instanceof SequenceFlowGraphicalEditPart) {
             	getViewer().select((EditPart)object);
-            	((SequenceFlowEditPart)object).performDirectEdit();
+            	((SequenceFlowGraphicalEditPart)object).performDirectEdit();
             }
         }
     }

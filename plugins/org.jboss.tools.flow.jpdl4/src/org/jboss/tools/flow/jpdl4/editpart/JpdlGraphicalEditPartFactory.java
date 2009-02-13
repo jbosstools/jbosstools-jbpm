@@ -7,24 +7,24 @@ import org.jboss.tools.flow.common.figure.IFigureFactory;
 import org.jboss.tools.flow.common.figure.NodeFigureFactory;
 import org.jboss.tools.flow.common.model.Element;
 
-public class JpdlEditPartFactory extends EditPartFactory {
+public class JpdlGraphicalEditPartFactory extends EditPartFactory {
 
     protected EditPart createNodeEditPart(Element element) {
 		IConfigurationElement configurationElement = 
 			(IConfigurationElement)element.getMetaData("configurationElement");
 		if (configurationElement == null) return null;
-    	ProcessNodeEditPart result = new ProcessNodeEditPart();
+    	ProcessNodeGraphicalEditPart result = new ProcessNodeGraphicalEditPart();
     	IFigureFactory figureFactory = new NodeFigureFactory(configurationElement);
     	result.setFigureFactory(figureFactory);
     	return result;
     }
     
     protected EditPart createFlowEditPart(Element element) {
-    	return new ProcessEditPart();
+    	return new ProcessGraphicalEditPart();
     }
     
     protected EditPart createConnectionEditPart(Element element) {
-    	return new SequenceFlowEditPart();
+    	return new SequenceFlowGraphicalEditPart();
     }
     
     

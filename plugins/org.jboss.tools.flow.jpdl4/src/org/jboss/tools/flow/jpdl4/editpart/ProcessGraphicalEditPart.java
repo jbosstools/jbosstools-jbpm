@@ -9,7 +9,7 @@ import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.jpdl4.policy.ProcessLayoutEditPolicy;
 
-public class ProcessEditPart extends RootEditPart {
+public class ProcessGraphicalEditPart extends RootEditPart implements JpdlGraphicalEditPart {
 
     protected void createEditPolicies() {
         installEditPolicy(EditPolicy.LAYOUT_ROLE, new ProcessLayoutEditPolicy());
@@ -22,8 +22,8 @@ public class ProcessEditPart extends RootEditPart {
         	Object changedObject = event.getChangedObject();
         	if (changedObject != null) {
         		EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(changedObject);
-        		if (editPart instanceof ProcessNodeEditPart) {
-        			((ProcessNodeEditPart)editPart).performDirectEdit();
+        		if (editPart instanceof ProcessNodeGraphicalEditPart) {
+        			((ProcessNodeGraphicalEditPart)editPart).performDirectEdit();
         			// force selection to update the properties view
         			getViewer().setSelection(new StructuredSelection(editPart));
         		}

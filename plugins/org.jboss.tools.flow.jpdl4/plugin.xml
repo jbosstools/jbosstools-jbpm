@@ -278,6 +278,16 @@
             <input type="org.jboss.tools.flow.jpdl4.model.Process"/> 
          </propertySection>
       </propertySections>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.jboss.tools.flow.jpdl4.view.DetailsView"
+            icon="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.details"
+            name="Details"
+            restorable="true">
+      </view>
    </extension> 
 
 </plugin>

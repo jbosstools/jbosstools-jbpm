@@ -89,25 +89,27 @@ public class JpdlSerializer {
     
     
     private void appendNodeList(StringBuffer buffer, ArrayList<Node> nodeList) {
-    	if (transformer == null) {
-    		Logger.logInfo("Skipping append nodes as transformer is not initialized.");
-    		return;
-    	}
-    	DOMSource domSource = new DOMSource();
-    	for (Node node : nodeList) {
-        	StringWriter writer = new StringWriter();
-        	domSource.setNode(node);
-        	Result result = new StreamResult(writer);
-        	try {
+		if (transformer == null) {
+			Logger.logInfo("Skipping append nodes as transformer is not initialized.");
+			return;
+		}
+		DOMSource domSource = new DOMSource();
+		for (Node node : nodeList) {
+	    	StringWriter writer = new StringWriter();
+	    	domSource.setNode(node);
+	    	Result result = new StreamResult(writer);
+	    	try {
 				transformer.transform(domSource, result);
 			} catch (TransformerException e) {
 				Logger.logError("Exception while transforming xml.", e);
 			}
-    		buffer.append(writer.getBuffer());
-    	}
-    }
-    
-    interface WrapperSerializer {
+			buffer.append(writer.getBuffer());
+		}
+	}
+
+
+
+	interface WrapperSerializer {
     	void appendOpening(StringBuffer buffer, Wrapper wrapper, int level);
     }
     
@@ -356,12 +358,39 @@ public class JpdlSerializer {
     	
     }
     
-    private void appendPadding(StringBuffer buffer, int level) {
-    	for (int i = 0; i < level; i++) {
-    		buffer.append("   ");
-    	}
-    }
-    
+    @SuppressWarnings("unchecked")
+	private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+	    if (wrapper instanceof ContainerWrapper) {
+	    	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
+	    	List<NodeWrapper> children = containerWrapper.getElements();
+	    	for (NodeWrapper nodeWrapper : children) {
+	    		appendToBuffer(buffer, nodeWrapper, level+1);
+	    	}
+	    }
+	    if (wrapper instanceof NodeWrapper) {
+	    	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
+	    	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
+	    	for (ConnectionWrapper connectionWrapper : children) {
+	    		appendToBuffer(buffer, connectionWrapper, level+1);
+	    	}
+	    } 
+		Element element = (Element)wrapper.getElement();
+		ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
+		boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
+		if (appendTrailingNodes) {
+			appendNodeList(buffer, trailingNodeList);
+		} else if (buffer.length() > 0){
+			buffer.append("\n");
+			appendPadding(buffer, level);
+		}
+	}
+
+	private void appendPadding(StringBuffer buffer, int level) {
+		for (int i = 0; i < level; i++) {
+			buffer.append("   ");
+		}
+	}
+
 	private void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
     	if (element instanceof SequenceFlow) {
@@ -399,33 +428,6 @@ public class JpdlSerializer {
     	} else if (element instanceof Process) {
     		buffer.append("</process>");
     	}	
-    }
-    
-    @SuppressWarnings("unchecked")
-	private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
-        if (wrapper instanceof ContainerWrapper) {
-        	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
-        	List<NodeWrapper> children = containerWrapper.getElements();
-        	for (NodeWrapper nodeWrapper : children) {
-        		appendToBuffer(buffer, nodeWrapper, level+1);
-        	}
-        }
-        if (wrapper instanceof NodeWrapper) {
-        	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
-        	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
-        	for (ConnectionWrapper connectionWrapper : children) {
-        		appendToBuffer(buffer, connectionWrapper, level+1);
-        	}
-        } 
-    	Element element = (Element)wrapper.getElement();
-    	ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
-    	boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
-    	if (appendTrailingNodes) {
-    		appendNodeList(buffer, trailingNodeList);
-    	} else if (buffer.length() > 0){
-			buffer.append("\n");
-			appendPadding(buffer, level);
-    	}
     }
     
     private boolean isEmpty(String str) {

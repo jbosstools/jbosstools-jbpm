@@ -18,7 +18,7 @@ import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 
-public class SequenceFlowEditPart extends ConnectionEditPart {
+public class SequenceFlowGraphicalEditPart extends ConnectionEditPart implements JpdlGraphicalEditPart {
 
     protected void createEditPolicies() {
     	super.createEditPolicies();
