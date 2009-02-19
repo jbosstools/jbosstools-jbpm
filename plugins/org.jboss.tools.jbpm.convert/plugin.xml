@@ -5,7 +5,7 @@
 		<category name="%category.name"
                   id="org.jboss.tools.jbpm.convert.export.category"/>
 		<wizard name="%wizard.name"
-                icon="$nl$/icons/sample.gif"
+                icon="$nl$/icons/process_definition_enabled.gif"
                 category="org.jboss.tools.jbpm.convert.export.category"
                 class="org.jboss.tools.jbpm.convert.b2j.wizard.B2JExportWizard"
                 id="org.jboss.tools.jbpm.convert.export.b2jexportwizard">
