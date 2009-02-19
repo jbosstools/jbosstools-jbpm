@@ -3,11 +3,10 @@ package org.jboss.tools.flow.jpdl4.editpart;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.gef.editparts.AbstractTreeEditPart;
 import org.jboss.tools.flow.jpdl4.model.Process;
 
-public class ProcessTreeRootEditPart extends AbstractTreeEditPart {
-
+public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
+	
 	public ProcessTreeRootEditPart(Process process) {
 		super(process);
 	}
@@ -20,5 +19,5 @@ public class ProcessTreeRootEditPart extends AbstractTreeEditPart {
 		result.add(new ProcessNodeListTreeEditPart((Process)getModel()));
 		return result;
 	}
-
+	
 }

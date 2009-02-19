@@ -1,8 +1,11 @@
 package org.jboss.tools.flow.jpdl4.model;
 
+import java.util.List;
+
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
+import org.jboss.tools.flow.common.model.Connection;
 import org.jboss.tools.flow.common.model.DefaultConnection;
 import org.jboss.tools.flow.common.model.Node;
 import org.jboss.tools.flow.common.properties.IPropertyId;
@@ -38,7 +41,14 @@ public class SequenceFlow extends DefaultConnection {
 	}
 	
 	public boolean isDefault() {
-		return true;
+		Node from = getFrom();
+		if (from != null) {
+			List<Connection> outgoingConnections = from.getOutgoingConnections("");
+			if (outgoingConnections != null) {
+				return outgoingConnections.size() > 1 && outgoingConnections.get(0) == this;
+			}
+		}
+		return false;
 	}
 	
 	private class PropertySource implements IPropertySource, IPropertyId {

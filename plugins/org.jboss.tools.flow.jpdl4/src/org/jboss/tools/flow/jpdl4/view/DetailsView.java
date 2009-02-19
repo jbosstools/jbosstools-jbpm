@@ -13,6 +13,7 @@ import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.MessagePage;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 public class DetailsView extends PageBookView implements ISelectionProvider,
         ISelectionChangedListener {
@@ -91,4 +92,13 @@ public class DetailsView extends PageBookView implements ISelectionProvider,
 		}
         super.showPageRec(pageRec);
     }
+    
+	@SuppressWarnings("unchecked")
+	public Object getAdapter(Class adapter) {
+    	if (adapter == IPropertySheetPage.class)
+            return getCurrentContributingPart().getAdapter(adapter);
+        return super.getAdapter(adapter);
+    }
+
+	
 }

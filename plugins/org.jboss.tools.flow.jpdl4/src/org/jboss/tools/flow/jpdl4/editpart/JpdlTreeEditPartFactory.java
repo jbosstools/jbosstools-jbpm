@@ -7,7 +7,7 @@ import org.jboss.tools.flow.jpdl4.model.Process;
 public class JpdlTreeEditPartFactory implements EditPartFactory {
 
 	public EditPart createEditPart(EditPart context, Object model) {
-		if (model instanceof Process) return new ProcessTreeRootEditPart((Process)model);
+		if (model instanceof Process && context == null) return new ProcessTreeRootEditPart((Process)model);
 		if (model instanceof ProcessNodeListTreeEditPart) return (EditPart)model;
 		return null;
 	}

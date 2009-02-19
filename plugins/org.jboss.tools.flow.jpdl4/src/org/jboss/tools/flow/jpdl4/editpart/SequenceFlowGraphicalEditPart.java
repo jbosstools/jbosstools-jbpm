@@ -8,7 +8,6 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.jboss.tools.flow.common.editpart.ConnectionEditPart;
-import org.jboss.tools.flow.common.figure.CrossHairDecoration;
 import org.jboss.tools.flow.common.figure.DiamondDecoration;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.policy.ElementDirectEditPolicy;
@@ -25,19 +24,30 @@ public class SequenceFlowGraphicalEditPart extends ConnectionEditPart implements
     	installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new ElementDirectEditPolicy());
     }
     
+    public void refreshVisuals() {
+    	decorateFigure((PolylineConnection)getFigure(), ((Wrapper)getModel()).getElement());
+    }
+    
     protected IFigure createFigure() {
-    	PolylineConnection result = (PolylineConnection)super.createFigure();
-    	Element element = ((Wrapper)getModel()).getElement();
-    	if (element instanceof SequenceFlow) {
+    	return decorateFigure((PolylineConnection)super.createFigure(), ((Wrapper)getModel()).getElement());
+    }
+
+	private IFigure decorateFigure(PolylineConnection figure, Element element) {
+		if (element instanceof SequenceFlow) {
     		SequenceFlow sequenceFlow = (SequenceFlow)element;
-    		if (sequenceFlow.isDefault()) {
-    			result.setSourceDecoration(new CrossHairDecoration());
-    		} else if (sequenceFlow.isConditional()) {
-    			result.setSourceDecoration(new DiamondDecoration());
+//    		if (sequenceFlow.isDefault()) {
+//    			figure.setSourceDecoration(new CrossHairDecoration());
+//    		} else 
+    		if (sequenceFlow.isConditional()) {
+    			if (getElementConnection().getSource().getOutgoingConnections().size() > 1) {
+    				figure.setSourceDecoration(new DiamondDecoration());
+    			}
+    		} else {
+    			figure.setSourceDecoration(null);
     		}
     	}
-    	return result;
-    }
+		return figure;
+	}
     
     public void performRequest(Request request) {
         if (request.getType() == RequestConstants.REQ_DIRECT_EDIT) {
