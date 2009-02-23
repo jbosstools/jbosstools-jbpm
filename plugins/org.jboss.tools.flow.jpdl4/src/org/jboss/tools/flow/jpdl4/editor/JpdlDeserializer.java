@@ -219,7 +219,7 @@ public class JpdlDeserializer {
 		else if ("exclusive".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
 		else if ("join".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelJoinGateway";
 		else if ("fork".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForkGateway";
-		else if ("flow".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sequenceFlow";
+		else if ("transition".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sequenceFlow";
 		else return null;
 	}
 	

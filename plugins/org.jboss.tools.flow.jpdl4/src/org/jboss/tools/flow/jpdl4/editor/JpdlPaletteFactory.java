@@ -185,7 +185,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
                 "fork",
-                "Create a new Parallel Fork Gateway",
+                "Create a new Fork",
                 "org.jboss.tools.flow.jpdl4.parallelForkGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelForkGateway"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_parallel.png")),
@@ -194,7 +194,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
                 "join",
-                "Create a new Parallel Join Gateway",
+                "Create a new Join",
                 "org.jboss.tools.flow.jpdl4.parallelJoinGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelJoinGateway"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_parallel.png")),
@@ -207,8 +207,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createFlowEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         ToolEntry tool = new ConnectionCreationToolEntry(
-                "flow",
-                "Creating a new Sequence Flow",
+                "transition",
+                "Create a new Transition",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sequenceFlow"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/flow_sequence.png")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/flow_sequence.png"))

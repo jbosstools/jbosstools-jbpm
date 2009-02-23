@@ -178,7 +178,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "exclusive";
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
-		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "flow";
+		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "transition";
 		else return null;
     }
     
@@ -394,7 +394,7 @@ public class JpdlSerializer {
 	private void appendClosing(StringBuffer buffer, Wrapper wrapper, int level) {
     	Element element = (Element)wrapper.getElement();
     	if (element instanceof SequenceFlow) {
-    		buffer.append("</flow>");
+    		buffer.append("</transition>");
     	} else if (element instanceof TerminateEndEvent) {
     		buffer.append("</end>");
     	} else if (element instanceof ErrorEndEvent) {
