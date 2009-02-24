@@ -24,7 +24,8 @@ public class SequenceFlowGraphicalEditPart extends ConnectionEditPart implements
     	installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new ElementDirectEditPolicy());
     }
     
-    public void refreshVisuals() {
+    protected void refreshVisuals() {
+    	super.refreshVisuals();
     	decorateFigure((PolylineConnection)getFigure(), ((Wrapper)getModel()).getElement());
     }
     

@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.jboss.tools.flow.common.command.RenameElementCommand;
 import org.jboss.tools.flow.common.properties.IPropertyId;
 
 public class NameSection extends AbstractPropertySection implements IPropertyId {
@@ -32,7 +33,11 @@ public class NameSection extends AbstractPropertySection implements IPropertyId 
 	private ModifyListener nameTextModifyListener = new ModifyListener() {
 		public void modifyText(ModifyEvent arg0) {
 			if (input != null) {
-				input.setPropertyValue(NAME, nameText.getText());
+				RenameElementCommand rec = new RenameElementCommand();
+				rec.setSource(input);
+				rec.setOldName((String)input.getPropertyValue(NAME));
+				rec.setName(nameText.getText());
+				commandStack.execute(rec);
 			}
 		}
 	};
