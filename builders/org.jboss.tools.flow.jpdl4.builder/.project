@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.jboss.tools.flow.jpdl4.builder</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.pluginbuilder.core.pluginBuilderNature</nature>
+	</natures>
+</projectDescription>
