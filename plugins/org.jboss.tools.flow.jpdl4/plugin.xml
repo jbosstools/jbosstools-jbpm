@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+     <content-type 
+           base-type="org.eclipse.core.runtime.xml"
+           file-extensions="xml"
+           id="org.jboss.tools.flow.jpdl4"
+           name="jPDL 4 File"
+           priority="normal">
+        <describer 
+              class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+           <parameter 
+                 name="element" 
+                 value="process">
+           </parameter>
+        </describer>
+     </content-type>
+   </extension>
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            name="jPDL4 Editor"
+            icon="icons/process.gif"
+            contributorClass="org.jboss.tools.flow.common.editor.GenericActionBarContributor"
+            class="org.jboss.tools.flow.jpdl4.editor.JpdlEditor"
+            id="org.jboss.tools.flow.jpdl4.editor">
+         <contentTypeBinding
+               contentTypeId="org.jboss.tools.flow.jpdl4">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.jboss.tools.flow.common.languages">
+      <language
+            editor="org.jboss.tools.flow.jpdl4.editor"
+            id="org.jboss.tools.flow.jpdl4"
+            name="jBPM Process Definition Language">
+      </language>
+   </extension>
+   <extension
+         point="org.jboss.tools.flow.common.elements">
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Process"
+            figure="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.process"
+            label="process"
+            language="org.jboss.tools.flow.jpdl4">
+         <flow
+               acceptsElementStrategy="org.jboss.tools.flow.jpdl4.strategy.ProcessAcceptsElementStrategy"></flow>
+      </element>
+<!--      <element
+            class="org.jboss.tools.flow.jpdl4.model.SuperState"
+            figure="icons/exclusive.gif"
+            id="org.jboss.tools.flow.jpdl4.superState"
+            language="org.jboss.tools.flow.jpdl4"
+            name="Super State">
+         <container></container>
+      </element> -->
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.StartEvent"
+            figure="icons/16/start_event_empty.png"
+            id="org.jboss.tools.flow.jpdl4.startEvent"
+            label="start"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsIncomingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.StartEventAcceptsIncomingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.StartEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.TerminateEndEvent"
+            figure="icons/16/end_event_terminate.png"
+            id="org.jboss.tools.flow.jpdl4.terminateEndEvent"
+            label="end"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TerminateEndEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.CancelEndEvent"
+            figure="icons/16/end_event_cancel.png"
+            id="org.jboss.tools.flow.jpdl4.cancelEndEvent"
+            label="cancel"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.CancelEndEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ErrorEndEvent"
+            figure="icons/16/end_event_error.png"
+            id="org.jboss.tools.flow.jpdl4.errorEndEvent"
+            label="error"
+            language="org.jboss.tools.flow.jpdl4">
+         <node
+               acceptsOutgoingConnectionStrategy="org.jboss.tools.flow.jpdl4.strategy.EndEventAcceptsOutgoingConnectionStrategy">
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ErrorEndEventFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.WaitTask"
+            figure="icons/16/task_wait.png"
+            id="org.jboss.tools.flow.jpdl4.waitTask"
+            label="state"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.HqlTask"
+            figure="icons/16/task_hql.png"
+            id="org.jboss.tools.flow.jpdl4.hqlTask"
+            label="hql"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.SqlTask"
+            figure="icons/16/task_sql.png"
+            id="org.jboss.tools.flow.jpdl4.sqlTask"
+            label="sql"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.JavaTask"
+            figure="icons/16/task_java.png"
+            id="org.jboss.tools.flow.jpdl4.javaTask"
+            label="java"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ScriptTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.scriptTask"
+            label="script"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ServiceTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.serviceTask"
+            label="esb"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.HumanTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.humanTask"
+            label="task"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ExclusiveGateway"
+            figure="icons/16/gateway_exclusive.png"
+            id="org.jboss.tools.flow.jpdl4.exclusiveGateway"
+            label="exclusive"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ExclusiveGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.ForkParallelGateway"
+            figure="icons/16/gateway_parallel.png"
+            id="org.jboss.tools.flow.jpdl4.parallelForkGateway"
+            label="fork"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ParallelGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.JoinParallelGateway"
+            figure="icons/16/gateway_parallel.png"
+            id="org.jboss.tools.flow.jpdl4.parallelJoinGateway"
+            label="join"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ParallelGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.SequenceFlow"
+            figure="icons/sequence.gif"
+            id="org.jboss.tools.flow.jpdl4.sequenceFlow"
+            label="flow"
+            language="org.jboss.tools.flow.jpdl4">
+         <connection></connection>
+      </element>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.jboss.tools.flow.jpdl4"
+            name="jBPM">
+      </category>
+      <wizard
+            category="org.jboss.tools.flow.jpdl4"
+            class="org.jboss.tools.flow.jpdl4.wizard.NewJpdl4FileWizard"
+            icon="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.file"
+            name="jPDL4 File">
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="org.jboss.tools.flow.jpdl4.editor"
+            typeMapper="org.jboss.tools.flow.jpdl4.properties.TypeMapper">
+         <propertyCategory category="general"/>
+         <propertyCategory category="details"/>
+         <propertyCategory category="graphics"/>
+         <propertyCategory category="advanced"/>
+      </propertyContributor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.jboss.tools.flow.jpdl4.editor">
+         <propertyTab
+               category="general"
+               id="org.jboss.tools.jpdl4.general"
+               label="General"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.general"
+               category="details"
+               id="org.jboss.tools.jpdl4.details"
+               label="Details"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.details"
+               category="graphics"
+               id="org.jboss.tools.jpdl4.graphics"
+               label="Graphics"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.graphics"
+               category="advanced"
+               id="org.jboss.tools.jpdl4.advanced"
+               label="Advanced"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="org.jboss.tools.flow.jpdl4.editor">
+          <propertySection
+               class="org.jboss.tools.flow.jpdl4.properties.AdvancedSection"
+               id="org.jboss.tools.jpdl4.advanced"
+               tab="org.jboss.tools.jpdl4.advanced">
+            <input type="java.lang.Object"/> 
+         </propertySection> 
+          <propertySection
+               class="org.jboss.tools.flow.jpdl4.properties.NameSection"
+               id="org.jboss.tools.jpdl4.name"
+               tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.SequenceFlow"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.ProcessNode"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.Process"/> 
+         </propertySection>
+      </propertySections>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.jboss.tools.flow.jpdl4.view.DetailsView"
+            icon="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.details"
+            name="Details"
+            restorable="true">
+      </view>
+   </extension> 
+
+</plugin>
