@@ -224,7 +224,7 @@
  <para>The main purpose of this chapter is to let you know how to launch the <property moreinfo="none">JBoss
   jBPM</property> (business process management).</para>
  <para>The jBPM plugin (jBPM Designer) is already included in the <property moreinfo="none">JBoss Tools</property>.
-  To make it work, you should only download the jBPM runtime (<ulink url="http://sourceforge.net/project/showfiles.php?group_id=70542&package_id=145174&release_id=539054s">jbpm-jpdl-3.2.2</ulink> currently) and specify the directory where you extracted the runtime
+  To make it work, you should only download the jBPM runtime (<ulink url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=539054s">jbpm-jpdl-3.2.2</ulink> currently) and specify the directory where you extracted the runtime
   either when you create a jBPM project or by using the jBPM preference pages.</para>
 
  <note>
@@ -1279,7 +1279,7 @@
             </mediaobject>
         </figure>
         <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-            workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&op=viewforum&f=217">our forum</ulink>.</para>
+            workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=217">our forum</ulink>.</para>
     </section>
 </chapter>
 
