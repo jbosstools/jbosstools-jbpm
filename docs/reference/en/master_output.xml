@@ -55,10 +55,10 @@
         <pubdate>April 2008</pubdate>
         <copyright>
             <year>2007</year>
-            <year>2009</year>
-            <holder>JBoss, a division of Red Hat</holder>
+            <year><diffmk:wrapper diffmk:change="changed">2009</diffmk:wrapper></year>
+            <holder><diffmk:wrapper diffmk:change="changed">JBoss, a division of Red Hat</diffmk:wrapper></holder>
         </copyright>
-        <releaseinfo> Version: 3.1.5.GA</releaseinfo>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 3.1.5.GA</diffmk:wrapper></releaseinfo>
 
 <abstract>
    <title></title>
@@ -487,10 +487,10 @@
     <title>The views</title>
 
     <para>Here, it will be explained how to work with views and editors provided by JBDS.</para>
-    <para>The views are used for representation and navigation the resources you are working on at
+    <para><diffmk:wrapper diffmk:change="changed">The views are used for representation and navigation the resources you are working on at
         the moment. One of the advantages of all the views is that all modifications made in the
         current active file are immediately displayed in them. Let’s get acquainted more closely
-        with those that the <property moreinfo="none">jPDL perspective</property> provides. </para>
+        with those that the </diffmk:wrapper><property moreinfo="none">jPDL perspective</property> provides. </para>
 
     <figure float="0">
         <title>The jPDL Perspective Views and Editors</title>
@@ -525,8 +525,8 @@
     <section id="the_overview">
         <?dbhtml filename="the_outline_view.html"?>
         <title>The Overview</title>
-        <para>The main advantage of this view is that it gives visual representation of the whole
-            current developing process. Besides, the <emphasis>
+        <para><diffmk:wrapper diffmk:change="changed">The main advantage of this view is that it gives visual representation of the whole
+            current developing process. Besides, the </diffmk:wrapper><emphasis>
                 <property moreinfo="none">Overview</property>
             </emphasis> comes as a scrollable thumbnail which enables a better navigation of the
             process structure if it's too large.</para>
