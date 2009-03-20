@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.jboss.tools.flow.jpdl4.multipage.editors.MultiPageEditor"
+            contributorClass="org.jboss.tools.flow.jpdl4.multipage.editors.MultiPageEditorContributor"
+            extensions="xml"
+            icon="icons/process.gif"
+            id="org.jboss.tools.flow.jpdl4.multipage.editors.MultiPageEditor"
+            name="jBPM Graphical Process Designer">
+      </editor>
+   </extension>
+
+</plugin>
