@@ -14,5 +14,6 @@ Require-Bundle: org.jboss.tools.flow.common;bundle-version="1.0.0",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.4.1"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.jboss.tools.flow.jpdl4.Activator
-Export-Package: org.jboss.tools.flow.jpdl4.model
+Export-Package: org.jboss.tools.flow.jpdl4.editor,
+ org.jboss.tools.flow.jpdl4.model
 Bundle-Localization: plugin
