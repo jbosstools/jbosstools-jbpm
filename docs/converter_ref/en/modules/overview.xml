@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <chapter id="overview">
    <title>BPMN Convert Overview</title>
-
-    <para>JBoss BPMN Convert module is a tool used to translate a BPMN file to something else.</para>
-    <para>The BPMN file may be written by hands or with the help of some editors. In this guide, we use STP BPMN editor to draw a BPMN file.</para>
-    <para>As a part of JBoss tools, this module implements BPMN -> JPDL translation. You can get a basic JPDL file from a BPMN file by using this module.</para>
-
-</chapter>
+    <para>This chapter gives you a short overview of JBoss BPMN Convert module</para>
+    <para>JBoss BPMN Convert module is a tool used for a BPMN file translation</para>
+    <para>As a part of JBoss tools, JBoss BPMN Convert module implements BPMN -> JPDL translation. You can get a basic JPDL file from a BPMN file by using this module.</para>
+    <para>The BPMN file may be written by hands or with the help of some editors. In this guide, we use STP BPMN editor to draw a BPMN file.</para> 
+    <para>You can download the editor which is included into  BPMN Modeler from Eclipse download or update site. On the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink> you can find the necessary links and other related information</para>  
+   </chapter>
