@@ -12,6 +12,7 @@ public class ProcessNodeGraphicalEditPart extends NodeEditPart implements JpdlGr
 	
     protected void createEditPolicies() {
     	super.createEditPolicies();
+    	removeEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE);
         installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new ProcessNodeGraphicalNodeEditPolicy());
    }
     

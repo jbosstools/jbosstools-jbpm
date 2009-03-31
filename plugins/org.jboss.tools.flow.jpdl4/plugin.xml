@@ -244,6 +244,10 @@
                id="org.jboss.tools.jpdl4.general"
                label="General"/>
          <propertyTab
+               category="general"
+               id="org.jboss.tools.jpdl4.assignment"
+               label="Assignment"/>
+         <propertyTab
                afterTab="org.jboss.tools.jpdl4.general"
                category="details"
                id="org.jboss.tools.jpdl4.details"
@@ -276,6 +280,12 @@
             <input type="org.jboss.tools.flow.jpdl4.model.SequenceFlow"/>
             <input type="org.jboss.tools.flow.jpdl4.model.ProcessNode"/>
             <input type="org.jboss.tools.flow.jpdl4.model.Process"/> 
+         </propertySection>
+          <propertySection
+               class="org.jboss.tools.flow.jpdl4.properties.AssignmentSection"
+               id="org.jboss.tools.jpdl4.assignment"
+               tab="org.jboss.tools.jpdl4.assignment">
+            <input type="org.jboss.tools.flow.jpdl4.model.HumanTask"/>
          </propertySection>
       </propertySections>
    </extension>

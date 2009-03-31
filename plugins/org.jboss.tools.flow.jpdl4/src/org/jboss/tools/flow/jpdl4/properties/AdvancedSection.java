@@ -7,7 +7,7 @@ import org.eclipse.ui.views.properties.tabbed.AdvancedPropertySection;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 public class AdvancedSection extends AdvancedPropertySection {
-
+	
 	public void createControls(Composite parent,
 			final TabbedPropertySheetPage atabbedPropertySheetPage) {
 		super.createControls(parent, atabbedPropertySheetPage);
@@ -16,5 +16,5 @@ public class AdvancedSection extends AdvancedPropertySection {
 			page.setRootEntry(new UndoablePropertySheetEntry(commandStack));
 		}
 	}
-
+	
 }

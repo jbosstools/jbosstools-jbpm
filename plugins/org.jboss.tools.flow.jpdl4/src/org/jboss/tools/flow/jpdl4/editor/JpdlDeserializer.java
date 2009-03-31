@@ -233,7 +233,7 @@ public class JpdlDeserializer {
 	
 	private void addGraphics(ConnectionWrapper wrapper, Element element) {
 		String graphics = element.getAttribute("g");
-		if (graphics != null) {
+		if (graphics != null && !"".equals(graphics)) {
 			int pos = graphics.lastIndexOf(':');
 			String labelInfo, bendpointInfo = null;
 			if (pos != -1) {
@@ -242,10 +242,10 @@ public class JpdlDeserializer {
 			} else {
 				labelInfo = graphics;
 			}
-			if (labelInfo != null) {
+			if (labelInfo != null && !"".equals(labelInfo)) {
 				addLabelInfo(wrapper, labelInfo);
 			}
-			if (bendpointInfo != null) {
+			if (bendpointInfo != null && !"".equals(bendpointInfo)) {
 				addBendpointInfo(wrapper, bendpointInfo);
 			}
 		}

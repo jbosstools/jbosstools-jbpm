@@ -49,7 +49,9 @@ public class NameSection extends AbstractPropertySection implements IPropertyId 
 	};
 
 	public void dispose() {
-		commandStack.removeCommandStackListener(commandStackListener);
+		if (commandStack != null) {
+			commandStack.removeCommandStackListener(commandStackListener);
+		}
 		super.dispose();
 	}
 	

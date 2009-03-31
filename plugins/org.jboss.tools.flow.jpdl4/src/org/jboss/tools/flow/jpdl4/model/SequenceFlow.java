@@ -54,7 +54,11 @@ public class SequenceFlow extends DefaultConnection {
 	private class PropertySource implements IPropertySource, IPropertyId {
 		
 		private IPropertyDescriptor[] propertyDescriptors = new IPropertyDescriptor[] {
-				new TextPropertyDescriptor(NAME, "Name") {}
+				new TextPropertyDescriptor(NAME, "Name") {
+					public String getCategory() {
+						return "General";
+					}
+				}
 		};
 
 		public Object getEditableValue() {
