@@ -280,6 +280,39 @@ public class JpdlSerializer {
     	}
     }
     
+    class HumanTaskSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
+    		result.add("assignee");
+    		result.add("candidate-groups");
+    		result.add("swimlane");
+    		return result;
+    	}
+    	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
+    		if (!(wrapper instanceof NodeWrapper)) return;
+    		Element element = wrapper.getElement();
+    		if (!(element instanceof HumanTask)) return;
+    		if ("assignee".equals(attributeName)) {
+				appendExpression("assignee", buffer, wrapper);
+			} else if ("candidate-groups".equals(attributeName)) {
+				appendExpression("candidate-groups", buffer, wrapper);
+    		} else if ("swimlane".equals(attributeName)) {
+    			appendExpression("swimlane", buffer, wrapper);
+    		} else {
+    			super.appendAttributeToSave(attributeName, buffer, wrapper);
+    		}
+    	}
+    	protected void appendExpression(String type, StringBuffer buffer, Wrapper wrapper) {
+    		Object assignmentType = wrapper.getPropertyValue(HumanTask.ASSIGNMENT_TYPE);
+    		if (!(assignmentType instanceof Integer)) return;
+    		if (type.equals(HumanTask.ASSIGNMENT_TYPES[(Integer)assignmentType])) {
+    			Object value = wrapper.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION);
+    			if (value == null || "".equals(value)) return;
+    			buffer.append(" " + type + "=\"" + value + "\"");
+    		}
+     	}
+    }
+    
     class ProcessWrapperSerializer extends AbstractWrapperSerializer {
     	public void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
@@ -345,7 +378,7 @@ public class JpdlSerializer {
     	} else if (element instanceof ServiceTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof HumanTask) {
-    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+    		new HumanTaskSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ExclusiveGateway) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ForkParallelGateway) {

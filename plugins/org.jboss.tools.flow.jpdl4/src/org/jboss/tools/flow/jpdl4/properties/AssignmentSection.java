@@ -28,8 +28,8 @@ public class AssignmentSection extends AbstractPropertySection {
 	private CLabel typeLabel;
 	private Text expressionText;
 	private CLabel expressionLabel;
-	private Text languageText;
-	private CLabel languageLabel;
+//	private Text languageText;
+//	private CLabel languageLabel;
 
 //	private Composite parent;
 	
@@ -58,8 +58,8 @@ public class AssignmentSection extends AbstractPropertySection {
 		createTypeCombo(composite);
 		createExpressionLabel(composite);
 		createExpressionText(composite);
-		createLanguageLabel(composite);
-		createLanguageText(composite);
+//		createLanguageLabel(composite);
+//		createLanguageText(composite);
 	}
 	
 	
@@ -97,22 +97,22 @@ public class AssignmentSection extends AbstractPropertySection {
 		expressionText.setLayoutData(data);
 	}
 	
-	private void createLanguageLabel(Composite parent) {
-		languageLabel = getWidgetFactory().createCLabel(parent, "Language");
-		FormData data = new FormData();
-		data.left = new FormAttachment(0, 0);
-		data.top = new FormAttachment(expressionText, 2);
-		languageLabel.setLayoutData(data);
-	}
-	
-	private void createLanguageText(Composite parent) {
-		languageText = getWidgetFactory().createText(parent, "");
-		FormData data = new FormData();
-		data.top = new FormAttachment(expressionText, 0);
-		data.left = new FormAttachment(0, 80);
-		data.right = new FormAttachment(100, 0);
-		languageText.setLayoutData(data);
-	}
+//	private void createLanguageLabel(Composite parent) {
+//		languageLabel = getWidgetFactory().createCLabel(parent, "Language");
+//		FormData data = new FormData();
+//		data.left = new FormAttachment(0, 0);
+//		data.top = new FormAttachment(expressionText, 2);
+//		languageLabel.setLayoutData(data);
+//	}
+//	
+//	private void createLanguageText(Composite parent) {
+//		languageText = getWidgetFactory().createText(parent, "");
+//		FormData data = new FormData();
+//		data.top = new FormAttachment(expressionText, 0);
+//		data.left = new FormAttachment(0, 80);
+//		data.right = new FormAttachment(100, 0);
+//		languageText.setLayoutData(data);
+//	}
 
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		super.setInput(part, selection);
@@ -132,6 +132,7 @@ public class AssignmentSection extends AbstractPropertySection {
 	private SelectionListener typeComboSelectionListener = new SelectionAdapter() {
 		public void widgetSelected(SelectionEvent e) {
 			changeProperty(HumanTask.ASSIGNMENT_TYPE, typeCombo.getSelectionIndex());
+			expressionText.setEnabled(!HumanTask.NONE.equals(typeCombo.getText()));
 		}		
 	};
 	
@@ -141,11 +142,11 @@ public class AssignmentSection extends AbstractPropertySection {
 		}		
 	};
 	
-	private ModifyListener languageTextModifyListener = new ModifyListener() {
-		public void modifyText(ModifyEvent e) {
-			changeProperty(HumanTask.ASSIGNMENT_EXPRESSION_LANGUAGE, languageText.getText());
-		}		
-	};
+//	private ModifyListener languageTextModifyListener = new ModifyListener() {
+//		public void modifyText(ModifyEvent e) {
+//			changeProperty(HumanTask.ASSIGNMENT_EXPRESSION_LANGUAGE, languageText.getText());
+//		}		
+//	};
 	
 	protected void changeProperty(Object propertyId, Object newValue) {
 		if (commandStack == null || input == null) return;
@@ -161,24 +162,31 @@ public class AssignmentSection extends AbstractPropertySection {
 	protected void unhookListeners() {
 		typeCombo.removeSelectionListener(typeComboSelectionListener);
 		expressionText.removeModifyListener(expressionTextModifyListener);
-		languageText.removeModifyListener(languageTextModifyListener);
+//		languageText.removeModifyListener(languageTextModifyListener);
 	}
 	
 	protected void hookListeners() {
 		typeCombo.addSelectionListener(typeComboSelectionListener);
 		expressionText.addModifyListener(expressionTextModifyListener);
-		languageText.addModifyListener(languageTextModifyListener);
+//		languageText.addModifyListener(languageTextModifyListener);
 	}
 	
 	protected void updateValues() {
 		if (input == null) {
 			typeCombo.setText(HumanTask.NONE);
+			expressionText.setEnabled(false);
 			expressionText.setText("");
-			languageText.setText("");
+//			languageText.setText("");
 		} else {
 			typeCombo.setText(HumanTask.ASSIGNMENT_TYPES[(Integer)input.getPropertyValue(HumanTask.ASSIGNMENT_TYPE)]);
-			expressionText.setText((String)input.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION));
-			languageText.setText((String)input.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION_LANGUAGE));
+			if (HumanTask.NONE.equals(typeCombo.getText())) {
+				expressionText.setEnabled(false);
+				expressionText.setText("");
+			} else {
+				expressionText.setEnabled(true);
+				expressionText.setText((String)input.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION));
+//			    languageText.setText((String)input.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION_LANGUAGE));
+			}
 		}
 	}
 

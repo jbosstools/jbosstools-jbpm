@@ -19,7 +19,7 @@
         </describer>
      </content-type>
    </extension>
-   <extension point="org.eclipse.ui.editors">
+<!--   <extension point="org.eclipse.ui.editors">
       <editor
             name="jPDL4 Editor"
             icon="icons/process.gif"
@@ -30,7 +30,7 @@
                contentTypeId="org.jboss.tools.flow.jpdl4">
          </contentTypeBinding>
       </editor>
-   </extension>
+   </extension> -->
    <extension
          point="org.jboss.tools.flow.common.languages">
       <language
@@ -233,7 +233,7 @@
          <propertyCategory category="general"/>
          <propertyCategory category="details"/>
          <propertyCategory category="graphics"/>
-         <propertyCategory category="advanced"/>
+<!--         <propertyCategory category="advanced"/> -->
       </propertyContributor>
    </extension>
    
@@ -244,14 +244,15 @@
                id="org.jboss.tools.jpdl4.general"
                label="General"/>
          <propertyTab
+               afterTab="org.jboss.tools.jpdl4.general"
                category="general"
                id="org.jboss.tools.jpdl4.assignment"
                label="Assignment"/>
-         <propertyTab
+<!--         <propertyTab
                afterTab="org.jboss.tools.jpdl4.general"
                category="details"
                id="org.jboss.tools.jpdl4.details"
-               label="Details"/>
+               label="Details"/> 
          <propertyTab
                afterTab="org.jboss.tools.jpdl4.details"
                category="graphics"
@@ -261,7 +262,7 @@
                afterTab="org.jboss.tools.jpdl4.graphics"
                category="advanced"
                id="org.jboss.tools.jpdl4.advanced"
-               label="Advanced"/>
+               label="Advanced"/> -->
       </propertyTabs>
    </extension>
    

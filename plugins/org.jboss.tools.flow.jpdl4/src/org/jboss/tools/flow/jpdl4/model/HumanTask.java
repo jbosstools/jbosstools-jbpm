@@ -17,12 +17,11 @@ public class HumanTask extends Task {
 	
 	public static final String ASSIGNEE = "assignee";
 	public static final String CANDIDATE_GROUPS = "candidate-groups";
-	public static final String CANDIDATE_USERS = "candidate-users";
 	public static final String SWIMLANE = "swimlane";
 	public static final String NONE = "none";
 	
 	public static final String[] ASSIGNMENT_TYPES = {
-		ASSIGNEE, CANDIDATE_GROUPS, CANDIDATE_USERS, SWIMLANE, NONE
+		ASSIGNEE, CANDIDATE_GROUPS, SWIMLANE, NONE
 	};
 	
 	private String assignmentType = NONE;
