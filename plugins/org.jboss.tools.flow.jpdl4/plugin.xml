@@ -215,7 +215,7 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="org.jboss.tools.flow.jpdl4"
-            name="jBPM">
+            name="JBoss jBPM">
       </category>
       <wizard
             category="org.jboss.tools.flow.jpdl4"
@@ -268,12 +268,12 @@
    
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
       <propertySections contributorId="org.jboss.tools.flow.jpdl4.editor">
-          <propertySection
+<!--          <propertySection
                class="org.jboss.tools.flow.jpdl4.properties.AdvancedSection"
                id="org.jboss.tools.jpdl4.advanced"
                tab="org.jboss.tools.jpdl4.advanced">
             <input type="java.lang.Object"/> 
-         </propertySection> 
+         </propertySection> -->
           <propertySection
                class="org.jboss.tools.flow.jpdl4.properties.NameSection"
                id="org.jboss.tools.jpdl4.name"

@@ -89,9 +89,6 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 		getEditDomain().addViewer(treeViewer);
 		getSelectionSynchronizer().addViewer(treeViewer);
 		detailsPage = new DetailsPage(treeViewer) ;
-		if (((Wrapper)getModel()).getElement() == null) {
-			System.out.println("Ha!");
-		}
 		treeViewer.setContents(((Wrapper)getModel()).getElement());
 		getSite().getSelectionProvider().addSelectionChangedListener(detailsPage);
 	}

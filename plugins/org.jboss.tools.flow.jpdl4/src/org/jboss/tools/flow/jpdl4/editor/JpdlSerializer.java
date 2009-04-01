@@ -283,21 +283,21 @@ public class JpdlSerializer {
     class HumanTaskSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		List<String> result = super.getAttributesToSave();
-    		result.add("assignee");
-    		result.add("candidate-groups");
-    		result.add("swimlane");
+    		result.add(HumanTask.ASSIGNEE);
+    		result.add(HumanTask.CANDIDATE_GROUPS);
+    		result.add(HumanTask.SWIMLANE);
     		return result;
     	}
     	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
     		if (!(wrapper instanceof NodeWrapper)) return;
     		Element element = wrapper.getElement();
     		if (!(element instanceof HumanTask)) return;
-    		if ("assignee".equals(attributeName)) {
-				appendExpression("assignee", buffer, wrapper);
-			} else if ("candidate-groups".equals(attributeName)) {
-				appendExpression("candidate-groups", buffer, wrapper);
-    		} else if ("swimlane".equals(attributeName)) {
-    			appendExpression("swimlane", buffer, wrapper);
+    		if (HumanTask.ASSIGNEE.equals(attributeName)) {
+				appendExpression(HumanTask.ASSIGNEE, buffer, wrapper);
+			} else if (HumanTask.CANDIDATE_GROUPS.equals(attributeName)) {
+				appendExpression(HumanTask.CANDIDATE_GROUPS, buffer, wrapper);
+    		} else if (HumanTask.SWIMLANE.equals(attributeName)) {
+    			appendExpression(HumanTask.SWIMLANE, buffer, wrapper);
     		} else {
     			super.appendAttributeToSave(attributeName, buffer, wrapper);
     		}

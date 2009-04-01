@@ -16,6 +16,7 @@ import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -57,6 +58,36 @@ public class JpdlDeserializer {
 			NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
 			addGraphics(nodeWrapper, element);
 			nodeWrapper.setName(element.getAttribute("name"));			
+		}
+	}
+	
+	class HumanTaskAttributeHandler extends NodeAttributeHandler {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			String assignee = element.getAttribute(HumanTask.ASSIGNEE);
+			if (!"".equals(assignee)) {
+				wrapper.setPropertyValue(
+						HumanTask.ASSIGNMENT_TYPE, 
+						HumanTask.getAssignmentTypesIndex(HumanTask.ASSIGNEE));
+				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, assignee);
+				return;
+			}
+			String candidateGroups = element.getAttribute(HumanTask.CANDIDATE_GROUPS);
+			if (!"".equals(candidateGroups)) {
+				wrapper.setPropertyValue(
+						HumanTask.ASSIGNMENT_TYPE, 
+						HumanTask.getAssignmentTypesIndex(HumanTask.CANDIDATE_GROUPS));
+				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, candidateGroups);
+				return;
+			}
+			String swimlane = element.getAttribute(HumanTask.SWIMLANE);
+			if (!"".equals(swimlane)) {
+				wrapper.setPropertyValue(
+						HumanTask.ASSIGNMENT_TYPE, 
+						HumanTask.getAssignmentTypesIndex(HumanTask.SWIMLANE));
+				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, swimlane);
+				return;
+			}
 		}
 	}
 	
@@ -187,11 +218,20 @@ public class JpdlDeserializer {
 		if (wrapper instanceof FlowWrapper) {
 			return new ProcessAttributeHandler();
 		} else if (wrapper instanceof NodeWrapper) {
-			return new NodeAttributeHandler();
+			return getNodeAttributeHandler(wrapper);
 		} else if (wrapper instanceof ConnectionWrapper) {
 			return new ConnectionAttributeHandler();
 		}
 		return null;
+	}
+	
+	private AttributeDeserializer getNodeAttributeHandler(Wrapper wrapper) {
+		Object element = wrapper.getElement();
+		if (element instanceof HumanTask) {
+			return new HumanTaskAttributeHandler();
+		} else {
+			return new NodeAttributeHandler();
+		}
 	}
 	
 	private ChildNodeDeserializer getChildNodeHandler(Wrapper wrapper) {

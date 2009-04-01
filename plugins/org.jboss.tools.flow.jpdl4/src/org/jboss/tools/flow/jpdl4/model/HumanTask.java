@@ -24,6 +24,17 @@ public class HumanTask extends Task {
 		ASSIGNEE, CANDIDATE_GROUPS, SWIMLANE, NONE
 	};
 	
+	public static Integer getAssignmentTypesIndex(String assignmentType) {
+		Integer result = 0;
+		for (String type : ASSIGNMENT_TYPES) {
+			if (type.equals(assignmentType)) {
+				break;
+			}
+			result++;
+		}
+		return result;
+	}
+
 	private String assignmentType = NONE;
 	private String assignmentExpression = "";
 	private String assignmentExpressionLanguage = "";
@@ -64,17 +75,6 @@ public class HumanTask extends Task {
 			return propertyDescriptors;
 		}
 		
-		private int getAssignmentTypesIndex(String assignmentType) {
-			int result = 0;
-			for (String type : ASSIGNMENT_TYPES) {
-				if (type.equals(assignmentType)) {
-					break;
-				}
-				result++;
-			}
-			return result;
-		}
-
 		public Object getPropertyValue(Object id) {
 			if (ASSIGNMENT_TYPE.equals(id)) {
 				return getAssignmentTypesIndex(assignmentType);
