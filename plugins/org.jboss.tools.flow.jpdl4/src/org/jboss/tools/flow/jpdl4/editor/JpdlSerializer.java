@@ -205,7 +205,7 @@ public class JpdlSerializer {
     	protected void appendName(StringBuffer buffer, SequenceFlow sequenceFlow) {
     		if (sequenceFlow.getName() == null) return;
     		String value = sequenceFlow.getName();
-    		if (value == null || "".equals(sequenceFlow)) return;
+    		if (value == null || "".equals(sequenceFlow.getName())) return;
     		buffer.append(" name=\"" + value + "\"");
     	}
 		protected void appendTo(StringBuffer buffer, SequenceFlow sequenceFlow) {
