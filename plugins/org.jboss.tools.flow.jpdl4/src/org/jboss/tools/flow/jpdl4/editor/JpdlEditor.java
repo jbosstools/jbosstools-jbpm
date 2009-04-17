@@ -24,7 +24,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 	
 	public static String ID = "org.jboss.tools.flow.jpdl4.editor";
 	
-	protected SelectionSynchronizer selectionSynchronizer;
+//	protected SelectionSynchronizer selectionSynchronizer;
 	private DetailsPage detailsPage;
 	
     protected PaletteRoot createPalette() {
@@ -56,13 +56,13 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
     	setModel(empty ? createModel() : new JpdlDeserializer().deserialize(is));
     }
     
-    public SelectionSynchronizer getSelectionSynchronizer() {
-    	if (selectionSynchronizer == null) {
-    		selectionSynchronizer = new JpdlSelectionSynchronizer();
-    		selectionSynchronizer.addViewer(getGraphicalViewer());
-    	}
-    	return selectionSynchronizer;
-    }
+//    public SelectionSynchronizer getSelectionSynchronizer() {
+//    	if (selectionSynchronizer == null) {
+//    		selectionSynchronizer = new JpdlSelectionSynchronizer();
+//    		selectionSynchronizer.addViewer(getGraphicalViewer());
+//    	}
+//    	return selectionSynchronizer;
+//    }
     
 	public String getContributorId() {
 		return getSite().getId();
@@ -87,9 +87,8 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 		TreeViewer treeViewer = new TreeViewer();
 		treeViewer.setEditPartFactory(new JpdlTreeEditPartFactory());
 		getEditDomain().addViewer(treeViewer);
-		getSelectionSynchronizer().addViewer(treeViewer);
+//		getSelectionSynchronizer().addViewer(treeViewer);
 		detailsPage = new DetailsPage(treeViewer) ;
-		treeViewer.setContents(((Wrapper)getModel()).getElement());
 		getSite().getSelectionProvider().addSelectionChangedListener(detailsPage);
 	}
 	
