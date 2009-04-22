@@ -1,10 +1,15 @@
 package org.jboss.tools.flow.jpdl4.view;
 
+import org.eclipse.jface.action.GroupMarker;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.IPage;
@@ -17,6 +22,20 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 public class DetailsView extends PageBookView implements ISelectionProvider,
         ISelectionChangedListener {
+	
+	private MenuManager menuManager;
+	
+	public void createPartControl(Composite parent) {
+		createContextMenu();
+		super.createPartControl(parent);
+	}
+
+	protected void createContextMenu() {
+		menuManager = new MenuManager();
+		menuManager.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		getSite().registerContextMenu("org.jboss.tools.flow.jpdl4.details", menuManager, getSelectionProvider());
+	}
+
 
     public void addSelectionChangedListener(ISelectionChangedListener listener) {
         getSelectionProvider().addSelectionChangedListener(listener);
@@ -38,6 +57,8 @@ public class DetailsView extends PageBookView implements ISelectionProvider,
     			initPage((IPageBookViewPage)page);
     		}
     		page.createControl(getPageBook());
+    		Menu menu = menuManager.createContextMenu(getPageBook());
+    		page.getControl().setMenu(menu);
     		return new PageRec(part, page);
     	}
     	return null;

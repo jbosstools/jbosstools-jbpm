@@ -395,7 +395,7 @@ public class JpdlSerializer {
 	private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
 	    if (wrapper instanceof ContainerWrapper) {
 	    	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
-	    	List<NodeWrapper> children = containerWrapper.getElements();
+	    	List<NodeWrapper> children = containerWrapper.getNodeWrappers();
 	    	for (NodeWrapper nodeWrapper : children) {
 	    		appendToBuffer(buffer, nodeWrapper, level+1);
 	    	}

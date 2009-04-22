@@ -10,7 +10,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
-import org.jboss.tools.flow.common.wrapper.Wrapper;
 
 public class DetailsPage extends Page implements IDetailsPage, ISelectionChangedListener {
 	
@@ -66,9 +65,6 @@ public class DetailsPage extends Page implements IDetailsPage, ISelectionChanged
 			Object object = ((IStructuredSelection)selection).getFirstElement();
 			if (object instanceof EditPart) {
 				object = ((EditPart)object).getModel();
-			}
-			if (object instanceof Wrapper) {
-				object = ((Wrapper)object).getElement();
 			}
 			if (getViewer() != null) {
 				getViewer().setContents(object);

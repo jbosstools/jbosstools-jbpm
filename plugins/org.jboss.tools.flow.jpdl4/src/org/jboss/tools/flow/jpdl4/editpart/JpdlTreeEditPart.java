@@ -10,6 +10,7 @@ public class JpdlTreeEditPart extends AbstractTreeEditPart {
 
 	public JpdlTreeEditPart(Element element) {
 		super(element);
+		if (element == null) return;
 		Object object = element.getMetaData("propertySource");
 		if (object != null && object instanceof IPropertySource) {
 			propertySource = (IPropertySource)object;

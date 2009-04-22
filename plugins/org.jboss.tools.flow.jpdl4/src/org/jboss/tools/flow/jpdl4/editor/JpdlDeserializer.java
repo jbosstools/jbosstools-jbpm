@@ -143,7 +143,7 @@ public class JpdlDeserializer {
 		public void postProcess(Wrapper wrapper) {
 			if (!(wrapper instanceof FlowWrapper)) return;
 			FlowWrapper flowWrapper = (FlowWrapper)wrapper;
-			for (NodeWrapper source : flowWrapper.getElements()) {
+			for (NodeWrapper source : flowWrapper.getNodeWrappers()) {
 				ArrayList<ConnectionWrapper> flows = (ArrayList<ConnectionWrapper>)source.getElement().getMetaData("flows");
 				if (flows == null) continue;
 				for (ConnectionWrapper connectionWrapper : flows) {
@@ -265,7 +265,7 @@ public class JpdlDeserializer {
 	
 	private NodeWrapper getNamedNode(String name, FlowWrapper flowWrapper) {
 		if (name == null) return null;
-		for (NodeWrapper nodeWrapper : flowWrapper.getElements()) {
+		for (NodeWrapper nodeWrapper : flowWrapper.getNodeWrappers()) {
 			if (name.equals(nodeWrapper.getName())) return nodeWrapper;
 		}
 		return null;

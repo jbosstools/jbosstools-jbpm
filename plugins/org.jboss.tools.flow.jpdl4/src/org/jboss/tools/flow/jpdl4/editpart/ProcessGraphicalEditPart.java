@@ -18,7 +18,7 @@ public class ProcessGraphicalEditPart extends RootEditPart implements JpdlGraphi
 
     public void modelChanged(ModelEvent event) {
     	super.modelChanged(event);
-        if (event.getChange() == ContainerWrapper.ADD_ELEMENT) {
+        if (event.getChangeType() == ContainerWrapper.ADD_ELEMENT) {
         	Object changedObject = event.getChangedObject();
         	if (changedObject != null) {
         		EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(changedObject);

@@ -5,31 +5,32 @@ import java.util.List;
 
 import org.jboss.tools.flow.jpdl4.model.Process;
 
+import org.jboss.tools.flow.common.wrapper.FlowWrapper;
+
 public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 	
-	List<Object> modelChildren;
+	public ProcessTreeRootEditPart(FlowWrapper flowWrapper) {
+		super(flowWrapper);
+	}
 	
-	public ProcessTreeRootEditPart(Process process) {
-		super(process);
+	private Process getProcess() {
+		return (Process)((FlowWrapper)getModel()).getElement();
 	}
 
 	protected void createEditPolicies() {
 	}
 
-	private List<Object> initModelChildren() {
-		List<Object> result = new ArrayList<Object>();
-		result.add(new SwimlaneListTreeEditPart((Process)getModel()));
-		result.add(new EventListenerContainerListTreeEditPart((Process)getModel()));
-		result.add(new TimerListTreeEditPart((Process)getModel()));
-		result.add(new ProcessNodeListTreeEditPart((Process)getModel()));
-		return result;
-	}
-	
 	protected List<Object> getModelChildren() {
-		if (modelChildren == null) {
-			modelChildren = initModelChildren();
-		}
-		return modelChildren;
+		List<Object> result = new ArrayList<Object>();
+		result.add(new EventListenerContainerListTreeEditPart(null));
+//		Process process = getProcess();
+//		if (process.get)
+		return result;
+//		List<Object> result = new ArrayList<Object>();
+//		if (modelChildren == null) {
+//			modelChildren = initModelChildren();
+//		}
+//		return modelChildren;
 	}
 	
 }

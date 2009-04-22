@@ -18,14 +18,15 @@ public class ProcessNodeGraphicalEditPart extends NodeEditPart implements JpdlGr
     
     public void modelChanged(ModelEvent event) {
     	super.modelChanged(event);
-        if (event.getChange() == Wrapper.ADD_INCOMING_CONNECTION) {
-            Object object = getViewer().getEditPartRegistry().get(event.getChangedObject());
+        if (event.getChangeType() == Wrapper.ADD_ELEMENT && "incomingConnection".equals(event.getChangeDiscriminator())) {
+            Object object = getViewer().getEditPartRegistry().get(event.getNewValue());
             if (object != null && object instanceof SequenceFlowGraphicalEditPart) {
             	getViewer().select((EditPart)object);
             	((SequenceFlowGraphicalEditPart)object).performDirectEdit();
             }
-        } else if (event.getChange() == Wrapper.ADD_OUTGOING_CONNECTION || 
-        		event.getChange() == Wrapper.REMOVE_OUTGOING_CONNECTION) {
+        } else if ((event.getChangeType() == Wrapper.ADD_ELEMENT || 
+        		event.getChangeType() == Wrapper.REMOVE_ELEMENT) &&
+        		"outgoingConnection".equals(event.getChangeDiscriminator())) {
         	for (Object connection : getSourceConnections()) {
         		if (connection instanceof AbstractConnectionEditPart) {
         			((AbstractConnectionEditPart)connection).refresh();

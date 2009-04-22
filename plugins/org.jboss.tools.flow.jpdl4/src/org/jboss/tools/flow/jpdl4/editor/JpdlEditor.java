@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.palette.PaletteRoot;
-import org.eclipse.gef.ui.parts.SelectionSynchronizer;
 import org.eclipse.gef.ui.parts.TreeViewer;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
@@ -88,7 +87,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 		treeViewer.setEditPartFactory(new JpdlTreeEditPartFactory());
 		getEditDomain().addViewer(treeViewer);
 //		getSelectionSynchronizer().addViewer(treeViewer);
-		detailsPage = new DetailsPage(treeViewer) ;
+		detailsPage = new DetailsPage(treeViewer);
 		getSite().getSelectionProvider().addSelectionChangedListener(detailsPage);
 	}
 	
