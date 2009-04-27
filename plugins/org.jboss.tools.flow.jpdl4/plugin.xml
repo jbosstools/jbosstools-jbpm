@@ -316,12 +316,6 @@
       <command
             categoryId="org.jboss.tools.flow.jpdl4"
             defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddEventListenerHandler"
-            id="org.jboss.tools.flow.jpdl4.addEventListenerType"
-            name="Add Event Listener Type">
-      </command>
-      <command
-            categoryId="org.jboss.tools.flow.jpdl4"
-            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddEventListenerHandler"
             id="org.jboss.tools.flow.jpdl4.addEventListener"
             name="Add Event Listener">
       </command>
@@ -330,6 +324,12 @@
             defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddTimerHandler"
             id="org.jboss.tools.flow.jpdl4.addTimer"
             name="Add Timer">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.DeleteElementHandler"
+            id="org.jboss.tools.flow.jpdl4.delete"
+            name="Delete">
       </command>
    </extension>
    <extension
@@ -374,6 +374,24 @@
                <iterate>
                   <instanceof
                         value="org.jboss.tools.flow.jpdl4.editpart.ProcessTreeRootEditPart">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <separator
+               name="org.jboss.tools.flow.jpdl4.details.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.delete"
+               icon="icons/16/delete.gif"
+               id="org.jboss.tools.flow.jpdl4.details.delete"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <instanceof
+                        value="org.jboss.tools.flow.jpdl4.editpart.ElementTreeEditPart">
                   </instanceof>
                </iterate>
             </visibleWhen>

@@ -1,15 +1,17 @@
 package org.jboss.tools.flow.jpdl4.editpart;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
-public class SwimlaneListTreeEditPart extends JpdlTreeEditPart implements ListTreeEditPart {
+public class SwimlaneListTreeEditPart extends JpdlTreeEditPart {
 	
-	public SwimlaneListTreeEditPart(Process process) {
-		super(process);
+	public SwimlaneListTreeEditPart(List<Element> swimlanes) {
+		super(swimlanes);
 	}
 	
 	protected Image getImage() {
@@ -22,5 +24,11 @@ public class SwimlaneListTreeEditPart extends JpdlTreeEditPart implements ListTr
 	protected String getText() {
 		return "Swimlanes";
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected List<Object> getModelChildren() {
+		return (List<Object>)getModel();
+	}
+	
 
 }

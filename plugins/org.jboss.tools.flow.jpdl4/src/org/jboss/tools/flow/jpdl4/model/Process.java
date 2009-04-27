@@ -1,7 +1,11 @@
-package org.jboss.tools.flow.jpdl4.model;
+ package org.jboss.tools.flow.jpdl4.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySource;
 import org.jboss.tools.flow.common.model.DefaultFlow;
 import org.jboss.tools.flow.common.model.Node;
 import org.jboss.tools.flow.jpdl4.util.Jpdl4Helper;
@@ -9,6 +13,15 @@ import org.jboss.tools.flow.jpdl4.util.Jpdl4Helper;
 public class Process extends DefaultFlow {
 	
 	private Node initial = null;
+	
+	private List<Swimlane> swimlanes = new ArrayList<Swimlane>();
+	private List<Timer> timers = new ArrayList<Timer>();
+//	private List<String> eventTypes = new ArrayList<String>();
+//	private Map<String, List<EventListener>> eventListeners = new HashMap<String, List<EventListener>>();
+	
+	public Process() {
+		setMetaData("propertySource", new PropertySource());
+	}
 	
 	public StartEvent getStartState() {
 		for (Iterator<Node> iterator = getNodes().iterator(); iterator.hasNext(); ) {
@@ -32,5 +45,40 @@ public class Process extends DefaultFlow {
 		Jpdl4Helper.mergeLeadingNodes(node);
 		super.removeNode(node);
 	}
-	
+		
+	private class PropertySource implements IPropertySource {
+		
+		public Object getEditableValue() {
+			return null;
+		}
+
+		public IPropertyDescriptor[] getPropertyDescriptors() {
+			return new IPropertyDescriptor[0];
+		}
+
+		public Object getPropertyValue(Object id) {
+			if ("swimlane".equals(id)) {
+				return swimlanes;
+			} else if ("timer".equals(id)) {
+				return timers;
+			}
+			return null;
+		}
+
+		public boolean isPropertySet(Object id) {
+			if ("swimlane".equals(id)) {
+				return true;
+			} else if ("timer".equals(id)) {
+				return true;
+			}
+			return false;
+		}
+
+		public void resetPropertyValue(Object id) {
+		}
+
+		public void setPropertyValue(Object id, Object value) {
+		}
+		
+	}
 }

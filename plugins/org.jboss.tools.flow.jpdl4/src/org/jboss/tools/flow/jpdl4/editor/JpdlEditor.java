@@ -7,14 +7,12 @@ import java.io.OutputStream;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.palette.PaletteRoot;
-import org.eclipse.gef.ui.parts.TreeViewer;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.jboss.tools.flow.common.editor.GenericModelEditor;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.editpart.JpdlGraphicalEditPartFactory;
-import org.jboss.tools.flow.jpdl4.editpart.JpdlTreeEditPartFactory;
 import org.jboss.tools.flow.jpdl4.properties.JpdlPropertySheetPage;
 import org.jboss.tools.flow.jpdl4.view.DetailsPage;
 import org.jboss.tools.flow.jpdl4.view.IDetailsPage;
@@ -83,11 +81,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 	}
 
 	protected void initDetailsPage() {
-		TreeViewer treeViewer = new TreeViewer();
-		treeViewer.setEditPartFactory(new JpdlTreeEditPartFactory());
-		getEditDomain().addViewer(treeViewer);
-//		getSelectionSynchronizer().addViewer(treeViewer);
-		detailsPage = new DetailsPage(treeViewer);
+		detailsPage = new DetailsPage(this);
 		getSite().getSelectionProvider().addSelectionChangedListener(detailsPage);
 	}
 	

@@ -1,11 +1,11 @@
 package org.jboss.tools.flow.jpdl4.command;
 
-import org.jboss.tools.flow.common.command.AddElementCommand;
+import org.jboss.tools.flow.common.command.AddNodeCommand;
 import org.jboss.tools.flow.common.model.Flow;
 import org.jboss.tools.flow.common.model.Node;
 import org.jboss.tools.flow.jpdl4.util.Jpdl4Helper;
 
-public class AddProcessNodeCommand extends AddElementCommand {
+public class AddProcessNodeCommand extends AddNodeCommand {
 
     public void execute() {
     	if (getChild().getName() == null) {

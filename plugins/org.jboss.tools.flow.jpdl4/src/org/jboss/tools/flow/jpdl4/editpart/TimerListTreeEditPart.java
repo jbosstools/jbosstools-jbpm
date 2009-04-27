@@ -1,15 +1,17 @@
 package org.jboss.tools.flow.jpdl4.editpart;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
-public class TimerListTreeEditPart extends JpdlTreeEditPart implements ListTreeEditPart {
+public class TimerListTreeEditPart extends JpdlTreeEditPart {
 	
-	public TimerListTreeEditPart(Process process) {
-		super(process);
+	public TimerListTreeEditPart(List<Element> timers) {
+		super(timers);
 	}
 	
 	protected Image getImage() {
@@ -23,4 +25,9 @@ public class TimerListTreeEditPart extends JpdlTreeEditPart implements ListTreeE
 		return "Timers";
 	}
 
+	@SuppressWarnings("unchecked")
+	protected List<Object> getModelChildren() {
+		return (List<Object>)getModel();
+	}
+	
 }

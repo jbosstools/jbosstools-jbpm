@@ -4,17 +4,45 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.jboss.tools.flow.common.command.AddChildCommand;
+import org.jboss.tools.flow.common.wrapper.DefaultWrapper;
+import org.jboss.tools.flow.common.wrapper.FlowWrapper;
+import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.Timer;
 
 public class AddTimerHandler extends AbstractHandler implements IHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		MessageDialog.openInformation(
-			window.getShell(), "MenuEclipseArticle Plug-in",
-			"Hello, Eclipse world");
+		IWorkbenchPage page = HandlerUtil.getActiveWorkbenchWindowChecked(event).getActivePage();
+		if (page == null) return null;
+		ISelection selection = page.getSelection();
+		if (!(selection instanceof IStructuredSelection)) return null;
+		IStructuredSelection structuredSelection = (IStructuredSelection)selection;
+		Object first = structuredSelection.getFirstElement();
+		if (!(first instanceof EditPart)) return null;
+		EditPart editPart = (EditPart)first;
+		Object model = editPart.getModel();
+		if (model == null || !(model instanceof FlowWrapper)) return null;
+		FlowWrapper flowWrapper = (FlowWrapper)model;
+		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
+		if (editorPart == null) return null;
+		Object object = editorPart.getAdapter(CommandStack.class);
+		if (object == null || !(object instanceof CommandStack)) return null;
+		CommandStack commandStack = (CommandStack)object;
+		AddChildCommand addChildCommand = new AddChildCommand();
+		Wrapper child = new DefaultWrapper();
+		child.setElement(new Timer());
+		addChildCommand.setChild(child);
+		addChildCommand.setType("timer");
+		addChildCommand.setParent(flowWrapper);
+		commandStack.execute(addChildCommand);
 		return null;	
 	}
 
