@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gef.EditPart;
-import org.jboss.tools.flow.common.command.DeleteChildCommand;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 
 public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 	
@@ -64,24 +62,7 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
     		}
     	} else if (event.getChangeType() == Wrapper.REMOVE_ELEMENT) {
     		refreshChildren();
-//    		if ("eventListener".equals(event.getChangeDiscriminator())) {
-//    			doCleanup(event.getChangedObject());
-//    		}
     	}
-    }
-    
-    private void doCleanup(Object object) {
-    	if (!(object instanceof Wrapper)) return;
-    	Wrapper child = (Wrapper)object;
-    	if (!(child.getElement() instanceof EventListenerContainer)) return;
-    	EventListenerContainer eventListenerContainer = (EventListenerContainer)child.getElement();
-    	if (eventListenerContainer.getListeners().isEmpty()) {
-    		DeleteChildCommand deleteChildCommand = new DeleteChildCommand();
-    		deleteChildCommand.setChild(child);
-    		deleteChildCommand.setParent((Wrapper)getModel());
-    		deleteChildCommand.setType("eventListener");
-    		getViewer().getEditDomain().getCommandStack().execute(deleteChildCommand);
-     	}
     }
     
     public void activate() {

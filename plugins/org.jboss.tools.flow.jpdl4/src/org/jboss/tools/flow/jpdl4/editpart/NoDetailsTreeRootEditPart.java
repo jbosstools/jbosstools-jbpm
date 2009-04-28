@@ -7,4 +7,8 @@ public class NoDetailsTreeRootEditPart extends JpdlTreeEditPart {
 		super(null);
 	}
 	
+	protected String getText() {
+		return "Details are not available.";
+	}
+	
 }

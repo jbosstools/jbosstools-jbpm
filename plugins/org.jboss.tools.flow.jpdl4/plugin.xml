@@ -281,12 +281,20 @@
             <input type="org.jboss.tools.flow.jpdl4.model.SequenceFlow"/>
             <input type="org.jboss.tools.flow.jpdl4.model.ProcessNode"/>
             <input type="org.jboss.tools.flow.jpdl4.model.Process"/> 
-         </propertySection>
+            <input type="org.jboss.tools.flow.jpdl4.model.Swimlane"/> 
+          </propertySection>
+          <propertySection
+               class="org.jboss.tools.flow.jpdl4.properties.TimerSection"
+               id="org.jboss.tools.jpdl4.timer"
+               tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.Timer"/>
+          </propertySection>
           <propertySection
                class="org.jboss.tools.flow.jpdl4.properties.AssignmentSection"
                id="org.jboss.tools.jpdl4.assignment"
                tab="org.jboss.tools.jpdl4.assignment">
             <input type="org.jboss.tools.flow.jpdl4.model.HumanTask"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.Swimlane"/>
          </propertySection>
       </propertySections>
    </extension>

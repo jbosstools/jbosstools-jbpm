@@ -16,6 +16,8 @@ import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.Assignment;
+import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -67,24 +69,24 @@ public class JpdlDeserializer {
 			String assignee = element.getAttribute(HumanTask.ASSIGNEE);
 			if (!"".equals(assignee)) {
 				wrapper.setPropertyValue(
-						HumanTask.ASSIGNMENT_TYPE, 
-						HumanTask.getAssignmentTypesIndex(HumanTask.ASSIGNEE));
+						Assignment.ASSIGNMENT_TYPE, 
+						AssignmentPropertySource.getAssignmentTypesIndex(HumanTask.ASSIGNEE));
 				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, assignee);
 				return;
 			}
 			String candidateGroups = element.getAttribute(HumanTask.CANDIDATE_GROUPS);
 			if (!"".equals(candidateGroups)) {
 				wrapper.setPropertyValue(
-						HumanTask.ASSIGNMENT_TYPE, 
-						HumanTask.getAssignmentTypesIndex(HumanTask.CANDIDATE_GROUPS));
+						Assignment.ASSIGNMENT_TYPE, 
+						AssignmentPropertySource.getAssignmentTypesIndex(HumanTask.CANDIDATE_GROUPS));
 				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, candidateGroups);
 				return;
 			}
 			String swimlane = element.getAttribute(HumanTask.SWIMLANE);
 			if (!"".equals(swimlane)) {
 				wrapper.setPropertyValue(
-						HumanTask.ASSIGNMENT_TYPE, 
-						HumanTask.getAssignmentTypesIndex(HumanTask.SWIMLANE));
+						Assignment.ASSIGNMENT_TYPE, 
+						AssignmentPropertySource.getAssignmentTypesIndex(HumanTask.SWIMLANE));
 				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, swimlane);
 				return;
 			}

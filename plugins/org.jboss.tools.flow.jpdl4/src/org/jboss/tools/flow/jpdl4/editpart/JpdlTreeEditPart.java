@@ -31,7 +31,7 @@ public class JpdlTreeEditPart extends AbstractTreeEditPart implements ModelListe
     
     private void initPropertySource() {
     	EditPart editPart = this;
-    	while (editPart != null && propertySource != null) {
+    	while (editPart != null && propertySource == null) {
     		if (editPart.getModel() != null && editPart.getModel() instanceof IAdaptable) {
     			propertySource = (IPropertySource)((IAdaptable)editPart.getModel()).getAdapter(IPropertySource.class);
     		}
