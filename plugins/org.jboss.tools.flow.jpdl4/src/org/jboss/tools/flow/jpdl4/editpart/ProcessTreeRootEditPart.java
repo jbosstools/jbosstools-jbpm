@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gef.EditPart;
+import org.jboss.tools.flow.common.command.DeleteChildCommand;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 
 public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 	
@@ -23,20 +25,31 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 		FlowWrapper flowWrapper = (FlowWrapper)getModel();
 		if (flowWrapper == null) return null;
 		addSwimlanes(result, flowWrapper);
+		addEventListeners(result, flowWrapper);
 		addTimers(result, flowWrapper);
 		return result;
 	}
 	
-	private void addSwimlanes(List<Object> list, FlowWrapper wrapper) {
-		List<Element> swimlanes = wrapper.getChildren("swimlane");
-		if (swimlanes != null && !(swimlanes.isEmpty())) {
+	private void addSwimlanes(List<Object> list, FlowWrapper flowWrapper) {
+		List<Element> swimlanes = flowWrapper.getChildren("swimlane");
+		if (swimlanes != null && !swimlanes.isEmpty()) {
 			list.add(new SwimlaneListTreeEditPart(swimlanes));
 		}
 	}
 	
-	private void addTimers(List<Object> list, FlowWrapper wrapper) {
-		List<Element> timers = wrapper.getChildren("timer");
-		if (timers != null && !(timers.isEmpty())) {
+	private void addEventListeners(List<Object> list, FlowWrapper flowWrapper) {
+		List<Element> eventListeners = flowWrapper.getChildren("eventListener");
+		if (eventListeners == null) return;
+		for (Element element : eventListeners) {
+			if (element instanceof Wrapper) {
+				list.add((Wrapper)element);
+			}
+		}
+	}
+	
+	private void addTimers(List<Object> list, FlowWrapper flowWrapper) {
+		List<Element> timers = flowWrapper.getChildren("timer");
+		if (timers != null && !timers.isEmpty()) {
 			list.add(new TimerListTreeEditPart(timers));
 		}
 	}
@@ -46,10 +59,29 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
     		refreshChildren();
     		Object object = event.getNewValue();
     		EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(object);
-    		getViewer().select(editPart);
+    		if (editPart != null) {
+    			getViewer().select(editPart);
+    		}
     	} else if (event.getChangeType() == Wrapper.REMOVE_ELEMENT) {
     		refreshChildren();
+//    		if ("eventListener".equals(event.getChangeDiscriminator())) {
+//    			doCleanup(event.getChangedObject());
+//    		}
     	}
+    }
+    
+    private void doCleanup(Object object) {
+    	if (!(object instanceof Wrapper)) return;
+    	Wrapper child = (Wrapper)object;
+    	if (!(child.getElement() instanceof EventListenerContainer)) return;
+    	EventListenerContainer eventListenerContainer = (EventListenerContainer)child.getElement();
+    	if (eventListenerContainer.getListeners().isEmpty()) {
+    		DeleteChildCommand deleteChildCommand = new DeleteChildCommand();
+    		deleteChildCommand.setChild(child);
+    		deleteChildCommand.setParent((Wrapper)getModel());
+    		deleteChildCommand.setType("eventListener");
+    		getViewer().getEditDomain().getCommandStack().execute(deleteChildCommand);
+     	}
     }
     
     public void activate() {

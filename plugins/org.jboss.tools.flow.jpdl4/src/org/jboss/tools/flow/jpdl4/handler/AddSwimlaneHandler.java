@@ -13,7 +13,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.AddChildCommand;
 import org.jboss.tools.flow.common.wrapper.DefaultWrapper;
-import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 
@@ -29,8 +28,8 @@ public class AddSwimlaneHandler extends AbstractHandler implements IHandler {
 		if (!(first instanceof EditPart)) return null;
 		EditPart editPart = (EditPart)first;
 		Object model = editPart.getModel();
-		if (model == null || !(model instanceof FlowWrapper)) return null;
-		FlowWrapper flowWrapper = (FlowWrapper)model;
+		if (model == null || !(model instanceof Wrapper)) return null;
+		Wrapper parent = (Wrapper)model;
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 		if (editorPart == null) return null;
 		Object object = editorPart.getAdapter(CommandStack.class);
@@ -41,7 +40,7 @@ public class AddSwimlaneHandler extends AbstractHandler implements IHandler {
 		child.setElement(new Swimlane());
 		addChildCommand.setChild(child);
 		addChildCommand.setType("swimlane");
-		addChildCommand.setParent(flowWrapper);
+		addChildCommand.setParent(parent);
 		commandStack.execute(addChildCommand);
 		return null;	
 	}

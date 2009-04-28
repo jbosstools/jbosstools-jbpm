@@ -13,8 +13,11 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.DeleteChildCommand;
+import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.EventListener;
+import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
 
@@ -32,13 +35,9 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 		Object model = editPart.getModel();
 		if (model == null || !(model instanceof Wrapper)) return null;
 		Wrapper child = (Wrapper)model;
-		EditPart root = null;
-		while (editPart != null && !(editPart instanceof RootEditPart)) {
-			root = editPart;
-			editPart = editPart.getParent();
-		}
-		if (root == null) return null;
-		model = root.getModel();
+		EditPart parentEditPart = getParentEditPart(child.getElement(), editPart);
+		if (parentEditPart == null) return null;
+		model = parentEditPart.getModel();
 		if (model == null || !(model instanceof Wrapper)) return null;
 		Wrapper parent = (Wrapper)model;
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
@@ -52,6 +51,10 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 			deleteChildCommand.setType("swimlane");
 		} else if (child.getElement() instanceof Timer) {
 			deleteChildCommand.setType("timer");
+		} else if (child.getElement() instanceof EventListener) {
+			deleteChildCommand.setType("listener");
+		} else if (child.getElement() instanceof EventListenerContainer) {
+			deleteChildCommand.setType("eventListener");
 		}
 		deleteChildCommand.setParent(parent);
 		if (deleteChildCommand.canExecute()) {
@@ -60,6 +63,22 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 			Logger.logInfo("Could not execute delete element command: " + deleteChildCommand);
 		}
 		return null;	
+	}
+	
+	private EditPart getParentEditPart(Element element, EditPart editPart) {
+		if (element instanceof Swimlane || element instanceof Timer) {
+			return getRootEditPart(editPart);
+		} else {
+			return editPart.getParent();
+		}
+	}
+	
+	private EditPart getRootEditPart(EditPart editPart) {
+		EditPart result = editPart;
+		while (result.getParent() != null && !(result.getParent() instanceof RootEditPart)) {
+			result = result.getParent();
+		}
+		return result;
 	}
 
 }

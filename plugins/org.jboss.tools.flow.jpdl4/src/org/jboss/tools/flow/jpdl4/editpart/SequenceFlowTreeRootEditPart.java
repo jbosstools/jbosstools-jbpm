@@ -13,7 +13,7 @@ public class SequenceFlowTreeRootEditPart extends JpdlTreeEditPart {
 	
 	protected List<Object> getModelChildren() {
 		List<Object> result = new ArrayList<Object>();
-		result.add(new EventListenerContainerListTreeEditPart(null));
+		result.add(new EventListenerListTreeEditPart(null));
 		return result;
 	}
 	

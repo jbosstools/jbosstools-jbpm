@@ -16,8 +16,7 @@ public class Process extends DefaultFlow {
 	
 	private List<Swimlane> swimlanes = new ArrayList<Swimlane>();
 	private List<Timer> timers = new ArrayList<Timer>();
-//	private List<String> eventTypes = new ArrayList<String>();
-//	private Map<String, List<EventListener>> eventListeners = new HashMap<String, List<EventListener>>();
+	private List<EventListenerContainer> eventlisteners = new ArrayList<EventListenerContainer>();
 	
 	public Process() {
 		setMetaData("propertySource", new PropertySource());
@@ -61,6 +60,8 @@ public class Process extends DefaultFlow {
 				return swimlanes;
 			} else if ("timer".equals(id)) {
 				return timers;
+			} else if ("eventListener".equals(id)) {
+				return eventlisteners;
 			}
 			return null;
 		}
@@ -69,6 +70,8 @@ public class Process extends DefaultFlow {
 			if ("swimlane".equals(id)) {
 				return true;
 			} else if ("timer".equals(id)) {
+				return true;
+			} else if ("eventListener".equals(id)) {
 				return true;
 			}
 			return false;
