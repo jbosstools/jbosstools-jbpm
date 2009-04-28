@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.jboss.tools.flow.jpdl4.model.Timer;
 
 public class TimerSection extends JpdlPropertySection {
 
@@ -27,11 +28,11 @@ public class TimerSection extends JpdlPropertySection {
 			CommandStack commandStack = getCommandStack();
 			if (input == null || commandStack == null) return;
 			if (dueDateText == event.getSource()) {
-				changeProperty("dueDate", getValueNullsAllowed(dueDateText.getText()));
+				changeProperty(Timer.DUE_DATE, getValueNullsAllowed(dueDateText.getText()));
 			} else if (repeatText == event.getSource()) {
-				changeProperty("repeat", getValueNullsAllowed(repeatText.getText()));
+				changeProperty(Timer.REPEAT, getValueNullsAllowed(repeatText.getText()));
 			} else if (dueDateTimeText == event.getSource()) {
-				changeProperty("dueDateTime", getValueNullsAllowed(dueDateTimeText.getText()));
+				changeProperty(Timer.DUE_DATETIME, getValueNullsAllowed(dueDateTimeText.getText()));
 			}
 		}
 	};
@@ -115,9 +116,9 @@ public class TimerSection extends JpdlPropertySection {
 	protected void updateValues() {
 		IPropertySource input = getInput();
 		if (input != null) {
-			dueDateText.setText(getValueNotNull((String)input.getPropertyValue("dueDate")));
-			repeatText.setText(getValueNotNull((String)input.getPropertyValue("repeat")));
-			dueDateTimeText.setText(getValueNotNull((String)input.getPropertyValue("dueDateTime")));
+			dueDateText.setText(getValueNotNull((String)input.getPropertyValue(Timer.DUE_DATE)));
+			repeatText.setText(getValueNotNull((String)input.getPropertyValue(Timer.REPEAT)));
+			dueDateTimeText.setText(getValueNotNull((String)input.getPropertyValue(Timer.DUE_DATETIME)));
 		} else {
 			dueDateText.setText("");
 			repeatText.setText("");
