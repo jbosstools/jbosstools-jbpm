@@ -12,6 +12,7 @@ import org.jboss.tools.flow.common.model.Flow;
 import org.jboss.tools.flow.common.properties.IPropertyId;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
+import org.jboss.tools.flow.common.wrapper.DefaultWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
@@ -19,6 +20,7 @@ import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -64,22 +66,42 @@ public class JpdlDeserializer {
 	}
 	
 	class HumanTaskAttributeHandler extends NodeAttributeHandler {
+		AssignmentAttributeHandler assignmentAttributeHandler = new AssignmentAttributeHandler();
 		public void deserializeAttributes(Wrapper wrapper, Element element) {
 			super.deserializeAttributes(wrapper, element);
-			String assignee = element.getAttribute(HumanTask.ASSIGNEE);
+			assignmentAttributeHandler.deserializeAttributes(wrapper, element);
+		}
+		
+	}
+	
+	class SwimlaneAttributeHandler extends DefaultAttributeDeserializer {
+		AssignmentAttributeHandler assignmentAttributeHandler = new AssignmentAttributeHandler();
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			String name = element.getAttribute("name");
+			if (!"".equals(name) && name != null) {
+				wrapper.setPropertyValue(IPropertyId.NAME, name);
+			}
+			assignmentAttributeHandler.deserializeAttributes(wrapper, element);
+		}
+ 	}
+	
+	class AssignmentAttributeHandler implements AttributeDeserializer {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			String assignee = element.getAttribute(Assignment.ASSIGNEE);
 			if (!"".equals(assignee)) {
 				wrapper.setPropertyValue(
 						Assignment.ASSIGNMENT_TYPE, 
-						AssignmentPropertySource.getAssignmentTypesIndex(HumanTask.ASSIGNEE));
-				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, assignee);
+						AssignmentPropertySource.getAssignmentTypesIndex(Assignment.ASSIGNEE));
+				wrapper.setPropertyValue(Assignment.ASSIGNMENT_EXPRESSION, assignee);
 				return;
 			}
-			String candidateGroups = element.getAttribute(HumanTask.CANDIDATE_GROUPS);
+			String candidateGroups = element.getAttribute(Assignment.CANDIDATE_GROUPS);
 			if (!"".equals(candidateGroups)) {
 				wrapper.setPropertyValue(
 						Assignment.ASSIGNMENT_TYPE, 
-						AssignmentPropertySource.getAssignmentTypesIndex(HumanTask.CANDIDATE_GROUPS));
-				wrapper.setPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION, candidateGroups);
+						AssignmentPropertySource.getAssignmentTypesIndex(Assignment.CANDIDATE_GROUPS));
+				wrapper.setPropertyValue(Assignment.ASSIGNMENT_EXPRESSION, candidateGroups);
 				return;
 			}
 			String swimlane = element.getAttribute(HumanTask.SWIMLANE);
@@ -111,8 +133,11 @@ public class JpdlDeserializer {
 			FlowWrapper flowWrapper = (FlowWrapper)parent;
 			if (node instanceof Element) {
 				result = createWrapper((Element)node);
-				if (result != null && result instanceof NodeWrapper) {
+				if (result == null) return null;
+				if (result instanceof NodeWrapper) {
 					flowWrapper.addElement((NodeWrapper)result);
+				} else if (result.getElement() instanceof Swimlane) {
+					flowWrapper.addChild("swimlane", result);
 				}
 			}
 			return result;
@@ -223,7 +248,17 @@ public class JpdlDeserializer {
 			return getNodeAttributeHandler(wrapper);
 		} else if (wrapper instanceof ConnectionWrapper) {
 			return new ConnectionAttributeHandler();
+		} else if (wrapper instanceof DefaultWrapper) {
+			return getDefaultAttributeHandler(wrapper); 
 		}
+		return null;
+	}
+	
+	private AttributeDeserializer getDefaultAttributeHandler(Wrapper wrapper) {
+		Object element = wrapper.getElement();
+		if (element instanceof Swimlane) {
+			return new SwimlaneAttributeHandler();
+		} 
 		return null;
 	}
 	
@@ -262,6 +297,7 @@ public class JpdlDeserializer {
 		else if ("join".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelJoinGateway";
 		else if ("fork".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForkGateway";
 		else if ("transition".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sequenceFlow";
+		else if ("swimlane".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.swimlane";
 		else return null;
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.jboss.tools.flow.common.model.Element;
+import org.jboss.tools.flow.common.properties.IPropertyId;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.ContainerWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
@@ -28,6 +29,7 @@ import org.jboss.tools.flow.common.wrapper.LabelWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.CancelEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
@@ -44,6 +46,7 @@ import org.jboss.tools.flow.jpdl4.model.ServiceTask;
 import org.jboss.tools.flow.jpdl4.model.SqlTask;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
+import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
 import org.jboss.tools.flow.jpdl4.model.WaitTask;
 import org.w3c.dom.NamedNodeMap;
@@ -179,6 +182,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
 		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "transition";
+		else if ("org.jboss.tools.flow.jpdl4.swimlane".equals(elementId)) return "swimlane";
 		else return null;
     }
     
@@ -283,9 +287,9 @@ public class JpdlSerializer {
     class HumanTaskSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		List<String> result = super.getAttributesToSave();
-    		result.add(HumanTask.ASSIGNEE);
-    		result.add(HumanTask.CANDIDATE_GROUPS);
-    		result.add(HumanTask.SWIMLANE);
+    		result.add(Assignment.ASSIGNEE);
+    		result.add(Assignment.CANDIDATE_GROUPS);
+    		result.add(Assignment.SWIMLANE);
     		return result;
     	}
     	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
@@ -311,6 +315,49 @@ public class JpdlSerializer {
     			buffer.append(" " + type + "=\"" + value + "\"");
     		}
      	}
+    }
+    
+    class SwimlaneWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("name");
+    		result.add(Assignment.ASSIGNEE);
+    		result.add(Assignment.CANDIDATE_GROUPS);
+    		result.add(Assignment.SWIMLANE);
+    		return result;
+    	}
+    	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
+    		Element element = wrapper.getElement();
+    		if (!(element instanceof Swimlane)) return;
+    		if (Assignment.ASSIGNEE.equals(attributeName)) {
+				appendExpression(Assignment.ASSIGNEE, buffer, wrapper);
+			} else if (Assignment.CANDIDATE_GROUPS.equals(attributeName)) {
+				appendExpression(Assignment.CANDIDATE_GROUPS, buffer, wrapper);
+    		} else if (Assignment.SWIMLANE.equals(attributeName)) {
+    			appendExpression(Assignment.SWIMLANE, buffer, wrapper);
+    		} else if ("name".equals(attributeName)){
+    			appendName(buffer, wrapper);
+    		}
+    	}
+    	protected void appendName(StringBuffer buffer, Wrapper wrapper) {
+			String value = (String)wrapper.getPropertyValue(IPropertyId.NAME);
+			if (value == null || "".equals(value)) return;
+    		buffer.append(" name=\"" + value + "\"");
+     	}
+    	protected void appendExpression(String type, StringBuffer buffer, Wrapper wrapper) {
+    		Object assignmentType = wrapper.getPropertyValue(HumanTask.ASSIGNMENT_TYPE);
+    		if (!(assignmentType instanceof Integer)) return;
+    		if (type.equals(HumanTask.ASSIGNMENT_TYPES[(Integer)assignmentType])) {
+    			Object value = wrapper.getPropertyValue(HumanTask.ASSIGNMENT_EXPRESSION);
+    			if (value == null || "".equals(value)) return;
+    			buffer.append(" " + type + "=\"" + value + "\"");
+    		}
+     	}
+    	public void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
+    		appendLeadingNodes(buffer, wrapper, level);
+    		buffer.append("<swimlane");
+    		appendAttributes(buffer, wrapper, level);
+    	}
     }
     
     class ProcessWrapperSerializer extends AbstractWrapperSerializer {
@@ -387,12 +434,24 @@ public class JpdlSerializer {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof Process) {
     		new ProcessWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof Swimlane) {
+    		new SwimlaneWrapperSerializer().appendOpening(buffer, wrapper, level);
     	}
     	
     }
     
     @SuppressWarnings("unchecked")
 	private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    	if (wrapper instanceof FlowWrapper) {
+    		FlowWrapper flowWrapper = (FlowWrapper)wrapper;
+    		List<Element> swimlanes = flowWrapper.getChildren("swimlane");
+    		if (swimlanes != null) {
+	    		for (Element swimlane : swimlanes) {
+	    			if (!(swimlane instanceof Wrapper)) continue;
+	    			appendToBuffer(buffer, (Wrapper)swimlane, level+1);
+	    		}
+    		}
+    	}
 	    if (wrapper instanceof ContainerWrapper) {
 	    	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
 	    	List<NodeWrapper> children = containerWrapper.getNodeWrappers();
@@ -460,7 +519,9 @@ public class JpdlSerializer {
     		buffer.append("</join>");
     	} else if (element instanceof Process) {
     		buffer.append("</process>");
-    	}	
+    	} else if (element instanceof Swimlane) {
+    		buffer.append("</swimlane>");
+    	}
     }
     
     private boolean isEmpty(String str) {

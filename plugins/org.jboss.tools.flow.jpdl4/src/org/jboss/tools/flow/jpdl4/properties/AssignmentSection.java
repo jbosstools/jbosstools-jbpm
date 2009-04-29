@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 
 public class AssignmentSection extends JpdlPropertySection {
@@ -25,13 +26,13 @@ public class AssignmentSection extends JpdlPropertySection {
 	private SelectionListener typeComboSelectionListener = new SelectionAdapter() {
 		public void widgetSelected(SelectionEvent e) {
 			changeProperty(HumanTask.ASSIGNMENT_TYPE, typeCombo.getSelectionIndex());
-			expressionText.setEnabled(!HumanTask.NONE.equals(typeCombo.getText()));
+			expressionText.setEnabled(!Assignment.NONE.equals(typeCombo.getText()));
 		}		
 	};
 	
 	private ModifyListener expressionTextModifyListener = new ModifyListener() {
 		public void modifyText(ModifyEvent e) {
-			changeProperty(HumanTask.ASSIGNMENT_EXPRESSION, expressionText.getText());
+			changeProperty(Assignment.ASSIGNMENT_EXPRESSION, expressionText.getText());
 		}		
 	};
 	
