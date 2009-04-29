@@ -52,7 +52,7 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 		} else if (child.getElement() instanceof Timer) {
 			deleteChildCommand.setType("timer");
 		} else if (child.getElement() instanceof EventListener) {
-			deleteChildCommand.setType("listener");
+			deleteChildCommand.setType(EventListenerContainer.LISTENERS);
 		} else if (child.getElement() instanceof EventListenerContainer) {
 			deleteChildCommand.setType("eventListener");
 		}

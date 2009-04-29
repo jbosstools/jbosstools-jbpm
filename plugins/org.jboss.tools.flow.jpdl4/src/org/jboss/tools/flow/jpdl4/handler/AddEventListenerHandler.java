@@ -44,9 +44,9 @@ public class AddEventListenerHandler extends AbstractHandler implements IHandler
 			wrapper.setElement(new EventListener());
 			addChildCommand.setType("eventListener");
 			child.setElement(new EventListenerContainer());
-			child.addChild("listener", wrapper);
+			child.addChild(EventListenerContainer.LISTENERS, wrapper);
 		} else {
-			addChildCommand.setType("listener");
+			addChildCommand.setType(EventListenerContainer.LISTENERS);
 			child.setElement(new EventListener());
 		}
 		addChildCommand.setChild(child);

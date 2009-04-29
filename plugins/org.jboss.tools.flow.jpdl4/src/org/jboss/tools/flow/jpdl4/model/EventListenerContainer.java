@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.jboss.tools.flow.common.model.DefaultElement;
 
 public class EventListenerContainer extends DefaultElement {
+	
+	public static final String LISTENERS = "org.jboss.tools.flow.jpdl4.model.eventListenerContainer.listeners";
+	public static final String EVENT_TYPE = "org.jboss.tools.flow.jpdl4.model.eventListenerContainer.eventType";
 	
 	private String eventType;
 	private List<EventListener> listeners = new ArrayList<EventListener>();
@@ -34,24 +38,36 @@ public class EventListenerContainer extends DefaultElement {
 	
 	private class PropertySource implements IPropertySource {
 		
+		private IPropertyDescriptor[] propertyDescriptors = new IPropertyDescriptor[] {
+				new TextPropertyDescriptor(EVENT_TYPE, "Event Type") {
+					public String getCategory() {
+						return "General";
+					}
+				}
+		};
+
 		public Object getEditableValue() {
 			return null;
 		}
 
 		public IPropertyDescriptor[] getPropertyDescriptors() {
-			return new IPropertyDescriptor[0];
+			return propertyDescriptors;
 		}
 
 		public Object getPropertyValue(Object id) {
-			if ("listener".equals(id)) {
+			if (LISTENERS.equals(id)) {
 				return listeners;
+			} else if (EVENT_TYPE.equals(id)) {
+				return getEventType() != null ? getEventType() : "";
 			}
 			return null;
 		}
 
 		public boolean isPropertySet(Object id) {
-			if ("listener".equals(id)) {
+			if (LISTENERS.equals(id)) {
 				return true;
+			} else if (EVENT_TYPE.equals(id)) {
+				return getEventType() != null;
 			}
 			return false;
 		}
@@ -60,6 +76,11 @@ public class EventListenerContainer extends DefaultElement {
 		}
 
 		public void setPropertyValue(Object id, Object value) {
+			if (EVENT_TYPE.equals(id)) {
+				if (value instanceof String) {
+					setEventType((String)value);
+				}
+			}
 		}
 		
 	}

@@ -9,6 +9,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
 public class EventListenerListTreeEditPart extends JpdlTreeEditPart implements ElementTreeEditPart {
@@ -31,8 +32,8 @@ public class EventListenerListTreeEditPart extends JpdlTreeEditPart implements E
 	protected List<Object> getModelChildren() {
 		List<Object> result = new ArrayList<Object>();
 		Wrapper wrapper = (Wrapper)getModel();
-		if (wrapper.getChildren("listener") != null) {
-			result.addAll(wrapper.getChildren("listener"));
+		if (wrapper.getChildren(EventListenerContainer.LISTENERS) != null) {
+			result.addAll(wrapper.getChildren(EventListenerContainer.LISTENERS));
 		}
 		return result;
 	}
