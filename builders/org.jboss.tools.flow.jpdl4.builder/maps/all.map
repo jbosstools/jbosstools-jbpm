@@ -1,5 +1,5 @@
-feature@org.jboss.tools.flow.jpdl4.feature=COPY,/Users/koen/Workspace/Eclipse/3.4.1/GPD-4.0,org.jboss.tools.flow.jpdl4.feature
-plugin@org.jboss.tools.flow.jpdl4=COPY,/Users/koen/Workspace/Eclipse/3.4.1/GPD-4.0,org.jboss.tools.flow.jpdl4
-plugin@org.jboss.tools.flow.jpdl4.multipage=COPY,/Users/koen/Workspace/Eclipse/3.4.1/GPD-4.0,org.jboss.tools.flow.jpdl4.multipage
-feature@org.jboss.tools.flow.common.feature=COPY,/Users/koen/Workspace/Eclipse/3.4.1/GPD-4.0,org.jboss.tools.flow.common.feature
-plugin@org.jboss.tools.flow.common=COPY,/Users/koen/Workspace/Eclipse/3.4.1/GPD-4.0,org.jboss.tools.flow.common
+feature@org.jboss.tools.flow.jpdl4.feature=COPY,/Users/koen/Workspace/Eclipse/3.4.2/GPD-4.0,org.jboss.tools.flow.jpdl4.feature
+plugin@org.jboss.tools.flow.jpdl4=COPY,/Users/koen/Workspace/Eclipse/3.4.2/GPD-4.0,org.jboss.tools.flow.jpdl4
+plugin@org.jboss.tools.flow.jpdl4.multipage=COPY,/Users/koen/Workspace/Eclipse/3.4.2/GPD-4.0,org.jboss.tools.flow.jpdl4.multipage
+feature@org.jboss.tools.flow.common.feature=COPY,/Users/koen/Workspace/Eclipse/3.4.2/GPD-4.0,org.jboss.tools.flow.common.feature
+plugin@org.jboss.tools.flow.common=COPY,/Users/koen/Workspace/Eclipse/3.4.2/GPD-4.0,org.jboss.tools.flow.common
