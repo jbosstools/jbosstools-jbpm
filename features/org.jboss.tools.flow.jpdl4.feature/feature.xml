@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.flow.jpdl4.feature"
       label="%featureName"
-      version="1.0.0.beta1"
+      version="1.0.0.beta2"
       provider-name="%providerName">
 
    <description>
