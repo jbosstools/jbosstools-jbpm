@@ -99,10 +99,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements
 		if(model != null && model.getElement() != null) {
 			jpdlEditor.setModel(model);
 			((GraphicalViewer) jpdlEditor.getAdapter(GraphicalViewer.class)).setContents(model);
-		} else {
-			System.out.println("Ha!");
-		}
-		 
+		}		 
 		try {
 			in.close();
 		} catch (IOException e) {
