@@ -217,6 +217,27 @@
             label="swimlane"
             language="org.jboss.tools.flow.jpdl4">
       </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Timer"
+            figure="icons/16/timer.gif"
+            id="org.jboss.tools.flow.jpdl4.timer"
+            label="timer"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.EventListenerContainer"
+            figure="icons/16/events_multiple.gif"
+            id="org.jboss.tools.flow.jpdl4.eventListenerContainer"
+            label="events"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.EventListener"
+            figure="icons/16/event.gif"
+            id="org.jboss.tools.flow.jpdl4.eventListener"
+            label="event"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">

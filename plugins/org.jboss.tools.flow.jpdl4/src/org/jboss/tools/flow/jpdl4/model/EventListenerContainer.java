@@ -77,7 +77,7 @@ public class EventListenerContainer extends DefaultElement {
 
 		public void setPropertyValue(Object id, Object value) {
 			if (EVENT_TYPE.equals(id)) {
-				if (value instanceof String) {
+				if (value == null || value instanceof String) {
 					setEventType((String)value);
 				}
 			}

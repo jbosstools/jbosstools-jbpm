@@ -13,9 +13,8 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.AddChildCommand;
-import org.jboss.tools.flow.common.wrapper.DefaultWrapper;
+import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 
 public class AddEventListenerHandler extends AbstractHandler implements IHandler {
@@ -37,17 +36,16 @@ public class AddEventListenerHandler extends AbstractHandler implements IHandler
 		if (object == null || !(object instanceof CommandStack)) return null;
 		CommandStack commandStack = (CommandStack)object;
 		Wrapper parent = (Wrapper)model;
-		Wrapper child = new DefaultWrapper();
+		Wrapper child;
 		AddChildCommand addChildCommand = new AddChildCommand();
 		if (editPart.getParent() != null && editPart.getParent() instanceof RootEditPart) {
-			Wrapper wrapper = new DefaultWrapper();
-			wrapper.setElement(new EventListener());
+			child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListenerContainer");
+			Wrapper wrapper = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListener");
 			addChildCommand.setType("eventListener");
-			child.setElement(new EventListenerContainer());
 			child.addChild(EventListenerContainer.LISTENERS, wrapper);
 		} else {
+			child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListener");
 			addChildCommand.setType(EventListenerContainer.LISTENERS);
-			child.setElement(new EventListener());
 		}
 		addChildCommand.setChild(child);
 		addChildCommand.setParent(parent);

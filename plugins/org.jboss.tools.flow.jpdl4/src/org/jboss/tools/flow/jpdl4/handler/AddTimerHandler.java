@@ -12,10 +12,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.AddChildCommand;
-import org.jboss.tools.flow.common.wrapper.DefaultWrapper;
+import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.Timer;
 
 public class AddTimerHandler extends AbstractHandler implements IHandler {
 
@@ -37,8 +36,7 @@ public class AddTimerHandler extends AbstractHandler implements IHandler {
 		if (object == null || !(object instanceof CommandStack)) return null;
 		CommandStack commandStack = (CommandStack)object;
 		AddChildCommand addChildCommand = new AddChildCommand();
-		Wrapper child = new DefaultWrapper();
-		child.setElement(new Timer());
+		Wrapper child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.timer");
 		addChildCommand.setChild(child);
 		addChildCommand.setType("timer");
 		addChildCommand.setParent(flowWrapper);

@@ -101,15 +101,15 @@ public class Timer extends DefaultElement {
 
 		public void setPropertyValue(Object id, Object value) {
 			if (DUE_DATE.equals(id)) {
-				if (value instanceof String) {
+				if (value == null || value instanceof String) {
 					setDueDate((String)value);
 				}
 			} else if (REPEAT.equals(id)) {
-				if (value instanceof String) {
+				if (value == null || value instanceof String) {
 					setRepeat((String)value);
 				}
 			} else if (DUE_DATETIME.equals(id)) {
-				if (value instanceof String) {
+				if (value == null || value instanceof String) {
 					setDueDateTime((String)value);
 				}
 			}

@@ -32,6 +32,8 @@ import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.CancelEndEvent;
 import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
+import org.jboss.tools.flow.jpdl4.model.EventListener;
+import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HqlTask;
@@ -48,6 +50,7 @@ import org.jboss.tools.flow.jpdl4.model.StartEvent;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
+import org.jboss.tools.flow.jpdl4.model.Timer;
 import org.jboss.tools.flow.jpdl4.model.WaitTask;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -118,7 +121,14 @@ public class JpdlSerializer {
     
     abstract class AbstractWrapperSerializer implements WrapperSerializer {
     	protected abstract List<String> getAttributesToSave();
-    	protected abstract void appendAttributeToSave(String nodeName, StringBuffer buffer, Wrapper wrapper);
+    	protected String getPropertyName(String attributeName) {
+    		return attributeName;
+    	}
+    	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
+    		String value = (String)wrapper.getPropertyValue(getPropertyName(attributeName));
+    		if (value == null || "".equals(value)) return;
+    		buffer.append(" " + attributeName + "=\"" + value + "\"");
+    	}
     	@SuppressWarnings("unchecked")
 		protected void appendLeadingNodes(StringBuffer buffer, Wrapper wrapper, int level) {
         	ArrayList<Node> leadingNodeList = (ArrayList<Node>)wrapper.getElement().getMetaData("leadingNodes");
@@ -183,6 +193,9 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
 		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "transition";
 		else if ("org.jboss.tools.flow.jpdl4.swimlane".equals(elementId)) return "swimlane";
+		else if ("org.jboss.tools.flow.jpdl4.timer".equals(elementId)) return "timer";
+		else if ("org.jboss.tools.flow.jpdl4.eventListenerContainer".equals(elementId)) return "on";
+		else if ("org.jboss.tools.flow.jpdl4.eventListener".equals(elementId)) return "event-listener";
 		else return null;
     }
     
@@ -360,6 +373,54 @@ public class JpdlSerializer {
     	}
     }
     
+    class TimerWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("duedate");
+    		result.add("repeat");
+    		result.add("duedatetime");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("duedate".equals(attributeName)) {
+    			return Timer.DUE_DATE;
+    		} else if ("repeat".equals(attributeName)) {
+    			return Timer.REPEAT;
+    		} else if ("duedatetime".equals(attributeName)) {
+    			return Timer.DUE_DATETIME;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
+    class EventListenerContainerWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("event");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("event".equals(attributeName)) {
+    			return EventListenerContainer.EVENT_TYPE;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
+    class EventListenerWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("class");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("class".equals(attributeName)) {
+    			return EventListener.CLASS_NAME;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
     class ProcessWrapperSerializer extends AbstractWrapperSerializer {
     	public void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
     		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
@@ -436,6 +497,12 @@ public class JpdlSerializer {
     		new ProcessWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof Swimlane) {
     		new SwimlaneWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof Timer) {
+    		new TimerWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof EventListenerContainer) {
+    		new EventListenerContainerWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof EventListener) {
+    		new EventListenerWrapperSerializer().appendOpening(buffer, wrapper, level);
     	}
     	
     }
@@ -450,6 +517,20 @@ public class JpdlSerializer {
 	    			if (!(swimlane instanceof Wrapper)) continue;
 	    			appendToBuffer(buffer, (Wrapper)swimlane, level+1);
 	    		}
+    		}
+    		List<Element> timers = flowWrapper.getChildren("timer");
+    		if (timers != null) {
+    			for (Element timer : timers) {
+    				if (!(timer instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)timer, level+1);
+    			}
+    		}
+    		List<Element> eventListenerContainers = flowWrapper.getChildren("eventListener");
+    		if (eventListenerContainers != null) {
+    			for (Element eventListenerContainer : eventListenerContainers) {
+    				if (!(eventListenerContainer instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)eventListenerContainer, level+1);
+    			}
     		}
     	}
 	    if (wrapper instanceof ContainerWrapper) {
@@ -467,6 +548,15 @@ public class JpdlSerializer {
 	    	}
 	    } 
 		Element element = (Element)wrapper.getElement();
+		if (element instanceof EventListenerContainer) {
+			List<Element> eventListeners = wrapper.getChildren(EventListenerContainer.LISTENERS);
+			if (eventListeners != null) {
+				for (Element eventListener : eventListeners) {
+					if (!(eventListener instanceof Wrapper)) continue;
+					appendToBuffer(buffer, (Wrapper)eventListener, level+1);
+				}
+			}
+		}
 		ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
 		boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
 		if (appendTrailingNodes) {
@@ -521,6 +611,12 @@ public class JpdlSerializer {
     		buffer.append("</process>");
     	} else if (element instanceof Swimlane) {
     		buffer.append("</swimlane>");
+    	} else if (element instanceof Timer) {
+    		buffer.append("</timer>");
+    	} else if (element instanceof EventListenerContainer) {
+    		buffer.append("</on>");
+    	} else if (element instanceof EventListener) {
+    		buffer.append("</event-listener>");
     	}
     }
     

@@ -60,7 +60,7 @@ public class EventListener extends DefaultElement {
 
 		public void setPropertyValue(Object id, Object value) {
 			if (CLASS_NAME.equals(id)) {
-				if (value instanceof String) {
+				if (value == null || value instanceof String) {
 					setClassName((String)value);
 				}
 			}

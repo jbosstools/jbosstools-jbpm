@@ -107,12 +107,12 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createTaskEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "wait",
-                "Create a new Wait State Task",
+                "state",
+                "Create a new State Task",
                 "org.jboss.tools.flow.jpdl4.waitTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.waitTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_wait.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_wait.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -120,8 +120,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new HQL Task",
                 "org.jboss.tools.flow.jpdl4.hqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.hqlTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_hql.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_hql.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -129,8 +129,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new SQL Task",
                 "org.jboss.tools.flow.jpdl4.sqlTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.sqlTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_sql.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_sql.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -138,8 +138,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Java Task",
                 "org.jboss.tools.flow.jpdl4.javaTask",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.javaTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_java.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_java.png"))
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
@@ -175,8 +175,8 @@ public class JpdlPaletteFactory extends PaletteFactory {
     protected List<PaletteEntry> createGatewayEntries() {
         List<PaletteEntry> entries = new ArrayList<PaletteEntry>();        
         CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry(
-                "exclusive",
-                "Create a new Exclusive Gateway",
+                "decision",
+                "Create a new Decision",
                 "org.jboss.tools.flow.jpdl4.exclusiveGateway",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.exclusiveGateway"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_exclusive.png")),

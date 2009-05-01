@@ -3,6 +3,8 @@ package org.jboss.tools.flow.jpdl4.editpart;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.jboss.tools.flow.common.properties.IPropertyId;
+import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
@@ -20,7 +22,23 @@ public class SwimlaneTreeEditPart extends JpdlTreeEditPart implements ElementTre
 	}
 	
 	protected String getText() {
-		return "swimlane";
+		String name = (String)((Wrapper)getModel()).getPropertyValue(IPropertyId.NAME);
+		return name == null || "".equals(name) ? "swimlane" : name;
 	}
 	
+    public void modelChanged(ModelEvent event) {
+    	if (event.getChangeType() == Wrapper.CHANGE_PROPERTY) {
+    		refreshVisuals();
+    	}
+    }
+    
+    public void activate() {
+        super.activate();
+        ((Wrapper)getModel()).addListener(this);
+    }
+
+    public void deactivate() {
+    	((Wrapper)getModel()).removeListener(this);
+        super.deactivate();
+    }
 }

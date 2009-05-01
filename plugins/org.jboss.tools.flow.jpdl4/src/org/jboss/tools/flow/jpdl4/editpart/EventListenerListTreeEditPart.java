@@ -26,7 +26,9 @@ public class EventListenerListTreeEditPart extends JpdlTreeEditPart implements E
 	}
 	
 	protected String getText() {
-		return "event";
+		String eventType = (String)((Wrapper)getModel()).getPropertyValue(EventListenerContainer.EVENT_TYPE);
+		if (eventType != null && !("".equals(eventType))) return eventType;
+		return "event type";
 	}
 	
 	protected List<Object> getModelChildren() {
@@ -50,12 +52,16 @@ public class EventListenerListTreeEditPart extends JpdlTreeEditPart implements E
     }
 
     public void modelChanged(ModelEvent event) {
-    	EditPart parent = getParent();
-    	if (parent instanceof JpdlTreeEditPart) {
-    		ModelEvent modelEvent = new ModelEvent(Wrapper.REMOVE_ELEMENT, "eventListener", getModel(), null, null);
-    		((JpdlTreeEditPart)parent).modelChanged(modelEvent);
+    	if (event.getChangeType() == Wrapper.REMOVE_ELEMENT) {
+	    	EditPart parent = getParent();
+	    	if (parent instanceof JpdlTreeEditPart) {
+	    		ModelEvent modelEvent = new ModelEvent(Wrapper.REMOVE_ELEMENT, "eventListener", getModel(), null, null);
+	    		((JpdlTreeEditPart)parent).modelChanged(modelEvent);
+	    	}
+	    	refreshChildren();
+    	} else if (event.getChangeType() == Wrapper.CHANGE_PROPERTY) {
+    		refreshVisuals();
     	}
-    	refreshChildren();
     }
     
 }
