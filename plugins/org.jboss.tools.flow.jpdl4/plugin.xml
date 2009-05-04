@@ -173,6 +173,16 @@
          </node>
       </element>
       <element
+            class="org.jboss.tools.flow.jpdl4.model.SubprocessTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.subprocessTask"
+            label="Subprocess"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
             class="org.jboss.tools.flow.jpdl4.model.ExclusiveGateway"
             figure="icons/16/gateway_exclusive.png"
             id="org.jboss.tools.flow.jpdl4.exclusiveGateway"
@@ -276,6 +286,11 @@
                category="general"
                id="org.jboss.tools.jpdl4.assignment"
                label="Assignment"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.general"
+               category="general"
+               id="org.jboss.tools.jpdl4.subprocess"
+               label="Subprocess"/>
 <!--         <propertyTab
                afterTab="org.jboss.tools.jpdl4.general"
                category="details"
@@ -316,6 +331,12 @@
                id="org.jboss.tools.jpdl4.timer"
                tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.Timer"/>
+          </propertySection>
+          <propertySection
+               class="org.jboss.tools.flow.jpdl4.properties.SubprocessSection"
+               id="org.jboss.tools.jpdl4.subprocess"
+               tab="org.jboss.tools.jpdl4.subprocess">
+            <input type="org.jboss.tools.flow.jpdl4.model.SubprocessTask"/>
           </propertySection>
           <propertySection
                class="org.jboss.tools.flow.jpdl4.properties.EventTypeSection"

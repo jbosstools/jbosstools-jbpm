@@ -47,6 +47,7 @@ import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.ServiceTask;
 import org.jboss.tools.flow.jpdl4.model.SqlTask;
 import org.jboss.tools.flow.jpdl4.model.StartEvent;
+import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.SuperState;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
@@ -188,6 +189,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.scriptTask".equals(elementId)) return "script";
 		else if ("org.jboss.tools.flow.jpdl4.serviceTask".equals(elementId)) return "esb";
 		else if ("org.jboss.tools.flow.jpdl4.humanTask".equals(elementId)) return "task";
+		else if ("org.jboss.tools.flow.jpdl4.subprocessTask".equals(elementId)) return "sub-process";
 		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "exclusive";
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
@@ -393,6 +395,26 @@ public class JpdlSerializer {
     	}
     }
     
+    class SubprocessTaskWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("sub-process-id");
+    		result.add("sub-process-key");
+    		result.add("outcome");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("sub-process-id".equals(attributeName)) {
+    			return SubprocessTask.ID;
+    		} else if ("sub-process-key".equals(attributeName)) {
+    			return SubprocessTask.KEY;
+    		} else if ("outcome".equals(attributeName)) {
+    			return SubprocessTask.OUTCOME;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
     class EventListenerContainerWrapperSerializer extends AbstractWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		ArrayList<String> result = new ArrayList<String>();
@@ -487,6 +509,8 @@ public class JpdlSerializer {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof HumanTask) {
     		new HumanTaskSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof SubprocessTask) {
+    		new SubprocessTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ExclusiveGateway) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ForkParallelGateway) {
@@ -601,6 +625,8 @@ public class JpdlSerializer {
     		buffer.append("</esb>");
     	} else if (element instanceof HumanTask) {
     		buffer.append("</task>");
+    	} else if (element instanceof HumanTask) {
+    		buffer.append("</sub-process>");
     	} else if (element instanceof ExclusiveGateway) {
     		buffer.append("</exclusive>");
     	} else if (element instanceof ForkParallelGateway) {

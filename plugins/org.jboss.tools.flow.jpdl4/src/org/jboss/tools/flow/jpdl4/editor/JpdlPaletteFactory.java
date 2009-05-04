@@ -169,6 +169,15 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "subprocess",
+                "Create a new Subprocess",
+                "org.jboss.tools.flow.jpdl4.subprocess",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.subprocessTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+            );
+        entries.add(combined);
         return entries;
     }
     

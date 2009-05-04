@@ -73,7 +73,7 @@ public abstract class JpdlPropertySection extends AbstractPropertySection {
 		changePropertyCommand.setPropertyId(propertyId);
 		changePropertyCommand.setTarget(input);
 		changePropertyCommand.setNewValue(newValue);
-		commandStack.execute(changePropertyCommand);
+			commandStack.execute(changePropertyCommand);
 	}
 	
 	public void aboutToBeShown() {

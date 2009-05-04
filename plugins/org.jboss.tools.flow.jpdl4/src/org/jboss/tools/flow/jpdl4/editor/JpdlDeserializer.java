@@ -23,6 +23,7 @@ import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
 import org.w3c.dom.Document;
@@ -120,6 +121,27 @@ public class JpdlDeserializer {
     			return "repeat";
     		} else if (Timer.DUE_DATETIME.equals(attributeName)) {
     			return "duedatetime";
+    		} else {
+    			return super.getXmlName(attributeName);
+    		}
+    	}
+ 	}
+	
+	class SubprocessTaskAttributeHandler extends NodeAttributeHandler {
+    	protected List<String> getAttributesToRead() {
+    		List<String> result = super.getAttributesToRead();
+    		result.add(SubprocessTask.ID);
+    		result.add(SubprocessTask.KEY);
+    		result.add(SubprocessTask.OUTCOME);
+    		return result;
+    	}
+    	protected String getXmlName(String attributeName) {
+    		if (SubprocessTask.ID.equals(attributeName)) {
+    			return "sub-process-id";
+    		} else if (SubprocessTask.KEY.equals(attributeName)) {
+    			return "sub-process-key";
+    		} else if (SubprocessTask.OUTCOME.equals(attributeName)) {
+    			return "outcome";
     		} else {
     			return super.getXmlName(attributeName);
     		}
@@ -360,6 +382,8 @@ public class JpdlDeserializer {
 		Object element = wrapper.getElement();
 		if (element instanceof HumanTask) {
 			return new HumanTaskAttributeHandler();
+		} else if (element instanceof SubprocessTask) {
+			return new SubprocessTaskAttributeHandler();
 		} else {
 			return new NodeAttributeHandler();
 		}
@@ -396,6 +420,7 @@ public class JpdlDeserializer {
 		else if ("script".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.scriptTask";
 		else if ("esb".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.serviceTask";
 		else if ("task".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.humanTask";
+		else if ("sub-process".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.subprocessTask";
 		else if ("exclusive".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
 		else if ("join".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelJoinGateway";
 		else if ("fork".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForkGateway";
