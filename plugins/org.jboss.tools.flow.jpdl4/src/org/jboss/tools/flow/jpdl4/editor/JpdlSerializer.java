@@ -190,7 +190,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.serviceTask".equals(elementId)) return "esb";
 		else if ("org.jboss.tools.flow.jpdl4.humanTask".equals(elementId)) return "task";
 		else if ("org.jboss.tools.flow.jpdl4.subprocessTask".equals(elementId)) return "sub-process";
-		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "exclusive";
+		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "decision";
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
 		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "transition";
@@ -628,7 +628,7 @@ public class JpdlSerializer {
     	} else if (element instanceof HumanTask) {
     		buffer.append("</sub-process>");
     	} else if (element instanceof ExclusiveGateway) {
-    		buffer.append("</exclusive>");
+    		buffer.append("</decision>");
     	} else if (element instanceof ForkParallelGateway) {
     		buffer.append("</fork>");
     	} else if (element instanceof JoinParallelGateway) {

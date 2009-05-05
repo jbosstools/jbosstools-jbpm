@@ -421,7 +421,7 @@ public class JpdlDeserializer {
 		else if ("esb".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.serviceTask";
 		else if ("task".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.humanTask";
 		else if ("sub-process".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.subprocessTask";
-		else if ("exclusive".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
+		else if ("decision".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
 		else if ("join".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelJoinGateway";
 		else if ("fork".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForkGateway";
 		else if ("transition".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sequenceFlow";
