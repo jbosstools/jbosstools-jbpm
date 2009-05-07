@@ -84,7 +84,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "cancel",
+                "end-cancel",
                 "Create a new cancel end event",
                 "org.jboss.tools.flow.jpdl4.cancelEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.cancelEndEvent"),
@@ -93,7 +93,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);                                  
         combined = new CombinedTemplateCreationEntry(
-                "error",
+                "end-error",
                 "Create a new error end event",
                 "org.jboss.tools.flow.jpdl4.errorEndEvent",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.errorEndEvent"),
@@ -170,7 +170,7 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
-                "subprocess",
+                "sub-process",
                 "Create a new Subprocess",
                 "org.jboss.tools.flow.jpdl4.subprocess",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.subprocessTask"),                
