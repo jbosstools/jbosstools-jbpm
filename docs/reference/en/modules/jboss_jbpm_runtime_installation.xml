@@ -15,8 +15,8 @@
   jBPM</property> (business process management).</para>
  <para>The jBPM plugin (jBPM Designer) is already included in the <property>JBoss Tools</property>.
   To make it work, you should only download the jBPM runtime (<ulink
-   url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=539054s"
-   >jbpm-jpdl-3.2.2</ulink> currently) and specify the directory where you extracted the runtime
+   url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377"
+   >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
   either when you create a jBPM project or by using the jBPM preference pages.</para>
 
  <note>
