@@ -133,6 +133,16 @@
          </node>
       </element>
       <element
+            class="org.jboss.tools.flow.jpdl4.model.MailTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.mailTask"
+            label="mail"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
             class="org.jboss.tools.flow.jpdl4.model.JavaTask"
             figure="icons/16/task_java.png"
             id="org.jboss.tools.flow.jpdl4.javaTask"

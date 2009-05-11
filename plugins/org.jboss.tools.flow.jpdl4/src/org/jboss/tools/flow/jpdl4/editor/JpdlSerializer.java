@@ -40,6 +40,7 @@ import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
+import org.jboss.tools.flow.jpdl4.model.MailTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.ProcessNode;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
@@ -187,6 +188,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.sqlTask".equals(elementId)) return "sql";
 		else if ("org.jboss.tools.flow.jpdl4.javaTask".equals(elementId)) return "java";
 		else if ("org.jboss.tools.flow.jpdl4.scriptTask".equals(elementId)) return "script";
+		else if ("org.jboss.tools.flow.jpdl4.mailTask".equals(elementId)) return "mail";
 		else if ("org.jboss.tools.flow.jpdl4.serviceTask".equals(elementId)) return "esb";
 		else if ("org.jboss.tools.flow.jpdl4.humanTask".equals(elementId)) return "task";
 		else if ("org.jboss.tools.flow.jpdl4.subprocessTask".equals(elementId)) return "sub-process";
@@ -503,7 +505,9 @@ public class JpdlSerializer {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof JavaTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
-    	} else if (element instanceof ScriptTask) {
+       	} else if (element instanceof ScriptTask) {
+    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+       	} else if (element instanceof MailTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ServiceTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
@@ -621,6 +625,8 @@ public class JpdlSerializer {
     		buffer.append("</java>");
     	} else if (element instanceof ScriptTask) {
     		buffer.append("</script>");
+    	} else if (element instanceof MailTask) {
+    		buffer.append("</mail>");
     	} else if (element instanceof ServiceTask) {
     		buffer.append("</esb>");
     	} else if (element instanceof HumanTask) {

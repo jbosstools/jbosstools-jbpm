@@ -419,6 +419,7 @@ public class JpdlDeserializer {
 		else if ("java".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.javaTask";
 		else if ("script".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.scriptTask";
 		else if ("esb".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.serviceTask";
+		else if ("mail".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.mailTask";
 		else if ("task".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.humanTask";
 		else if ("sub-process".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.subprocessTask";
 		else if ("decision".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
