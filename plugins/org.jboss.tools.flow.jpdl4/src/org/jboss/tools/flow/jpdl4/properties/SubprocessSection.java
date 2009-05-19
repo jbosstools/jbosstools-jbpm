@@ -1,7 +1,6 @@
 package org.jboss.tools.flow.jpdl4.properties;
 
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -62,7 +61,7 @@ public class SubprocessSection extends JpdlPropertySection {
 		idText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(0, 0);
-		data.left = new FormAttachment(idLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		idText.setLayoutData(data);
 	}
@@ -79,7 +78,7 @@ public class SubprocessSection extends JpdlPropertySection {
 		keyText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(idText, 0);
-		data.left = new FormAttachment(idLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		keyText.setLayoutData(data);
 	}
@@ -96,7 +95,7 @@ public class SubprocessSection extends JpdlPropertySection {
 		outcomeText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(keyText, 0);
-		data.left = new FormAttachment(idLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		outcomeText.setLayoutData(data);
 	}

@@ -60,7 +60,7 @@ public class AssignmentSection extends JpdlPropertySection {
 		typeCombo.setItems(HumanTask.ASSIGNMENT_TYPES);
 		FormData data = new FormData();
 		data.top = new FormAttachment(0, 5);
-		data.left = new FormAttachment(0, 85);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		typeCombo.setLayoutData(data);
 	}
 	
@@ -77,7 +77,7 @@ public class AssignmentSection extends JpdlPropertySection {
 		FormData data = new FormData();
 		data.top = new FormAttachment(typeCombo, 2);
 		data.right = new FormAttachment(100, 0);
-		data.left = new FormAttachment(0, 80);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		expressionText.setLayoutData(data);
 	}
 	

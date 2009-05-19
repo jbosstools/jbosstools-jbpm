@@ -9,7 +9,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.jboss.tools.flow.common.model.Flow;
 import org.jboss.tools.flow.common.properties.IPropertyId;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
@@ -23,6 +22,7 @@ import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
@@ -69,9 +69,12 @@ public class JpdlDeserializer {
 	class ProcessAttributeHandler extends DefaultAttributeDeserializer {
 		public void deserializeAttributes(Wrapper wrapper, Element element) {
 			super.deserializeAttributes(wrapper, element);
-			if (!(wrapper instanceof FlowWrapper)) return;
-			FlowWrapper flowWrapper = (FlowWrapper)wrapper;
-			((Flow)flowWrapper.getElement()).setName(element.getAttribute("name"));
+			if (!(wrapper.getElement() instanceof Process)) return;
+			Process process = (Process)wrapper.getElement();
+			process.setName(element.getAttribute("name"));
+			process.setKey(element.getAttribute("key"));
+			process.setVersion(element.getAttribute("version"));
+			process.setDescription(element.getAttribute("description"));
 		}
 	}
 	

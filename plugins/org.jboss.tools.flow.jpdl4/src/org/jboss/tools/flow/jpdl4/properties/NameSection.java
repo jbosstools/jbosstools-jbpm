@@ -3,7 +3,6 @@ package org.jboss.tools.flow.jpdl4.properties;
 import java.util.EventObject;
 
 import org.eclipse.gef.commands.CommandStackListener;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -68,7 +67,7 @@ public class NameSection extends JpdlPropertySection implements IPropertyId {
 		nameText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(0, 0);
-		data.left = new FormAttachment(nameLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		nameText.setLayoutData(data);
 	}

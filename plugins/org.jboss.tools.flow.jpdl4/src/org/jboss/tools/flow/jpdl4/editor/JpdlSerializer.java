@@ -456,19 +456,28 @@ public class JpdlSerializer {
     		result.add("xmlns");
     		result.add("name");
     		result.add("initial");
+    		result.add("key");
+    		result.add("version");
+    		result.add("description");
     		return result;
     	}
     	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
     		if (!(wrapper instanceof FlowWrapper)) return;
     		Element element = wrapper.getElement();
     		if (element == null || !(element instanceof Process)) return;
-    		if ("xmlns".equals(attributeName)) {
-	    		buffer.append(" xmlns=\"http://jbpm.org/4/jpdl\"");    	    		
-			} else if ("name".equals(attributeName)) {
+    		if ("name".equals(attributeName)) {
 				appendName(buffer, (Process)element);
+    		} else if ("key".equals(attributeName)) {
+    			appendKey(buffer, (Process)element);
+    		} else if ("version".equals(attributeName)) {
+    			appendVersion(buffer, (Process)element);
+    		} else if ("description".equals(attributeName)) {
+    			appendDescription(buffer, (Process)element);
 			} else if ("initial".equals(attributeName)) {
 				appendInitial(buffer, (Process)element);
-    		}
+    		} else if ("xmlns".equals(attributeName)) {
+	    		buffer.append(" xmlns=\"http://jbpm.org/4/jpdl\"");    	    		
+			} 
     	}
     	protected void appendName(StringBuffer buffer, Process process) {
 			String value = process.getName();
@@ -480,6 +489,24 @@ public class JpdlSerializer {
 			String value = process.getInitial().getName();
 			if (value == null || "".equals(value)) return;
 			buffer.append(" initial=\"" + value + "\"");
+    	}
+    	protected void appendKey(StringBuffer buffer, Process process) {
+    		if (process.getKey() == null) return;
+    		String value = process.getKey();
+    		if (value == null || "".equals(value)) return;
+    		buffer.append(" key=\"" + value + "\"");
+    	}
+    	protected void appendVersion(StringBuffer buffer, Process process) {
+    		if (process.getVersion() == null) return;
+    		String value = process.getVersion();
+    		if (value == null || "".equals(value)) return;
+    		buffer.append(" version=\"" + value + "\"");
+    	}
+    	protected void appendDescription(StringBuffer buffer, Process process) {
+    		if (process.getDescription() == null) return;
+    		String value = process.getDescription();
+    		if (value == null || "".equals(value)) return;
+    		buffer.append(" description=\"" + value + "\"");
     	}
     }
     

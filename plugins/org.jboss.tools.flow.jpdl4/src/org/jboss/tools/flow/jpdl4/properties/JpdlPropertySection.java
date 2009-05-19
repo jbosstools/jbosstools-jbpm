@@ -12,6 +12,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.jboss.tools.flow.jpdl4.command.ChangePropertyCommand;
 
 public abstract class JpdlPropertySection extends AbstractPropertySection {
+	
+	public static final int SECOND_COLUMN_LEFT_LIMIT = 30;
 
 	private CommandStack commandStack;
 	private Composite flatFormComposite;

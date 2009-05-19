@@ -1,7 +1,6 @@
 package org.jboss.tools.flow.jpdl4.properties;
 
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -62,7 +61,7 @@ public class TimerSection extends JpdlPropertySection {
 		dueDateText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(0, 0);
-		data.left = new FormAttachment(dueDateLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		dueDateText.setLayoutData(data);
 	}
@@ -79,7 +78,7 @@ public class TimerSection extends JpdlPropertySection {
 		repeatText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(dueDateText, 0);
-		data.left = new FormAttachment(dueDateLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		repeatText.setLayoutData(data);
 	}
@@ -96,7 +95,7 @@ public class TimerSection extends JpdlPropertySection {
 		dueDateTimeText = getWidgetFactory().createText(parent, "");
 		FormData data = new FormData();
 		data.top = new FormAttachment(repeatText, 0);
-		data.left = new FormAttachment(dueDateLabel, 0, SWT.RIGHT);
+		data.left = new FormAttachment(JpdlPropertySection.SECOND_COLUMN_LEFT_LIMIT, 0);
 		data.right = new FormAttachment(100, 0);
 		dueDateTimeText.setLayoutData(data);
 	}
