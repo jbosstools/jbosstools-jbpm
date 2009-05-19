@@ -1,17 +1,44 @@
 package org.jboss.tools.flow.jpdl4.editor;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.SWTGraphics;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DefaultEditDomain;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.jboss.tools.flow.common.editor.GenericModelEditor;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.editpart.JpdlGraphicalEditPartFactory;
 import org.jboss.tools.flow.jpdl4.properties.JpdlPropertySheetPage;
 import org.jboss.tools.flow.jpdl4.view.DetailsPage;
@@ -21,9 +48,18 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 	
 	public static String ID = "org.jboss.tools.flow.jpdl4.editor";
 	
-//	protected SelectionSynchronizer selectionSynchronizer;
 	private DetailsPage detailsPage;
 	
+	public void doSave(IProgressMonitor monitor) {
+		super.doSave(monitor);
+		writeImage();
+	}
+
+	public void doSaveAs() {
+		super.doSaveAs();
+		writeImage();
+	}
+
     protected PaletteRoot createPalette() {
         return new JpdlPaletteFactory().createPalette();
     }
@@ -43,7 +79,60 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
         }
     }
     
-    protected void createModel(InputStream is) {
+    protected void writeImage() {    		
+		// TODO repair doSave method
+		SWTGraphics g = null;
+		GC gc = null;
+		Image image = null;
+	
+		LayerManager lm = (LayerManager)getGraphicalViewer().getEditPartRegistry().get(LayerManager.ID);
+		IFigure figure = lm.getLayer(LayerConstants.PRINTABLE_LAYERS);
+		
+		try {
+		
+		    Rectangle r = figure.getBounds();
+			image = new Image(Display.getDefault(), r.width, r.height);
+	        gc = new GC(image);
+	        g = new SWTGraphics(gc);
+	        g.translate(r.x * -1, r.y * -1);
+	        figure.paint(g);
+	        ImageLoader imageLoader = new ImageLoader();
+	        imageLoader.data = new ImageData[] {image.getImageData()};
+	        imageLoader.save(getImageSavePath(), SWT.IMAGE_JPEG);
+	        refreshProcessFolder();
+	        
+	    } finally {
+	        if (g != null) {
+	            g.dispose();
+	        }
+	        if (gc != null) {
+	            gc.dispose();
+	        }
+	        if (image != null) {
+	            image.dispose();
+	        }
+	    }
+	}    	
+    
+	private String getImageSavePath() {
+		IFile file = getFile();
+		IPath path = file.getRawLocation();
+		if ("xml".equals(path.getFileExtension())) path = path.removeFileExtension();
+		if ("jpdl".equals(path.getFileExtension())) path = path.removeFileExtension();
+		path = path.addFileExtension("png");
+		return path.toOSString();
+	}
+
+	private void refreshProcessFolder() {
+		try {
+			IFile file = ((FileEditorInput)getEditorInput()).getFile();
+			file.getParent().refreshLocal(1, null);			
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void createModel(InputStream is) {
     	boolean empty = true;
     	try {
     		empty = is.available() == 0;
