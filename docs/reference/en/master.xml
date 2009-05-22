@@ -27,7 +27,17 @@
 <book>
     <bookinfo>
         <title>jBPM Tools Reference Guide</title>
-
+            <corpauthor>
+                <inlinemediaobject>
+                    <imageobject role="fo">
+                        <imagedata format="PNG" fileref="images/jbosstools_logo.png" />
+                    </imageobject>	
+                    <imageobject role="html">
+                        <imagedata/>
+                    </imageobject>	
+                </inlinemediaobject>           
+            </corpauthor>
+        
         <author>
             <firstname>Anatoly</firstname>
             <surname>Fedosik</surname>
