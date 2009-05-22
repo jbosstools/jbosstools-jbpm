@@ -10,6 +10,17 @@
     
      <bookinfo>
          <title>BPMN Convert User Guide</title>
+             <corpauthor>
+                 <inlinemediaobject>
+                     <imageobject role="fo">
+                         <imagedata format="PNG" fileref="images/jbosstools_logo.png" />
+                     </imageobject>	
+                     <imageobject role="html">
+                         <imagedata/>
+                     </imageobject>	
+                 </inlinemediaobject>           
+             </corpauthor>
+         
          <author><firstname>Grid</firstname><surname>Qian</surname><email>fqian@redhat.com</email></author>           
          <pubdate>October 2008</pubdate>
 	     <copyright>
