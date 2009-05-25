@@ -173,6 +173,8 @@ public class JpdlSerializer {
     	public void appendClosing(StringBuffer buffer, Wrapper wrapper) {
     		buffer.append("</" + getNodeName(wrapper.getElement()) + ">");
     	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    	}
     }
     
     private String getNodeName(Element element) {
@@ -280,6 +282,8 @@ public class JpdlSerializer {
 				appendName(buffer, (ProcessNode)element);
 			} else if ("g".equals(attributeName)) {
 				appendGraphics(buffer, (NodeWrapper)wrapper);
+    		} else {
+    			super.appendAttributeToSave(attributeName, buffer, wrapper);
     		}
     	}
     	protected void appendName(StringBuffer buffer, ProcessNode processNode) {
@@ -299,9 +303,43 @@ public class JpdlSerializer {
         	buffer.append(constraint.height);
         	buffer.append("\"");
     	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+	    	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
+	    	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
+	    	for (ConnectionWrapper connectionWrapper : children) {
+	    		appendToBuffer(buffer, connectionWrapper, level+1);
+	    	}
+    	}
     }
     
-    class HumanTaskSerializer extends ProcessNodeWrapperSerializer {
+    class ExclusiveGatewayWrapperSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
+    		result.add("expr");
+    		result.add("lang");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("expr".equals(attributeName)) {
+    			return ExclusiveGateway.EXPR;
+    		} else if ("repeat".equals(attributeName)) {
+    			return ExclusiveGateway.LANG;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)wrapper.getElement();
+    		String handler = exclusiveGateway.getHandler();
+    		if (handler != null && !"".equals(handler)) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<handler class=\"" + handler + "\" />");
+    		}
+    		super.appendBody(buffer, wrapper, level);
+    	}
+    }
+    
+    class HumanTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		List<String> result = super.getAttributesToSave();
     		result.add(Assignment.ASSIGNEE);
@@ -397,7 +435,7 @@ public class JpdlSerializer {
     	}
     }
     
-    class SubprocessTaskWrapperSerializer extends AbstractWrapperSerializer {
+    class SubprocessTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		ArrayList<String> result = new ArrayList<String>();
     		result.add("sub-process-id");
@@ -428,6 +466,15 @@ public class JpdlSerializer {
     			return EventListenerContainer.EVENT_TYPE;
     		}
     		return super.getPropertyName(attributeName);
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+			List<Element> eventListeners = wrapper.getChildren(EventListenerContainer.LISTENERS);
+			if (eventListeners != null) {
+				for (Element eventListener : eventListeners) {
+					if (!(eventListener instanceof Wrapper)) continue;
+					appendToBuffer(buffer, (Wrapper)eventListener, level+1);
+				}
+			}
     	}
     }
     
@@ -475,8 +522,8 @@ public class JpdlSerializer {
     			appendDescription(buffer, (Process)element);
 			} else if ("initial".equals(attributeName)) {
 				appendInitial(buffer, (Process)element);
-    		} else if ("xmlns".equals(attributeName)) {
-	    		buffer.append(" xmlns=\"http://jbpm.org/4/jpdl\"");    	    		
+    		} else {
+    			super.appendAttributeToSave(attributeName, buffer, wrapper);    	    		
 			} 
     	}
     	protected void appendName(StringBuffer buffer, Process process) {
@@ -507,6 +554,35 @@ public class JpdlSerializer {
     		String value = process.getDescription();
     		if (value == null || "".equals(value)) return;
     		buffer.append(" description=\"" + value + "\"");
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		FlowWrapper flowWrapper = (FlowWrapper)wrapper;
+    		List<Element> swimlanes = flowWrapper.getChildren("swimlane");
+    		if (swimlanes != null) {
+	    		for (Element swimlane : swimlanes) {
+	    			if (!(swimlane instanceof Wrapper)) continue;
+	    			appendToBuffer(buffer, (Wrapper)swimlane, level+1);
+	    		}
+    		}
+    		List<Element> timers = flowWrapper.getChildren("timer");
+    		if (timers != null) {
+    			for (Element timer : timers) {
+    				if (!(timer instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)timer, level+1);
+    			}
+    		}
+    		List<Element> eventListenerContainers = flowWrapper.getChildren("eventListener");
+    		if (eventListenerContainers != null) {
+    			for (Element eventListenerContainer : eventListenerContainers) {
+    				if (!(eventListenerContainer instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)eventListenerContainer, level+1);
+    			}
+    		}
+	    	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
+	    	List<NodeWrapper> children = containerWrapper.getNodeWrappers();
+	    	for (NodeWrapper nodeWrapper : children) {
+	    		appendToBuffer(buffer, nodeWrapper, level+1);
+	    	}
     	}
     }
     
@@ -539,11 +615,11 @@ public class JpdlSerializer {
     	} else if (element instanceof ServiceTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof HumanTask) {
-    		new HumanTaskSerializer().appendOpening(buffer, wrapper, level);
+    		new HumanTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof SubprocessTask) {
     		new SubprocessTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ExclusiveGateway) {
-    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+    		new ExclusiveGatewayWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ForkParallelGateway) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof JoinParallelGateway) {
@@ -564,54 +640,54 @@ public class JpdlSerializer {
     
     @SuppressWarnings("unchecked")
 	private void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
-    	if (wrapper instanceof FlowWrapper) {
-    		FlowWrapper flowWrapper = (FlowWrapper)wrapper;
-    		List<Element> swimlanes = flowWrapper.getChildren("swimlane");
-    		if (swimlanes != null) {
-	    		for (Element swimlane : swimlanes) {
-	    			if (!(swimlane instanceof Wrapper)) continue;
-	    			appendToBuffer(buffer, (Wrapper)swimlane, level+1);
-	    		}
-    		}
-    		List<Element> timers = flowWrapper.getChildren("timer");
-    		if (timers != null) {
-    			for (Element timer : timers) {
-    				if (!(timer instanceof Wrapper)) continue;
-    				appendToBuffer(buffer, (Wrapper)timer, level+1);
-    			}
-    		}
-    		List<Element> eventListenerContainers = flowWrapper.getChildren("eventListener");
-    		if (eventListenerContainers != null) {
-    			for (Element eventListenerContainer : eventListenerContainers) {
-    				if (!(eventListenerContainer instanceof Wrapper)) continue;
-    				appendToBuffer(buffer, (Wrapper)eventListenerContainer, level+1);
-    			}
-    		}
+    	Element element = wrapper.getElement();
+    	if (element instanceof SequenceFlow) {
+    		new SequenceFlowWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof TerminateEndEvent) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof ErrorEndEvent) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof CancelEndEvent) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof StartEvent) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof SuperState) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof WaitTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof HqlTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof SqlTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof JavaTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+       	} else if (element instanceof ScriptTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+       	} else if (element instanceof MailTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof ServiceTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof HumanTask) {
+    		new HumanTaskWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof SubprocessTask) {
+    		new SubprocessTaskWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof ExclusiveGateway) {
+    		new ExclusiveGatewayWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof ForkParallelGateway) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof JoinParallelGateway) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof Process) {
+    		new ProcessWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof Swimlane) {
+    		new SwimlaneWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof Timer) {
+    		new TimerWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof EventListenerContainer) {
+    		new EventListenerContainerWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof EventListener) {
+    		new EventListenerWrapperSerializer().appendBody(buffer, wrapper, level);
     	}
-	    if (wrapper instanceof ContainerWrapper) {
-	    	ContainerWrapper containerWrapper = (ContainerWrapper)wrapper;
-	    	List<NodeWrapper> children = containerWrapper.getNodeWrappers();
-	    	for (NodeWrapper nodeWrapper : children) {
-	    		appendToBuffer(buffer, nodeWrapper, level+1);
-	    	}
-	    }
-	    if (wrapper instanceof NodeWrapper) {
-	    	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
-	    	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
-	    	for (ConnectionWrapper connectionWrapper : children) {
-	    		appendToBuffer(buffer, connectionWrapper, level+1);
-	    	}
-	    } 
-		Element element = (Element)wrapper.getElement();
-		if (element instanceof EventListenerContainer) {
-			List<Element> eventListeners = wrapper.getChildren(EventListenerContainer.LISTENERS);
-			if (eventListeners != null) {
-				for (Element eventListener : eventListeners) {
-					if (!(eventListener instanceof Wrapper)) continue;
-					appendToBuffer(buffer, (Wrapper)eventListener, level+1);
-				}
-			}
-		}
 		ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
 		boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
 		if (appendTrailingNodes) {

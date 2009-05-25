@@ -21,6 +21,7 @@ import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
@@ -85,6 +86,16 @@ public class JpdlDeserializer {
 			NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
 			addGraphics(nodeWrapper, element);
 			nodeWrapper.setName(element.getAttribute("name"));			
+		}
+	}
+	
+	class ExclusiveGatewayAttributeHandler extends NodeAttributeHandler {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			if (!(wrapper.getElement() instanceof ExclusiveGateway)) return;
+			ExclusiveGateway exclusiveGateWay = (ExclusiveGateway)wrapper.getElement();
+			exclusiveGateWay.setExpr(element.getAttribute("expr"));
+			exclusiveGateWay.setLang(element.getAttribute("lang"));
 		}
 	}
 	
@@ -278,6 +289,18 @@ public class JpdlDeserializer {
 		}
 	}
 	
+	class ExclusiveGateWayChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = super.deserializeChildNode(parent, node);
+			ExclusiveGateway exclusiveGateway = (ExclusiveGateway)parent.getElement();
+			if (node instanceof Element && "handler".equals(node.getNodeName())) {
+				String className = ((Element)node).getAttribute("class");
+				exclusiveGateway.setHandler("".equals(className) ? null : className);
+			}
+			return result;
+		}
+	}
+	
 	class ProcessPostProcessor implements PostProcessor {
 		@SuppressWarnings("unchecked")
 		public void postProcess(Wrapper wrapper) {
@@ -387,6 +410,8 @@ public class JpdlDeserializer {
 			return new HumanTaskAttributeHandler();
 		} else if (element instanceof SubprocessTask) {
 			return new SubprocessTaskAttributeHandler();
+		} else if (element instanceof ExclusiveGateway) {
+			return new ExclusiveGatewayAttributeHandler();
 		} else {
 			return new NodeAttributeHandler();
 		}
@@ -396,11 +421,20 @@ public class JpdlDeserializer {
 		if (wrapper instanceof FlowWrapper) {
 			return new ProcessChildNodeHandler();
 		} else if (wrapper instanceof NodeWrapper) {
-			return new NodeChildNodeHandler();
+			return getNodeChildNodeDeserializer(wrapper);
 		} else if (wrapper instanceof DefaultWrapper) {
 			return getDefaultChildNodeHandler(wrapper);
 		}
 		return null;
+	}
+	
+	private ChildNodeDeserializer getNodeChildNodeDeserializer(Wrapper wrapper) {
+		Object element = wrapper.getElement();
+		if (element instanceof ExclusiveGateway) {
+			return new ExclusiveGateWayChildNodeHandler();
+		} else {
+			return new NodeChildNodeHandler();
+		}
 	}
 	
 	private ChildNodeDeserializer getDefaultChildNodeHandler(Wrapper wrapper) {
