@@ -14,6 +14,10 @@
 			<property name="type" value="feature" />
 			<property name="id" value="org.jboss.tools.flow.common.feature" />
 		</ant>
+		<ant antfile="${genericTargets}" target="${target}">
+			<property name="type" value="feature" />
+			<property name="id" value="org.jboss.tools.jbpm.common.feature" />
+		</ant>
 		
 	</target>
 
@@ -31,6 +35,11 @@
 		</ant>
 	</target>
 	<target name="assemble.org.jboss.tools.flow.common.feature">
+		<ant antfile="${assembleScriptName}" dir="${buildDirectory}">
+			<property name="zipargs" value="" />
+		</ant>
+	</target>
+	<target name="assemble.org.jboss.tools.jbpm.common.feature">
 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}">
 			<property name="zipargs" value="" />
 		</ant>
