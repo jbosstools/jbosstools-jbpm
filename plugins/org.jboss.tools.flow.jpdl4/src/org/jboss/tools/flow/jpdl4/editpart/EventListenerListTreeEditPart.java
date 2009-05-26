@@ -59,7 +59,15 @@ public class EventListenerListTreeEditPart extends JpdlTreeEditPart implements E
 	    		((JpdlTreeEditPart)parent).modelChanged(modelEvent);
 	    	}
 	    	refreshChildren();
-    	} else if (event.getChangeType() == Wrapper.CHANGE_PROPERTY) {
+    	} else if (event.getChangeType() == Wrapper.ADD_ELEMENT) {
+    		refreshChildren();
+    		Object object = event.getNewValue();
+    		EditPart editPart = (EditPart)getViewer().getEditPartRegistry().get(object);
+    		if (editPart != null) {
+    			getViewer().select(editPart);
+    		}
+    	}
+    	else if (event.getChangeType() == Wrapper.CHANGE_PROPERTY) {
     		refreshVisuals();
     	}
     }

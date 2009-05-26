@@ -16,8 +16,8 @@ import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 
 public class AddSwimlaneHandler extends AbstractHandler implements IHandler {
-
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	
+	private Wrapper getParent(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchPage page = HandlerUtil.getActiveWorkbenchWindowChecked(event).getActivePage();
 		if (page == null) return null;
 		ISelection selection = page.getSelection();
@@ -26,9 +26,18 @@ public class AddSwimlaneHandler extends AbstractHandler implements IHandler {
 		Object first = structuredSelection.getFirstElement();
 		if (!(first instanceof EditPart)) return null;
 		EditPart editPart = (EditPart)first;
-		Object model = editPart.getModel();
-		if (model == null || !(model instanceof Wrapper)) return null;
-		Wrapper parent = (Wrapper)model;
+		while (editPart != null) {
+			Object model = editPart.getModel();
+			if (model != null && model instanceof Wrapper) {
+				return (Wrapper)model;
+			}
+			editPart = editPart.getParent();
+		}
+		return null;
+	}
+
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		Wrapper parent = getParent(event);
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 		if (editorPart == null) return null;
 		Object object = editorPart.getAdapter(CommandStack.class);

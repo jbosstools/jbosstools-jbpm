@@ -221,7 +221,7 @@ public class JpdlDeserializer {
 		}
 	}
 	
-	class ConnectionAttributeHandler extends DefaultAttributeDeserializer {
+	class SequenceFlowAttributeHandler extends DefaultAttributeDeserializer {
 		public void deserializeAttributes(Wrapper wrapper, Element element) {
 			super.deserializeAttributes(wrapper, element);
 			if (!(wrapper instanceof ConnectionWrapper)) return;
@@ -229,6 +229,24 @@ public class JpdlDeserializer {
 			addGraphics(connectionWrapper, element);
 			connectionWrapper.getElement().setMetaData("to", element.getAttribute("to"));
 			connectionWrapper.setPropertyValue(IPropertyId.NAME, element.getAttribute("name"));
+		}
+	}
+	
+	class SequenceFlowChildNodeHandler implements ChildNodeDeserializer {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = null;
+			if (!(parent instanceof ConnectionWrapper)) return result;
+			ConnectionWrapper connectionWrapper = (ConnectionWrapper)parent;
+			if (node instanceof Element) {
+				result = createWrapper((Element)node);
+				if (result == null) return null;
+				if (result instanceof Wrapper) {
+					if (result.getElement() instanceof EventListener) {
+						connectionWrapper.addChild("listener", result);
+					}
+				}
+			}
+			return result;
 		}
 	}
 	
@@ -281,8 +299,12 @@ public class JpdlDeserializer {
 			}
 			if (node instanceof Element) {
 				result = createWrapper((Element)node);
-				if (result != null && result instanceof ConnectionWrapper) {
-					flows.add((ConnectionWrapper)result);
+				if (result != null) {
+					if (result instanceof ConnectionWrapper) {
+						flows.add((ConnectionWrapper)result);
+					} else if (result.getElement() instanceof EventListenerContainer) {
+						parent.addChild("eventListener", result);
+					}
 				}
 			}
 			return result;
@@ -291,11 +313,13 @@ public class JpdlDeserializer {
 	
 	class ExclusiveGateWayChildNodeHandler extends NodeChildNodeHandler {
 		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
-			Wrapper result = super.deserializeChildNode(parent, node);
+			Wrapper result = null;
 			ExclusiveGateway exclusiveGateway = (ExclusiveGateway)parent.getElement();
 			if (node instanceof Element && "handler".equals(node.getNodeName())) {
 				String className = ((Element)node).getAttribute("class");
 				exclusiveGateway.setHandler("".equals(className) ? null : className);
+			} else {
+				result = super.deserializeChildNode(parent, node);
 			}
 			return result;
 		}
@@ -383,7 +407,7 @@ public class JpdlDeserializer {
 		} else if (wrapper instanceof NodeWrapper) {
 			return getNodeAttributeHandler(wrapper);
 		} else if (wrapper instanceof ConnectionWrapper) {
-			return new ConnectionAttributeHandler();
+			return new SequenceFlowAttributeHandler();
 		} else if (wrapper instanceof DefaultWrapper) {
 			return getDefaultAttributeHandler(wrapper); 
 		}
@@ -424,6 +448,8 @@ public class JpdlDeserializer {
 			return getNodeChildNodeDeserializer(wrapper);
 		} else if (wrapper instanceof DefaultWrapper) {
 			return getDefaultChildNodeHandler(wrapper);
+		} else if (wrapper instanceof ConnectionWrapper) {
+			return new SequenceFlowChildNodeHandler();
 		}
 		return null;
 	}

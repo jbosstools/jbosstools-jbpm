@@ -13,12 +13,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.AddChildCommand;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
-import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 
 public class AddTimerHandler extends AbstractHandler implements IHandler {
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	private Wrapper getParent(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchPage page = HandlerUtil.getActiveWorkbenchWindowChecked(event).getActivePage();
 		if (page == null) return null;
 		ISelection selection = page.getSelection();
@@ -27,9 +26,18 @@ public class AddTimerHandler extends AbstractHandler implements IHandler {
 		Object first = structuredSelection.getFirstElement();
 		if (!(first instanceof EditPart)) return null;
 		EditPart editPart = (EditPart)first;
-		Object model = editPart.getModel();
-		if (model == null || !(model instanceof FlowWrapper)) return null;
-		FlowWrapper flowWrapper = (FlowWrapper)model;
+		while (editPart != null) {
+			Object model = editPart.getModel();
+			if (model != null && model instanceof Wrapper) {
+				return (Wrapper)model;
+			}
+			editPart = editPart.getParent();
+		}
+		return null;
+	}
+
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		Wrapper parent = getParent(event);
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 		if (editorPart == null) return null;
 		Object object = editorPart.getAdapter(CommandStack.class);
@@ -39,7 +47,7 @@ public class AddTimerHandler extends AbstractHandler implements IHandler {
 		Wrapper child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.timer");
 		addChildCommand.setChild(child);
 		addChildCommand.setType("timer");
-		addChildCommand.setParent(flowWrapper);
+		addChildCommand.setParent(parent);
 		commandStack.execute(addChildCommand);
 		return null;	
 	}

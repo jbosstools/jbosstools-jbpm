@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.eclipse.gef.EditPart;
 import org.jboss.tools.flow.common.model.Element;
-import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 
 public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 	
-	public ProcessTreeRootEditPart(FlowWrapper flowWrapper) {
-		super(flowWrapper);
+	public ProcessTreeRootEditPart(Wrapper wrapper) {
+		super(wrapper);
 	}
 	
 	protected void createEditPolicies() {
@@ -20,23 +19,23 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 
 	protected List<Object> getModelChildren() {
 		List<Object> result = new ArrayList<Object>();
-		FlowWrapper flowWrapper = (FlowWrapper)getModel();
-		if (flowWrapper == null) return null;
-		addSwimlanes(result, flowWrapper);
-		addEventListeners(result, flowWrapper);
-		addTimers(result, flowWrapper);
+		Wrapper wrapper = (Wrapper)getModel();
+		if (wrapper == null) return null;
+		addSwimlanes(result, wrapper);
+		addEventListeners(result, wrapper);
+		addTimers(result, wrapper);
 		return result;
 	}
 	
-	private void addSwimlanes(List<Object> list, FlowWrapper flowWrapper) {
-		List<Element> swimlanes = flowWrapper.getChildren("swimlane");
+	private void addSwimlanes(List<Object> list, Wrapper wrapper) {
+		List<Element> swimlanes = wrapper.getChildren("swimlane");
 		if (swimlanes != null && !swimlanes.isEmpty()) {
 			list.add(new SwimlaneListTreeEditPart(swimlanes));
 		}
 	}
 	
-	private void addEventListeners(List<Object> list, FlowWrapper flowWrapper) {
-		List<Element> eventListeners = flowWrapper.getChildren("eventListener");
+	private void addEventListeners(List<Object> list, Wrapper wrapper) {
+		List<Element> eventListeners = wrapper.getChildren("eventListener");
 		if (eventListeners == null) return;
 		for (Element element : eventListeners) {
 			if (element instanceof Wrapper) {
@@ -45,8 +44,8 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
 		}
 	}
 	
-	private void addTimers(List<Object> list, FlowWrapper flowWrapper) {
-		List<Element> timers = flowWrapper.getChildren("timer");
+	private void addTimers(List<Object> list, Wrapper wrapper) {
+		List<Element> timers = wrapper.getChildren("timer");
 		if (timers != null && !timers.isEmpty()) {
 			list.add(new TimerListTreeEditPart(timers));
 		}
@@ -67,11 +66,11 @@ public class ProcessTreeRootEditPart extends JpdlTreeEditPart {
     
     public void activate() {
         super.activate();
-        ((FlowWrapper)getModel()).addListener(this);
+        ((Wrapper)getModel()).addListener(this);
     }
 
     public void deactivate() {
-    	((FlowWrapper)getModel()).removeListener(this);
+    	((Wrapper)getModel()).removeListener(this);
         super.deactivate();
     }
 

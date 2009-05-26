@@ -16,8 +16,10 @@ import org.jboss.tools.flow.common.command.DeleteChildCommand;
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.editpart.EventListenerListTreeEditPart;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
 
@@ -52,7 +54,11 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 		} else if (child.getElement() instanceof Timer) {
 			deleteChildCommand.setType("timer");
 		} else if (child.getElement() instanceof EventListener) {
-			deleteChildCommand.setType(EventListenerContainer.LISTENERS);
+			if (parent.getElement() instanceof SequenceFlow) {
+				deleteChildCommand.setType("listener");
+			} else {
+				deleteChildCommand.setType(EventListenerContainer.LISTENERS);
+			}
 		} else if (child.getElement() instanceof EventListenerContainer) {
 			deleteChildCommand.setType("eventListener");
 		}
@@ -66,10 +72,10 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 	}
 	
 	private EditPart getParentEditPart(Element element, EditPart editPart) {
-		if (element instanceof Swimlane || element instanceof Timer) {
-			return getRootEditPart(editPart);
-		} else {
+		if (editPart.getParent() instanceof EventListenerListTreeEditPart) {
 			return editPart.getParent();
+		} else {
+			return getRootEditPart(editPart);
 		}
 	}
 	

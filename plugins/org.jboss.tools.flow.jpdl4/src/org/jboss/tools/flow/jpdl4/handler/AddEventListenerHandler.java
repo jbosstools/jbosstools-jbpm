@@ -15,7 +15,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.jboss.tools.flow.common.command.AddChildCommand;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.editpart.SequenceFlowTreeRootEditPart;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 
 public class AddEventListenerHandler extends AbstractHandler implements IHandler {
 
@@ -38,14 +40,20 @@ public class AddEventListenerHandler extends AbstractHandler implements IHandler
 		Wrapper parent = (Wrapper)model;
 		Wrapper child;
 		AddChildCommand addChildCommand = new AddChildCommand();
-		if (editPart.getParent() != null && editPart.getParent() instanceof RootEditPart) {
+		if (editPart.getParent() != null 
+				&& editPart.getParent() instanceof RootEditPart 
+				&& !(editPart instanceof SequenceFlowTreeRootEditPart)) {
 			child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListenerContainer");
 			Wrapper wrapper = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListener");
 			addChildCommand.setType("eventListener");
 			child.addChild(EventListenerContainer.LISTENERS, wrapper);
 		} else {
 			child = ElementRegistry.createWrapper("org.jboss.tools.flow.jpdl4.eventListener");
-			addChildCommand.setType(EventListenerContainer.LISTENERS);
+			if (parent.getElement() instanceof SequenceFlow) {
+				addChildCommand.setType("listener");
+			} else {
+				addChildCommand.setType(EventListenerContainer.LISTENERS);
+			}
 		}
 		addChildCommand.setChild(child);
 		addChildCommand.setParent(parent);

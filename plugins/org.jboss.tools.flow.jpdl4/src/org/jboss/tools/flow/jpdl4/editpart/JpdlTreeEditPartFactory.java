@@ -28,6 +28,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 		}
 		if (model instanceof SwimlaneListTreeEditPart) return (EditPart)model;
 		if (model instanceof TimerListTreeEditPart) return (EditPart)model;
+		if (model instanceof ListenerListTreeEditPart) return (EditPart)model;
 		return new NoDetailsTreeRootEditPart();
 	}
 	

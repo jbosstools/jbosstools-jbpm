@@ -265,6 +265,15 @@ public class JpdlSerializer {
 	    	buffer.append(labelBuffer);
 	    	buffer.append("\"");
 		}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		List<Element> eventListeners = wrapper.getChildren("listener");
+    		if (eventListeners != null) {
+    			for (Element eventListener : eventListeners) {
+    				if (!(eventListener instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)eventListener, level+1);
+    			}
+    		}
+    	}
     }
     
     class ProcessNodeWrapperSerializer extends AbstractWrapperSerializer {
@@ -305,6 +314,13 @@ public class JpdlSerializer {
     	}
     	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
 	    	NodeWrapper nodeWrapper = (NodeWrapper)wrapper;
+    		List<Element> eventListenerContainers = nodeWrapper.getChildren("eventListener");
+    		if (eventListenerContainers != null) {
+    			for (Element eventListenerContainer : eventListenerContainers) {
+    				if (!(eventListenerContainer instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)eventListenerContainer, level+1);
+    			}
+    		}
 	    	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
 	    	for (ConnectionWrapper connectionWrapper : children) {
 	    		appendToBuffer(buffer, connectionWrapper, level+1);
