@@ -26,6 +26,7 @@ import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
+import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
 import org.jboss.tools.flow.jpdl4.model.Timer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -96,6 +97,16 @@ public class JpdlDeserializer {
 			ExclusiveGateway exclusiveGateWay = (ExclusiveGateway)wrapper.getElement();
 			exclusiveGateWay.setExpr(element.getAttribute("expr"));
 			exclusiveGateWay.setLang(element.getAttribute("lang"));
+		}
+	}
+	
+	class TerminateEndEventAttributeHandler extends NodeAttributeHandler {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			if (!(wrapper.getElement() instanceof TerminateEndEvent)) return;
+			TerminateEndEvent terminateEndEvent = (TerminateEndEvent)wrapper.getElement();
+			terminateEndEvent.setEnds(element.getAttribute("ends"));
+			terminateEndEvent.setState(element.getAttribute("state"));
 		}
 	}
 	
@@ -436,6 +447,8 @@ public class JpdlDeserializer {
 			return new SubprocessTaskAttributeHandler();
 		} else if (element instanceof ExclusiveGateway) {
 			return new ExclusiveGatewayAttributeHandler();
+		} else if (element instanceof TerminateEndEvent) {
+			return new TerminateEndEventAttributeHandler();
 		} else {
 			return new NodeAttributeHandler();
 		}

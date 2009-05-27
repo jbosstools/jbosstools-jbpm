@@ -335,14 +335,6 @@ public class JpdlSerializer {
     		result.add("lang");
     		return result;
     	}
-    	protected String getPropertyName(String attributeName) {
-    		if ("expr".equals(attributeName)) {
-    			return ExclusiveGateway.EXPR;
-    		} else if ("repeat".equals(attributeName)) {
-    			return ExclusiveGateway.LANG;
-    		}
-    		return super.getPropertyName(attributeName);
-    	}
     	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
     		ExclusiveGateway exclusiveGateway = (ExclusiveGateway)wrapper.getElement();
     		String handler = exclusiveGateway.getHandler();
@@ -352,6 +344,15 @@ public class JpdlSerializer {
     			buffer.append("<handler class=\"" + handler + "\" />");
     		}
     		super.appendBody(buffer, wrapper, level);
+    	}
+    }
+    
+    class TerminateEndEventWrapperSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
+    		result.add("ends");
+    		result.add("state");
+    		return result;
     	}
     }
     
@@ -607,7 +608,7 @@ public class JpdlSerializer {
     	if (element instanceof SequenceFlow) {
     		new SequenceFlowWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof TerminateEndEvent) {
-    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+    		new TerminateEndEventWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ErrorEndEvent) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof CancelEndEvent) {
@@ -660,7 +661,7 @@ public class JpdlSerializer {
     	if (element instanceof SequenceFlow) {
     		new SequenceFlowWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof TerminateEndEvent) {
-    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    		new TerminateEndEventWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof ErrorEndEvent) {
     		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof CancelEndEvent) {
