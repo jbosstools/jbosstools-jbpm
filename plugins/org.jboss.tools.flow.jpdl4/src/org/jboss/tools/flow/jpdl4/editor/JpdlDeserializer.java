@@ -23,6 +23,7 @@ import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
@@ -98,6 +99,15 @@ public class JpdlDeserializer {
 			ExclusiveGateway exclusiveGateWay = (ExclusiveGateway)wrapper.getElement();
 			exclusiveGateWay.setExpr(element.getAttribute("expr"));
 			exclusiveGateWay.setLang(element.getAttribute("lang"));
+		}
+	}
+	
+	class JavaTaskAttributeHandler extends NodeAttributeHandler {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			wrapper.setPropertyValue(JavaTask.CLASS, element.getAttribute("class"));
+			wrapper.setPropertyValue(JavaTask.METHOD, element.getAttribute("method"));
+			wrapper.setPropertyValue(JavaTask.VAR, element.getAttribute("var"));
 		}
 	}
 	
@@ -465,6 +475,8 @@ public class JpdlDeserializer {
 			return new ExclusiveGatewayAttributeHandler();
 		} else if (element instanceof TerminateEndEvent) {
 			return new TerminateEndEventAttributeHandler();
+		} else if (element instanceof JavaTask) {
+			return new JavaTaskAttributeHandler();
 		} else {
 			return new NodeAttributeHandler();
 		}

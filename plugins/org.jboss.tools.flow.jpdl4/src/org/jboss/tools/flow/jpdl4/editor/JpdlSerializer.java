@@ -362,6 +362,26 @@ public class JpdlSerializer {
     	}
     }
     
+    class JavaTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
+    		result.add("class");
+    		result.add("method");
+    		result.add("var");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("class".equals(attributeName)) {
+    			return JavaTask.CLASS;
+    		} else if ("method".equals(attributeName)) {
+    			return JavaTask.METHOD;
+    		} else if ("var".equals(attributeName)) {
+    			return JavaTask.VAR;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
     class HumanTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		List<String> result = super.getAttributesToSave();
@@ -637,7 +657,7 @@ public class JpdlSerializer {
     	} else if (element instanceof SqlTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof JavaTask) {
-    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+    		new JavaTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
        	} else if (element instanceof ScriptTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
        	} else if (element instanceof MailTask) {
