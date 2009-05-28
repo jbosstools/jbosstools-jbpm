@@ -350,7 +350,7 @@
           </propertySection>
           <propertySection
                class="org.jboss.tools.flow.jpdl4.properties.EventTypeSection"
-               id="org.jboss.tools.jpdl4.eventType"
+               id="org.jboss.tools.jpdl4.eventListenerContainer.eventType"
                tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.EventListenerContainer"/>
           </propertySection>
@@ -422,6 +422,20 @@
                 id="org.jboss.tools.jpdl4.endEvent.state"
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.TerminateEndEvent"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.eventListenerContainer.eventType"
+                class="org.jboss.tools.flow.jpdl4.properties.EventListenerContainerTimerSection"
+                id="org.jboss.tools.jpdl4.eventListenerContainer.timer"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.EventListenerContainer"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.name"
+                class="org.jboss.tools.flow.jpdl4.properties.SequenceFlowTimerSection"
+                id="org.jboss.tools.jpdl4.sequenceFlow.timer"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.SequenceFlow"/>
           </propertySection>
       </propertySections>
    </extension>

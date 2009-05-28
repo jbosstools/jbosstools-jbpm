@@ -266,6 +266,12 @@ public class JpdlSerializer {
 	    	buffer.append("\"");
 		}
     	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		String timer = (String)wrapper.getPropertyValue(SequenceFlow.TIMER);
+    		if (timer != null && !("".equals(timer))) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<timer duedate=\"" + timer + "\"/>");
+    		}
     		List<Element> eventListeners = wrapper.getChildren("listener");
     		if (eventListeners != null) {
     			for (Element eventListener : eventListeners) {
@@ -485,6 +491,13 @@ public class JpdlSerializer {
     		return super.getPropertyName(attributeName);
     	}
     	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		EventListenerContainer eventListenerContainer = (EventListenerContainer)wrapper.getElement();
+    		String timer = eventListenerContainer.getTimer();
+    		if (timer != null && !"".equals(timer)) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<timer duedate=\"" + timer + "\"/>");
+    		}
 			List<Element> eventListeners = wrapper.getChildren(EventListenerContainer.LISTENERS);
 			if (eventListeners != null) {
 				for (Element eventListener : eventListeners) {

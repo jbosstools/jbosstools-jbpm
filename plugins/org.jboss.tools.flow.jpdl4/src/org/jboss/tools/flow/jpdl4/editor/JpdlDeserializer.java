@@ -24,6 +24,7 @@ import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.TerminateEndEvent;
@@ -249,6 +250,12 @@ public class JpdlDeserializer {
 			if (!(parent instanceof ConnectionWrapper)) return result;
 			ConnectionWrapper connectionWrapper = (ConnectionWrapper)parent;
 			if (node instanceof Element) {
+				if ("timer".equals(node.getNodeName())) {
+					String duedate = ((Element)node).getAttribute("duedate");
+					if (duedate != null && !("".equals(duedate))) {
+						parent.setPropertyValue(SequenceFlow.TIMER, duedate);
+					}
+				}
 				result = createWrapper((Element)node);
 				if (result == null) return null;
 				if (result instanceof Wrapper) {
@@ -286,11 +293,20 @@ public class JpdlDeserializer {
 	class EventListenerContainerChildNodeHandler implements ChildNodeDeserializer {
 		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
 			Wrapper result = null;
+			if (!(parent.getElement() instanceof EventListenerContainer)) return result;
 			if (node instanceof Element) {
-				result = createWrapper((Element)node);
-				if (result == null) return null;
-				if (result.getElement() instanceof EventListener) {
-					parent.addChild(EventListenerContainer.LISTENERS, result);
+				if ("timer".equals(node.getNodeName())) {
+					String duedate = ((Element)node).getAttribute("duedate");
+					if (duedate != null && !("".equals(duedate))) {
+						((EventListenerContainer)parent.getElement()).setTimer(duedate);
+					}
+				} else {
+					result = createWrapper((Element)node);
+					if (result != null) {
+						if (result.getElement() instanceof EventListener) {
+							parent.addChild(EventListenerContainer.LISTENERS, result);
+						}
+					}
 				}
 			}
 			return result;

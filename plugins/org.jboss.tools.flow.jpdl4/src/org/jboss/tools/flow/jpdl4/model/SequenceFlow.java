@@ -12,8 +12,11 @@ import org.jboss.tools.flow.common.properties.IPropertyId;
 
 public class SequenceFlow extends DefaultConnection {
 	
+	public static final String TIMER = "org.jboss.tools.flow.jpdl4.model.eventListenerContainer.timer";
+	
 	private String name;
 	private boolean conditional = false;
+	private String timer;
 
 	public SequenceFlow() {
 		this(null, null);
@@ -30,6 +33,14 @@ public class SequenceFlow extends DefaultConnection {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public String getTimer() {
+		return timer;
+	}
+	
+	public void setTimer(String timer) {
+		this.timer = timer;
 	}
 	
 	public void setConditional(boolean conditional) {
@@ -71,7 +82,9 @@ public class SequenceFlow extends DefaultConnection {
 
 		public Object getPropertyValue(Object id) {
 			if (NAME.equals(id) || LABEL.equals(id)) {
-				return getName() != null ? getName() : "";
+				return getName();
+			} else if (TIMER.equals(id)) {
+				return getTimer();
 			}
 			return null;
 		}
@@ -79,6 +92,8 @@ public class SequenceFlow extends DefaultConnection {
 		public boolean isPropertySet(Object id) {
 			if (NAME.equals(id) || LABEL.equals(id)) {
 				return getName() != null;
+			} else if (TIMER.equals(id)) {
+				return getTimer() != null;
 			}
 			return false;
 		}
@@ -88,10 +103,10 @@ public class SequenceFlow extends DefaultConnection {
 
 		public void setPropertyValue(Object id, Object value) {
 			if (NAME.equals(id) || LABEL.equals(id)) {
-				if (value instanceof String) {
-					setName((String)value);
-				}
-			} 
+				setName((String)value);
+			} else if (TIMER.equals(id)) {
+				setTimer((String)value);
+			}
 		}
 		
 	}
