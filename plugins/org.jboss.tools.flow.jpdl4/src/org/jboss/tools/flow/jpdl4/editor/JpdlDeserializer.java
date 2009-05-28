@@ -25,6 +25,7 @@ import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
@@ -108,6 +109,15 @@ public class JpdlDeserializer {
 			wrapper.setPropertyValue(JavaTask.CLASS, element.getAttribute("class"));
 			wrapper.setPropertyValue(JavaTask.METHOD, element.getAttribute("method"));
 			wrapper.setPropertyValue(JavaTask.VAR, element.getAttribute("var"));
+		}
+	}
+	
+	class ScriptTaskAttributeHandler extends NodeAttributeHandler {
+		public void deserializeAttributes(Wrapper wrapper, Element element) {
+			super.deserializeAttributes(wrapper, element);
+			wrapper.setPropertyValue(ScriptTask.EXPR, element.getAttribute("expr"));
+			wrapper.setPropertyValue(ScriptTask.LANG, element.getAttribute("lang"));
+			wrapper.setPropertyValue(ScriptTask.VAR, element.getAttribute("var"));
 		}
 	}
 	
@@ -273,6 +283,21 @@ public class JpdlDeserializer {
 						connectionWrapper.addChild("listener", result);
 					}
 				}
+			}
+			return result;
+		}
+	}
+	
+	class ScriptTaskChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = null;
+			if (node instanceof Element && "text".equals(node.getNodeName())) {
+				String text = ((Element)node).getTextContent();
+				if (text != null && !("".equals(text))) {
+					parent.setPropertyValue(ScriptTask.TEXT, text);
+				}
+			} else {
+				result = super.deserializeChildNode(parent, node);
 			}
 			return result;
 		}
@@ -477,6 +502,8 @@ public class JpdlDeserializer {
 			return new TerminateEndEventAttributeHandler();
 		} else if (element instanceof JavaTask) {
 			return new JavaTaskAttributeHandler();
+		} else if (element instanceof ScriptTask) {
+			return new ScriptTaskAttributeHandler();
 		} else {
 			return new NodeAttributeHandler();
 		}
@@ -499,6 +526,8 @@ public class JpdlDeserializer {
 		Object element = wrapper.getElement();
 		if (element instanceof ExclusiveGateway) {
 			return new ExclusiveGateWayChildNodeHandler();
+		} else if (element instanceof ScriptTask) {
+			return new ScriptTaskChildNodeHandler();
 		} else {
 			return new NodeChildNodeHandler();
 		}

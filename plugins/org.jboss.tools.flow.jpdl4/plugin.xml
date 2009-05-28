@@ -453,10 +453,38 @@
           </propertySection>
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.javaTask.method"
-                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskVarSection"
+                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskVariableSection"
                 id="org.jboss.tools.jpdl4.javaTask.var"
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.JavaTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.name"
+                class="org.jboss.tools.flow.jpdl4.properties.ScriptTaskExpressionSection"
+                id="org.jboss.tools.jpdl4.scriptTask.expr"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ScriptTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.scriptTask.expr"
+                class="org.jboss.tools.flow.jpdl4.properties.ScriptTaskLanguageSection"
+                id="org.jboss.tools.jpdl4.scriptTask.lang"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ScriptTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.scriptTask.lang"
+                class="org.jboss.tools.flow.jpdl4.properties.ScriptTaskVariableSection"
+                id="org.jboss.tools.jpdl4.scriptTask.var"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ScriptTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.scriptTask.var"
+                class="org.jboss.tools.flow.jpdl4.properties.ScriptTaskTextSection"
+                id="org.jboss.tools.jpdl4.scriptTask.text"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ScriptTask"/>
           </propertySection>
       </propertySections>
    </extension>

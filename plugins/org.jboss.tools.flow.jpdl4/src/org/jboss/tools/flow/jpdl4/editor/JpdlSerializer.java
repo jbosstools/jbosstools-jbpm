@@ -382,6 +382,34 @@ public class JpdlSerializer {
     	}
     }
     
+    class ScriptTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
+    		result.add("expr");
+    		result.add("lang");
+    		result.add("var");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("expr".equals(attributeName)) {
+    			return ScriptTask.EXPR;
+    		} else if ("lang".equals(attributeName)) {
+    			return ScriptTask.LANG;
+    		} else if ("var".equals(attributeName)) {
+    			return ScriptTask.VAR;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		String text = (String)wrapper.getPropertyValue(ScriptTask.TEXT);
+    		if (text != null && !("".equals(text))) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<text>" + text + "</text>");
+    		}
+    	}
+    }
+    
     class HumanTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		List<String> result = super.getAttributesToSave();
@@ -659,7 +687,7 @@ public class JpdlSerializer {
     	} else if (element instanceof JavaTask) {
     		new JavaTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
        	} else if (element instanceof ScriptTask) {
-    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
+    		new ScriptTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
        	} else if (element instanceof MailTask) {
     		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ServiceTask) {
@@ -712,7 +740,7 @@ public class JpdlSerializer {
     	} else if (element instanceof JavaTask) {
     		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
        	} else if (element instanceof ScriptTask) {
-    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    		new ScriptTaskWrapperSerializer().appendBody(buffer, wrapper, level);
        	} else if (element instanceof MailTask) {
     		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof ServiceTask) {
