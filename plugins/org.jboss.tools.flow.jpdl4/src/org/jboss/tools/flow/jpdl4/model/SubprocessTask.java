@@ -1,5 +1,8 @@
 package org.jboss.tools.flow.jpdl4.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
@@ -10,11 +13,15 @@ public class SubprocessTask extends Task {
 	
 	public final static String ID = "org.jboss.tools.flow.jpdl4.model.subprocess.id";
 	public final static String KEY = "org.jboss.tools.flow.jpdl4.model.subprocess.key";
-	public final static String OUTCOME = "org.jboss.tools.flow.jpdl4.model.subprocess.outcome";
+	public final static String OUTCOME = "org.jboss.tools.flow.jpdl4.model.subprocess.outcome";	
+	public final static String INPUT_PARAMETERS = "org.jboss.tools.flow.jpdl4.model.subprocess.inputParameters";
+	public final static String OUTPUT_PARAMETERS = "org.jboss.tools.flow.jpdl4.model.subprocess.outputParameters";
 	
 	private String subprocessId;
 	private String key;
 	private String outcome;
+	private List<InputParameter> inputParameters = new ArrayList<InputParameter>();
+	private List<OutputParameter> outputParameters = new ArrayList<OutputParameter>();
 	
 	public SubprocessTask() {
 		setMetaData("propertySource", new PropertySource());
@@ -83,6 +90,10 @@ public class SubprocessTask extends Task {
 				return getKey() != null ? getKey() : "";
 			} else if (OUTCOME.equals(id)) {
 				return getOutcome() != null ? getOutcome() : "";
+			} else if (INPUT_PARAMETERS.equals(id)) {
+				return inputParameters;
+			} else if (OUTPUT_PARAMETERS.equals(id)) {
+				return outputParameters;
 			}
 			return null;
 		}
@@ -94,6 +105,10 @@ public class SubprocessTask extends Task {
 				return getKey() != null;
 			} else if (OUTCOME.equals(id)) {
 				return getOutcome() != null;
+			} else if (INPUT_PARAMETERS.equals(id)) {
+				return true;
+			} else if (OUTPUT_PARAMETERS.equals(id)) {
+				return true;
 			}
 			return false;
 		}

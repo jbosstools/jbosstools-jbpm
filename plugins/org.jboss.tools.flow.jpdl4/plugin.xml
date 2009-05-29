@@ -258,6 +258,20 @@
             label="event"
             language="org.jboss.tools.flow.jpdl4">
       </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.InputParameter"
+            figure="icons/16/input.gif"
+            id="org.jboss.tools.flow.jpdl4.inputParameter"
+            label="input parameter"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.OutputParameter"
+            figure="icons/16/output.gif"
+            id="org.jboss.tools.flow.jpdl4.outputParameter"
+            label="output parameter"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
@@ -438,6 +452,13 @@
             <input type="org.jboss.tools.flow.jpdl4.model.SequenceFlow"/>
           </propertySection>
           <propertySection
+                afterSection="org.jboss.tools.jpdl4.sequenceFlow.timer"
+                class="org.jboss.tools.flow.jpdl4.properties.SequenceFlowOutcomeValueSection"
+                filter="org.jboss.tools.jpdl4.properties.SequenceFlowOutcomeValueFilter"
+                id="org.jboss.tools.jpdl4.sequenceFlow.outcome"
+                tab="org.jboss.tools.jpdl4.general">
+          </propertySection>
+          <propertySection
                 afterSection="org.jboss.tools.jpdl4.name"
                 class="org.jboss.tools.flow.jpdl4.properties.JavaTaskClassSection"
                 id="org.jboss.tools.jpdl4.javaTask.class"
@@ -486,6 +507,60 @@
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.ScriptTask"/>
           </propertySection>
+          <propertySection
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterOuterVariableSection"
+                id="org.jboss.tools.jpdl4.inputParameter.outerVariable"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.InputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.inputParameter.outerVariable"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterInnerVariableSection"
+                id="org.jboss.tools.jpdl4.inputParameter.innerVariable"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.InputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.inputParameter.innerVariable"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterExpressionSection"
+                id="org.jboss.tools.jpdl4.inputParameter.expression"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.InputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.inputParameter.expression"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterLanguageSection"
+                id="org.jboss.tools.jpdl4.inputParameter.language"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.InputParameter"/>
+          </propertySection>
+          <propertySection
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterInnerVariableSection"
+                id="org.jboss.tools.jpdl4.outputParameter.innerVariable"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.outputParameter.innerVariable"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterOuterVariableSection"
+                id="org.jboss.tools.jpdl4.outputParameter.outerVariable"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.outputParameter.outerVariable"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterExpressionSection"
+                id="org.jboss.tools.jpdl4.outputParameter.expression"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.outputParameter.expression"
+                class="org.jboss.tools.flow.jpdl4.properties.ParameterLanguageSection"
+                id="org.jboss.tools.jpdl4.outputParameter.language"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
+          </propertySection>
       </propertySections>
    </extension>
    <extension
@@ -522,6 +597,18 @@
             defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddTimerHandler"
             id="org.jboss.tools.flow.jpdl4.addTimer"
             name="Add Timer">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddInputParameterHandler"
+            id="org.jboss.tools.flow.jpdl4.addInputParameter"
+            name="Add Input Parameter">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddOutputParameterHandler"
+            id="org.jboss.tools.flow.jpdl4.addOutputParameter"
+            name="Add Output Parameter">
       </command>
       <command
             categoryId="org.jboss.tools.flow.jpdl4"
@@ -592,6 +679,44 @@
                      </instanceof>
                      <instanceof
                            value="org.jboss.tools.flow.jpdl4.editpart.TimerListTreeEditPart">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.addInputParameter"
+               icon="icons/16/input.gif"
+               id="org.jboss.tools.flow.jpdl4.addInputParameter"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.SubprocessTaskTreeRootEditPart">
+                     </instanceof>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.InputParameterListTreeEditPart">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.addOutputParameter"
+               icon="icons/16/output.gif"
+               id="org.jboss.tools.flow.jpdl4.addOutputParameter"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.SubprocessTaskTreeRootEditPart">
+                     </instanceof>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.OutputParameterListTreeEditPart">
                      </instanceof>
                   </or>
                </iterate>

@@ -38,9 +38,12 @@ import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.InputParameter;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.MailTask;
+import org.jboss.tools.flow.jpdl4.model.OutputParameter;
+import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.ProcessNode;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
@@ -202,6 +205,8 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.timer".equals(elementId)) return "timer";
 		else if ("org.jboss.tools.flow.jpdl4.eventListenerContainer".equals(elementId)) return "on";
 		else if ("org.jboss.tools.flow.jpdl4.eventListener".equals(elementId)) return "event-listener";
+		else if ("org.jboss.tools.flow.jpdl4.inputParameter".equals(elementId)) return "parameter-in";
+		else if ("org.jboss.tools.flow.jpdl4.outputParameter".equals(elementId)) return "parameter-out";
 		else return null;
     }
     
@@ -271,6 +276,12 @@ public class JpdlSerializer {
     			buffer.append("\n");
     			appendPadding(buffer, level + 1);
     			buffer.append("<timer duedate=\"" + timer + "\"/>");
+    		}
+    		String outcome = (String)wrapper.getPropertyValue(SequenceFlow.OUTCOME_VALUE);
+    		if (outcome != null && !("".equals(outcome))) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<outcome-value><string value=\"" + outcome + "\"/></outcome-value>");
     		}
     		List<Element> eventListeners = wrapper.getChildren("listener");
     		if (eventListeners != null) {
@@ -506,9 +517,32 @@ public class JpdlSerializer {
     	}
     }
     
-    class SubprocessTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
+    class ParameterWrapperSerializer extends AbstractWrapperSerializer {
     	protected List<String> getAttributesToSave() {
     		ArrayList<String> result = new ArrayList<String>();
+    		result.add("var");
+    		result.add("subvar");
+    		result.add("expr");
+    		result.add("lang");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("var".equals(attributeName)) {
+    			return Parameter.VAR;
+    		} else if ("subvar".equals(attributeName)) {
+    			return Parameter.SUBVAR;
+    		} else if ("expr".equals(attributeName)) {
+    			return Parameter.EXPR;
+    		} else if ("lang".equals(attributeName)) {
+    			return Parameter.LANG;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    }
+    
+    class SubprocessTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		List<String> result = super.getAttributesToSave();
     		result.add("sub-process-id");
     		result.add("sub-process-key");
     		result.add("outcome");
@@ -523,6 +557,23 @@ public class JpdlSerializer {
     			return SubprocessTask.OUTCOME;
     		}
     		return super.getPropertyName(attributeName);
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		List<Element> inputParameters = wrapper.getChildren(SubprocessTask.INPUT_PARAMETERS);
+    		if (inputParameters != null) {
+	    		for (Element inputParameter : inputParameters) {
+	    			if (!(inputParameter instanceof Wrapper)) continue;
+	    			appendToBuffer(buffer, (Wrapper)inputParameter, level+1);
+	    		}
+    		}
+    		List<Element> outputParameters = wrapper.getChildren(SubprocessTask.OUTPUT_PARAMETERS);
+    		if (outputParameters != null) {
+    			for (Element outputParameter : outputParameters) {
+    				if (!(outputParameter instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)outputParameter, level+1);
+    			}
+    		}
+    		super.appendBody(buffer, wrapper, level);
     	}
     }
     
@@ -712,6 +763,8 @@ public class JpdlSerializer {
     		new EventListenerContainerWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof EventListener) {
     		new EventListenerWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof Parameter) {
+    		new ParameterWrapperSerializer().appendOpening(buffer, wrapper, level);
     	}
     	
     }
@@ -812,7 +865,7 @@ public class JpdlSerializer {
     		buffer.append("</esb>");
     	} else if (element instanceof HumanTask) {
     		buffer.append("</task>");
-    	} else if (element instanceof HumanTask) {
+    	} else if (element instanceof SubprocessTask) {
     		buffer.append("</sub-process>");
     	} else if (element instanceof ExclusiveGateway) {
     		buffer.append("</decision>");
@@ -830,6 +883,10 @@ public class JpdlSerializer {
     		buffer.append("</on>");
     	} else if (element instanceof EventListener) {
     		buffer.append("</event-listener>");
+    	} else if (element instanceof InputParameter) {
+    		buffer.append("</parameter-in>");
+    	} else if (element instanceof OutputParameter) {
+    		buffer.append("</parameter-out>");
     	}
     }
     

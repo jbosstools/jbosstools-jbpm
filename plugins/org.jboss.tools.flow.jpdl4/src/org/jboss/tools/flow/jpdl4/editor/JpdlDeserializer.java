@@ -23,7 +23,10 @@ import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
+import org.jboss.tools.flow.jpdl4.model.InputParameter;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
+import org.jboss.tools.flow.jpdl4.model.OutputParameter;
+import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
@@ -173,6 +176,30 @@ public class JpdlDeserializer {
     	}
  	}
 	
+	class ParameterAttributeHandler extends DefaultAttributeDeserializer {
+    	protected List<String> getAttributesToRead() {
+    		List<String> result = super.getAttributesToRead();
+    		result.add(Parameter.VAR);
+    		result.add(Parameter.SUBVAR);
+    		result.add(Parameter.EXPR);
+    		result.add(Parameter.LANG);
+    		return result;
+    	}
+    	protected String getXmlName(String attributeName) {
+    		if (Parameter.VAR.equals(attributeName)) {
+    			return "var";
+    		} else if (Parameter.SUBVAR.equals(attributeName)) {
+    			return "subvar";
+       		} else if (Parameter.EXPR.equals(attributeName)) {
+    			return "expr";
+       		} else if (Parameter.LANG.equals(attributeName)) {
+    			return "lang";
+    		} else {
+    			return super.getXmlName(attributeName);
+    		}
+    	}
+ 	}
+	
 	class SubprocessTaskAttributeHandler extends NodeAttributeHandler {
     	protected List<String> getAttributesToRead() {
     		List<String> result = super.getAttributesToRead();
@@ -275,8 +302,17 @@ public class JpdlDeserializer {
 					if (duedate != null && !("".equals(duedate))) {
 						parent.setPropertyValue(SequenceFlow.TIMER, duedate);
 					}
+				} else if ("outcome-value".equals(node.getNodeName())) {
+					NodeList nodeList = ((Element)node).getElementsByTagName("string");
+					if (nodeList.getLength() == 1) {
+						String value = ((Element)nodeList.item(0)).getAttribute("value");
+						if (value != null && !("".equals("value"))) {
+							parent.setPropertyValue(SequenceFlow.OUTCOME_VALUE, value);
+						}
+					}
+				} else {
+					result = createWrapper((Element)node);
 				}
-				result = createWrapper((Element)node);
 				if (result == null) return null;
 				if (result instanceof Wrapper) {
 					if (result.getElement() instanceof EventListener) {
@@ -320,6 +356,19 @@ public class JpdlDeserializer {
 				} else if (result.getElement() instanceof EventListenerContainer) {
 					flowWrapper.addChild("eventListener", result);
 				}
+			}
+			return result;
+		}
+	}
+	
+	class SubprocessTaskChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = super.deserializeChildNode(parent, node);
+			if (result == null) return result;
+			if (result.getElement() instanceof InputParameter) {
+				parent.addChild(SubprocessTask.INPUT_PARAMETERS, result);
+			} else if (result.getElement() instanceof OutputParameter) {
+				parent.addChild(SubprocessTask.OUTPUT_PARAMETERS, result);
 			}
 			return result;
 		}
@@ -486,6 +535,8 @@ public class JpdlDeserializer {
 			return new EventListenerContainerAttributeHandler();
 		} else if (element instanceof EventListener) {
 			return new EventListenerAttributeHandler();
+		} else if (element instanceof Parameter) {
+			return new ParameterAttributeHandler();
 		}
 		return null;
 	}
@@ -528,6 +579,8 @@ public class JpdlDeserializer {
 			return new ExclusiveGateWayChildNodeHandler();
 		} else if (element instanceof ScriptTask) {
 			return new ScriptTaskChildNodeHandler();
+		} else if (element instanceof SubprocessTask) {
+			return new SubprocessTaskChildNodeHandler();
 		} else {
 			return new NodeChildNodeHandler();
 		}
@@ -563,6 +616,8 @@ public class JpdlDeserializer {
 		else if ("timer".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.timer";
 		else if ("on".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.eventListenerContainer";
 		else if ("event-listener".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.eventListener";
+		else if ("parameter-in".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.inputParameter";
+		else if ("parameter-out".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.outputParameter";
 		else return null;
 	}
 	

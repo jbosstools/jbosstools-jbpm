@@ -19,7 +19,10 @@ import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.editpart.EventListenerListTreeEditPart;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.InputParameter;
+import org.jboss.tools.flow.jpdl4.model.OutputParameter;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
+import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
 
@@ -61,6 +64,10 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 			}
 		} else if (child.getElement() instanceof EventListenerContainer) {
 			deleteChildCommand.setType("eventListener");
+		} else if (child.getElement() instanceof InputParameter) {
+			deleteChildCommand.setType(SubprocessTask.INPUT_PARAMETERS);
+		} else if (child.getElement() instanceof OutputParameter) {
+			deleteChildCommand.setType(SubprocessTask.OUTPUT_PARAMETERS);
 		}
 		deleteChildCommand.setParent(parent);
 		if (deleteChildCommand.canExecute()) {

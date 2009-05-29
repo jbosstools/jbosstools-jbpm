@@ -12,11 +12,13 @@ import org.jboss.tools.flow.common.properties.IPropertyId;
 
 public class SequenceFlow extends DefaultConnection {
 	
-	public static final String TIMER = "org.jboss.tools.flow.jpdl4.model.eventListenerContainer.timer";
+	public static final String TIMER = "org.jboss.tools.flow.jpdl4.model.sequenceFlow.timer";
+	public static final String OUTCOME_VALUE = "org.jboss.tools.flow.jpdl4.model.sequenceFlow.outcome";
 	
 	private String name;
 	private boolean conditional = false;
 	private String timer;
+	private String outcomeValue;
 
 	public SequenceFlow() {
 		this(null, null);
@@ -43,6 +45,14 @@ public class SequenceFlow extends DefaultConnection {
 		this.timer = timer;
 	}
 	
+	public String getOutcomeValue() {
+		return outcomeValue;
+	}
+
+	public void setOutcomeValue(String outcomeValue) {
+		this.outcomeValue = outcomeValue;
+	}
+
 	public void setConditional(boolean conditional) {
 		this.conditional = conditional;
 	}
@@ -85,6 +95,8 @@ public class SequenceFlow extends DefaultConnection {
 				return getName();
 			} else if (TIMER.equals(id)) {
 				return getTimer();
+			} else if (OUTCOME_VALUE.equals(id)) {
+				return getOutcomeValue();
 			}
 			return null;
 		}
@@ -94,6 +106,8 @@ public class SequenceFlow extends DefaultConnection {
 				return getName() != null;
 			} else if (TIMER.equals(id)) {
 				return getTimer() != null;
+			} else if (OUTCOME_VALUE.equals(id)) {
+				return getOutcomeValue() != null;
 			}
 			return false;
 		}
@@ -106,6 +120,8 @@ public class SequenceFlow extends DefaultConnection {
 				setName((String)value);
 			} else if (TIMER.equals(id)) {
 				setTimer((String)value);
+			} else if (OUTCOME_VALUE.equals(id)) {
+				setOutcomeValue((String)value);
 			}
 		}
 		
