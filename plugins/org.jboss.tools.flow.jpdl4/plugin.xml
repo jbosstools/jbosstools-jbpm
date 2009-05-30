@@ -315,6 +315,16 @@
                category="general"
                id="org.jboss.tools.jpdl4.subprocess"
                label="Subprocess"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.general"
+               category="general"
+               id="org.jboss.tools.jpdl4.javaTask.fields"
+               label="Fields"/>
+         <propertyTab
+               afterTab="org.jboss.tools.jpdl4.javaTask.fields"
+               category="general"
+               id="org.jboss.tools.jpdl4.javaTask.arguments"
+               label="Arguments"/>
 <!--         <propertyTab
                afterTab="org.jboss.tools.jpdl4.general"
                category="details"
@@ -560,6 +570,18 @@
                 id="org.jboss.tools.jpdl4.outputParameter.language"
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
+          </propertySection>
+          <propertySection
+                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskFieldsSection"
+                id="org.jboss.tools.jpdl4.javaTask.fields"
+                tab="org.jboss.tools.jpdl4.javaTask.fields">
+            <input type="org.jboss.tools.flow.jpdl4.model.JavaTask"/>
+          </propertySection>
+          <propertySection
+                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskArgumentsSection"
+                id="org.jboss.tools.jpdl4.javaTask.arguments"
+                tab="org.jboss.tools.jpdl4.javaTask.arguments">
+            <input type="org.jboss.tools.flow.jpdl4.model.JavaTask"/>
           </propertySection>
       </propertySections>
    </extension>

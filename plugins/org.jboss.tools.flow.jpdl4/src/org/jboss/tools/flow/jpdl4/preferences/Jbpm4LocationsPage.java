@@ -21,15 +21,24 @@
  */
 package org.jboss.tools.flow.jpdl4.preferences;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.widgets.Shell;
+import org.jboss.tools.flow.jpdl4.Activator;
 import org.jboss.tools.jbpm.preferences.AddJbpmInstallationDialog;
 import org.jboss.tools.jbpm.preferences.JbpmLocationsPage;
 
 public class Jbpm4LocationsPage extends JbpmLocationsPage {
 
+	public Jbpm4LocationsPage() {
+		super(Activator.getDefault());
+	}
+
 	protected AddJbpmInstallationDialog createAddJbpmInstallationDialog(Shell shell) {
-		return new AddJbpmInstallationDialog(getShell()) {
-			public String getVersion() {
+		return new AddJbpmInstallationDialog(getShell(), Activator.getDefault()) {
+			protected boolean isValidJbpmInstallation() {
+				return new Path(getLocation()).append("/jbpm.jar").toFile().exists();		
+			}
+			protected String getVersion() {
 				return "4.0";
 			}
 		};

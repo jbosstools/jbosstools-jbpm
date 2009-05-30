@@ -17,6 +17,7 @@ package org.jboss.tools.flow.jpdl4;
  */
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
@@ -26,6 +27,10 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	
 	public Activator() {
+	}
+	
+	public PreferencesManager getPreferencesManager() {
+		return PreferencesManager.getPreferencesManager(this);
 	}
 
 	public void start(BundleContext context) throws Exception {
