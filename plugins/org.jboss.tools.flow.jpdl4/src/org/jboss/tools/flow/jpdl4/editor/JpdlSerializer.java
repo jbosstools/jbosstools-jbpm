@@ -31,6 +31,7 @@ import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.CancelEndEvent;
+import org.jboss.tools.flow.jpdl4.model.CustomTask;
 import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
@@ -197,6 +198,7 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.serviceTask".equals(elementId)) return "esb";
 		else if ("org.jboss.tools.flow.jpdl4.humanTask".equals(elementId)) return "task";
 		else if ("org.jboss.tools.flow.jpdl4.subprocessTask".equals(elementId)) return "sub-process";
+		else if ("org.jboss.tools.flow.jpdl4.customTask".equals(elementId)) return "node";
 		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "decision";
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
@@ -747,6 +749,8 @@ public class JpdlSerializer {
     		new HumanTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof SubprocessTask) {
     		new SubprocessTaskWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof CustomTask) {
+    		new ProcessNodeWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ExclusiveGateway) {
     		new ExclusiveGatewayWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof ForkParallelGateway) {
@@ -802,6 +806,8 @@ public class JpdlSerializer {
     		new HumanTaskWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof SubprocessTask) {
     		new SubprocessTaskWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof CustomTask) {
+    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof ExclusiveGateway) {
     		new ExclusiveGatewayWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof ForkParallelGateway) {
@@ -867,6 +873,8 @@ public class JpdlSerializer {
     		buffer.append("</task>");
     	} else if (element instanceof SubprocessTask) {
     		buffer.append("</sub-process>");
+    	} else if (element instanceof CustomTask) {
+    		buffer.append("</node>");
     	} else if (element instanceof ExclusiveGateway) {
     		buffer.append("</decision>");
     	} else if (element instanceof ForkParallelGateway) {

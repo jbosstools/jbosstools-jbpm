@@ -4,14 +4,13 @@ import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.jboss.tools.flow.common.properties.IPropertyId;
 
 public class JavaTaskArgumentsSection extends JpdlPropertySection implements IPropertyId {
 	
-	private final static String NO_FIELDS = "The configured class has no fields that can be configured.";
-	private final static String CONFIGURE_FIELDS = "Configure the value of the supported fields as needed.";
+	private final static String NO_ARGUMENTS = "The configured method has no arguments that can be configured.";
+	private final static String CONFIGURE_ARGUMENTS = "Configure the value of the supported arguments as needed.";
 
 	private CLabel infoLabel;
 	
@@ -51,7 +50,7 @@ public class JavaTaskArgumentsSection extends JpdlPropertySection implements IPr
 	
 	
 	private void createInfoLabel(Composite parent) {
-		infoLabel = getWidgetFactory().createCLabel(parent, NO_FIELDS);
+		infoLabel = getWidgetFactory().createCLabel(parent, NO_ARGUMENTS);
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.top = new FormAttachment(0, 5);

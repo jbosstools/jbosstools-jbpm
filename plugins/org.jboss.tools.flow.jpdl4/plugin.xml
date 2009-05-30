@@ -162,7 +162,7 @@
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
       </element>
-      <element
+<!--      <element
             class="org.jboss.tools.flow.jpdl4.model.ServiceTask"
             figure="icons/16/task_empty.png"
             id="org.jboss.tools.flow.jpdl4.serviceTask"
@@ -171,7 +171,7 @@
          <node>
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
-      </element>
+      </element> -->
       <element
             class="org.jboss.tools.flow.jpdl4.model.HumanTask"
             figure="icons/16/task_empty.png"
@@ -191,6 +191,16 @@
          <node>
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.CustomTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.customTask"
+            label="custom"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.ExclusiveGateway"

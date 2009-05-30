@@ -151,15 +151,15 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
         entries.add(combined);
-        combined = new CombinedTemplateCreationEntry(
-                "esb",
-                "Create a new Service Task",
-                "org.jboss.tools.flow.jpdl4.serviceTask",
-                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.serviceTask"),                
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
-                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
-            );
-        entries.add(combined);
+//        combined = new CombinedTemplateCreationEntry(
+//                "esb",
+//                "Create a new Service Task",
+//                "org.jboss.tools.flow.jpdl4.serviceTask",
+//                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.serviceTask"),                
+//                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+//                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+//            );
+//        entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
                 "task",
                 "Create a new Human Task",
@@ -174,6 +174,15 @@ public class JpdlPaletteFactory extends PaletteFactory {
                 "Create a new Subprocess",
                 "org.jboss.tools.flow.jpdl4.subprocess",
                 ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.subprocessTask"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
+                "custom",
+                "Create a new Custom Node",
+                "org.jboss.tools.flow.jpdl4.customTask",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.customTask"),                
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/task_empty.png")),
                 ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/task_empty.png"))
             );
