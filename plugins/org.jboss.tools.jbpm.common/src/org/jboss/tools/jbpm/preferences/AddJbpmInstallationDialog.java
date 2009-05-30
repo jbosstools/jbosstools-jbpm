@@ -22,10 +22,9 @@
 package org.jboss.tools.jbpm.preferences;
 
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.StatusDialog;
@@ -43,34 +42,29 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.jboss.tools.jbpm.Activator;
 
 public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	
-	private static final String pluginId = Activator.getDefault().getBundle().getSymbolicName();
+	private static final String ENTER_NAME = "Enter the name of the jBPM installation.";
+	private static final String ENTER_LOCATION = "Enter the location of the jBPM installation.";
+	private static final String UNEXISTING_LOCATION = "The location does not exist.";
+	private static final String NAME_ALREADY_USED = "The name is already used.";
+	private static final String INVALID_JBPM_INSTALLATION = "This is not a valid jBPM installation.";
 	
-	private static final IStatus enterNameStatus = new Status(
-			Status.INFO, pluginId, 0, "Enter the name of the jBPM installation.", null);
-	private static final IStatus enterLocationStatus = new Status(
-			Status.INFO, pluginId, 0, "Enter the location of the jBPM installation.", null);
-	private static final IStatus unExistingLocationStatus = new Status(
-			Status.ERROR, pluginId, 0, "The location does not exist.", null);
-	private static final IStatus nameAlreadyUsedStatus = new Status(
-			Status.ERROR, pluginId, 0, "The name is already used.", null);
-	private static final IStatus inValidJbpmInstallationStatus = new Status(
-			Status.ERROR, pluginId, 0, "This is not a valid jBPM installation.", null);
+	private Plugin plugin;
 	
 	String title;
 	Text nameText, locationText;
 	Button locationButton;
 	
-	IStatus currentStatus = enterNameStatus;
+	IStatus currentStatus; ;
 	
 	String name, location;
 	IStatus status;
 	
-	public AddJbpmInstallationDialog(Shell parentShell) {
+	public AddJbpmInstallationDialog(Shell parentShell, Plugin plugin) {
 		super(parentShell);
+		this.plugin = plugin;
 	}
 	
 	public void initialize(String t, String n, String l) {
@@ -97,7 +91,7 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	
 	protected Control createContents(Composite parent) {
 		Control result = super.createContents(parent);
-		updateStatus(currentStatus);
+		updateCurrentStatus();
 		return result;
 	}
 	
@@ -117,7 +111,6 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	private void handleLocationChanged() {
 		location = locationText.getText();
 		updateCurrentStatus();
-		updateStatus(currentStatus);
 	}
 	
 	private void createLocationButton(Composite area) {
@@ -166,29 +159,33 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	private void handleNameChanged() {
 		name = nameText.getText();
 		updateCurrentStatus();
-		updateStatus(currentStatus);
 	}	
+	
+	private IStatus getStatus(int severity, String str) {
+		return new Status(severity, plugin.getBundle().getSymbolicName(), str, null);
+	}
 	
 	private void updateCurrentStatus() {
 		if (isNameEmpty() && isLocationEmpty()) {
-			currentStatus = enterNameStatus;
+			currentStatus = getStatus(Status.INFO, ENTER_NAME);
 		} else if (isNameAlreadyUsed() && !"Edit Location".equals(title)) {
-			currentStatus = nameAlreadyUsedStatus;
+			currentStatus = getStatus(Status.ERROR, NAME_ALREADY_USED);
 		} else if (isLocationEmpty()) {
-			currentStatus = enterLocationStatus;
+			currentStatus = getStatus(Status.INFO, ENTER_LOCATION);
 		} else if (!isLocationExisting()) {
-			currentStatus = unExistingLocationStatus;
+			currentStatus = getStatus(Status.ERROR, UNEXISTING_LOCATION);
 		} else if (!isValidJbpmInstallation()) {
-			currentStatus = inValidJbpmInstallationStatus;
+			currentStatus = getStatus(Status.ERROR, INVALID_JBPM_INSTALLATION);
 		} else if (isNameEmpty()) {
-			currentStatus = enterNameStatus;
+			currentStatus = getStatus(Status.INFO, ENTER_NAME);
 		} else {
 			currentStatus = Status.OK_STATUS;
 		}
+		updateStatus(currentStatus);
 	}
 	
 	private boolean isNameAlreadyUsed() {
-		return PreferencesManager.INSTANCE.getJbpmInstallation(nameText.getText()) != null;
+		return PreferencesManager.getPreferencesManager(plugin).getJbpmInstallation(nameText.getText()) != null;
 	}
 	
 	private boolean isLocationExisting() {
@@ -202,15 +199,7 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	private boolean isLocationEmpty() {
 		return location == null || "".equals(location);
 	}
-	
-	private boolean isValidJbpmInstallation() {
-		return getJbpmVersionInfoFile().exists();		
-	}
-	
-	private File getJbpmVersionInfoFile() {
-		return new Path(location).append("/src/resources/gpd/version.info.xml").toFile();
-	}
-	
+		
 	protected void updateButtonsEnableState(IStatus status) {
 		Button ok = getButton(IDialogConstants.OK_ID);
 		if (ok != null && !ok.isDisposed())
@@ -223,7 +212,7 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 		label.setLayoutData(gridData);
 		label.setText("Name :");
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -232,6 +221,7 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 		return location;
 	}
 
-	public abstract String getVersion(); 
+	protected abstract String getVersion(); 
+	protected abstract boolean isValidJbpmInstallation();
 
 }

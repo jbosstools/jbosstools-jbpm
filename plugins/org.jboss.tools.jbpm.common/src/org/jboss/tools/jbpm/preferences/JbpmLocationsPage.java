@@ -21,7 +21,6 @@
  */
 package org.jboss.tools.jbpm.preferences;
 
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -41,7 +40,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.jboss.tools.jbpm.Activator;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.jboss.tools.jbpm.Constants;
 import org.jboss.tools.jbpm.util.AutoResizeTableLayout;
 
@@ -49,10 +48,13 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 	
 	private TableViewer tableViewer;
 	private Button addButton, editButton, removeButton;
+	
+	private AbstractUIPlugin plugin;
 
-	public JbpmLocationsPage() {
+	public JbpmLocationsPage(AbstractUIPlugin plugin) {
 		super();
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		this.plugin = plugin;
+		setPreferenceStore(plugin.getPreferenceStore());
 	}
 	
 	protected abstract AddJbpmInstallationDialog createAddJbpmInstallationDialog(Shell shell);
@@ -177,12 +179,12 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 	}
 	
 	private void initializeInput(TableViewer viewer) {
-		viewer.setInput(PreferencesManager.INSTANCE);
+		viewer.setInput(PreferencesManager.getPreferencesManager(plugin));
 		checkItemToCheck(viewer);
 	}
 
 	private void checkItemToCheck(TableViewer viewer) {
-		String name = getPreferences().getString(Constants.JBPM_NAME);
+		String name = plugin.getPreferenceStore().getString(Constants.JBPM_NAME);
 		if (name != null) {
 			TableItem tableItem = getItemToCheck(viewer, name);
 			if (tableItem != null) {
@@ -299,7 +301,7 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 		if (item != null) {
 			name = item.getText(0);
 		}
-		getPreferences().setValue(Constants.JBPM_NAME, name);		
+		plugin.getPluginPreferences().setValue(Constants.JBPM_NAME, name);		
 		return true;
 	}
 	
@@ -312,7 +314,7 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 	}
 	
 	public void performDefaults() {
-		getPreferences().setToDefault(Constants.JBPM_NAME);
+		plugin.getPluginPreferences().setToDefault(Constants.JBPM_NAME);
 		PreferencesManager inputManager = 
 			(PreferencesManager)tableViewer.getInput();
 		inputManager.getJbpmInstallationMap().clear();
@@ -321,10 +323,6 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 		setMessage("");
 		updateButtons();
 		setValid(true);
-	}
-
-	private Preferences getPreferences() {
-		return Activator.getDefault().getPluginPreferences();
 	}
 	
 }
