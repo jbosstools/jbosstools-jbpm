@@ -23,7 +23,7 @@ public class NewJpdl4FileWizardPage extends WizardNewFileCreationPage {
     private String getInitialContentsAsString() {
     	StringBuffer buffer = new StringBuffer();
     	buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
-    	buffer.append("<process xmlns=\"http://jbpm.org/4/jpdl\" name=\"");
+    	buffer.append("<process xmlns=\"http://jbpm.org/4.0/jpdl\" name=\"");
     	buffer.append(getFileName().substring(0, getFileName().lastIndexOf(getFileExtension()) - 1));
     	buffer.append("\">\n</process>");
     	return buffer.toString();
