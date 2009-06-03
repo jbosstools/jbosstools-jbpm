@@ -23,7 +23,7 @@ public class NameSection extends JpdlPropertySection implements IPropertyId {
 	private ModifyListener nameTextModifyListener = new ModifyListener() {
 		public void modifyText(ModifyEvent arg0) {
 			IPropertySource input = getInput();
-			if (input != null) {
+			if (input != null && getCommandStack() != null) {
 				RenameElementCommand rec = new RenameElementCommand();
 				rec.setSource(input);
 				rec.setOldName((String)input.getPropertyValue(NAME));
@@ -49,6 +49,9 @@ public class NameSection extends JpdlPropertySection implements IPropertyId {
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
+		if (getCommandStack() != null) {
+			getCommandStack().addCommandStackListener(commandStackListener);
+		}
 		Composite composite = getFlatFormComposite();
 		createNameLabel(composite);
 		createNameText(composite);

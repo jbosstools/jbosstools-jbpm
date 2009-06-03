@@ -17,11 +17,13 @@ import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.AssignmentPropertySource;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
+import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.InputParameter;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
@@ -200,6 +202,28 @@ public class JpdlDeserializer {
     	}
  	}
 	
+	class ArgumentAttributeHandler extends DefaultAttributeDeserializer {
+    	protected List<String> getAttributesToRead() {
+    		List<String> result = super.getAttributesToRead();
+    		return result;
+    	}
+ 	}
+	
+	class FieldAttributeHandler extends DefaultAttributeDeserializer {
+    	protected List<String> getAttributesToRead() {
+    		List<String> result = super.getAttributesToRead();
+    		result.add(Field.NAME);
+    		return result;
+    	}
+    	protected String getXmlName(String attributeName) {
+    		if (Field.NAME.equals(attributeName)) {
+    			return "name";
+    		} else {
+    			return super.getXmlName(attributeName);
+    		}
+    	}
+ 	}
+	
 	class SubprocessTaskAttributeHandler extends NodeAttributeHandler {
     	protected List<String> getAttributesToRead() {
     		List<String> result = super.getAttributesToRead();
@@ -334,6 +358,49 @@ public class JpdlDeserializer {
 				}
 			} else {
 				result = super.deserializeChildNode(parent, node);
+			}
+			return result;
+		}
+	}
+	
+	class ArgumentChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = null;
+			if (node instanceof Element && "string".equals(node.getNodeName())) {
+				String value = ((Element)node).getAttribute("value");
+				if (value != null && !("".equals(value))) {
+					parent.setPropertyValue(Argument.VALUE, value);
+				}
+			} else {
+				result = super.deserializeChildNode(parent, node);
+			}
+			return result;
+		}
+	}
+	
+	class FieldChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = null;
+			if (node instanceof Element && "string".equals(node.getNodeName())) {
+				String value = ((Element)node).getAttribute("value");
+				if (value != null && !("".equals(value))) {
+					parent.setPropertyValue(Field.VALUE, value);
+				}
+			} else {
+				result = super.deserializeChildNode(parent, node);
+			}
+			return result;
+		}
+	}
+	
+	class JavaTaskChildNodeHandler extends NodeChildNodeHandler {
+		public Wrapper deserializeChildNode(Wrapper parent, Node node) {
+			Wrapper result = super.deserializeChildNode(parent, node);
+			if (result == null) return result;
+			if (result.getElement() instanceof Argument) {
+				parent.addChild(JavaTask.ARGS, result);
+			} else if (result.getElement() instanceof Field) {
+				parent.addChild(JavaTask.FIELDS, result);
 			}
 			return result;
 		}
@@ -537,6 +604,10 @@ public class JpdlDeserializer {
 			return new EventListenerAttributeHandler();
 		} else if (element instanceof Parameter) {
 			return new ParameterAttributeHandler();
+		} else if (element instanceof Argument) {
+			return new ArgumentAttributeHandler();
+		} else if (element instanceof Field) {
+			return new FieldAttributeHandler();
 		}
 		return null;
 	}
@@ -581,15 +652,23 @@ public class JpdlDeserializer {
 			return new ScriptTaskChildNodeHandler();
 		} else if (element instanceof SubprocessTask) {
 			return new SubprocessTaskChildNodeHandler();
+		} else if (element instanceof JavaTask) {
+			return new JavaTaskChildNodeHandler();
 		} else {
 			return new NodeChildNodeHandler();
 		}
 	}
 	
 	private ChildNodeDeserializer getDefaultChildNodeHandler(Wrapper wrapper) {
-		if (wrapper.getElement() != null && wrapper.getElement() instanceof EventListenerContainer) {
+		Object element = wrapper.getElement();
+		if (element == null) return null;
+		if (element instanceof EventListenerContainer) {
 			return new EventListenerContainerChildNodeHandler();
-		} 
+		} else if (element instanceof Argument) {
+			return new ArgumentChildNodeHandler();
+		} else if (element instanceof Field) {
+			return new FieldChildNodeHandler();
+		}
 		return null;
 	}
 	 
@@ -618,6 +697,8 @@ public class JpdlDeserializer {
 		else if ("event-listener".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.eventListener";
 		else if ("parameter-in".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.inputParameter";
 		else if ("parameter-out".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.outputParameter";
+		else if ("field".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.field";
+		else if ("arg".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.argument";
 		else return null;
 	}
 	

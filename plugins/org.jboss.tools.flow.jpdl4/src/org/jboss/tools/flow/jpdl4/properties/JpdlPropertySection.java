@@ -45,6 +45,9 @@ public abstract class JpdlPropertySection extends AbstractPropertySection {
 		if (aTabbedPropertySheetPage instanceof JpdlPropertySheetPage) {
 			commandStack = ((JpdlPropertySheetPage)aTabbedPropertySheetPage).getCommandStack();
 		}
+		if (commandStack != null) {
+			
+		}
 		flatFormComposite = getWidgetFactory().createFlatFormComposite(parent);
 	}
 

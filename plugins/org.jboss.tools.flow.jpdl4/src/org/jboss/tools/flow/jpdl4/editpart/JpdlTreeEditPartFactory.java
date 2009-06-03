@@ -7,8 +7,11 @@ import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.Field;
+import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
@@ -21,6 +24,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 		if (model instanceof NodeWrapper && context == null) {
 			Element element = ((NodeWrapper)model).getElement();
 			if (element instanceof SubprocessTask) return new SubprocessTaskTreeRootEditPart((Wrapper)model);
+			if (element instanceof JavaTask) return new JavaTaskTreeRootEditPart((Wrapper)model);
 			return new TaskTreeRootEditPart((NodeWrapper)model);
 		}
 		if (model instanceof ConnectionWrapper && context == null) return new SequenceFlowTreeRootEditPart((ConnectionWrapper)model);
@@ -28,6 +32,8 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			Element  element = ((Wrapper)model).getElement();
 			if (element instanceof Swimlane) return new SwimlaneTreeEditPart((Wrapper)model);
 			if (element instanceof Parameter) return new ParameterTreeEditPart((Wrapper)model);
+			if (element instanceof Argument) return new ArgumentTreeEditPart((Wrapper)model);
+			if (element instanceof Field) return new FieldTreeEditPart((Wrapper)model);
 			if (element instanceof EventListenerContainer) return new EventListenerListTreeEditPart((Wrapper)model);
 			if (element instanceof EventListener) return new EventListenerTreeEditPart((Wrapper)model);
 			if (element instanceof Timer) return new TimerTreeEditPart((Wrapper)model);
@@ -36,6 +42,8 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 		if (model instanceof SwimlaneListTreeEditPart) return (EditPart)model;
 		if (model instanceof InputParameterListTreeEditPart) return (EditPart)model;
 		if (model instanceof OutputParameterListTreeEditPart) return (EditPart)model;
+		if (model instanceof ArgumentListTreeEditPart) return (EditPart)model;
+		if (model instanceof FieldListTreeEditPart) return (EditPart)model;
 		if (model instanceof TimerListTreeEditPart) return (EditPart)model;
 		if (model instanceof ListenerListTreeEditPart) return (EditPart)model;
 		return new NoDetailsTreeRootEditPart();

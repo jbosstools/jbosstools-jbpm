@@ -29,6 +29,7 @@ import org.jboss.tools.flow.common.wrapper.LabelWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
+import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.Assignment;
 import org.jboss.tools.flow.jpdl4.model.CancelEndEvent;
 import org.jboss.tools.flow.jpdl4.model.CustomTask;
@@ -36,6 +37,7 @@ import org.jboss.tools.flow.jpdl4.model.ErrorEndEvent;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
+import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
@@ -209,6 +211,8 @@ public class JpdlSerializer {
 		else if ("org.jboss.tools.flow.jpdl4.eventListener".equals(elementId)) return "event-listener";
 		else if ("org.jboss.tools.flow.jpdl4.inputParameter".equals(elementId)) return "parameter-in";
 		else if ("org.jboss.tools.flow.jpdl4.outputParameter".equals(elementId)) return "parameter-out";
+		else if ("org.jboss.tools.flow.jpdl4.argument".equals(elementId)) return "arg";
+		else if ("org.jboss.tools.flow.jpdl4.field".equals(elementId)) return "field";
 		else return null;
     }
     
@@ -393,6 +397,23 @@ public class JpdlSerializer {
     		}
     		return super.getPropertyName(attributeName);
     	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		List<Element> fields = wrapper.getChildren(JavaTask.FIELDS);
+    		if (fields != null) {
+	    		for (Element field : fields) {
+	    			if (!(field instanceof Wrapper)) continue;
+	    			appendToBuffer(buffer, (Wrapper)field, level+1);
+	    		}
+    		}
+    		List<Element> arguments = wrapper.getChildren(JavaTask.ARGS);
+    		if (arguments != null) {
+    			for (Element argument : arguments) {
+    				if (!(argument instanceof Wrapper)) continue;
+    				appendToBuffer(buffer, (Wrapper)argument, level+1);
+    			}
+    		}
+    		super.appendBody(buffer, wrapper, level);
+    	}
     }
     
     class ScriptTaskWrapperSerializer extends ProcessNodeWrapperSerializer {
@@ -539,6 +560,45 @@ public class JpdlSerializer {
     			return Parameter.LANG;
     		}
     		return super.getPropertyName(attributeName);
+    	}
+    }
+    
+    class ArgumentWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		return result;
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		String value = (String)wrapper.getPropertyValue(Argument.VALUE);
+    		if (value != null && !("".equals(value))) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<string value=\"" + value + "\"/>");
+    		}
+    		super.appendBody(buffer, wrapper, level);
+    	}
+    }
+    
+    class FieldWrapperSerializer extends AbstractWrapperSerializer {
+    	protected List<String> getAttributesToSave() {
+    		ArrayList<String> result = new ArrayList<String>();
+    		result.add("name");
+    		return result;
+    	}
+    	protected String getPropertyName(String attributeName) {
+    		if ("name".equals(attributeName)) {
+    			return Field.NAME;
+    		}
+    		return super.getPropertyName(attributeName);
+    	}
+    	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
+    		String value = (String)wrapper.getPropertyValue(Field.VALUE);
+    		if (value != null && !("".equals(value))) {
+    			buffer.append("\n");
+    			appendPadding(buffer, level + 1);
+    			buffer.append("<string value=\"" + value + "\"/>");
+    		}
+    		super.appendBody(buffer, wrapper, level);
     	}
     }
     
@@ -769,6 +829,10 @@ public class JpdlSerializer {
     		new EventListenerWrapperSerializer().appendOpening(buffer, wrapper, level);
     	} else if (element instanceof Parameter) {
     		new ParameterWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof Argument) {
+    		new ArgumentWrapperSerializer().appendOpening(buffer, wrapper, level);
+    	} else if (element instanceof Field) {
+    		new FieldWrapperSerializer().appendOpening(buffer, wrapper, level);
     	}
     	
     }
@@ -795,7 +859,7 @@ public class JpdlSerializer {
     	} else if (element instanceof SqlTask) {
     		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof JavaTask) {
-    		new ProcessNodeWrapperSerializer().appendBody(buffer, wrapper, level);
+    		new JavaTaskWrapperSerializer().appendBody(buffer, wrapper, level);
        	} else if (element instanceof ScriptTask) {
     		new ScriptTaskWrapperSerializer().appendBody(buffer, wrapper, level);
        	} else if (element instanceof MailTask) {
@@ -824,6 +888,10 @@ public class JpdlSerializer {
     		new EventListenerContainerWrapperSerializer().appendBody(buffer, wrapper, level);
     	} else if (element instanceof EventListener) {
     		new EventListenerWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof Argument) {
+    		new ArgumentWrapperSerializer().appendBody(buffer, wrapper, level);
+    	} else if (element instanceof Field) {
+    		new FieldWrapperSerializer().appendBody(buffer, wrapper, level);
     	}
 		ArrayList<Node> trailingNodeList = (ArrayList<Node>)element.getMetaData("trailingNodes");
 		boolean appendTrailingNodes = trailingNodeList != null && !trailingNodeList.isEmpty();
@@ -895,6 +963,10 @@ public class JpdlSerializer {
     		buffer.append("</parameter-in>");
     	} else if (element instanceof OutputParameter) {
     		buffer.append("</parameter-out>");
+    	} else if (element instanceof Argument) {
+    		buffer.append("</arg>");
+    	} else if (element instanceof Field) {
+    		buffer.append("</field>");
     	}
     }
     

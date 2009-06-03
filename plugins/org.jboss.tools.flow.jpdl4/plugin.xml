@@ -191,6 +191,7 @@
          <node>
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
+      </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.CustomTask"
             figure="icons/16/task_empty.png"
@@ -200,7 +201,6 @@
          <node>
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
-      </element>
       </element>
       <element
             class="org.jboss.tools.flow.jpdl4.model.ExclusiveGateway"
@@ -280,6 +280,20 @@
             figure="icons/16/output.gif"
             id="org.jboss.tools.flow.jpdl4.outputParameter"
             label="output parameter"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Argument"
+            figure="icons/16/argument.gif"
+            id="org.jboss.tools.flow.jpdl4.argument"
+            label="argument"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.Field"
+            figure="icons/16/field.gif"
+            id="org.jboss.tools.flow.jpdl4.field"
+            label="field"
             language="org.jboss.tools.flow.jpdl4">
       </element>
    </extension>
@@ -582,16 +596,23 @@
             <input type="org.jboss.tools.flow.jpdl4.model.OutputParameter"/>
           </propertySection>
           <propertySection
-                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskFieldsSection"
-                id="org.jboss.tools.jpdl4.javaTask.fields"
-                tab="org.jboss.tools.jpdl4.javaTask.fields">
-            <input type="org.jboss.tools.flow.jpdl4.model.JavaTask"/>
+                class="org.jboss.tools.flow.jpdl4.properties.ArgumentValueSection"
+                id="org.jboss.tools.jpdl4.argument.value"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.Argument"/>
           </propertySection>
           <propertySection
-                class="org.jboss.tools.flow.jpdl4.properties.JavaTaskArgumentsSection"
-                id="org.jboss.tools.jpdl4.javaTask.arguments"
-                tab="org.jboss.tools.jpdl4.javaTask.arguments">
-            <input type="org.jboss.tools.flow.jpdl4.model.JavaTask"/>
+                class="org.jboss.tools.flow.jpdl4.properties.FieldNameSection"
+                id="org.jboss.tools.jpdl4.field.name"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.Field"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.field.name"
+                class="org.jboss.tools.flow.jpdl4.properties.FieldValueSection"
+                id="org.jboss.tools.jpdl4.field.value"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.Field"/>
           </propertySection>
       </propertySections>
    </extension>
@@ -641,6 +662,18 @@
             defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddOutputParameterHandler"
             id="org.jboss.tools.flow.jpdl4.addOutputParameter"
             name="Add Output Parameter">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddArgumentHandler"
+            id="org.jboss.tools.flow.jpdl4.addArgument"
+            name="Add Argument">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddFieldHandler"
+            id="org.jboss.tools.flow.jpdl4.addField"
+            name="Add Field">
       </command>
       <command
             categoryId="org.jboss.tools.flow.jpdl4"
@@ -749,6 +782,44 @@
                      </instanceof>
                      <instanceof
                            value="org.jboss.tools.flow.jpdl4.editpart.OutputParameterListTreeEditPart">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.addArgument"
+               icon="icons/16/argument.gif"
+               id="org.jboss.tools.flow.jpdl4.addArgument"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.JavaTaskTreeRootEditPart">
+                     </instanceof>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.ArgumentListTreeEditPart">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.addField"
+               icon="icons/16/field.gif"
+               id="org.jboss.tools.flow.jpdl4.addField"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.JavaTaskTreeRootEditPart">
+                     </instanceof>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.FieldListTreeEditPart">
                      </instanceof>
                   </or>
                </iterate>

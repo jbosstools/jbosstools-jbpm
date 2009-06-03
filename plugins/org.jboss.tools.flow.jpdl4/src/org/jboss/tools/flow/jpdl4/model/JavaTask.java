@@ -1,5 +1,8 @@
 package org.jboss.tools.flow.jpdl4.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 
@@ -9,10 +12,14 @@ public class JavaTask extends Task {
 	public static final String CLASS = "org.jboss.tools.flow.jpdl4.model.javaTask.class";
 	public static final String METHOD = "org.jboss.tools.flow.jpdl4.model.javaTask.method";
 	public static final String VAR = "org.jboss.tools.flow.jpdl4.model.javaTask.var";
+	public static final String FIELDS = "org.jboss.tools.flow.jpdl4.model.javaTask.fields";
+	public static final String ARGS = "org.jboss.tools.flow.jpdl4.model.javaTask.args";
 	
 	private String className;
 	private String methodName;
 	private String variableName;
+	private List<Argument> arguments = new ArrayList<Argument>();
+	private List<Field> fields = new ArrayList<Field>();
 	
 	public JavaTask() {
 		setMetaData("propertySource", new PropertySource());
@@ -41,7 +48,7 @@ public class JavaTask extends Task {
 	public void setVariableName(String variableName) {
 		this.variableName = variableName;
 	}
-
+	
 	protected boolean isPropagationExclusive() {
 		return true;
 	}
@@ -63,6 +70,10 @@ public class JavaTask extends Task {
 				return getMethodName();
 			} else if (VAR.equals(id)) {
 				return getVariableName();
+			} else if (FIELDS.equals(id)) {
+				return fields;
+			} else if (ARGS.equals(id)) {
+				return arguments;
 			}
 			return null;
 		}
@@ -74,6 +85,10 @@ public class JavaTask extends Task {
 				return getMethodName() != null;
 			} else if (VAR.equals(id)) {
 				return getVariableName() != null;
+			} else if (FIELDS.equals(id)) {
+				return true;
+			} else if (ARGS.equals(id)) {
+				return true;
 			}
 			return false;
 		}

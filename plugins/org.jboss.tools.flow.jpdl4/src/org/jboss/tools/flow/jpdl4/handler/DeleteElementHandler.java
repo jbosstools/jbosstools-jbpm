@@ -17,9 +17,12 @@ import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.editpart.EventListenerListTreeEditPart;
+import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.InputParameter;
+import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.OutputParameter;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
@@ -68,6 +71,10 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 			deleteChildCommand.setType(SubprocessTask.INPUT_PARAMETERS);
 		} else if (child.getElement() instanceof OutputParameter) {
 			deleteChildCommand.setType(SubprocessTask.OUTPUT_PARAMETERS);
+		} else if (child.getElement() instanceof Field) {
+			deleteChildCommand.setType(JavaTask.FIELDS);
+		} else if (child.getElement() instanceof Argument) {
+			deleteChildCommand.setType(JavaTask.ARGS);
 		}
 		deleteChildCommand.setParent(parent);
 		if (deleteChildCommand.canExecute()) {
