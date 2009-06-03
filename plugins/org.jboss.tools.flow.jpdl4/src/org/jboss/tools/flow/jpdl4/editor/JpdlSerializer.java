@@ -365,7 +365,7 @@ public class JpdlSerializer {
     			buffer.append("\n");
     			appendPadding(buffer, level + 1);
     			buffer.append("<handler class=\"" + handler + "\" />");
-    		}
+    		} 
     		super.appendBody(buffer, wrapper, level);
     	}
     }
@@ -440,7 +440,8 @@ public class JpdlSerializer {
     			buffer.append("\n");
     			appendPadding(buffer, level + 1);
     			buffer.append("<text>" + text + "</text>");
-    		}
+    		} 
+    		super.appendBody(buffer, wrapper, level);
     	}
     }
     
