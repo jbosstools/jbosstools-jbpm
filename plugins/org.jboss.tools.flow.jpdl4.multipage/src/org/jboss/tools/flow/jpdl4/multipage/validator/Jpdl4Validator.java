@@ -14,6 +14,7 @@ public class Jpdl4Validator extends AbstractValidator {
             ValidationState state,
             IProgressMonitor monitor) {
 		System.out.println("validating...");
+//		Thread.currentThread().getContextClassLoader().
 		return super.validate(resource, kind, state, monitor);
 	}
 
