@@ -691,7 +691,6 @@ public class JpdlSerializer {
     	}
     	protected List<String> getAttributesToSave() {
     		ArrayList<String> result = new ArrayList<String>();
-    		result.add("xmlns");
     		result.add("name");
     		result.add("initial");
     		result.add("key");
