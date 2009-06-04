@@ -659,12 +659,12 @@ public class JpdlSerializer {
     		if ((dueDate != null && !"".equals(dueDate)) || (repeat != null && !"".equals(repeat))) {
     			buffer.append("\n");
     			appendPadding(buffer, level);
-    			buffer.append("<timer ");
+    			buffer.append("<timer");
     			if (dueDate != null && !"".equals(dueDate)) {
-    				buffer.append("duedate=\"" + dueDate + "\"");
+    				buffer.append(" duedate=\"" + dueDate + "\"");
     			}
     			if (repeat != null && !"".equals(repeat)) {
-    				buffer.append("repeat=\"" + repeat + "\"");
+    				buffer.append(" repeat=\"" + repeat + "\"");
     			}
     			buffer.append("/>");
     		}
