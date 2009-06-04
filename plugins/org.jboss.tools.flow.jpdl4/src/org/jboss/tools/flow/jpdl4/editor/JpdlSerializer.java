@@ -654,11 +654,19 @@ public class JpdlSerializer {
     	}
     	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
     		EventListenerContainer eventListenerContainer = (EventListenerContainer)wrapper.getElement();
-    		String timer = eventListenerContainer.getTimer();
-    		if (timer != null && !"".equals(timer)) {
+    		String dueDate = eventListenerContainer.getDueDate();
+    		String repeat = eventListenerContainer.getRepeat();
+    		if ((dueDate != null && !"".equals(dueDate)) || (repeat != null && !"".equals(repeat))) {
     			buffer.append("\n");
-    			appendPadding(buffer, level + 1);
-    			buffer.append("<timer duedate=\"" + timer + "\"/>");
+    			appendPadding(buffer, level);
+    			buffer.append("<timer ");
+    			if (dueDate != null && !"".equals(dueDate)) {
+    				buffer.append("duedate=\"" + dueDate + "\"");
+    			}
+    			if (repeat != null && !"".equals(repeat)) {
+    				buffer.append("repeat=\"" + repeat + "\"");
+    			}
+    			buffer.append("/>");
     		}
 			List<Element> eventListeners = wrapper.getChildren(EventListenerContainer.LISTENERS);
 			if (eventListeners != null) {

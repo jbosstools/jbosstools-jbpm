@@ -446,17 +446,13 @@ public class JpdlDeserializer {
 			Wrapper result = null;
 			if (!(parent.getElement() instanceof EventListenerContainer)) return result;
 			if (node instanceof Element) {
-				if ("timer".equals(node.getNodeName())) {
-					String duedate = ((Element)node).getAttribute("duedate");
-					if (duedate != null && !("".equals(duedate))) {
-						((EventListenerContainer)parent.getElement()).setTimer(duedate);
-					}
-				} else {
-					result = createWrapper((Element)node);
-					if (result != null) {
-						if (result.getElement() instanceof EventListener) {
-							parent.addChild(EventListenerContainer.LISTENERS, result);
-						}
+				result = createWrapper((Element)node);
+				if (result != null) {
+					if (result.getElement() instanceof EventListener) {
+						parent.addChild(EventListenerContainer.LISTENERS, result);
+					} else if (result.getElement() instanceof Timer) {
+						parent.setPropertyValue(EventListenerContainer.DUE_DATE, result.getPropertyValue(Timer.DUE_DATE));
+						parent.setPropertyValue(EventListenerContainer.REPEAT, result.getPropertyValue(Timer.REPEAT));
 					}
 				}
 			}

@@ -473,7 +473,7 @@
           </propertySection>
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.eventListenerContainer.eventType"
-                class="org.jboss.tools.flow.jpdl4.properties.EventListenerContainerTimerSection"
+                class="org.jboss.tools.flow.jpdl4.properties.EventListenerContainerDueDateSection"
                 id="org.jboss.tools.jpdl4.eventListenerContainer.timer"
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.EventListenerContainer"/>

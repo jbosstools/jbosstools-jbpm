@@ -50,7 +50,7 @@ public class TimerSection extends JpdlPropertySection {
 	
 	
 	private void createDueDateLabel(Composite parent) {
-		dueDateLabel = getWidgetFactory().createCLabel(parent, "Due Date (e.g. '3 business hours')             ");
+		dueDateLabel = getWidgetFactory().createCLabel(parent, "Due Date");
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.top = new FormAttachment(0, 5);
@@ -67,7 +67,7 @@ public class TimerSection extends JpdlPropertySection {
 	}
 
 	private void createRepeatLabel(Composite parent) {
-		repeatLabel = getWidgetFactory().createCLabel(parent, "Repeat (e.g. '30 minutes')");
+		repeatLabel = getWidgetFactory().createCLabel(parent, "Repeat");
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.top = new FormAttachment(dueDateText, 5);
@@ -84,7 +84,7 @@ public class TimerSection extends JpdlPropertySection {
 	}
 
 	private void createDueDateTimeLabel(Composite parent) {
-		dueDateTimeLabel = getWidgetFactory().createCLabel(parent, "Due Date-time (e.g. 'HH:mm dd/MM/yyyy')");
+		dueDateTimeLabel = getWidgetFactory().createCLabel(parent, "Due Date-time");
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.top = new FormAttachment(repeatText, 5);
