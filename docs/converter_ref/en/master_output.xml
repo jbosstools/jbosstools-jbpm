@@ -8,6 +8,17 @@
     
      <bookinfo>
          <title>BPMN Convert User Guide</title>
+             <corpauthor diffmk:change="added">
+                 <inlinemediaobject diffmk:change="added">
+                     <imageobject diffmk:change="added" role="fo">
+                         <imagedata diffmk:change="added" fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+                     </imageobject>	
+                     <imageobject diffmk:change="added" role="html">
+                         <imagedata diffmk:change="added"></imagedata>
+                     </imageobject>	
+                 </inlinemediaobject>           
+             </corpauthor>
+         
          <author><firstname>Grid</firstname><surname>Qian</surname><email>fqian@redhat.com</email></author>           
          <pubdate>October 2008</pubdate>
 	     <copyright>
@@ -15,9 +26,9 @@
 	          <year>2009</year>
 	          <holder>JBoss, a division of Red Hat</holder>
 	     </copyright>
-         <releaseinfo>
-            Version: 1.0.0.GA
-         </releaseinfo>
+         <releaseinfo><diffmk:wrapper diffmk:change="changed">
+             Version: 1.1.0.M1
+         </diffmk:wrapper></releaseinfo>
 <abstract>
    <title></title>
        <para>
@@ -32,27 +43,70 @@
     
 <chapter id="overview" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/converter_ref/en/modules/overview.xml">
    <title>BPMN Convert Overview</title>
-    <para diffmk:change="added"><diffmk:wrapper diffmk:change="added">This chapter gives you a short overview of JBoss BPMN Convert module</diffmk:wrapper></para>
-    <para><diffmk:wrapper diffmk:change="changed">JBoss BPMN Convert module is a tool used for a BPMN file translation</diffmk:wrapper></para>
-    <para><diffmk:wrapper diffmk:change="changed">As a part of JBoss tools, JBoss BPMN Convert module implements BPMN -&gt; JPDL translation. You can get a basic JPDL file from a BPMN file by using this module.</diffmk:wrapper></para>
-    <para><diffmk:wrapper diffmk:change="changed">The BPMN file may be written by hands or with the help of some editors. In this guide, we use STP BPMN editor to draw a BPMN file.</diffmk:wrapper></para> 
-    <para diffmk:change="added"><diffmk:wrapper diffmk:change="added">You can download the editor which is included into  BPMN Modeler from Eclipse download or update site. On the </diffmk:wrapper><ulink diffmk:change="added" url="http://www.eclipse.org/bpmn"><diffmk:wrapper diffmk:change="added">Eclipse BPMN project page</diffmk:wrapper></ulink><diffmk:wrapper diffmk:change="added"> you can find the necessary links and other related information</diffmk:wrapper></para>  
-   </chapter>
+    <para><diffmk:wrapper diffmk:change="changed">This chapter gives you a short overview of JBoss BPMN Convert module.</diffmk:wrapper></para>
+    <para><diffmk:wrapper diffmk:change="changed">JBoss BPMN Convert module is a tool used for a BPMN file translation.</diffmk:wrapper></para>
+    <para>As a part of JBoss tools, JBoss BPMN Convert module implements BPMN -&gt; JPDL translation. You can get a basic JPDL file from a BPMN file by using this module.</para>
+    <para>The BPMN file may be written by hands or with the help of some editors. In this guide, we use STP BPMN editor to draw a BPMN file.</para> 
+    <para>You can download the editor which is included into  BPMN Modeler from Eclipse download or update site. On the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink><diffmk:wrapper diffmk:change="added"> you can find the necessary links and other related information.</diffmk:wrapper></para>  
+  
+<section diffmk:change="added">
+    <title diffmk:change="added"><diffmk:wrapper diffmk:change="added">Key Features of JBoss BPMN Convert module</diffmk:wrapper></title>
+    <para diffmk:change="added"><diffmk:wrapper diffmk:change="added">For a start, we propose you to look through the table of main features of JBoss BPMN Convert module:</diffmk:wrapper></para>
+
+    <table diffmk:change="added">
+        
+        <title diffmk:change="added"><diffmk:wrapper diffmk:change="added">Key Functionality of JBoss BPMN Convert module</diffmk:wrapper></title>
+        <tgroup cols="3" diffmk:change="added">
+            
+            <colspec align="left" colnum="1" colwidth="2*" diffmk:change="added"></colspec>
+            <colspec colnum="2" colwidth="4*" diffmk:change="added"></colspec>
+            <colspec align="left" colnum="3" colwidth="2*" diffmk:change="added"></colspec>
+            
+            <thead diffmk:change="added">
+                <row diffmk:change="added">
+                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Feature</diffmk:wrapper></entry>
+                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Benefit</diffmk:wrapper></entry>
+                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Chapter</diffmk:wrapper></entry>
+                </row>
+            </thead>
+            
+            <tbody diffmk:change="added">
+                
+                <row diffmk:change="added">
+                    <entry diffmk:change="added"><para diffmk:change="added"><diffmk:wrapper diffmk:change="added">STP BPMN Editor</diffmk:wrapper></para></entry>
+                    <entry diffmk:change="added"><para diffmk:change="added"><diffmk:wrapper diffmk:change="added">JBoss BPMN Convert module contains STP Business Process Modeling Notation (BPMN) Editor which is a tool to express any processes in a graphical form (simple diagrams with a set of some graphical elements). Created BPMN files can then be converted to jPDL.</diffmk:wrapper></para></entry>
+                    <entry diffmk:change="added">
+                        <link diffmk:change="added" linkend="createbpmnfile"><diffmk:wrapper diffmk:change="added">creating a BPMN file by STP BPMN editor</diffmk:wrapper></link>
+                    </entry>
+                </row>
+                
+                
+            </tbody>
+            
+        </tgroup>
+    </table>
+    
+    
+
+</section>
+    
+    
+</chapter>
     
 <chapter id="bpmn2jpdl" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/converter_ref/en/modules/bpmn2jpdl.xml">
-    <title><diffmk:wrapper diffmk:change="changed">Translate a Bpmn file to a JPDL file</diffmk:wrapper></title>
-    <para><diffmk:wrapper diffmk:change="changed">In this chapter we provide you with the necessary steps to translate a Bpmn file to a JPDL file.</diffmk:wrapper></para>  
+    <title>Translate a Bpmn file to a JPDL file</title>
+    <para>In this chapter we provide you with the necessary steps to translate a Bpmn file to a JPDL file.</para>  
     
     <section id="createproject">
     	<title>Creating a project</title>
-  	    <para><diffmk:wrapper diffmk:change="changed">Before creating a Bpmn file, you should have a Project created.</diffmk:wrapper></para>
+  	    <para>Before creating a Bpmn file, you should have a Project created.</para>
   	    <para>Create a project by 
-  	          <emphasis><property moreinfo="none"><diffmk:wrapper diffmk:change="changed">New &gt; Project... &gt; General &gt; Project</diffmk:wrapper></property></emphasis><diffmk:wrapper diffmk:change="changed">. Enter the following information:
-   </diffmk:wrapper></para>
+  	          <emphasis><property moreinfo="none">New &gt; Project... &gt; General &gt; Project</property></emphasis>. Enter the following information:
+   </para>
   <para>Project Name: test</para>
      
         <figure float="0">
-            <title><diffmk:wrapper diffmk:change="changed">Creating a Project</diffmk:wrapper></title>
+            <title>Creating a Project</title>
                 <mediaobject>
                      <imageobject>
                           <imagedata fileref="images/bpmnconvert_bpmn2jpdl_1.png"></imagedata>
@@ -62,14 +116,14 @@
         <para>Click on the <property moreinfo="none">Finish</property> button.</para>
     </section>
     <section id="createbpmnfile">
-    	<title><diffmk:wrapper diffmk:change="changed">Creating a Bpmn File by STP BPMN Editor</diffmk:wrapper></title>
-        <para><diffmk:wrapper diffmk:change="changed">Create a BPMN diagram file by 
-  	          </diffmk:wrapper><emphasis><property moreinfo="none">New &gt; Others... &gt; Bpmn Diagram</property></emphasis>
+    	<title>Creating a Bpmn File by STP BPMN Editor</title>
+        <para>Create a BPMN diagram file by 
+  	          <emphasis><property moreinfo="none">New &gt; Others... &gt; Bpmn Diagram</property></emphasis>
   	          . Enter the following information:
   	    </para>
               <para>File Name: test</para>
            <figure float="0">
-            <title><diffmk:wrapper diffmk:change="changed">Creating BPMN Diagram</diffmk:wrapper></title>
+            <title>Creating BPMN Diagram</title>
                 <mediaobject>
                      <imageobject>
                           <imagedata fileref="images/bpmnconvert_bpmn2jpdl_2.png"></imagedata>
@@ -78,11 +132,11 @@
         </figure>
         <para>Click on the <property moreinfo="none">Finish</property> button.</para>
         <para>Open the test.bpmn_diagram file by double-click it.</para>
-        <para><diffmk:wrapper diffmk:change="added">Draw the Bpmn diagram using STP BPMN editor. If you do not know how to use STP BPMN editor, please visit </diffmk:wrapper><ulink diffmk:change="added" url="http://www.eclipse.org/bpmn/"><diffmk:wrapper diffmk:change="added">BPMN project page for details</diffmk:wrapper></ulink><diffmk:wrapper diffmk:change="added">.</diffmk:wrapper></para>
+        <para>Draw the Bpmn diagram using STP BPMN editor. If you do not know how to use STP BPMN editor, please visit <ulink url="http://www.eclipse.org/bpmn/">BPMN project page for details</ulink>.</para>
     </section>
         <section id="bpmntojpdl">
-    	<title><diffmk:wrapper diffmk:change="changed">Exporting a Bpmn File to Jpdl files</diffmk:wrapper></title>
-  	    <para><diffmk:wrapper diffmk:change="changed">A Bpmn file may include more than one pool. Every pool can be mapped to a corresponding Jpdl file.</diffmk:wrapper></para>
+    	<title>Exporting a Bpmn File to Jpdl files</title>
+  	    <para>A Bpmn file may include more than one pool. Every pool can be mapped to a corresponding Jpdl file.</para>
   	    <itemizedlist>
   	        <listitem>
   	      	  <para>Select 'test.bpmn' file and right-click it. Open the export wizard by 
@@ -103,7 +157,7 @@
   	      	  <para>Select the BPMN file that you want to translate.
   	          </para>
               <figure float="0">
-                   <title><diffmk:wrapper diffmk:change="changed">Choosing a BPMN File</diffmk:wrapper></title>
+                   <title>Choosing a BPMN File</title>
                        <mediaobject>
                             <imageobject>
                                 <imagedata fileref="images/bpmnconvert_bpmn2jpdl_4.png"></imagedata>
@@ -116,7 +170,7 @@
   	      	  <para>Select the Pools of BPMN that you want to translate.
   	          </para>
               <figure float="0">
-                   <title><diffmk:wrapper diffmk:change="changed">Choosing BPMN Pools</diffmk:wrapper></title>
+                   <title>Choosing BPMN Pools</title>
                        <mediaobject>
                             <imageobject>
                                 <imagedata fileref="images/bpmnconvert_bpmn2jpdl_5.png"></imagedata>
@@ -126,8 +180,8 @@
               <para>Click on the <property moreinfo="none">Next</property> button.</para>
             </listitem>
             <listitem>
-  	      	  <para><diffmk:wrapper diffmk:change="changed">On the next page, you may get error or warning messages that occurred during the conversion. If there are no messages, this page is skipped.
-  	          </diffmk:wrapper></para>
+  	      	  <para>On the next page, you may get error or warning messages that occurred during the conversion. If there are no messages, this page is skipped.
+  	          </para>
                      <para>Click on the <property moreinfo="none">Next</property> button.</para>
             </listitem>
             <listitem>
@@ -143,7 +197,7 @@
               </figure>
               <itemizedlist>
                   <listitem>
-                      <para><diffmk:wrapper diffmk:change="changed">If you'd like to overwrite existing resources,check this "Overwrite existing resources" checkbox.</diffmk:wrapper></para>
+                      <para>If you'd like to overwrite existing resources,check this "Overwrite existing resources" checkbox.</para>
                   </listitem>
               </itemizedlist>
               <para>Click on the <property moreinfo="none">Finish</property> button.</para>
@@ -159,7 +213,7 @@
                             </imageobject>
                        </mediaobject>
               </figure>  
-            <para diffmk:change="added"><diffmk:wrapper diffmk:change="added">We hope, this guide helped you to get started with the JBoss BPMN Convert module. Besides, for additional information you are welcome on </diffmk:wrapper><ulink diffmk:change="added" url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201"><diffmk:wrapper diffmk:change="added">JBoss forum</diffmk:wrapper></ulink><diffmk:wrapper diffmk:change="added">.</diffmk:wrapper></para>
+            <para>We hope, this guide helped you to get started with the JBoss BPMN Convert module. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&op=viewforum&f=201">JBoss forum</ulink>.</para>
     </section>
        
 </chapter>
