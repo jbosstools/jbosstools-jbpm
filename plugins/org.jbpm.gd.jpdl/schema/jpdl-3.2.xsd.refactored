@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:jbpm.org:jpdl-3.2"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="urn:jbpm.org:jpdl-3.2">
+	<xsd:simpleType name="ConfigType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="field"></xsd:enumeration>
+			<xsd:enumeration value="bean"></xsd:enumeration>
+			<xsd:enumeration value="constructor"></xsd:enumeration>
+			<xsd:enumeration value="configuration-property"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Delegation" mixed="true">
+		<xsd:sequence>
+			<xsd:any processContents="lax" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:any>
+		</xsd:sequence>
+		<xsd:attribute name="class" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="config-type" type="ConfigType" default="field"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Assignment">
+		<xsd:complexContent>
+			<xsd:extension base="Delegation">
+				<xsd:attribute name="expression" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="actor-id" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="pooled-actors" type="xsd:string"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Swimlane">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:sequence minOccurs="0" maxOccurs="1">
+					<xsd:element name="assignment" type="Assignment"></xsd:element>
+				</xsd:sequence>
+
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="BooleanType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="yes"></xsd:enumeration>
+			<xsd:enumeration value="no"></xsd:enumeration>
+			<xsd:enumeration value="true"></xsd:enumeration>
+			<xsd:enumeration value="false"></xsd:enumeration>
+			<xsd:enumeration value="on"></xsd:enumeration>
+			<xsd:enumeration value="off"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="PredefinedPriorityType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="highest"></xsd:enumeration>
+			<xsd:enumeration value="high"></xsd:enumeration>
+			<xsd:enumeration value="normal"></xsd:enumeration>
+			<xsd:enumeration value="low"></xsd:enumeration>
+			<xsd:enumeration value="lowest"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="PriorityType">
+		<xsd:union memberTypes="xsd:int PredefinedPriorityType"></xsd:union>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Action">
+		<xsd:complexContent>
+			<xsd:extension base="Delegation">
+				<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="ref-name" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="accept-propagated-events"
+					type="BooleanType" default="true">
+				</xsd:attribute>
+				<xsd:attribute name="expression" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="async" type="BooleanType" default="false"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Script" mixed="true">
+		<xsd:sequence>
+			<xsd:any processContents="lax" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:any>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="accept-propagated-events"
+			type="BooleanType" default="true">
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="NamedElement">
+		<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Timer">
+		<xsd:choice>
+			<xsd:element name="action" type="Action"></xsd:element>
+			<xsd:element name="script" type="Script"></xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="duedate" type="xsd:string"
+			use="required">
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="repeat" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="transition" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Mail">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="subject" type="xsd:string"></xsd:element>
+					<xsd:element name="text" type="xsd:string"></xsd:element>
+				</xsd:choice>
+
+
+				<xsd:attribute name="async" type="xsd:string"
+					default="false">
+				</xsd:attribute>
+
+				<xsd:attribute name="template" type="xsd:string"></xsd:attribute>
+
+				<xsd:attribute name="actors" type="xsd:string"></xsd:attribute>
+
+				<xsd:attribute name="to" type="xsd:string"></xsd:attribute>
+
+				<xsd:attribute name="subject" type="xsd:string"></xsd:attribute>
+
+				<xsd:attribute name="text" type="xsd:string"></xsd:attribute>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:group name="ActionElements">
+		<xsd:choice>
+			<xsd:element name="action" type="Action"></xsd:element>
+			<xsd:element name="script" type="Script"></xsd:element>
+			<xsd:element name="create-timer" type="CreateTimer"></xsd:element>
+			<xsd:element name="cancel-timer" type="CancelTimer"></xsd:element>
+			<xsd:element name="mail" type="Mail"></xsd:element>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:simpleType name="EventType">
+		<xsd:union memberTypes="xsd:string PredefinedEventType"></xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="PredefinedEventType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="node-enter"></xsd:enumeration>
+			<xsd:enumeration value="node-leave"></xsd:enumeration>
+			<xsd:enumeration value="process-start"></xsd:enumeration>
+			<xsd:enumeration value="process-end"></xsd:enumeration>
+			<xsd:enumeration value="task-create"></xsd:enumeration>
+			<xsd:enumeration value="task-assign"></xsd:enumeration>
+			<xsd:enumeration value="task-start"></xsd:enumeration>
+			<xsd:enumeration value="task-end"></xsd:enumeration>
+			<xsd:enumeration value="before-signal"></xsd:enumeration>
+			<xsd:enumeration value="after-signal"></xsd:enumeration>
+			<xsd:enumeration value="superstate-enter"></xsd:enumeration>
+			<xsd:enumeration value="superstate-leave"></xsd:enumeration>
+			<xsd:enumeration value="timer-create"></xsd:enumeration>
+			<xsd:enumeration value="subprocess-created"></xsd:enumeration>
+			<xsd:enumeration value="subprocess-end"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Event">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:group ref="ActionElements"></xsd:group>
+		</xsd:choice>
+		<xsd:attribute name="type" type="EventType" use="required"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Task">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="assignment" type="Assignment"></xsd:element>
+			<xsd:element name="controller" type="Controller"></xsd:element>
+			<xsd:element name="event" type="Event"></xsd:element>
+			<xsd:element name="timer" type="Timer"></xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="blocking" type="BooleanType"
+			default="false">
+		</xsd:attribute>
+		<xsd:attribute name="signalling" type="BooleanType"
+			default="true">
+		</xsd:attribute>
+		<xsd:attribute name="description" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="duedate" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="swimlane" type="xsd:string"></xsd:attribute>
+		<xsd:attribute name="priority" type="PriorityType"
+			default="normal">
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="ExceptionHandler">
+		<xsd:choice minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="action" type="Action"></xsd:element>
+			<xsd:element name="script" type="Script"></xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="exception-class" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="CreateTimer">
+		<xsd:complexContent>
+			<xsd:extension base="Timer"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CancelTimer">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="StartState">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="task" type="Task"></xsd:element>
+			<xsd:element name="transition" type="Transition"></xsd:element>
+			<xsd:element name="event" type="Event"></xsd:element>
+			<xsd:element name="exception-handler"
+				type="ExceptionHandler">
+			</xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="EndState">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="event" type="Event"></xsd:element>
+					<xsd:element name="exception-handler" type="ExceptionHandler"></xsd:element>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Controller">
+		<xsd:complexContent>
+			<xsd:extension base="Delegation"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Condition" mixed="true">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:any processContents="lax" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:any>
+		</xsd:sequence>
+		<xsd:attribute name="expression" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="Transition">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="condition" type="Condition"></xsd:element>
+			<xsd:group ref="ActionElements"></xsd:group>
+			<xsd:element name="exception-handler"
+				type="ExceptionHandler">
+			</xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="to" type="xsd:string" use="required"></xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="AbstractNode">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:attribute name="async" type="xsd:string" default="false"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Handler">
+		<xsd:complexContent>
+			<xsd:extension base="Delegation"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Decision">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="handler" type="Handler"></xsd:element>
+					<xsd:element name="event" type="Event"></xsd:element>
+					<xsd:element name="exception-handler"
+						type="ExceptionHandler">
+					</xsd:element>
+					<xsd:element name="transition" type="Transition">
+					</xsd:element>
+				</xsd:choice>
+
+				<xsd:attribute name="expression" type="xsd:string"></xsd:attribute>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Fork">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="script" type="Script"></xsd:element>
+					<xsd:group ref="NodeContentElements"></xsd:group>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:group name="NodeContentElements">
+		<xsd:choice>
+			<xsd:element name="event" type="Event"></xsd:element>
+			<xsd:element name="exception-handler"
+				type="ExceptionHandler">
+			</xsd:element>
+			<xsd:element name="timer" type="Timer"></xsd:element>
+			<xsd:element name="transition" type="Transition"></xsd:element>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:complexType name="Join">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:group ref="NodeContentElements"></xsd:group></xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Node">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:group ref="ActionElements"></xsd:group>
+					</xsd:choice>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded"><xsd:group ref="NodeContentElements"></xsd:group></xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SubProcess">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:attribute name="version" type="xsd:int"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Variable">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+				<xsd:sequence>
+					<xsd:any processContents="lax" minOccurs="0"
+						maxOccurs="unbounded">
+					</xsd:any>
+				</xsd:sequence>
+				<xsd:attribute name="access" type="xsd:string" default="read,write"></xsd:attribute>
+				<xsd:attribute name="mapped-name" type="xsd:string"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ProcessState">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                	<xsd:element name="sub-process" type="SubProcess"></xsd:element>
+                	<xsd:element name="variable" type="Variable"></xsd:element>
+                	<xsd:group ref="NodeContentElements"></xsd:group>
+                </xsd:choice>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SuperState">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                	<xsd:group ref="NodeElements"></xsd:group>
+                	<xsd:group ref="NodeContentElements"></xsd:group></xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="TaskNode">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="task" type="Task"></xsd:element>
+					<xsd:group ref="NodeContentElements"></xsd:group>
+				</xsd:choice>
+				<xsd:attribute name="create-tasks" type="BooleanType" default="true"></xsd:attribute>
+				<xsd:attribute name="end-tasks" type="BooleanType" default="false"></xsd:attribute>
+				<xsd:attribute name="signal" type="SignalType" default="last"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MailNode">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="subject" type="xsd:string"></xsd:element>
+					<xsd:element name="text" type="xsd:string"></xsd:element>
+					<xsd:group ref="NodeContentElements"></xsd:group>
+				</xsd:choice>
+
+				<xsd:attribute name="template" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="actors" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="to" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="subject" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="text" type="xsd:string"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:group name="NodeElements">
+        <xsd:choice>
+        	<xsd:element name="node" type="Node"></xsd:element>
+        	<xsd:element name="state" type="State"></xsd:element>
+        	<xsd:element name="task-node" type="TaskNode"></xsd:element>
+        	<xsd:element name="super-state" type="SuperState"></xsd:element>
+        	<xsd:element name="process-state" type="ProcessState"></xsd:element>
+        	<xsd:element name="fork" type="Fork"></xsd:element>
+        	<xsd:element name="join" type="Join"></xsd:element>
+        	<xsd:element name="decision" type="Decision"></xsd:element>
+        	<xsd:element name="end-state" type="EndState"></xsd:element>
+        	<xsd:element name="mail-node" type="MailNode"></xsd:element>
+        </xsd:choice>
+
+	</xsd:group>
+
+	<xsd:complexType name="State">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNode">
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                	<xsd:group ref="NodeContentElements"></xsd:group></xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="SignalType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="unsynchronized"></xsd:enumeration>
+			<xsd:enumeration value="never"></xsd:enumeration>
+			<xsd:enumeration value="first"></xsd:enumeration>
+			<xsd:enumeration value="first-wait"></xsd:enumeration>
+			<xsd:enumeration value="last"></xsd:enumeration>
+			<xsd:enumeration value="last-wait"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ProcessDefinition">
+		<xsd:complexContent>
+			<xsd:extension base="NamedElement">
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                	<xsd:element name="swimlane" type="Swimlane"></xsd:element>
+                	<xsd:element name="start-state" type="StartState"></xsd:element>
+                	<xsd:group ref="NodeElements"></xsd:group>
+                	<xsd:group ref="ActionElements"></xsd:group>
+                	<xsd:element name="event" type="Event"></xsd:element>
+                	<xsd:element name="exception-handler"
+                		type="ExceptionHandler">
+                	</xsd:element>
+                	<xsd:element name="task" type="Task"></xsd:element>
+                </xsd:choice>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+    <xsd:element name="process-definition" type="ProcessDefinition"></xsd:element>
+</xsd:schema>

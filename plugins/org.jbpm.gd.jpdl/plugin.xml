@@ -1,0 +1,1531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   
+   <extension
+         point="org.eclipse.wst.xml.core.catalogContributions">
+      <catalogContribution id="org.jbpm.core">
+         <uri
+               name="http://jbpm.org/3/jpdl"
+               uri="schema/jpdl-3.0.xsd"/> 
+         <uri
+               name="urn:jbpm.org:jpdl-3.1"
+               uri="schema/jpdl-3.1.xsd"/> 
+         <uri
+               name="urn:jbpm.org:jpdl-3.2"
+               uri="schema/jpdl-3.2.xsd"/> 
+      </catalogContribution>
+   </extension> 
+   
+   <extension-point id="dsl" name="jBPM Domain Specific Language Extensions" schema="schema/dsl.exsd"/>
+   <extension 
+   		 point="org.jbpm.gd.jpdl.dsl">
+      <language 
+            id="org.jbpm.gd.jpdl" name="jBPM Process Definition Language" editor="org.jbpm.gd.jpdl.editor"/>		 
+   </extension>
+   
+   <extension-point id="semanticElements" name="JPDL Element Extensions" schema="schema/semanticElements.exsd"/>
+   <extension
+         point="org.jbpm.gd.jpdl.semanticElements">
+      <semanticElement
+            icon="icons/full/obj16/action_enabled.gif"
+            id="org.jbpm.gd.jpdl.action"
+            label="Action"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Action"
+            name="action"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.assignment"
+            label="Assignment"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Assignment"
+            name="assignment"/>
+      <semanticElement
+            icon="icons/full/obj16/cancel_timer_enabled.gif"
+            id="org.jbpm.gd.jpdl.cancelTimer"
+            label="Cancel Timer"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.CancelTimer"
+            name="cancel-timer"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.condition"
+            label="Condition"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Condition"
+            name="condition"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.controller"
+            label="Controller"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Controller"
+            name="controller"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.genericElement"
+            label="Configuration Information Element"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.common.model.GenericElement"/>
+      <semanticElement
+            icon="icons/full/obj16/create_timer_enabled.gif"
+            id="org.jbpm.gd.jpdl.createTimer"
+            label="Create Timer"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.CreateTimer"
+            name="create-timer"/>
+      <semanticElement
+            icon="icons/full/obj16/decision_enabled.gif"
+            id="org.jbpm.gd.jpdl.decision"
+            label="Decision"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Decision"
+            name="decision"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.description"
+            label="Description"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Description"
+            name="text"/>
+      <semanticElement
+            icon="icons/full/obj16/end_state_enabled.gif"
+            id="org.jbpm.gd.jpdl.endState"
+            label="End State"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.EndState"
+            name="end-state"/>
+      <semanticElement
+            icon="icons/full/obj16/event_enabled.gif"
+            id="org.jbpm.gd.jpdl.event"
+            label="Event"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Event"
+            name="event"/>
+      <semanticElement
+            icon="icons/full/obj16/exception_enabled.gif"
+            id="org.jbpm.gd.jpdl.exceptionHandler"
+            label="Exception Handler"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.ExceptionHandler"
+            name="exception-handler"/>
+      <semanticElement
+            icon="icons/full/obj16/fork_enabled.gif"
+            id="org.jbpm.gd.jpdl.fork"
+            label="Fork"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Fork"
+            name="fork"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.handler"
+            label="Handler"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Handler"
+            name="handler"/>
+      <semanticElement
+            icon="icons/full/obj16/join_enabled.gif"
+            id="org.jbpm.gd.jpdl.join"
+            label="Join"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Join"
+            name="join"/>
+      <semanticElement
+            icon="icons/full/obj16/mail_enabled.gif"
+            id="org.jbpm.gd.jpdl.mail"
+            label="Mail"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.MailAction"
+            name="mail"/>
+      <semanticElement
+            icon="icons/full/obj16/mail_node_enabled.gif"
+            id="org.jbpm.gd.jpdl.mailNode"
+            label="Mail Node"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.MailNode"
+            name="mail-node"/>
+      <semanticElement
+            icon="icons/full/obj16/node_enabled.gif"
+            id="org.jbpm.gd.jpdl.node"
+            label="Node"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Node"
+            name="node"/>
+      <semanticElement
+            icon="icons/full/obj16/esb_enabled.gif"
+            id="org.jbpm.gd.jpdl.esbNode"
+            label="ESB Service"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.EsbNode"
+            name="esb"/>
+      <semanticElement
+            icon="icons/full/obj16/esb_enabled.gif"
+            id="org.jbpm.gd.jpdl.esbNotifier"
+            label="ESB Notifier"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.EsbNotifier"
+            name="esb-notifier"/>
+      <semanticElement
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            id="org.jbpm.gd.jpdl.processDefinition"
+            label="Process Definition"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.ProcessDefinition"
+            name="process-definition"/>
+      <semanticElement
+            icon="icons/full/obj16/process_state_enabled.gif"
+            id="org.jbpm.gd.jpdl.processState"
+            label="Process State"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.ProcessState"
+            name="process-state"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.reminder"
+            label="Reminder"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Reminder"
+            name="reminder"/>
+      <semanticElement
+            icon="icons/full/obj16/script_enabled.gif"
+            id="org.jbpm.gd.jpdl.script"
+            label="Script"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Script"
+            name="script"/>
+      <semanticElement
+            icon="icons/full/obj16/start_state_enabled.gif"
+            id="org.jbpm.gd.jpdl.startState"
+            label="Start State"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.StartState"
+            name="start-state"/>
+      <semanticElement
+            icon="icons/full/obj16/state_enabled.gif"
+            id="org.jbpm.gd.jpdl.state"
+            label="State"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.State"
+            name="state"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.subject"
+            label="Subject"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Subject"
+            name="subject"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.subprocess"
+            label="Subprocess"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.SubProcess"
+            name="sub-process"/>
+      <semanticElement
+            icon="icons/full/obj16/super_state_enabled.gif"
+            id="org.jbpm.gd.jpdl.superState"
+            label="Superstate"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.SuperState"
+            name="super-state"/>
+      <semanticElement
+            icon="icons/full/obj16/swimlane_disabled.gif"
+            id="org.jbpm.gd.jpdl.swimlane"
+            label="Swimlane"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Swimlane"
+            name="swimlane"/>
+      <semanticElement
+            icon="icons/full/obj16/task_enabled.gif"
+            id="org.jbpm.gd.jpdl.task"
+            label="Task"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Task"
+            name="task"/>
+      <semanticElement
+            icon="icons/full/obj16/task_node_enabled.gif"
+            id="org.jbpm.gd.jpdl.taskNode"
+            label="Task Node"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.TaskNode"
+            name="task-node"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.text"
+            label="Text"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Text"
+            name="text"/>
+      <semanticElement
+            icon="icons/full/obj16/timer_enabled.gif"
+            id="org.jbpm.gd.jpdl.timer"
+            label="Timer"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Timer"
+            name="timer"/>
+      <semanticElement
+            icon="icons/full/obj16/transition_enabled.gif"
+            id="org.jbpm.gd.jpdl.transition"
+            label="Transition"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Transition"
+            name="transition"/>
+      <semanticElement
+            id="org.jbpm.gd.jpdl.variable"
+            label="Variable"
+            language="org.jbpm.gd.jpdl"
+            modelClass="org.jbpm.gd.jpdl.model.Variable"
+            name="variable"/>
+   </extension>
+   
+   
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+          class="org.jbpm.gd.jpdl.editor.JpdlEditor"
+          contributorClass="org.jbpm.gd.common.editor.ActionBarContributor" 
+          icon="icons/full/obj16/par_obj.gif"
+          id="org.jbpm.gd.jpdl.editor"
+          matchingStrategy="org.jbpm.gd.jpdl.editor.JpdlEditorMatchingStrategy"
+          name="jBPM Graphical Process Designer">
+        <contentTypeBinding contentTypeId="org.jbpm.gd.jpdl.semantic" /> 
+    </editor> 
+  </extension> 
+  	
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="jBPM jPDL 3"
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            class="org.jbpm.gd.jpdl.JpdlPerspectiveFactory"
+            id="org.jbpm.gd.jpdl.JpdlPerspective">
+         <description>
+            A perspective to facilitate creation of jBPM JPDL process definitions.
+         </description>
+      </perspective>
+   </extension>
+   
+  <extension point="org.eclipse.core.runtime.contentTypes">
+  	<content-type id="semantic" 	name="jpdl semantic info"
+		base-type="org.eclipse.core.runtime.xml"
+		default-charset="UTF-8">
+		<describer class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+			<parameter name="element" value="process-definition"/>
+		</describer>
+	</content-type>
+  </extension>  
+  
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="JBoss jBPM"
+            id="org.jbpm.ui">
+      </category> 
+      <wizard
+            name="Process Definition"
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            category="org.jbpm.ui"
+            class="org.jbpm.gd.jpdl.wizard.NewProcessDefinitionWizard"
+            id="org.jbpm.gd.jpdl.wizard.new.file">
+         <description>
+            A wizard that creates a process diagram
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+      <wizard
+            name="Process Project"
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            category="org.jbpm.ui"
+            class="org.jbpm.gd.jpdl.wizard.NewProcessProjectWizard"
+            id="org.jbpm.gd.jpdl.wizard.new.project"
+            project="true" >
+         <description>
+            A wizard that creates a new jBPM Project
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
+   
+   <extension
+         point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            class="org.jbpm.gd.jpdl.util.JbpmClasspathContainerInitializer"
+            id="JBPM"/>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page class="org.jboss.tools.jbpm.preferences.DefaultPage"
+            id="org.jbpm.gd.jpdl.prefs.jbpm3"
+            name="jBPM 3"
+            category="org.jboss.tools.jbpm"/>
+      <page
+            class="org.jbpm.gd.jpdl.prefs.JbpmLocationsPage"
+            id="org.jbpm.gd.jpdl.prefs.jbpmLocations"
+            name="Runtime Locations"
+            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+      <page
+            class="org.jbpm.gd.jpdl.prefs.AssignmentTypesPage"
+            id="org.jbpm.gd.jpdl.prefs.assignmentTypes"
+            name="Assignment Types"
+            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+      <page
+            class="org.jbpm.gd.jpdl.prefs.ServerDeploymentPage"
+            id="org.jbpm.gd.jpdl.prefs.deployment"
+            name="Server Deployment"
+            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+      <page
+            class="org.jbpm.gd.jpdl.prefs.JpdlTemplatesPage"
+            id="org.jbpm.gd.jpdl.prefs.templates"
+            name="Jpdl Templates"
+            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="org.jbpm.gd.jpdl.editor"
+            labelProvider="org.jbpm.gd.common.properties.ElementLabelProvider"
+            typeMapper="org.jbpm.gd.common.properties.ElementTypeMapper">
+         <propertyCategory category="org.jbpm.gd.jpdl.general"/>
+         <propertyCategory category="org.jbpm.gd.jpdl.specific"/>
+         <propertyCategory category="org.jbpm.gd.jpdl.advanced"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.jbpm.gd.jpdl.editor">
+         <propertyTab 
+            category="org.jbpm.gd.jpdl.general"   
+            id="org.jbpm.gd.jpdl.general"
+            label="General"/>
+         <propertyTab 
+            afterTab="org.jbpm.gd.jpdl.general"
+            category="org.jbpm.gd.jpdl.specific"   
+            id="org.jbpm.gd.jpdl.details"
+            label="Details"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.swimlanes"
+               image="icons/full/obj16/swimlane_enabled.gif"
+               label="Swimlanes"/>
+         <propertyTab
+               afterTab="org.jbpm.gd.jpdl.details"
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.events"
+               image="icons/full/obj16/event_enabled.gif"
+               label="Events"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.actionElements"
+               image="icons/full/obj16/action_enabled.gif"
+               label="Actions"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.tasks"
+               image="icons/full/obj16/task_enabled.gif"
+               label="Tasks"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.exceptions"
+               image="icons/full/obj16/exception_enabled.gif"
+               label="Exceptions"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.startStateTask"
+               image="icons/full/obj16/task_enabled.gif"
+               label="Task"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.subprocess"
+               label="Subprocess"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.mail"
+               label="Mail Info"/>
+         <propertyTab
+               afterTab="org.jbpm.gd.jpdl.details"
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.assignment"
+               label="Assignment"/>
+         <propertyTab
+               afterTab="org.jbpm.gd.jpdl.details"
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.controller"
+               label="Controller"/>
+         <propertyTab
+               afterTab="org.jbpm.gd.jpdl.details"
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.reminder"
+               label="Reminder"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.action"
+               image="icons/full/obj16/action_enabled.gif"
+               label="Action"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.esb"
+               image="icons/full/obj16/esb_enabled.gif"
+               label="ESB"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.decisionHandler"
+               image="icons/full/obj16/decision_enabled.gif"
+               label="Handler"/>
+         <propertyTab
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.condition"
+               image="icons/full/obj16/action_enabled.gif"
+               label="Condition"/>
+         <propertyTab
+               afterTab="org.jbpm.gd.jpdl.details"
+               category="org.jbpm.gd.jpdl.specific"
+               id="org.jbpm.gd.jpdl.timer"
+               image="icons/full/obj16/timer_enabled.gif"
+               label="Timers"/>
+         <propertyTab 
+            category="org.jbpm.gd.jpdl.advanced"   
+            id="org.jbpm.gd.jpdl.advanced"
+            label="Advanced"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="org.jbpm.gd.jpdl.editor">
+         <propertySection
+               class="org.jbpm.gd.common.properties.NamedElementSection"
+               filter="org.jbpm.gd.jpdl.properties.NamedElementFilter"
+               id="org.jbpm.gd.jpdl.name"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.ActionDetailsSection"
+               id="org.jbpm.gd.jpdl.actionDetails"
+               tab="org.jbpm.gd.jpdl.details">
+            <input type="org.jbpm.gd.jpdl.model.Action"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.EventSection"
+               filter="org.jbpm.gd.jpdl.properties.EventFilter"
+               id="org.jbpm.gd.jpdl.event"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.jpdl.model.Event"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.ScriptDetailsSection"
+               id="org.jbpm.gd.jpdl.scriptDetails"
+               tab="org.jbpm.gd.jpdl.details">
+            <input type="org.jbpm.gd.jpdl.model.Script"/>
+          </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.TimerActionSection"
+               id="org.jbpm.gd.jpdl.timerAction"
+               tab="org.jbpm.gd.jpdl.action">
+            <input type="org.jbpm.gd.jpdl.model.Timer"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.MailElementMailInfoSection"
+               id="org.jbpm.gd.jpdl.mail"
+               tab="org.jbpm.gd.jpdl.mail">
+            <input type="org.jbpm.gd.jpdl.model.MailElement"/>
+         </propertySection>
+         <propertySection
+               afterSection="org.jbpm.gd.jpdl.name"
+               class="org.jbpm.gd.jpdl.properties.MailElementTemplateSection"
+               filter="org.jbpm.gd.jpdl.properties.MailElementTemplateFilter"
+               id="org.jbpm.gd.jpdl.template"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.ActionNameSection"
+               id="org.jbpm.gd.jpdl.actionName"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.jpdl.model.Action"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.TimerGeneralSection"
+               id="org.jbpm.gd.jpdl.timerGeneral"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.jpdl.model.Timer"/>
+         </propertySection>
+         <propertySection
+               afterSection="org.jbpm.gd.jpdl.template"
+               class="org.jbpm.gd.jpdl.properties.DescribableElementSection"
+               filter="org.jbpm.gd.jpdl.properties.DescribableElementFilter"
+               id="org.jbpm.gd.jpdl.description"
+               tab="org.jbpm.gd.jpdl.general">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.AsyncableElementSection"
+               filter="org.jbpm.gd.jpdl.properties.AsyncableElementFilter"
+               id="org.jbpm.gd.jpdl.async"
+               tab="org.jbpm.gd.jpdl.advanced">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.AcceptPropagatedEventsSection"
+               id="org.jbpm.gd.jpdl.acceptPropagatedEvents"
+               tab="org.jbpm.gd.jpdl.advanced">
+            <input type="org.jbpm.gd.jpdl.model.Action"/>
+            <input type="org.jbpm.gd.jpdl.model.Script"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.TaskDetailsSection"
+               id="org.jbpm.gd.jpdl.taskDetails"
+               tab="org.jbpm.gd.jpdl.details">
+            <input type="org.jbpm.gd.jpdl.model.Task"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.AssignmentSection"
+               id="org.jbpm.gd.jpdl.assignment"
+               tab="org.jbpm.gd.jpdl.assignment">
+            <input type="org.jbpm.gd.jpdl.model.Assignable"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.ControllerSection"
+               id="org.jbpm.gd.jpdl.controller"
+               tab="org.jbpm.gd.jpdl.controller">
+            <input type="org.jbpm.gd.jpdl.model.Task"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.ExceptionHandlerContainerSection"
+               id="org.jbpm.gd.jpdl.exceptions"
+               tab="org.jbpm.gd.jpdl.exceptions">
+            <input type="org.jbpm.gd.jpdl.model.ExceptionHandlerContainer"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.StartStateTaskSection"
+               id="org.jbpm.gd.jpdl.startStateTask"
+               tab="org.jbpm.gd.jpdl.startStateTask">
+            <input type="org.jbpm.gd.jpdl.model.StartState"/>
+          </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.SubProcessSection"
+               id="org.jbpm.gd.jpdl.subprocess"
+               tab="org.jbpm.gd.jpdl.subprocess">
+            <input type="org.jbpm.gd.jpdl.model.ProcessState"/>
+          </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.NodeActionSection"
+               id="org.jbpm.gd.jpdl.nodeAction"
+               filter="org.jbpm.gd.jpdl.properties.NodeActionFilter"
+               tab="org.jbpm.gd.jpdl.action">
+            <input type="org.jbpm.gd.jpdl.model.Node"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.EsbElementSection"
+               id="org.jbpm.gd.jpdl.esbNode"
+               tab="org.jbpm.gd.jpdl.esb">
+            <input type="org.jbpm.gd.jpdl.model.EsbElement"/>
+         </propertySection>
+          <propertySection
+               class="org.jbpm.gd.jpdl.properties.DecisionHandlerSection"
+               id="org.jbpm.gd.jpdl.decisionHandler"
+               tab="org.jbpm.gd.jpdl.decisionHandler">
+            <input type="org.jbpm.gd.jpdl.model.Decision"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.SwimlaneContainerSection"
+               id="org.jbpm.gd.jpdl.swimlanes"
+               tab="org.jbpm.gd.jpdl.swimlanes">
+            <input type="org.jbpm.gd.jpdl.model.ProcessDefinition"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.EventContainerSection"
+               id="org.jbpm.gd.jpdl.events"
+               tab="org.jbpm.gd.jpdl.events">
+            <input type="org.jbpm.gd.jpdl.model.EventContainer"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.ActionElementContainerSection"
+               id="org.jbpm.gd.jpdl.actionElements"
+               tab="org.jbpm.gd.jpdl.actionElements">
+            <input type="org.jbpm.gd.jpdl.model.ActionElementContainer"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.TaskContainerSection"
+               id="org.jbpm.gd.jpdl.tasks"
+               tab="org.jbpm.gd.jpdl.tasks">
+            <input type="org.jbpm.gd.jpdl.model.TaskContainer"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.TaskReminderSection"
+               id="org.jbpm.gd.jpdl.taskReminder"
+               tab="org.jbpm.gd.jpdl.reminder">
+            <input type="org.jbpm.gd.jpdl.model.Task"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.ConditionSection"
+               id="org.jbpm.gd.jpdl.condition"
+               tab="org.jbpm.gd.jpdl.condition">
+            <input type="org.jbpm.gd.jpdl.model.Transition"/>
+         </propertySection>
+         <propertySection
+               class="org.jbpm.gd.jpdl.properties.TimerContainerSection"
+               id="org.jbpm.gd.jpdl.timer"
+               tab="org.jbpm.gd.jpdl.timer">
+            <input type="org.jbpm.gd.jpdl.model.TimerContainer"/>
+         </propertySection>
+      </propertySections>
+   </extension> 
+   
+   <extension point="org.eclipse.ui.propertyPages"> 
+<!--        <page 
+            id="org.jbpm.ui.GraphElementGeneralPage" 
+            name="General" 
+            objectClass="org.jbpm.gd.jpdl.model.JpdlElement" 
+            class="org.jbpm.gd.jpdl.ui.properties.JpdlElementGeneralPropertyPage"> 
+        </page> 
+        <page 
+            id="org.jbpm.ui.TaskAssignmentPage" 
+            name="Assignment" 
+            objectClass="org.jbpm.ui.model.Task" 
+            class="org.jbpm.gd.jpdl.ui.properties.TaskAssignmentPropertyPage"> 
+        </page> 
+        <page 
+            id="org.jbpm.ui.TaskControllerPage" 
+            name="Controller" 
+            objectClass="org.jbpm.ui.model.Task" 
+            class="org.jbpm.gd.jpdl.ui.properties.TaskControllerPropertyPage"> 
+        </page> 
+        <page 
+            id="org.jbpm.ui.TaskAdvancedPage" 
+            name="Advanced" 
+            objectClass="org.jbpm.ui.model.Task" 
+            class="org.jbpm.gd.jpdl.ui.properties.TaskAdvancedPropertyPage"> 
+        </page> 
+        <page 
+            id="org.jbpm.ui.ActionHandlerPage" 
+            name="Handler" 
+            objectClass="org.jbpm.ui.model.Action" 
+            class="org.jbpm.gd.jpdl.ui.properties.ActionHandlerPropertyPage"> 
+        </page> 
+        <page
+              class="org.jbpm.gd.jpdl.ui.properties.NodeActionPropertyPage"
+              id="org.jbpm.ui.NodeActionPage"
+              name="Handler"
+              objectClass="org.jbpm.ui.model.Node">
+           <filter
+                 name="nodeTagEqualsTo"
+                 value="node"/> 
+        </page> -->
+    </extension> 
+<!--   <extension
+         point="org.jbpm.gd.jpdl.ui.policies">
+      <editPolicy
+            id="org.jbpm.ui.tree.GraphElementComponentEditPolicy"
+            part="org.jbpm.ui.part.tree.ElementTreeEditPart"
+            policy="org.jbpm.ui.policy.GraphElementComponentEditPolicy"
+            role="ComponentEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.tree.ProcessDefinitionComponentEditPolicy"
+            part="org.jbpm.ui.part.tree.ProcessDefinitionTreeEditPart"
+            policy="org.jbpm.ui.policy.ProcessDefinitionComponentEditPolicy"
+            role="ComponentEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.tree.NodeComponentEditPolicy"
+            part="org.jbpm.ui.part.tree.NodeTreeEditPart"
+            policy="org.jbpm.ui.policy.NodeComponentEditPolicy"
+            role="ComponentEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.NodeComponentEditPolicy"
+            part="org.jbpm.ui.part.graph.NodeGraphicalEditPart"
+            policy="org.jbpm.ui.policy.NodeComponentEditPolicy"
+            role="ComponentEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.NodeGraphicalNodeEditPolicy"
+            part="org.jbpm.ui.part.graph.NodeGraphicalEditPart"
+            policy="org.jbpm.ui.policy.NodeGraphicalNodeEditPolicy"
+            role="GraphicalNodeEditPolciy"/>
+      <editPolicy
+            id="org.jbpm.ui.NodeDirectEditPolicy"
+            part="org.jbpm.ui.part.graph.NodeGraphicalEditPart"
+            policy="org.jbpm.ui.policy.NodeDirectEditPolicy"
+            role="DirectEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.TransitionConnectionEndpointsEditPolicy"
+            part="org.jbpm.ui.part.graph.TransitionGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TransitionConnectionEndpointsEditPolicy"
+            role="Connection Endpoint Policy"/>
+      <editPolicy
+            id="org.jbpm.ui.TransitionConnectionEditPolicy"
+            part="org.jbpm.ui.part.graph.TransitionGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TransitionConnectionEditPolicy"
+            role="ConnectionEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.TransitionConnectionBendpointEditPolicy"
+            part="org.jbpm.ui.part.graph.TransitionGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TransitionConnectionBendpointEditPolicy"
+            role="Connection Bendpoint Policy"/>
+      <editPolicy
+            id="org.jbpm.ui.ProcessDefinitionXYLayoutEditPolicy"
+            part="org.jbpm.ui.part.graph.ProcessDefinitionGraphicalEditPart"
+            policy="org.jbpm.ui.policy.ProcessDefinitionXYLayoutEditPolicy"
+            role="LayoutEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.TransitionLabelGraphicalNodeEditPolicy"
+            part="org.jbpm.ui.part.graph.TransitionLabelGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TransitionLabelGraphicalNodeEditPolicy"
+            role="GraphicalNodeEditPolciy"/>
+      <editPolicy
+            id="org.jbpm.ui.TransitionLabelDirectEditPolicy"
+            part="org.jbpm.ui.part.graph.TransitionLabelGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TransitionLabelDirectEditPolicy"
+            role="DirectEditPolicy"/>
+      <editPolicy
+            id="org.jbpm.ui.TaskSelectionFeedbackEditPolicy"
+            part="org.jbpm.ui.part.graph.TaskGraphicalEditPart"
+            policy="org.jbpm.ui.policy.TaskSelectionFeedbackEditPolicy"
+            role="Selection Feedback"/>
+   </extension> -->
+
+	<extension-point id="palette" name="Graphical Designer Palette Extensions" schema="schema/palette.exsd"/>
+
+    <extension point="org.jbpm.gd.jpdl.palette">
+       <paletteContribution id="jpdl" editorClass="org.jbpm.gd.jpdl.editor.JpdlEditor">
+	    <category id="basicNodeTools"/>
+	    <category id="advancedNodeTools"/>
+	    <category id="transitionTools"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.basicNodeTools"
+           icon="icons/full/obj16/start_state_enabled.gif"
+           id="startStateTool"
+           label="Start"
+           node="true"
+           object="org.jbpm.gd.jpdl.startState"
+           tooltip="Creates a start node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.basicNodeTools"
+           icon="icons/full/obj16/state_enabled.gif"
+           id="stateTool"
+           label="State"
+           node="true"
+           object="org.jbpm.gd.jpdl.state"
+           tooltip="Creates a state node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.basicNodeTools"
+           icon="icons/full/obj16/end_state_enabled.gif"
+           id="endStateTool"
+           label="End"
+           node="true"
+           object="org.jbpm.gd.jpdl.endState"
+           tooltip="Creates an end node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/fork_enabled.gif"
+           id="forkTool"
+           label="Fork"
+           node="true"
+           object="org.jbpm.gd.jpdl.fork"
+           tooltip="Creates a fork node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/join_enabled.gif"
+           id="joinTool"
+           label="Join"
+           node="true"
+           object="org.jbpm.gd.jpdl.join"
+           tooltip="Creates a join node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/decision_enabled.gif"
+           id="decisionTool"
+           label="Decision"
+           node="true"
+           object="org.jbpm.gd.jpdl.decision"
+           tooltip="Creates a decision node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/node_enabled.gif"
+           id="nodeTool"
+           label="Node"
+           node="true"
+           object="org.jbpm.gd.jpdl.node"
+           tooltip="Creates a node node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/task_node_enabled.gif"
+           id="taskNodeTool"
+           label="Task Node"
+           node="true"
+           object="org.jbpm.gd.jpdl.taskNode"
+           tooltip="Creates a task node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/mail_node_enabled.gif"
+           id="mailNodeTool"
+           label="Mail Node"
+           node="true"
+           object="org.jbpm.gd.jpdl.mailNode"
+           tooltip="Creates a mail node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/esb_enabled.gif"
+           id="esbServiceTool"
+           label="ESB Service"
+           node="true"
+           object="org.jbpm.gd.jpdl.esbNode"
+           tooltip="Creates an ESB service node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/process_state_enabled.gif"
+           id="processStateTool"
+           label="Process State"
+           node="true"
+           object="org.jbpm.gd.jpdl.processState"
+           tooltip="Creates a process state node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.advancedNodeTools"
+           icon="icons/full/obj16/super_state_enabled.gif"
+           id="superStateTool"
+           label="Super State"
+           node="true"
+           object="org.jbpm.gd.jpdl.superState"
+           tooltip="Creates a superstate node"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.transitionTools"
+           icon="icons/full/obj16/transition_enabled.gif"
+           id="transitionTool"
+           label="Transition"
+           node="false"
+           object="org.jbpm.gd.jpdl.transition"
+           tooltip="Creates a transition"/>
+	  </paletteContribution>
+   </extension>	
+
+	<extension-point id="notationElements" name="Graphical Editor Notational Extensions" schema="schema/notationElements.exsd"/>
+	
+	<extension point="org.jbpm.gd.jpdl.notationElements">
+	  <notationElement id="root" class="org.jbpm.gd.jpdl.notation.JpdlRootContainer"/>
+	  <notationElement id="container" class="org.jbpm.gd.jpdl.notation.JpdlNodeContainer"/>
+	  <notationElement id="node" class="org.jbpm.gd.jpdl.notation.JpdlNode"/>
+	  <notationElement id="edge" class="org.jbpm.gd.jpdl.notation.JpdlEdge"/>
+	  <notationElement id="label" class="org.jbpm.gd.common.notation.Label"/>
+	  <notationElement id="bendpoint" class="org.jbpm.gd.common.notation.BendPoint"/>
+	</extension>  
+	
+	<extension-point id="xmlMappings" name="Graphical Editor Element to XML Mapping" schema="schema/xmlMappings.exsd"/>
+	
+	<extension point="org.jbpm.gd.jpdl.xmlMappings">
+      <mapping
+      		id="org.jbpm.gd.jpdl.action"
+      		semanticElement="org.jbpm.gd.jpdl.action"
+            adapterClass="org.jbpm.gd.jpdl.xml.ActionDomAdapter"
+            xmlElement="action"/>
+      <mapping
+            id="org.jbpm.gd.jpdl.assignment"
+            semanticElement="org.jbpm.gd.jpdl.assignment"
+            adapterClass="org.jbpm.gd.jpdl.xml.AssignmentDomAdapter"
+            xmlElement="assignment"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.cancelTimer"
+      		semanticElement="org.jbpm.gd.jpdl.cancelTimer"
+            adapterClass="org.jbpm.gd.jpdl.xml.CancelTimerDomAdapter"
+      		xmlElement="cancel-timer"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.condition"
+      		semanticElement="org.jbpm.gd.jpdl.condition"
+            adapterClass="org.jbpm.gd.jpdl.xml.ConditionDomAdapter"
+      		xmlElement="condition"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.controller"
+      		semanticElement="org.jbpm.gd.jpdl.controller"
+            adapterClass="org.jbpm.gd.jpdl.xml.ControllerDomAdapter"
+      		xmlElement="controller"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.genericElement"
+      		semanticElement="org.jbpm.gd.jpdl.genericElement"
+            adapterClass="org.jbpm.gd.common.xml.GenericElementXmlAdapter"
+            nameProvider="org.jbpm.gd.common.xml.GenericElementNameProvider"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.createTimer"
+      		semanticElement="org.jbpm.gd.jpdl.createTimer"
+            adapterClass="org.jbpm.gd.jpdl.xml.CreateTimerDomAdapter"
+      		xmlElement="create-timer"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.decision"
+      		semanticElement="org.jbpm.gd.jpdl.decision"
+            adapterClass="org.jbpm.gd.jpdl.xml.DecisionDomAdapter"
+      		xmlElement="decision"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.description"
+      		semanticElement="org.jbpm.gd.jpdl.description"
+            adapterClass="org.jbpm.gd.jpdl.xml.DescriptionDomAdapter"
+      		xmlElement="description"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.endState"
+      		semanticElement="org.jbpm.gd.jpdl.endState"
+            adapterClass="org.jbpm.gd.jpdl.xml.EndStateDomAdapter"
+      		xmlElement="end-state"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.event"
+      		semanticElement="org.jbpm.gd.jpdl.event"
+            adapterClass="org.jbpm.gd.jpdl.xml.EventDomAdapter"
+      		xmlElement="event"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.exceptionHandler"
+      		semanticElement="org.jbpm.gd.jpdl.exceptionHandler"
+            adapterClass="org.jbpm.gd.jpdl.xml.ExceptionHandlerDomAdapter"
+      		xmlElement="exception-handler"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.fork"
+      		semanticElement="org.jbpm.gd.jpdl.fork"
+            adapterClass="org.jbpm.gd.jpdl.xml.ForkDomAdapter"
+      		xmlElement="fork"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.handler"
+      		semanticElement="org.jbpm.gd.jpdl.handler"
+            adapterClass="org.jbpm.gd.jpdl.xml.HandlerDomAdapter"
+      		xmlElement="handler"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.join"
+      		semanticElement="org.jbpm.gd.jpdl.join"
+            adapterClass="org.jbpm.gd.jpdl.xml.JoinDomAdapter"
+      		xmlElement="join"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.mail"
+      		semanticElement="org.jbpm.gd.jpdl.mail"
+            adapterClass="org.jbpm.gd.jpdl.xml.MailDomAdapter"
+      		xmlElement="mail"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.mailNode"
+      		semanticElement="org.jbpm.gd.jpdl.mailNode"
+            adapterClass="org.jbpm.gd.jpdl.xml.MailNodeDomAdapter"
+      		xmlElement="mail-node"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.node"
+      		semanticElement="org.jbpm.gd.jpdl.node"
+            adapterClass="org.jbpm.gd.jpdl.xml.NodeDomAdapter"
+      		xmlElement="node"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.esbNode"
+      		semanticElement="org.jbpm.gd.jpdl.esbNode"
+            adapterClass="org.jbpm.gd.jpdl.xml.NodeDomAdapter"
+            mapperClass="org.jbpm.gd.jpdl.xml.EsbNodeMapper"
+            mapperClassPriority="999"
+      		xmlElement="node"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.esbNotifier"
+      		semanticElement="org.jbpm.gd.jpdl.esbNotifier"
+            adapterClass="org.jbpm.gd.jpdl.xml.ActionDomAdapter"
+            mapperClass="org.jbpm.gd.jpdl.xml.EsbNotifierMapper"
+            mapperClassPriority="999"
+      		xmlElement="action"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.processDefinition"
+      		semanticElement="org.jbpm.gd.jpdl.processDefinition"
+            adapterClass="org.jbpm.gd.jpdl.xml.ProcessDefinitionDomAdapter"
+      		xmlElement="process-definition"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.processState"
+      		semanticElement="org.jbpm.gd.jpdl.processState"
+            adapterClass="org.jbpm.gd.jpdl.xml.ProcessStateDomAdapter"
+      		xmlElement="process-state"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.reminder"
+      		semanticElement="org.jbpm.gd.jpdl.reminder"
+            adapterClass="org.jbpm.gd.jpdl.xml.ReminderDomAdapter"
+      		xmlElement="reminder"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.script"
+      		semanticElement="org.jbpm.gd.jpdl.script"
+            adapterClass="org.jbpm.gd.jpdl.xml.ScriptDomAdapter"
+      		xmlElement="script"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.startState"
+      		semanticElement="org.jbpm.gd.jpdl.startState"
+            adapterClass="org.jbpm.gd.jpdl.xml.StartStateDomAdapter"
+      		xmlElement="start-state"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.state"
+      		semanticElement="org.jbpm.gd.jpdl.state"
+            adapterClass="org.jbpm.gd.jpdl.xml.StateDomAdapter"
+      		xmlElement="state"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.subject"
+      		semanticElement="org.jbpm.gd.jpdl.subject"
+            adapterClass="org.jbpm.gd.jpdl.xml.SubjectDomAdapter"
+      		xmlElement="subject"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.subprocess"
+      		semanticElement="org.jbpm.gd.jpdl.subprocess"
+            adapterClass="org.jbpm.gd.jpdl.xml.SubProcessDomAdapter"
+      		xmlElement="sub-process"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.superState"
+      		semanticElement="org.jbpm.gd.jpdl.superState"
+            adapterClass="org.jbpm.gd.jpdl.xml.SuperStateDomAdapter"
+      		xmlElement="super-state"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.swimlane"
+      		semanticElement="org.jbpm.gd.jpdl.swimlane"
+            adapterClass="org.jbpm.gd.jpdl.xml.SwimlaneDomAdapter"
+      		xmlElement="swimlane"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.task"
+      		semanticElement="org.jbpm.gd.jpdl.task"
+            adapterClass="org.jbpm.gd.jpdl.xml.TaskDomAdapter"
+      		xmlElement="task"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.taskNode"
+      		semanticElement="org.jbpm.gd.jpdl.taskNode"
+            adapterClass="org.jbpm.gd.jpdl.xml.TaskNodeDomAdapter"
+      		xmlElement="task-node"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.text"
+      		semanticElement="org.jbpm.gd.jpdl.text"
+            adapterClass="org.jbpm.gd.jpdl.xml.TextDomAdapter"
+      		xmlElement="text"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.timer"
+      		semanticElement="org.jbpm.gd.jpdl.timer"
+            adapterClass="org.jbpm.gd.jpdl.xml.TimerDomAdapter"
+      		xmlElement="timer"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.transition"
+      		semanticElement="org.jbpm.gd.jpdl.transition"
+            adapterClass="org.jbpm.gd.jpdl.xml.TransitionDomAdapter"
+      		xmlElement="transition"/>
+      <mapping
+      		id="org.jbpm.gd.jpdl.variable"
+      		semanticElement="org.jbpm.gd.jpdl.variable"
+            adapterClass="org.jbpm.gd.jpdl.xml.VariableDomAdapter"
+      		xmlElement="variable"/>
+	</extension>
+
+	<extension-point id="notationMappings" name="Graphical Editor Element to Notation Mappings" schema="schema/notationMappings.exsd"/>
+	
+	<extension point="org.jbpm.gd.jpdl.notationMappings">
+	   <mapping
+	      id="decision"
+	      semanticElement="org.jbpm.gd.jpdl.decision"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="endState"
+	      semanticElement="org.jbpm.gd.jpdl.endState"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="fork"
+	      semanticElement="org.jbpm.gd.jpdl.fork"
+	      notationElement="org.jbpm.gd.jpdl.node">
+	      <figure width="252" height="24" hideName="true"/> 
+	   </mapping> 
+	   <mapping
+	      id="join"
+	      semanticElement="org.jbpm.gd.jpdl.join"
+	      notationElement="org.jbpm.gd.jpdl.node">
+	      <figure width="252" height="24" hideName="true"/>
+	   </mapping> 
+	   <mapping
+	      id="mailNode"
+	      semanticElement="org.jbpm.gd.jpdl.mailNode"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="node"
+	      semanticElement="org.jbpm.gd.jpdl.node"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="esbNode"
+	      semanticElement="org.jbpm.gd.jpdl.esbNode"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="processState"
+	      semanticElement="org.jbpm.gd.jpdl.processState"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="startState"
+	      semanticElement="org.jbpm.gd.jpdl.startState"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="state"
+	      semanticElement="org.jbpm.gd.jpdl.state"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="superState"
+	      semanticElement="org.jbpm.gd.jpdl.superState"
+	      notationElement="org.jbpm.gd.jpdl.container">
+	      <figure width="360" height="240" />
+	   </mapping> 
+	   <mapping
+	      id="taskNode"
+	      semanticElement="org.jbpm.gd.jpdl.taskNode"
+	      notationElement="org.jbpm.gd.jpdl.node"/>
+	   <mapping
+	      id="processDefinition"
+	      semanticElement="org.jbpm.gd.jpdl.processDefinition"
+	      notationElement="org.jbpm.gd.jpdl.root"/>
+	   <mapping
+	      id="transition"
+	      semanticElement="org.jbpm.gd.jpdl.transition"
+	      notationElement="org.jbpm.gd.jpdl.edge"/>
+	</extension>   
+	
+	<extension-point id="graphicalEditParts" name="Graphical EditParts Extensions" schema="schema/editParts.exsd"/>
+	
+	<extension point="org.jbpm.gd.jpdl.graphicalEditParts">
+	  <editPart id="taskNode" class="org.jbpm.gd.jpdl.part.TaskNodeGraphicalEditPart" />
+	  <editPart id="taskList" class="org.jbpm.gd.jpdl.part.TaskListGraphicalEditPart" />
+	  <editPart id="task" class="org.jbpm.gd.jpdl.part.TaskGraphicalEditPart" />
+	  <editPart id="transition" class="org.jbpm.gd.common.part.EdgeGraphicalEditPart" />
+	  <editPart id="transitionLabel" class="org.jbpm.gd.common.part.LabelGraphicalEditPart" />
+	</extension> 
+
+<!--	<extension-point id="editPolicies" name="Graphical Editor EditPolicy Extensions" schema="schema/policies.exsd"/>
+	
+    <extension
+        point="org.jbpm.gd.jpdl.editPolicies">
+      <editPolicy
+            id="nodeComponent"
+            editPart="org.jbpm.gd.jpdl.node"
+            class="org.jbpm.gd.jpdl.ui.policy.NodeComponentEditPolicy"
+            role="ComponentEditPolicy"/>
+      <editPolicy
+            id="nodeGraphicalNode"
+            editPart="org.jbpm.gd.jpdl.node"
+            class="org.jbpm.gd.jpdl.ui.policy.NodeGraphicalNodeEditPolicy"
+            role="GraphicalNodeEditPolciy"/>
+      <editPolicy
+            id="nodeDirect"
+            editPart="org.jbpm.gd.jpdl.node"
+            class="org.jbpm.gd.jpdl.ui.policy.NodeDirectEditPolicy"
+            role="DirectEditPolicy"/>
+      <editPolicy
+            id="transitionConnectionEndpoints"
+            editPart="org.jbpm.gd.jpdl.transition"
+            class="org.jbpm.gd.jpdl.ui.policy.TransitionConnectionEndpointsEditPolicy"
+            role="Connection Endpoint Policy"/>
+      <editPolicy
+            id="transitionConnection"
+            editPart="org.jbpm.gd.jpdl.transition"
+            class="org.jbpm.gd.jpdl.ui.policy.TransitionConnectionEditPolicy"
+            role="ConnectionEditPolicy"/>
+      <editPolicy
+            id="transitionConnectionBendpoint"
+            editPart="org.jbpm.gd.jpdl.transition"
+            class="org.jbpm.gd.jpdl.ui.policy.TransitionConnectionBendpointEditPolicy"
+            role="Connection Bendpoint Policy"/>
+      <editPolicy
+            id="org.jbpm.ui.ProcessDefinitionXYLayoutEditPolicy"
+            editPart="org.jbpm.gd.jpdl.processDefinition"
+            class="org.jbpm.gd.jpdl.ui.policy.ProcessDefinitionXYLayoutEditPolicy"
+            role="LayoutEditPolicy"/>
+      <editPolicy
+            id="transitionLabelGraphicalNode"
+            editPart="org.jbpm.gd.jpdl.transitionLabel"
+            class="org.jbpm.gd.jpdl.ui.policy.TransitionLabelGraphicalNodeEditPolicy"
+            role="GraphicalNodeEditPolciy"/>
+      <editPolicy
+            id="transitionLabelDirect"
+            editPart="org.jbpm.gd.jpdl.transitionLabel"
+            class="org.jbpm.gd.jpdl.ui.policy.TransitionLabelDirectEditPolicy"
+            role="DirectEditPolicy"/>
+      <editPolicy
+            id="taskSelectionFeedback"
+            editPart="org.jbpm.gd.jpdl.task"
+            class="org.jbpm.gd.jpdl.ui.policy.TaskSelectionFeedbackEditPolicy"
+            role="Selection Feedback"/>
+    </extension> -->
+    
+    
+    <extension
+          point="org.eclipse.ui.views">
+       <view
+             allowMultiple="false"
+             category="org.jbpm.gd.jpdl.views"
+             class="org.jbpm.gd.common.editor.BirdsEyeViewer"
+             icon="icons/full/obj16/overview.gif"
+             id="org.jbpm.gd.jpdl.overview"
+             name="Overview"/>
+       <category
+             id="org.jbpm.gd.jpdl.views"
+             name="JBoss jBPM"/>
+    </extension>
+    
+    <extension-point id="assignmentType" name="Assignment Type Extensions" schema="schema/assignmentType.exsd"/>
+    
+    <extension
+          point="org.jbpm.gd.jpdl.assignmentType">          
+       <type
+             form="org.jbpm.gd.jpdl.properties.AssignmentSwimlaneInfoComposite"
+             id="org.jbpm.gd.jpdl.swimlane"
+             label="Swimlane"
+             matcher="org.jbpm.gd.jpdl.util.SwimlaneAssignmentMatcher"
+             input="org.jbpm.gd.jpdl.model.Task">
+       </type>
+       <type
+             form="org.jbpm.gd.jpdl.properties.AssignmentExpressionInfoComposite"
+             id="org.jbpm.gd.jpdl.expression"
+             label="Expression"
+             matcher="org.jbpm.gd.jpdl.util.ExpressionAssignmentMatcher"
+             input="org.jbpm.gd.jpdl.model.Assignable">
+       </type>
+       <type
+             form="org.jbpm.gd.jpdl.properties.AssignmentActorInfoComposite"
+             id="org.jbpm.gd.jpdl.actor"
+             label="Actor"
+             matcher="org.jbpm.gd.jpdl.util.ActorAssignmentMatcher"
+             input="org.jbpm.gd.jpdl.model.Assignable">
+       </type>
+       <type
+             form="org.jbpm.gd.jpdl.properties.AssignmentPooledActorsInfoComposite"
+             id="org.jbpm.gd.jpdl.pooledActors"
+             label="Pooled Actors"
+             matcher="org.jbpm.gd.jpdl.util.PooledActorsAssignmentMatcher"
+             input="org.jbpm.gd.jpdl.model.Assignable">
+       </type>
+       <type
+             form="org.jbpm.gd.jpdl.properties.AssignmentHandlerInfoComposite"
+             id="org.jbpm.gd.jpdl.handler"
+             label="Handler"
+             matcher="org.jbpm.gd.jpdl.util.HandlerAssignmentMatcher"
+             input="org.jbpm.gd.jpdl.model.Assignable">
+       </type>
+    </extension> 
+    
+    <!-- Seam Pageflow related extensions -->
+    
+  <extension point ="org.eclipse.ui.editors">
+    <editor
+          class="org.jbpm.gd.pf.editor.PageFlowEditor"
+          contributorClass="org.jbpm.gd.common.editor.ActionBarContributor" 
+          icon="icons/full/obj16/par_obj.gif"
+          id="org.jbpm.gd.pf.editor"
+          name="Seam Graphical Pageflow Designer">
+        <contentTypeBinding contentTypeId="org.jbpm.gd.jpdl.pageflow" /> 
+    </editor> 
+  </extension> 
+  	
+  <extension point="org.eclipse.core.runtime.contentTypes">
+  	<content-type id="pageflow" name="jpdl semantic info"
+		base-type="org.eclipse.core.runtime.xml"
+		default-charset="UTF-8">
+		<describer class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+			<parameter name="element" value="pageflow-definition"/>
+		</describer>
+	</content-type>
+  </extension>  
+  
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Seam"
+            id="org.jboss.tools.seam.ui">
+      </category> 
+      <wizard
+            name="Seam Page Flow"
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            category="org.jboss.tools.seam.ui"
+            class="org.jbpm.gd.pf.wizard.NewPageFlowWizard"
+            id="org.jbpm.gd.wizard.new.file">
+         <description>
+            A wizard that creates a pageflow diagram
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
+
+   <extension 
+   		 point="org.jbpm.gd.jpdl.dsl">
+      <language 
+            id="org.jbpm.gd.pf" 
+            name="Seam Pageflow Definition Language" 
+            editor="org.jbpm.gd.pf.editor"/>		 
+   </extension>
+    
+   <extension
+         point="org.jbpm.gd.jpdl.semanticElements">
+      <semanticElement
+            icon="icons/full/obj16/decision_enabled.gif"
+            id="org.jbpm.gd.pf.decision"
+            label="Decision"
+            language="org.jbpm.gd.pf"
+            modelClass="org.jbpm.gd.pf.model.Decision"
+            name="decision"/>
+      <semanticElement
+            icon="icons/full/obj16/page_enabled.gif"
+            id="org.jbpm.gd.pf.page"
+            label="Page"
+            language="org.jbpm.gd.pf"
+            modelClass="org.jbpm.gd.pf.model.Page"
+            name="page"/>
+      <semanticElement
+            icon="icons/full/obj16/pageflow_definition_enabled.gif"
+            id="org.jbpm.gd.pf.pageFlowDefinition"
+            label="Pageflow Definition"
+            language="org.jbpm.gd.pf"
+            modelClass="org.jbpm.gd.pf.model.PageFlowDefinition"
+            name="pageflow-definition"/>
+      <semanticElement
+            icon="icons/full/obj16/start_page_enabled.gif"
+            id="org.jbpm.gd.pf.startPage"
+            label="Start Page"
+            language="org.jbpm.gd.pf"
+            modelClass="org.jbpm.gd.pf.model.StartPage"
+            name="start-page"/>
+      <semanticElement
+      		icon="icons/full/obj16/process_state_enabled.gif"
+      		id="org.jbpm.gd.pf.processState"
+      		label="Process State"
+      		language="org.jbpm.gd.pf"
+      		modelClass="org.jbpm.gd.pf.model.ProcessState"
+      		name="process-state"/>
+      <semanticElement
+            icon="icons/full/obj16/transition_enabled.gif"
+            id="org.jbpm.gd.pf.transition"
+            label="Transition"
+            language="org.jbpm.gd.pf"
+            modelClass="org.jbpm.gd.pf.model.Transition"
+            name="transition"/>
+   </extension>
+
+	<extension point="org.jbpm.gd.jpdl.xmlMappings">
+      <mapping
+      		id="org.jbpm.gd.pf.decision"
+      		semanticElement="org.jbpm.gd.pf.decision"
+            adapterClass="org.jbpm.gd.pf.xml.DecisionDomAdapter"
+            xmlElement="decision"/>
+      <mapping
+      		id="org.jbpm.gd.pf.page"
+      		semanticElement="org.jbpm.gd.pf.page"
+            adapterClass="org.jbpm.gd.pf.xml.PageDomAdapter"
+            xmlElement="page"/>
+      <mapping
+      		id="org.jbpm.gd.pf.pageFlowDefinition"
+      		semanticElement="org.jbpm.gd.pf.pageFlowDefinition"
+            adapterClass="org.jbpm.gd.pf.xml.PageFlowDefinitionDomAdapter"
+            xmlElement="pageflow-definition"/>
+      <mapping
+      		id="org.jbpm.gd.pf.startPage"
+      		semanticElement="org.jbpm.gd.pf.startPage"
+            adapterClass="org.jbpm.gd.pf.xml.StartPageDomAdapter"
+            xmlElement="start-page"/>
+      <mapping
+      		id="org.jbpm.gd.pf.processState"
+      		semanticElement="org.jbpm.gd.pf.processState"
+      		adapterClass="org.jbpm.gd.pf.xml.ProcessStateDomAdapter"
+      		xmlElement="process-state"/>
+      <mapping
+      		id="org.jbpm.gd.pf.transition"
+      		semanticElement="org.jbpm.gd.pf.transition"
+            adapterClass="org.jbpm.gd.pf.xml.TransitionDomAdapter"
+            xmlElement="transition"/>
+    </extension>
+    
+    <extension point="org.jbpm.gd.jpdl.palette">
+       <paletteContribution id="pageflow" editorClass="org.jbpm.gd.pf.editor.PageFlowEditor">
+	    <category id="nodeTools"/>
+	    <category id="transitionTools"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.nodeTools"
+           icon="icons/full/obj16/start_page_enabled.gif"
+           id="startPageTool"
+           label="Start"
+           node="true"
+           object="org.jbpm.gd.pf.startPage"
+           tooltip="Creates a start page"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.nodeTools"
+           icon="icons/full/obj16/page_enabled.gif"
+           id="pageTool"
+           label="Page"
+           node="true"
+           object="org.jbpm.gd.pf.page"
+           tooltip="Creates a page"/>
+	    <entry
+           category="org.jbpm.gd.jpdl.nodeTools"
+           icon="icons/full/obj16/decision_enabled.gif"
+           id="decisionTool"
+           label="Decision"
+           node="true"
+           object="org.jbpm.gd.pf.decision"
+           tooltip="Creates a decision node"/>
+        <entry
+           category="org.jbpm.gd.jpdl.nodeTools"
+           icon="icons/full/obj16/process_state_enabled.gif"
+           id="processStateTool"
+           label="Process State"
+           node="true"
+           object="org.jbpm.gd.pf.processState"
+           tooltip="Creates a process state" />
+	    <entry
+           category="org.jbpm.gd.jpdl.transitionTools"
+           icon="icons/full/obj16/transition_enabled.gif"
+           id="transitionTool"
+           label="Transition"
+           node="false"
+           object="org.jbpm.gd.pf.transition"
+           tooltip="Creates a transition"/>
+	  </paletteContribution>
+   </extension>	
+   
+	<extension point="org.jbpm.gd.jpdl.notationElements">
+	  <notationElement id="pfRoot" class="org.jbpm.gd.pf.notation.PageFlowRootContainer"/>
+	  <notationElement id="pfNode" class="org.jbpm.gd.pf.notation.PageFlowNode"/>
+	  <notationElement id="pfEdge" class="org.jbpm.gd.pf.notation.PageFlowEdge"/>
+	</extension>  
+	
+   <extension point="org.jbpm.gd.jpdl.notationMappings">
+	   <mapping
+	      id="pageFlowDefinition"
+	      semanticElement="org.jbpm.gd.pf.pageFlowDefinition"
+	      notationElement="org.jbpm.gd.jpdl.pfRoot"/>
+	   <mapping
+	      id="pfDecision"
+	      semanticElement="org.jbpm.gd.pf.decision"
+	      notationElement="org.jbpm.gd.jpdl.pfNode"/>
+	   <mapping
+	      id="startPage"
+	      semanticElement="org.jbpm.gd.pf.startPage"
+	      notationElement="org.jbpm.gd.jpdl.pfNode"/>
+	   <mapping
+	      id="page"
+	      semanticElement="org.jbpm.gd.pf.page"
+	      notationElement="org.jbpm.gd.jpdl.pfNode"/>
+	   <mapping
+	   	  id="processState"
+	   	  semanticElement="org.jbpm.gd.pf.processState"
+	   	  notationElement="org.jbpm.gd.jpdl.pfNode"/>
+	   <mapping
+	      id="transition"
+	      semanticElement="org.jbpm.gd.pf.transition"
+	      notationElement="org.jbpm.gd.jpdl.pfEdge"/>
+	</extension>   
+	
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="org.jbpm.gd.pf.editor"
+            labelProvider="org.jbpm.gd.common.properties.ElementLabelProvider"
+            typeMapper="org.jbpm.gd.common.properties.ElementTypeMapper">
+         <propertyCategory category="org.jbpm.gd.pf.general"/>
+      </propertyContributor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.jbpm.gd.pf.editor">
+         <propertyTab 
+            category="org.jbpm.gd.pf.general"   
+            id="org.jbpm.gd.pf.general"
+            label="General"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="org.jbpm.gd.pf.editor">
+         <propertySection
+               class="org.jbpm.gd.common.properties.NamedElementSection"
+               filter="org.jbpm.gd.pf.properties.NamedElementFilter"
+               id="org.jbpm.gd.pf.name"
+               tab="org.jbpm.gd.pf.general">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+         <propertySection
+               afterSection="org.jbpm.gd.pf.name"
+               class="org.jbpm.gd.pf.properties.ViewIdSection"
+               filter="org.jbpm.gd.pf.properties.ViewIdFilter"
+               id="org.jbpm.gd.pf.viewId"
+               tab="org.jbpm.gd.pf.general">
+            <input type="org.jbpm.gd.common.model.SemanticElement"/>
+         </propertySection>
+      </propertySections>
+   </extension> 
+   
+</plugin>
