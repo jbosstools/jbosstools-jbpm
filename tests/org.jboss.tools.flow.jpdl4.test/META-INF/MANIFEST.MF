@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.jboss.tools.flow.jpdl4.test
+Bundle-Version: 1.0.0
+Bundle-Vendor: %pluginProvider
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
