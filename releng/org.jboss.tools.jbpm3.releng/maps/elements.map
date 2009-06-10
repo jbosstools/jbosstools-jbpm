@@ -1,0 +1,5 @@
+plugin@org.jbpm.gd.jpdl.help=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.help/
+plugin@org.jbpm.gd.jpdl.ui=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.ui/
+plugin@org.jbpm.gd.jpdl.core=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.core/
+plugin@org.jbpm.gd.jpdl=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl/
+feature@org.jbpm.gd.jpdl.feature=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.feature/
