@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.team.svn.core.svnnature">
+
+  <!-- !*** Contains features, plugins, and tests common to both jbpm3 and jbpm4. -->
+
+  <!-- !*** features -->
+  <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm.common.feature,org.jboss.tools.jbpm.common.feature"/>
+
+  <!-- !*** plugins -->
+  <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.common,org.jboss.tools.jbpm.common"/>
+
+  <!-- !*** test plugins -->
+  <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.common.test,org.jboss.tools.jbpm.common.test"/>
+
+</provider>
+</psf>

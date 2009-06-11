@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+
+  <!-- !*** Contains features, plugins, and tests for jbpm4.  -->
+  <!-- !*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4. -->
+
+  <!-- !*** features -->
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.sdk.feature,org.jboss.tools.jbpm4.sdk.feature"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.flow.jpdl4.feature,org.jboss.tools.flow.jpdl4.feature"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm.convert.feature,org.jboss.tools.jbpm.convert.feature"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jbpm.gd.jpdl.feature,org.jbpm.gd.jpdl.feature"/>
+
+  <!-- !*** plugins -->
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4,org.jboss.tools.flow.jpdl4"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4.multipage,org.jboss.tools.flow.jpdl4.multipage"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.convert,org.jboss.tools.flow.convert"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl,org.jbpm.gd.jpdl"/>
+
+  <!-- !*** test feature -->
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.tests.feature,org.jboss.tools.jbpm4.tests.feature"/>
+
+  <!-- !*** test plugins -->
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.convert.test,org.jboss.tools.jbpm.convert.test"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.test,org.jboss.tools.flow.jpdl4.test"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.multipage.test,org.jboss.tools.flow.jpdl4.multipage.test"/>
+  <project reference="0.9.3,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/tests/org.jbpm.gd.jpdl.test,org.jbpm.gd.jpdl.test"/>
+
+</provider>
+</psf>
