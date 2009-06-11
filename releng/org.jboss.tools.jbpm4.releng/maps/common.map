@@ -5,5 +5,6 @@ feature@org.jboss.tools.jbpm.common.feature=SVN,,http://anonsvn.jboss.org/repos,
 
 !*** plugins
 plugin@org.jboss.tools.jbpm.common=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.common
-plugin@org.jboss.tools.jbpm.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.common.test
 
+!*** test plugins
+plugin@org.jboss.tools.jbpm.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.common.test
