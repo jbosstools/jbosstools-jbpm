@@ -1,0 +1,23 @@
+!*** Contains features, plugins, and tests for jbpm4. 
+!*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4.
+
+!*** features
+feature@org.jboss.tools.jbpm4.all=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.all
+feature@org.jboss.tools.flow.jpdl4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.flow.jpdl4.feature
+feature@org.jboss.tools.jbpm.convert.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm.convert.feature
+feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jbpm.gd.jpdl.feature
+
+!*** plugins
+plugin@org.jboss.tools.flow.jpdl4=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4
+plugin@org.jboss.tools.flow.jpdl4.multipage=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4.multipage
+plugin@org.jboss.tools.flow.convert=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.convert
+plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl
+
+!*** test feature
+feature@org.jboss.tools.jbpm4.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.tests.feature
+
+!*** test plugins
+plugin@org.jboss.tools.jbpm.convert.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.convert.test
+plugin@org.jboss.tools.flow.jpdl4.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.test
+plugin@org.jboss.tools.flow.jpdl4.multipage.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.multipage.test
+plugin@org.jbpm.gd.jpdl.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jbpm.gd.jpdl.test
