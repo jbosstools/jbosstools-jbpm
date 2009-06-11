@@ -9,8 +9,8 @@ incubation=
 buildType=N
 version=4.0.0
 
-mainFeatureToBuildID=org.jboss.tools.jbpm4.all
-testFeatureToBuildID=org.jboss.tools.jbpm4.tests
+mainFeatureToBuildID=org.jboss.tools.jbpm4.sdk.feature
+testFeatureToBuildID=org.jboss.tools.jbpm4.tests.feature
 
 build.steps=map2psf,buildUpdate,buildTests,generateDigests,test,publish,cleanup
 
