@@ -12,7 +12,7 @@ version=4.0.0
 mainFeatureToBuildID=org.jboss.tools.jbpm4.sdk.feature
 testFeatureToBuildID=org.jboss.tools.jbpm4.tests.feature
 
-build.steps=map2psf,buildUpdate,buildTests,generateDigests,test,publish,cleanup
+build.steps=buildUpdate,buildTests,generateDigests,test,publish,cleanup
 
 # Re-use local sources?
 localSourceCheckoutDir=/home/nboldt/eclipse/workspace-jboss/jbosstools-trunk/jbpm
