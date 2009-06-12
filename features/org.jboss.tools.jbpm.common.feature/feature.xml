@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.jbpm.common.feature"
       label="jBPM Common"
-      version="1.0.0.CR1"
+      version="1.0.0.qualifier"
       provider-name="JBoss by Red Hat">
 
    <description>
