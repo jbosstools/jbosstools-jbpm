@@ -33,19 +33,11 @@
          version="0.0.0"/>
 
    <includes
-         id="org.jboss.tools.jbpm.convert.feature"
+         id="org.jboss.tools.flow.common.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.jboss.tools.jbpm.convert.source.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.jbpm.gd.jpdl.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.jbpm.gd.jpdl.source.feature"
+         id="org.jboss.tools.flow.common.source.feature"
          version="0.0.0"/>
 
 </feature>
