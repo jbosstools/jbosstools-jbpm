@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="languages" name="JBoss Tools Flow Language Extensions" schema="schema/languages.exsd"/>
+   <extension-point id="elements" name="JBoss Tools Flow Language Elements" schema="schema/elements.exsd"/>
+
+</plugin>
