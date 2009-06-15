@@ -301,14 +301,15 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="org.jboss.tools.flow.jpdl4"
-            name="JBoss jBPM">
+            name="jBPM 4"
+            parentCategory="org.jboss.tools.jbpm">
       </category>
       <wizard
             category="org.jboss.tools.flow.jpdl4"
             class="org.jboss.tools.flow.jpdl4.wizard.NewJpdl4FileWizard"
             icon="icons/process.gif"
             id="org.jboss.tools.flow.jpdl4.file"
-            name="jPDL4 File">
+            name="Process Definition">
       </wizard>
    </extension>
 
@@ -488,7 +489,7 @@
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.sequenceFlow.timer"
                 class="org.jboss.tools.flow.jpdl4.properties.SequenceFlowOutcomeValueSection"
-                filter="org.jboss.tools.jpdl4.properties.SequenceFlowOutcomeValueFilter"
+                filter="org.jboss.tools.flow.jpdl4.properties.SequenceFlowOutcomeValueFilter"
                 id="org.jboss.tools.jpdl4.sequenceFlow.outcome"
                 tab="org.jboss.tools.jpdl4.general">
           </propertySection>

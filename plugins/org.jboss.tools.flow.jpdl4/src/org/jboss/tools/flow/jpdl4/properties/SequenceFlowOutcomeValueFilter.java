@@ -1,4 +1,4 @@
-package org.jboss.tools.jpdl4.properties;
+package org.jboss.tools.flow.jpdl4.properties;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.viewers.IFilter;
