@@ -9,4 +9,12 @@
             name="JBoss jBPM"/>
    </extension>
 
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="JBoss jBPM"
+            id="org.jboss.tools.jbpm">
+      </category> 
+   </extension>
+   
 </plugin>
