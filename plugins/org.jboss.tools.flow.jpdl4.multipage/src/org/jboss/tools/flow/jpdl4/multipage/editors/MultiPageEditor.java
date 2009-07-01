@@ -28,7 +28,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.editor.JpdlDeserializer;
+import org.jboss.tools.flow.jpdl4.io.JpdlDeserializer;
 import org.jboss.tools.flow.jpdl4.multipage.message.MultiPageMessages;
 
 /**
@@ -95,7 +95,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements
 	private void doPageChangeFromXmlToJpdl() {
 		String xmlText = xmlEditor.getDocumentProvider().getDocument(xmlEditor.getEditorInput()).get();
 		ByteArrayInputStream in = new ByteArrayInputStream(xmlText.getBytes());
-		Wrapper model = new JpdlDeserializer().deserialize(in);
+		Wrapper model = JpdlDeserializer.deserialize(in);
 		if(model != null && model.getElement() != null) {
 			jpdlEditor.setModel(model);
 			((GraphicalViewer) jpdlEditor.getAdapter(GraphicalViewer.class)).setContents(model);
