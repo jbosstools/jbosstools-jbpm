@@ -3,28 +3,43 @@
  */
 package org.jboss.tools.flow.jpdl4.io;
 
-import java.util.List;
+import java.io.StringWriter;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-class ArgumentDeserializer extends AbstractElementDeserializer {
-	protected List<String> getAttributesToRead() {
-		List<String> result = super.getAttributesToRead();
-		return result;
+
+class ArgumentDeserializer extends PrimitiveObjectDeserializer {
+
+	public void deserializeAttributes(Wrapper wrapper, Element element) {
 	}
-	public Wrapper deserializeChildNode(Wrapper parent, Node node) {
-		Wrapper result = null;
-		if (node instanceof Element && "string".equals(node.getNodeName())) {
-			String value = ((Element)node).getAttribute("value");
-			if (value != null && !("".equals(value))) {
-				parent.setPropertyValue(Argument.VALUE, value);
+
+	public void deserializeChildNodes(Wrapper wrapper, Element element) {
+		NodeList nodeList = element.getChildNodes();
+		StringBuffer buffer = new StringBuffer();
+		DOMSource domSource = new DOMSource();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			StringWriter writer = new StringWriter();
+			domSource.setNode(nodeList.item(i));
+			Result result = new StreamResult(writer);
+			try {
+				getTransformer().transform(domSource, result);
+			} catch (TransformerException e) {
+				Logger.logError("Exception while transforming xml.", e);
 			}
-		} else {
-			result = super.deserializeChildNode(parent, node);
+			buffer.append(writer.getBuffer());
 		}
-		return result;
+		wrapper.setPropertyValue(Argument.VALUE, buffer.toString());
+		
 	}
+
+
 }

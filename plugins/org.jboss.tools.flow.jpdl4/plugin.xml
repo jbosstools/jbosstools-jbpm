@@ -296,6 +296,13 @@
             label="field"
             language="org.jboss.tools.flow.jpdl4">
       </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.PrimitiveObject"
+            figure="icons/16/object.png"
+            id="org.jboss.tools.flow.jpdl4.primitive"
+            label="primitive"
+            language="org.jboss.tools.flow.jpdl4">
+      </element>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">

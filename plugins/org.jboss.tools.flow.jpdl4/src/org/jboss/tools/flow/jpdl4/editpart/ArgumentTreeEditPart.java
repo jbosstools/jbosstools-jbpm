@@ -23,7 +23,7 @@ public class ArgumentTreeEditPart extends JpdlTreeEditPart implements ElementTre
 	
 	protected String getText() {
 		String value = (String)((Wrapper)getModel()).getPropertyValue(Argument.VALUE);
-		return (value != null && !("".equals(value))) ? value : "argument";
+		return (value != null && !("".equals(value))) ? value.trim() : "argument";
 	}
 	
     public void modelChanged(ModelEvent event) {

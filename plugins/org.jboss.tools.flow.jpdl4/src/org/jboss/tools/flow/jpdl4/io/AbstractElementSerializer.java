@@ -53,7 +53,9 @@ public abstract class AbstractElementSerializer implements ElementSerializer {
 		}
 	}
 
-	protected abstract List<String> getAttributesToSave();
+	protected List<String> getAttributesToSave() {
+		return new ArrayList<String>();
+	}
 	
 	protected String getPropertyName(String attributeName) {
 		return attributeName;

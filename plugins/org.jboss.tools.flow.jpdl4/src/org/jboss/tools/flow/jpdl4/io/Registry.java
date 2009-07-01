@@ -22,6 +22,7 @@ import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.MailTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
+import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
@@ -66,10 +67,31 @@ public class Registry {
 		else if ("parameter-out".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.outputParameter";
 		else if ("field".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.field";
 		else if ("arg".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.argument";
+		// wire object group treated as one kind of element
+		else if ("null".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("ref".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("env-ref".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("jndi".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("list".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("map".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("set".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("properties".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("object".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("string".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("byte".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("char".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("double".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("false".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("float".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("int".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("long".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("short".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("true".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		// no corresponding element
 		else return null;
 	}
 
-	public static AbstractElementDeserializer getElementDeserializer(Wrapper wrapper) {
+	public static ElementDeserializer getElementDeserializer(Wrapper wrapper) {
 		if (wrapper instanceof FlowWrapper) {
 			return new ProcessDeserializer();
 		} else if (wrapper instanceof NodeWrapper) {
@@ -90,7 +112,7 @@ public class Registry {
 	}
 	
 
-	private static AbstractElementDeserializer getDefaultDeserializer(Wrapper wrapper) {
+	private static ElementDeserializer getDefaultDeserializer(Wrapper wrapper) {
 		Object element = wrapper.getElement();
 		if (element instanceof Swimlane) {
 			return new SwimlaneDeserializer();
@@ -106,11 +128,13 @@ public class Registry {
 			return new ArgumentDeserializer();
 		} else if (element instanceof Field) {
 			return new FieldDeserializer();
+		} else if (element instanceof PrimitiveObject) {
+			return new PrimitiveObjectDeserializer();
 		}
 		return null;
 	}
 	
-	private static AbstractElementDeserializer getNodeDeserializer(Wrapper wrapper) {
+	private static ElementDeserializer getNodeDeserializer(Wrapper wrapper) {
 		Object element = wrapper.getElement();
 		if (element instanceof HumanTask) {
 			return new HumanTaskDeserializer();
@@ -134,7 +158,7 @@ public class Registry {
 		if (elementId == null) return null;
 		Wrapper result = ElementRegistry.createWrapper(elementId);
 		if (result == null) return null;
-		AbstractElementDeserializer elementDeserializer = Registry.getElementDeserializer(result);
+		ElementDeserializer elementDeserializer = Registry.getElementDeserializer(result);
 		if (elementDeserializer != null) {
 			elementDeserializer.deserializeAttributes(result, element);
 			elementDeserializer.deserializeChildNodes(result, element);
