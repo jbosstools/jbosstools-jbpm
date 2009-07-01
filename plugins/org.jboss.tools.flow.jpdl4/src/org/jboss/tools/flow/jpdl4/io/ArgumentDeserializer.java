@@ -23,6 +23,11 @@ class ArgumentDeserializer extends PrimitiveObjectDeserializer {
 	}
 
 	public void deserializeChildNodes(Wrapper wrapper, Element element) {
+		wrapper.setPropertyValue(Argument.VALUE, streamChildNodes(element));
+		
+	}
+
+	protected String streamChildNodes(Element element) {
 		NodeList nodeList = element.getChildNodes();
 		StringBuffer buffer = new StringBuffer();
 		DOMSource domSource = new DOMSource();
@@ -37,8 +42,7 @@ class ArgumentDeserializer extends PrimitiveObjectDeserializer {
 			}
 			buffer.append(writer.getBuffer());
 		}
-		wrapper.setPropertyValue(Argument.VALUE, buffer.toString());
-		
+		return buffer.toString();
 	}
 
 

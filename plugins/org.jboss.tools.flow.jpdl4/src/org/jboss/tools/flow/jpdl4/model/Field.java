@@ -9,7 +9,7 @@ public class Field extends DefaultElement {
 	public static final String NAME = "org.jboss.tools.flow.jpdl4.model.field.name";
 	public static final String VALUE = "org.jboss.tools.flow.jpdl4.model.field.value";
 	
-	private String value;
+	private String value = "<string value=\"aValue\"/>";
 	private String name;
 	
 	public Field() {

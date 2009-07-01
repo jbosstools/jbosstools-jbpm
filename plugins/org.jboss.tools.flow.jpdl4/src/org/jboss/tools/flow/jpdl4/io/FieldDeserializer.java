@@ -38,4 +38,10 @@ class FieldDeserializer extends ArgumentDeserializer {
 			}
 		}
 	}
+	
+	
+	public void deserializeChildNodes(Wrapper wrapper, Element element) {
+		wrapper.setPropertyValue(Field.VALUE, streamChildNodes(element));
+		
+	}
 }
