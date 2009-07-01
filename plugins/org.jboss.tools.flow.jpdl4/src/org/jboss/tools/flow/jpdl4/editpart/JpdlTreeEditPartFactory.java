@@ -11,11 +11,13 @@ import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.Field;
+import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
+import org.jboss.tools.flow.jpdl4.model.WireObject;
 
 public class JpdlTreeEditPartFactory implements EditPartFactory {
 
@@ -25,6 +27,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			Element element = ((NodeWrapper)model).getElement();
 			if (element instanceof SubprocessTask) return new SubprocessTaskTreeRootEditPart((Wrapper)model);
 			if (element instanceof JavaTask) return new JavaTaskTreeRootEditPart((Wrapper)model);
+			if (element instanceof HqlTask) return new HqlTaskTreeRootEditPart((Wrapper)model);
 			return new TaskTreeRootEditPart((NodeWrapper)model);
 		}
 		if (model instanceof ConnectionWrapper && context == null) return new SequenceFlowTreeRootEditPart((ConnectionWrapper)model);
@@ -37,6 +40,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			if (element instanceof EventListenerContainer) return new EventListenerListTreeEditPart((Wrapper)model);
 			if (element instanceof EventListener) return new EventListenerTreeEditPart((Wrapper)model);
 			if (element instanceof Timer) return new TimerTreeEditPart((Wrapper)model);
+			if (element instanceof WireObject) return new WireObjectTreeEditPart((Wrapper)model);
 			return new NoDetailsTreeRootEditPart();
 		}
 		if (model instanceof SwimlaneListTreeEditPart) return (EditPart)model;
@@ -46,6 +50,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 		if (model instanceof FieldListTreeEditPart) return (EditPart)model;
 		if (model instanceof TimerListTreeEditPart) return (EditPart)model;
 		if (model instanceof ListenerListTreeEditPart) return (EditPart)model;
+		if (model instanceof ParameterListTreeEditPart) return (EditPart)model;
 		return new NoDetailsTreeRootEditPart();
 	}
 	

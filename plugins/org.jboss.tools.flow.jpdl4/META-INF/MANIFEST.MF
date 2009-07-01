@@ -17,5 +17,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.jboss.tools.flow.jpdl4.Activator
 Export-Package: org.jboss.tools.flow.jpdl4,
  org.jboss.tools.flow.jpdl4.editor,
+ org.jboss.tools.flow.jpdl4.io,
  org.jboss.tools.flow.jpdl4.model
 Bundle-Localization: plugin

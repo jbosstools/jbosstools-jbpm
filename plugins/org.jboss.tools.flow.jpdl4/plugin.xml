@@ -615,6 +615,27 @@
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.Field"/>
           </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.name"
+                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskVariableNameSection"
+                id="org.jboss.tools.jpdl4.hqlTask.variableName"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.hqlTask.variableName"
+                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskUniqueSection"
+                id="org.jboss.tools.jpdl4.hqlTask.unique"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.hqlTask.unique"
+                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskQuerySection"
+                id="org.jboss.tools.jpdl4.hqlTask.query"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+          </propertySection>
       </propertySections>
    </extension>
    <extension
@@ -675,6 +696,12 @@
             defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddFieldHandler"
             id="org.jboss.tools.flow.jpdl4.addField"
             name="Add Field">
+      </command>
+      <command
+            categoryId="org.jboss.tools.flow.jpdl4"
+            defaultHandler="org.jboss.tools.flow.jpdl4.handler.AddParameterHandler"
+            id="org.jboss.tools.flow.jpdl4.addParameter"
+            name="Add Parameter">
       </command>
       <command
             categoryId="org.jboss.tools.flow.jpdl4"
@@ -802,6 +829,25 @@
                      </instanceof>
                      <instanceof
                            value="org.jboss.tools.flow.jpdl4.editpart.ArgumentListTreeEditPart">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.jboss.tools.flow.jpdl4.addParameter"
+               icon="icons/16/argument.gif"
+               id="org.jboss.tools.flow.jpdl4.addParameter"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.HqlTaskTreeRootEditPart">
+                     </instanceof>
+                     <instanceof
+                           value="org.jboss.tools.flow.jpdl4.editpart.ParameterListTreeEditPart">
                      </instanceof>
                   </or>
                </iterate>

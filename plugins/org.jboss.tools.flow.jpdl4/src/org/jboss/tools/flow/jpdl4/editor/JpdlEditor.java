@@ -29,6 +29,8 @@ import org.jboss.tools.flow.common.editor.GenericModelEditor;
 import org.jboss.tools.flow.common.registry.ElementRegistry;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.editpart.JpdlGraphicalEditPartFactory;
+import org.jboss.tools.flow.jpdl4.io.JpdlDeserializer;
+import org.jboss.tools.flow.jpdl4.io.JpdlSerializer;
 import org.jboss.tools.flow.jpdl4.properties.JpdlPropertySheetPage;
 import org.jboss.tools.flow.jpdl4.view.DetailsPage;
 import org.jboss.tools.flow.jpdl4.view.IDetailsPage;
@@ -64,7 +66,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
     protected void writeModel(OutputStream os) throws IOException {
         Object object = getModel();
         if (object instanceof Wrapper) {
-        	new JpdlSerializer().serialize((Wrapper)object, os);
+        	JpdlSerializer.serialize((Wrapper)object, os);
         }
     }
     
@@ -128,7 +130,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
     	} catch (IOException e) {
     		// ignored
     	}
-    	setModel(empty ? createModel() : new JpdlDeserializer().deserialize(is));
+    	setModel(empty ? createModel() : JpdlDeserializer.deserialize(is));
     }
     
 //    public SelectionSynchronizer getSelectionSynchronizer() {

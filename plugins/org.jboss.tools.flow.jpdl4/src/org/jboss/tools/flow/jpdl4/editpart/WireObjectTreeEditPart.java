@@ -5,12 +5,11 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
-public class ArgumentTreeEditPart extends JpdlTreeEditPart implements ElementTreeEditPart {
+public class WireObjectTreeEditPart extends JpdlTreeEditPart implements ElementTreeEditPart {
 	
-	public ArgumentTreeEditPart(Wrapper wrapper) {
+	public WireObjectTreeEditPart(Wrapper wrapper) {
 		super(wrapper);
 	}
 	
@@ -22,8 +21,7 @@ public class ArgumentTreeEditPart extends JpdlTreeEditPart implements ElementTre
 	}
 	
 	protected String getText() {
-		String value = (String)((Wrapper)getModel()).getPropertyValue(Argument.VALUE);
-		return (value != null && !("".equals(value))) ? value : "argument";
+		return "WireObject";
 	}
 	
     public void modelChanged(ModelEvent event) {

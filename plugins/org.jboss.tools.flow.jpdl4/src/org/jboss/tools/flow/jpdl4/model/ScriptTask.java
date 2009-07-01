@@ -8,8 +8,8 @@ public class ScriptTask extends Task {
 	
 	public static final String EXPR = "org.jboss.tools.flow.jpdl4.model.scriptTask.expr";
 	public static final String LANG = "org.jboss.tools.flow.jpdl4.model.scriptTask.lang";
-	public static final String VAR = "org.jboss.tools.flow.jpdl4.model.javaTask.var";
-	public static final String TEXT = "org.jboss.tools.flow.jpdl4.model.javaTask.text";
+	public static final String VAR = "org.jboss.tools.flow.jpdl4.model.scriptTask.var";
+	public static final String TEXT = "org.jboss.tools.flow.jpdl4.model.scriptTask.text";
 	
 	private String expression;
 	private String language;
