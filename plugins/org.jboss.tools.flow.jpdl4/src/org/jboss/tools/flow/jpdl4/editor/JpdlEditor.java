@@ -40,6 +40,7 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 	public static String ID = "org.jboss.tools.flow.jpdl4.editor";
 	
 	private DetailsPage detailsPage;
+	private JpdlPropertySheetPage propertySheetPage;
 	
 	public void doSave(IProgressMonitor monitor) {
 		super.doSave(monitor);
@@ -145,9 +146,9 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 		return getSite().getId();
 	}
 	
-	public CommandStack getCommandStack() {
-		return super.getCommandStack();
-	}
+//	public CommandStack getCommandStack() {
+//		return super.getCommandStack();
+//	}
 	
 	public DefaultEditDomain getEditDomain() {
 		return super.getEditDomain();
@@ -165,10 +166,17 @@ public class JpdlEditor extends GenericModelEditor implements ITabbedPropertyShe
 		getSite().getSelectionProvider().addSelectionChangedListener(detailsPage);
 	}
 	
+	private JpdlPropertySheetPage getPropertySheetPage() {
+		if (propertySheetPage == null) {
+			propertySheetPage = new JpdlPropertySheetPage(this, getCommandStack());
+		}
+		return propertySheetPage;
+	}
+	
     @SuppressWarnings("unchecked")
 	public Object getAdapter(Class adapter) {
     	if (adapter == IPropertySheetPage.class)
-            return new JpdlPropertySheetPage(this, getCommandStack());
+            return getPropertySheetPage();
     	else if (adapter == IDetailsPage.class)
     		return getDetailsPage();
         return super.getAdapter(adapter);
