@@ -16,5 +16,12 @@
             id="org.jboss.tools.jbpm">
       </category> 
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.jboss.tools.jbpm"
+            name="JBoss jBPM">
+      </category>
+   </extension>
    
 </plugin>
