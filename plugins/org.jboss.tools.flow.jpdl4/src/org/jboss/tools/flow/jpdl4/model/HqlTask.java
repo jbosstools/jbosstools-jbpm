@@ -17,7 +17,7 @@ public class HqlTask extends Task {
 	private String variableName;
 	private String unique;
 	private String query;
-	private List<WireObject> parameters = new ArrayList<WireObject>();
+	private List<PrimitiveObject> parameters = new ArrayList<PrimitiveObject>();
 	
 	public HqlTask() {
 		setMetaData("propertySource", new PropertySource());

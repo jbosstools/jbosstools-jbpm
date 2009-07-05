@@ -306,17 +306,15 @@
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            id="org.jboss.tools.flow.jpdl4"
-            name="jBPM 4"
-            parentCategory="org.jboss.tools.jbpm">
-      </category>
       <wizard
-            category="org.jboss.tools.flow.jpdl4"
+            category="org.jboss.tools.jbpm"
             class="org.jboss.tools.flow.jpdl4.wizard.NewJpdl4FileWizard"
             icon="icons/process.gif"
             id="org.jboss.tools.flow.jpdl4.file"
-            name="Process Definition">
+            name="jBPM 4 Process Definition">
+         <description>
+            A wizard that creates a new jBPM 4 process definition
+         </description>
       </wizard>
    </extension>
 
@@ -643,15 +641,22 @@
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
           </propertySection>
+          <propertySection
+                class="org.jboss.tools.flow.jpdl4.properties.PrimitiveObjectValueSection"
+                id="org.jboss.tools.jpdl4.primitiveObject.value"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.PrimitiveObject"/>
+          </propertySection>
       </propertySections>
    </extension>
    <extension
          point="org.eclipse.ui.views">
       <view
+            category="org.jboss.tools.jbpm"
             class="org.jboss.tools.flow.jpdl4.view.DetailsView"
             icon="icons/process.gif"
             id="org.jboss.tools.flow.jpdl4.details"
-            name="Details"
+            name="Details (jBPM 4)"
             restorable="true">
       </view>
    </extension>

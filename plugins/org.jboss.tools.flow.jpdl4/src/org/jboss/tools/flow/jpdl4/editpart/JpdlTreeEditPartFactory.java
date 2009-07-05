@@ -14,10 +14,10 @@ import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
+import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
-import org.jboss.tools.flow.jpdl4.model.WireObject;
 
 public class JpdlTreeEditPartFactory implements EditPartFactory {
 
@@ -40,7 +40,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			if (element instanceof EventListenerContainer) return new EventListenerListTreeEditPart((Wrapper)model);
 			if (element instanceof EventListener) return new EventListenerTreeEditPart((Wrapper)model);
 			if (element instanceof Timer) return new TimerTreeEditPart((Wrapper)model);
-			if (element instanceof WireObject) return new WireObjectTreeEditPart((Wrapper)model);
+			if (element instanceof PrimitiveObject) return new PrimitiveObjectTreeEditPart((Wrapper)model);
 			return new NoDetailsTreeRootEditPart();
 		}
 		if (model instanceof SwimlaneListTreeEditPart) return (EditPart)model;

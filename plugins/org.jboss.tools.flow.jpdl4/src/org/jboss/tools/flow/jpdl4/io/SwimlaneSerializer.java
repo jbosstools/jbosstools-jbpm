@@ -50,7 +50,7 @@ class SwimlaneSerializer extends AbstractElementSerializer {
 		}
  	}
 	public void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
-		appendLeadingNodes(buffer, wrapper, level);
+		appendUnknownNodes("leadingNodes", buffer, wrapper, level);
 		buffer.append("<swimlane");
 		appendAttributes(buffer, wrapper, level);
 	}

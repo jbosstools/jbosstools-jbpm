@@ -148,6 +148,8 @@ public class Registry {
 			return new JavaTaskDeserializer();
 		} else if (element instanceof ScriptTask) {
 			return new ScriptTaskDeserializer();
+		} else if (element instanceof HqlTask) {
+			return new HqlTaskDeserializer();
 		} else {
 			return new NodeDeserializer();
 		}
@@ -186,7 +188,7 @@ public class Registry {
     	} else if (element instanceof WaitTask) {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof HqlTask) {
-    		return new ProcessNodeSerializer();
+    		return new HqlTaskSerializer();
     	} else if (element instanceof SqlTask) {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof JavaTask) {

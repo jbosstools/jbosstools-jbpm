@@ -68,8 +68,8 @@ public abstract class AbstractElementSerializer implements ElementSerializer {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void appendLeadingNodes(StringBuffer buffer, Wrapper wrapper, int level) {
-    	ArrayList<Node> leadingNodeList = (ArrayList<Node>)wrapper.getElement().getMetaData("leadingNodes");
+	protected void appendUnknownNodes(String type, StringBuffer buffer, Wrapper wrapper, int level) {
+    	ArrayList<Node> leadingNodeList = (ArrayList<Node>)wrapper.getElement().getMetaData(type);
     	boolean appendLeadingNodes = leadingNodeList != null && !leadingNodeList.isEmpty();
     	if (appendLeadingNodes) {
     		appendNodeList(buffer, leadingNodeList);
@@ -136,7 +136,7 @@ public abstract class AbstractElementSerializer implements ElementSerializer {
 	}
     
 	protected void appendOpening(StringBuffer buffer, Wrapper wrapper, int level) {
-		appendLeadingNodes(buffer, wrapper, level);
+		appendUnknownNodes("leadingNodes", buffer, wrapper, level);
 		buffer.append("<" + Registry.getXmlNodeName(wrapper.getElement()));
 		appendAttributes(buffer, wrapper, level);
 	}

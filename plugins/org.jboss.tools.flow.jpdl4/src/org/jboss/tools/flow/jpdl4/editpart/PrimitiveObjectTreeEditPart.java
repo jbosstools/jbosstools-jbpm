@@ -5,11 +5,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.jboss.tools.flow.common.wrapper.ModelEvent;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
 import org.jboss.tools.flow.jpdl4.util.SharedImages;
 
-public class WireObjectTreeEditPart extends JpdlTreeEditPart implements ElementTreeEditPart {
+public class PrimitiveObjectTreeEditPart extends JpdlTreeEditPart implements ElementTreeEditPart {
 	
-	public WireObjectTreeEditPart(Wrapper wrapper) {
+	public PrimitiveObjectTreeEditPart(Wrapper wrapper) {
 		super(wrapper);
 	}
 	
@@ -21,7 +22,8 @@ public class WireObjectTreeEditPart extends JpdlTreeEditPart implements ElementT
 	}
 	
 	protected String getText() {
-		return "WireObject";
+		String value = (String)((Wrapper)getModel()).getPropertyValue(PrimitiveObject.VALUE);
+		return (value != null && !("".equals(value))) ? value.trim() : "object";
 	}
 	
     public void modelChanged(ModelEvent event) {

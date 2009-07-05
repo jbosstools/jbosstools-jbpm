@@ -1,6 +1,7 @@
 package org.jboss.tools.flow.jpdl4.io;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.jboss.tools.flow.common.wrapper.Wrapper;
@@ -21,15 +22,20 @@ public abstract class AbstractElementDeserializer implements ElementDeserializer
 		NodeList nodeList = element.getChildNodes();
 		ArrayList<Node> unknownNodeList = new ArrayList<Node>();
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			Wrapper childWrapper = deserializeChildNode(wrapper, nodeList.item(i));		
-			if (childWrapper != null) {
-				childWrapper.getElement().setMetaData("leadingNodes", unknownNodeList);
-				unknownNodeList = new ArrayList<Node>();
-			} else {
-				unknownNodeList.add(nodeList.item(i));
-			}
+			deserializeChildNode(wrapper, nodeList.item(i), unknownNodeList);
 		}
 		wrapper.getElement().setMetaData("trailingNodes", unknownNodeList);
+	}
+
+	protected void deserializeChildNode(Wrapper parent, Node node, List<Node> unknownNodeList) {
+		Wrapper childWrapper = deserializeChildNode(parent, node);		
+		if (childWrapper != null) {
+			childWrapper.getElement().setMetaData("leadingNodes", new ArrayList<Node>(unknownNodeList));
+			unknownNodeList.clear();
+		} else {
+			unknownNodeList.add(node);
+		}
+		
 	}
 
 	protected List<String> getAttributesToRead() {
