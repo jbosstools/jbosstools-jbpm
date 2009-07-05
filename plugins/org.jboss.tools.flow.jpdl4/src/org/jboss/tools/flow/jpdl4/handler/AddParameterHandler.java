@@ -1,6 +1,6 @@
 package org.jboss.tools.flow.jpdl4.handler;
 
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 
 public class AddParameterHandler extends AddChildHandler {
 	
@@ -11,7 +11,7 @@ public class AddParameterHandler extends AddChildHandler {
 
 	@Override
 	protected String getChildType() {
-		return HqlTask.PARAMETERS;
+		return QueryTask.PARAMETERS;
 	}
 
 }

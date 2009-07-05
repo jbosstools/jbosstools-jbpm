@@ -11,10 +11,10 @@ import org.jboss.tools.flow.jpdl4.model.Argument;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.Field;
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 import org.jboss.tools.flow.jpdl4.model.SubprocessTask;
 import org.jboss.tools.flow.jpdl4.model.Swimlane;
 import org.jboss.tools.flow.jpdl4.model.Timer;
@@ -27,7 +27,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			Element element = ((NodeWrapper)model).getElement();
 			if (element instanceof SubprocessTask) return new SubprocessTaskTreeRootEditPart((Wrapper)model);
 			if (element instanceof JavaTask) return new JavaTaskTreeRootEditPart((Wrapper)model);
-			if (element instanceof HqlTask) return new HqlTaskTreeRootEditPart((Wrapper)model);
+			if (element instanceof QueryTask) return new QueryTaskTreeRootEditPart((Wrapper)model);
 			return new TaskTreeRootEditPart((NodeWrapper)model);
 		}
 		if (model instanceof ConnectionWrapper && context == null) return new SequenceFlowTreeRootEditPart((ConnectionWrapper)model);

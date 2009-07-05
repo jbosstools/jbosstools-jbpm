@@ -16,7 +16,6 @@ import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
@@ -24,6 +23,7 @@ import org.jboss.tools.flow.jpdl4.model.MailTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
 import org.jboss.tools.flow.jpdl4.model.Process;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.ServiceTask;
@@ -148,8 +148,8 @@ public class Registry {
 			return new JavaTaskDeserializer();
 		} else if (element instanceof ScriptTask) {
 			return new ScriptTaskDeserializer();
-		} else if (element instanceof HqlTask) {
-			return new HqlTaskDeserializer();
+		} else if (element instanceof QueryTask) {
+			return new QueryTaskDeserializer();
 		} else {
 			return new NodeDeserializer();
 		}
@@ -187,8 +187,8 @@ public class Registry {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof WaitTask) {
     		return new ProcessNodeSerializer();
-    	} else if (element instanceof HqlTask) {
-    		return new HqlTaskSerializer();
+    	} else if (element instanceof QueryTask) {
+    		return new QueryTaskSerializer();
     	} else if (element instanceof SqlTask) {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof JavaTask) {

@@ -18,10 +18,12 @@ public class DetailsPage extends Page implements IDetailsPage, ISelectionChanged
 	
     private EditPartViewer viewer;
     private Control control;
+    private JpdlEditor jpdlEditor;
     
     public DetailsPage(JpdlEditor jpdlEditor) {
         viewer = new TreeViewer();
 		viewer.setEditPartFactory(new JpdlTreeEditPartFactory());
+		this.jpdlEditor = jpdlEditor;
 		jpdlEditor.getEditDomain().addViewer(viewer);
     }
     
@@ -31,6 +33,10 @@ public class DetailsPage extends Page implements IDetailsPage, ISelectionChanged
     
     protected EditPartViewer getViewer() {
     	return viewer;
+    }
+    
+    public JpdlEditor getContributingEditor() {
+    	return jpdlEditor;
     }
     
     public void addSelectionChangedListener(ISelectionChangedListener listener) {
@@ -76,4 +82,6 @@ public class DetailsPage extends Page implements IDetailsPage, ISelectionChanged
 			}
 		}
 	}
+	
+	
 }

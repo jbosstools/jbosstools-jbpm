@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 
-class HqlTaskSerializer extends ProcessNodeSerializer {
+class QueryTaskSerializer extends ProcessNodeSerializer {
 	
 	protected List<String> getAttributesToSave() {
 		List<String> result = super.getAttributesToSave();
@@ -20,19 +20,19 @@ class HqlTaskSerializer extends ProcessNodeSerializer {
 	
 	protected String getPropertyName(String attributeName) {
 		if ("var".equals(attributeName)) {
-			return HqlTask.VAR;
+			return QueryTask.VAR;
 		} else if ("unique".equals(attributeName)) {
-			return HqlTask.UNIQUE;
+			return QueryTask.UNIQUE;
 		}
 		return super.getPropertyName(attributeName);
 	}
 	
 	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
-		String query = (String)wrapper.getPropertyValue(HqlTask.QUERY);
+		String query = (String)wrapper.getPropertyValue(QueryTask.QUERY);
 		if (query != null && !"".equals(query)) {
 			appendQuery(buffer, wrapper, query, level+1);
 		}
-		List<Element> parameters =wrapper.getChildren(HqlTask.PARAMETERS);
+		List<Element> parameters =wrapper.getChildren(QueryTask.PARAMETERS);
 		if (parameters != null) {
 			appendParameters(buffer, wrapper, parameters, level+1);
 		}

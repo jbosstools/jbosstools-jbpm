@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
 import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-class HqlTaskDeserializer extends NodeDeserializer {
+class QueryTaskDeserializer extends NodeDeserializer {
 	
 	public void deserializeAttributes(Wrapper wrapper, Element element) {
 		super.deserializeAttributes(wrapper, element);
-		wrapper.setPropertyValue(HqlTask.VAR, element.getAttribute("var"));
-		wrapper.setPropertyValue(HqlTask.UNIQUE, element.getAttribute("unique"));
+		wrapper.setPropertyValue(QueryTask.VAR, element.getAttribute("var"));
+		wrapper.setPropertyValue(QueryTask.UNIQUE, element.getAttribute("unique"));
 	}
 	
 	public void deserializeChildNodes(Wrapper wrapper,
@@ -44,7 +44,7 @@ class HqlTaskDeserializer extends NodeDeserializer {
 		unknownNodeList.clear();
 		// the query has only one child node
 		Node content = node.getChildNodes().item(0);
-		parent.setPropertyValue(HqlTask.QUERY, content.getNodeValue());
+		parent.setPropertyValue(QueryTask.QUERY, content.getNodeValue());
 	}
 	
 	private void deserializeParameters(Wrapper parent, Node node, List<Node> unknownNodeList) {
@@ -55,7 +55,7 @@ class HqlTaskDeserializer extends NodeDeserializer {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Wrapper childWrapper = deserializeChildNode(parent, nodeList.item(i));		
 			if (childWrapper != null && childWrapper.getElement() instanceof PrimitiveObject) {
-				parent.addChild(HqlTask.PARAMETERS, childWrapper);
+				parent.addChild(QueryTask.PARAMETERS, childWrapper);
 				childWrapper.getElement().setMetaData("leadingNodes", new ArrayList<Node>(unknownNodeList));
 				unknownNodeList.clear();
 			} else {

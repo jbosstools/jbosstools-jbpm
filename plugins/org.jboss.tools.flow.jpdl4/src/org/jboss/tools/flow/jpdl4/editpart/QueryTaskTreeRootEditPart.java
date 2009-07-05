@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
-import org.jboss.tools.flow.jpdl4.model.HqlTask;
+import org.jboss.tools.flow.jpdl4.model.QueryTask;
 
-public class HqlTaskTreeRootEditPart extends TaskTreeRootEditPart {
+public class QueryTaskTreeRootEditPart extends TaskTreeRootEditPart {
 
-	public HqlTaskTreeRootEditPart(Wrapper wrapper) {
+	public QueryTaskTreeRootEditPart(Wrapper wrapper) {
 		super(wrapper);
 	}
 
@@ -21,7 +21,7 @@ public class HqlTaskTreeRootEditPart extends TaskTreeRootEditPart {
 	}
 	
 	private void addParameters(List<Object> list, Wrapper wrapper) {
-		List<Element> parameters = wrapper.getChildren(HqlTask.PARAMETERS);
+		List<Element> parameters = wrapper.getChildren(QueryTask.PARAMETERS);
 		if (parameters != null && !parameters.isEmpty()) {
 			list.add(new ParameterListTreeEditPart(parameters));
 		}

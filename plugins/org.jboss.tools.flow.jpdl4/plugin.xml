@@ -622,24 +622,24 @@
           </propertySection>
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.name"
-                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskVariableNameSection"
+                class="org.jboss.tools.flow.jpdl4.properties.QueryTaskVariableNameSection"
                 id="org.jboss.tools.jpdl4.hqlTask.variableName"
                 tab="org.jboss.tools.jpdl4.general">
-            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.QueryTask"/>
           </propertySection>
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.hqlTask.variableName"
-                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskUniqueSection"
+                class="org.jboss.tools.flow.jpdl4.properties.QueryTaskUniqueSection"
                 id="org.jboss.tools.jpdl4.hqlTask.unique"
                 tab="org.jboss.tools.jpdl4.general">
-            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.QueryTask"/>
           </propertySection>
           <propertySection
                 afterSection="org.jboss.tools.jpdl4.hqlTask.unique"
-                class="org.jboss.tools.flow.jpdl4.properties.HqlTaskQuerySection"
+                class="org.jboss.tools.flow.jpdl4.properties.QueryTaskQuerySection"
                 id="org.jboss.tools.jpdl4.hqlTask.query"
                 tab="org.jboss.tools.jpdl4.general">
-            <input type="org.jboss.tools.flow.jpdl4.model.HqlTask"/>
+            <input type="org.jboss.tools.flow.jpdl4.model.QueryTask"/>
           </propertySection>
           <propertySection
                 class="org.jboss.tools.flow.jpdl4.properties.PrimitiveObjectValueSection"
@@ -856,7 +856,7 @@
                <iterate>
                   <or>
                      <instanceof
-                           value="org.jboss.tools.flow.jpdl4.editpart.HqlTaskTreeRootEditPart">
+                           value="org.jboss.tools.flow.jpdl4.editpart.QueryTaskTreeRootEditPart">
                      </instanceof>
                      <instanceof
                            value="org.jboss.tools.flow.jpdl4.editpart.ParameterListTreeEditPart">
