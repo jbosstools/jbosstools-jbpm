@@ -1,7 +1,6 @@
 package org.jboss.tools.flow.jpdl4.io;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.jboss.tools.flow.common.wrapper.Wrapper;
