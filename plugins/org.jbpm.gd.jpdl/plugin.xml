@@ -307,32 +307,28 @@
   
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            name="JBoss jBPM"
-            id="org.jbpm.ui">
-      </category> 
       <wizard
-            name="Process Definition"
+            name="jBPM 3 Process Definition"
             icon="icons/full/obj16/process_definition_enabled.gif"
-            category="org.jbpm.ui"
+            category="org.jboss.tools.jbpm"
             class="org.jbpm.gd.jpdl.wizard.NewProcessDefinitionWizard"
             id="org.jbpm.gd.jpdl.wizard.new.file">
          <description>
-            A wizard that creates a process diagram
+            A wizard that creates a jBPM 3 process diagram
          </description>
          <selection
                class="org.eclipse.core.resources.IResource">
          </selection>
       </wizard>
       <wizard
-            name="Process Project"
+            name="jBPM 3 Project"
             icon="icons/full/obj16/process_definition_enabled.gif"
-            category="org.jbpm.ui"
+            category="org.jboss.tools.jbpm"
             class="org.jbpm.gd.jpdl.wizard.NewProcessProjectWizard"
             id="org.jbpm.gd.jpdl.wizard.new.project"
             project="true" >
          <description>
-            A wizard that creates a new jBPM Project
+            A wizard that creates a new jBPM 3 Project
          </description>
          <selection
                class="org.eclipse.core.resources.IResource">
@@ -1228,14 +1224,11 @@
           point="org.eclipse.ui.views">
        <view
              allowMultiple="false"
-             category="org.jbpm.gd.jpdl.views"
+             category="org.jboss.tools.jbpm"
              class="org.jbpm.gd.common.editor.BirdsEyeViewer"
              icon="icons/full/obj16/overview.gif"
              id="org.jbpm.gd.jpdl.overview"
-             name="Overview"/>
-       <category
-             id="org.jbpm.gd.jpdl.views"
-             name="JBoss jBPM"/>
+             name="Overview (jBPM 3)"/>
     </extension>
     
     <extension-point id="assignmentType" name="Assignment Type Extensions" schema="schema/assignmentType.exsd"/>
