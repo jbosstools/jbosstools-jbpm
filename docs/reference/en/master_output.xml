@@ -26,13 +26,13 @@
  ]><book xmlns:diffmk="http://diffmk.sf.net/ns/diff">
     <bookinfo>
         <title>jBPM Tools Reference Guide</title>
-            <corpauthor diffmk:change="added">
-                <inlinemediaobject diffmk:change="added">
-                    <imageobject diffmk:change="added" role="fo">
-                        <imagedata diffmk:change="added" fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+            <corpauthor>
+                <inlinemediaobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
                     </imageobject>	
-                    <imageobject diffmk:change="added" role="html">
-                        <imagedata diffmk:change="added"></imagedata>
+                    <imageobject role="html">
+                        <imagedata></imagedata>
                     </imageobject>	
                 </inlinemediaobject>           
             </corpauthor>
@@ -66,9 +66,9 @@
         <copyright>
             <year>2007</year>
             <year>2009</year>
-            <holder>JBoss by Red Hat</holder>
+            <holder><diffmk:wrapper diffmk:change="changed">JBoss by Red Hat</diffmk:wrapper></holder>
         </copyright>
-        <releaseinfo> Version: 3.1.7.GA</releaseinfo>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.M2</diffmk:wrapper></releaseinfo>
 
 <abstract>
    <title></title>
@@ -180,13 +180,13 @@
 
      <row>
       <entry>
-       <link diffmk:change="added" linkend="the_views"><diffmk:wrapper diffmk:change="added">A large range of special views, including:</diffmk:wrapper></link>
+       <link linkend="the_views">A large range of special views, including:</link>
       </entry>
-      <entry diffmk:change="added"></entry>
+      <entry></entry>
      </row>
 
-     <row diffmk:change="added">
-      <entry diffmk:change="added">
+     <row>
+      <entry>
        <link linkend="source_mode">Support of XML code view</link>
       </entry>
       <entry>Shows the corresponding XML that's generated automatically in the Source view
@@ -202,14 +202,14 @@
 
      <row>
       <entry>
-       <link diffmk:change="added" linkend="jbpm_gpd_editor"><diffmk:wrapper diffmk:change="added">The jBPM Graphical Process Designer editor</diffmk:wrapper></link>
+       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
       </entry>
-      <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">The plugin is used for designing the workflow.</diffmk:wrapper></entry>
+      <entry>The plugin is used for designing the workflow.</entry>
      </row>
      
 
-     <row diffmk:change="added">
-      <entry diffmk:change="added">Interaction with all of the J2EE based integration technologies including Web Services,
+     <row>
+      <entry>Interaction with all of the J2EE based integration technologies including Web Services,
        Java Messaging, J2EE Connectors, JBDC, EJBs.</entry>
       <entry>Enables implementation, provides better functionality and flexibility.</entry>
      </row>
@@ -249,7 +249,7 @@
  <para>The main purpose of this chapter is to let you know how to launch the <property moreinfo="none">JBoss
   jBPM</property> (business process management).</para>
  <para>The jBPM plugin (jBPM Designer) is already included in the <property moreinfo="none">JBoss Tools</property>.
-  To make it work, you should only download the jBPM runtime (<ulink url="http://sourceforge.net/project/showfiles.php?group_id=70542&apos;package_id=145174&apos;release_id=607377">jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
+  To make it work, you should only download the jBPM runtime (<ulink url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377">jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
   either when you create a jBPM project or by using the jBPM preference pages.</para>
 
  <note>
@@ -1304,7 +1304,7 @@
             </mediaobject>
         </figure>
         <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-            workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&apos;op=viewforum&apos;f=201">JBoss forum</ulink>.</para>
+            workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
     </section>
 </chapter>
 

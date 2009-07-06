@@ -8,13 +8,13 @@
     
      <bookinfo>
          <title>BPMN Convert User Guide</title>
-             <corpauthor diffmk:change="added">
-                 <inlinemediaobject diffmk:change="added">
-                     <imageobject diffmk:change="added" role="fo">
-                         <imagedata diffmk:change="added" fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+             <corpauthor>
+                 <inlinemediaobject>
+                     <imageobject role="fo">
+                         <imagedata fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
                      </imageobject>	
-                     <imageobject diffmk:change="added" role="html">
-                         <imagedata diffmk:change="added"></imagedata>
+                     <imageobject role="html">
+                         <imagedata></imagedata>
                      </imageobject>	
                  </inlinemediaobject>           
              </corpauthor>
@@ -24,15 +24,15 @@
 	     <copyright>
 	          <year>2008</year>
 	          <year>2009</year>
-	          <holder>JBoss by Red Hat</holder>
+	          <holder><diffmk:wrapper diffmk:change="changed">JBoss by Red Hat</diffmk:wrapper></holder>
 	     </copyright>
          <releaseinfo><diffmk:wrapper diffmk:change="changed">
-             Version: 1.1.0.M1
+             Version: 1.1.0.M2
          </diffmk:wrapper></releaseinfo>
 <abstract>
    <title></title>
        <para>
-           <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/bpmn_convert_guide/pdf/BPMN_Convert_Guide.pdf">PDF version</ulink>
+           <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/jboss_bpmn_convert_ref_guide/pdf/Converter_Reference_Guide.pdf">PDF version</ulink>
        </para>
 </abstract>
 
@@ -43,40 +43,40 @@
     
 <chapter id="overview" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/converter_ref/en/modules/overview.xml">
    <title>BPMN Convert Overview</title>
-    <para><diffmk:wrapper diffmk:change="changed">This chapter gives you a short overview of JBoss BPMN Convert module.</diffmk:wrapper></para>
-    <para><diffmk:wrapper diffmk:change="changed">JBoss BPMN Convert module is a tool used for a BPMN file translation.</diffmk:wrapper></para>
+    <para>This chapter gives you a short overview of JBoss BPMN Convert module.</para>
+    <para>JBoss BPMN Convert module is a tool used for a BPMN file translation.</para>
     <para>As a part of JBoss tools, JBoss BPMN Convert module implements BPMN -&gt; JPDL translation. You can get a basic JPDL file from a BPMN file by using this module.</para>
     <para>The BPMN file may be written by hands or with the help of some editors. In this guide, we use STP BPMN editor to draw a BPMN file.</para> 
-    <para>You can download the editor which is included into  BPMN Modeler from Eclipse download or update site. On the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink><diffmk:wrapper diffmk:change="added"> you can find the necessary links and other related information.</diffmk:wrapper></para>  
+    <para>You can download the editor which is included into  BPMN Modeler from Eclipse download or update site. On the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink> you can find the necessary links and other related information.</para>  
   
-<section diffmk:change="added">
-    <title diffmk:change="added"><diffmk:wrapper diffmk:change="added">Key Features of JBoss BPMN Convert module</diffmk:wrapper></title>
-    <para diffmk:change="added"><diffmk:wrapper diffmk:change="added">For a start, we propose you to look through the table of main features of JBoss BPMN Convert module:</diffmk:wrapper></para>
+<section>
+    <title>Key Features of JBoss BPMN Convert module</title>
+    <para>For a start, we propose you to look through the table of main features of JBoss BPMN Convert module:</para>
 
-    <table diffmk:change="added">
+    <table>
         
-        <title diffmk:change="added"><diffmk:wrapper diffmk:change="added">Key Functionality of JBoss BPMN Convert module</diffmk:wrapper></title>
-        <tgroup cols="3" diffmk:change="added">
+        <title>Key Functionality of JBoss BPMN Convert module</title>
+        <tgroup cols="3">
             
-            <colspec align="left" colnum="1" colwidth="2*" diffmk:change="added"></colspec>
-            <colspec colnum="2" colwidth="4*" diffmk:change="added"></colspec>
-            <colspec align="left" colnum="3" colwidth="2*" diffmk:change="added"></colspec>
+            <colspec align="left" colnum="1" colwidth="2*"></colspec>
+            <colspec colnum="2" colwidth="4*"></colspec>
+            <colspec align="left" colnum="3" colwidth="2*"></colspec>
             
-            <thead diffmk:change="added">
-                <row diffmk:change="added">
-                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Feature</diffmk:wrapper></entry>
-                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Benefit</diffmk:wrapper></entry>
-                    <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">Chapter</diffmk:wrapper></entry>
+            <thead>
+                <row>
+                    <entry>Feature</entry>
+                    <entry>Benefit</entry>
+                    <entry>Chapter</entry>
                 </row>
             </thead>
             
-            <tbody diffmk:change="added">
+            <tbody>
                 
-                <row diffmk:change="added">
-                    <entry diffmk:change="added"><para diffmk:change="added"><diffmk:wrapper diffmk:change="added">STP BPMN Editor</diffmk:wrapper></para></entry>
-                    <entry diffmk:change="added"><para diffmk:change="added"><diffmk:wrapper diffmk:change="added">JBoss BPMN Convert module contains STP Business Process Modeling Notation (BPMN) Editor which is a tool to express any processes in a graphical form (simple diagrams with a set of some graphical elements). Created BPMN files can then be converted to jPDL.</diffmk:wrapper></para></entry>
-                    <entry diffmk:change="added">
-                        <link diffmk:change="added" linkend="createbpmnfile"><diffmk:wrapper diffmk:change="added">creating a BPMN file by STP BPMN editor</diffmk:wrapper></link>
+                <row>
+                    <entry><para>STP BPMN Editor</para></entry>
+                    <entry><para>JBoss BPMN Convert module contains STP Business Process Modeling Notation (BPMN) Editor which is a tool to express any processes in a graphical form (simple diagrams with a set of some graphical elements). Created BPMN files can then be converted to jPDL.</para></entry>
+                    <entry>
+                        <link linkend="createbpmnfile">creating a BPMN file by STP BPMN editor</link>
                     </entry>
                 </row>
                 
