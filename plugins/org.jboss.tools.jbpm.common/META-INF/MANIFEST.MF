@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: jPDL Integration Tools
+Bundle-Name: Common Tools for jBPM 3 and jBPM 4
 Bundle-SymbolicName: org.jboss.tools.jbpm.common;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: JBoss by Red Hat
