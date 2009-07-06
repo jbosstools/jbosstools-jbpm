@@ -3,15 +3,12 @@
 
 !*** features
 feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jbpm.gd.jpdl.feature
-feature@org.jboss.tools.jbpm.convert.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm.convert.feature
 
 !*** plugins
 plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl
-plugin@org.jboss.tools.jbpm.convert=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.jbpm.convert
 
 !*** test feature
 feature@org.jboss.tools.jbpm3.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.feature
 
 !*** test plugins
 plugin@org.jbpm.gd.jpdl.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jbpm.gd.jpdl.test
-plugin@org.jboss.tools.jbpm.convert.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.jbpm.convert.test
