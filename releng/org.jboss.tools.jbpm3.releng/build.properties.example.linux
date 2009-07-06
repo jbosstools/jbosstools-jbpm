@@ -1,0 +1,59 @@
+## BEGIN PROJECT BUILD PROPERTIES ##
+
+# this property allows ant-contrib and pde-svn-plugin to be fetched and installed automatically for you
+thirdPartyDownloadLicenseAcceptance="I accept"
+
+projectid=jbosstools.jbpm3
+zipPrefix=jbpm3
+incubation=
+buildType=N
+version=3.2.0
+
+mainFeatureToBuildID=org.jboss.tools.jbpm3.sdk.feature
+testFeatureToBuildID=org.jboss.tools.jbpm3.tests.feature
+
+build.steps=buildUpdate,buildTests,generateDigests,test,publish,cleanup
+
+# Re-use local sources?
+localSourceCheckoutDir=/home/nboldt/eclipse/workspace-jboss/jbosstools-trunk/jbpm
+relengBuilderDir=/home/nboldt/eclipse/workspace-jboss/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm3.releng
+relengBaseBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.releng.basebuilder
+relengCommonBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.dash.common.releng
+
+JAVA_HOME=/usr/lib/jvm/java
+JAVA50_HOME=/usr/lib/jvm/java
+
+dependencyURLs=\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.0RC2.zip,\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/emf-runtime-2.5.0RC2.zip,\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/xsd-runtime-2.5.0RC2.zip,\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/wtp-S-3.1RC2-20090526075706.zip,\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/wtp-jpt-S-3.1RC2-20090526075706.zip,\
+http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-linux-gtk.tar.gz
+
+# alternate eclipse platforms - swap in above as needed
+#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-win32.zip,\
+#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-linux-gtk-x86_64.tar.gz,\
+#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-macosx-carbon.tar.gz,\
+
+# not needed for jbpm, copied for reference (other builds may need these)
+#http://www.eclipse.org/downloads/download.php?r=1&file=/birt/downloads/drops/M-R1-2.5M7-200905061338/birt-report-framework-2.5M7.zip,\
+#http://www.eclipse.org/downloads/download.php?r=1&file=/birt/downloads/drops/M-R1-2.5M7-200905061338/birt-wtp-integration-sdk-2.5M7.zip,\
+#http://www.eclipse.org/downloads/download.php?r=1&file=/datatools/downloads/drops/N_DTP_1.7/dtp-1.7.0M7-200905052200.zip,\
+#http://www.eclipse.org/downloads/download.php?r=1&file=/tptp/4.6.0/TPTP-4.6.0M7-200904260100/tptp.runtime-TPTP-4.6.0M7.zip,\
+
+flattenDependencies=true
+parallelCompilation=true
+generateFeatureVersionSuffix=true
+individualSourceBundles=true
+
+domainNamespace=*
+projNamespace=org.jboss.tools.jbpm3
+projRelengName=org.jboss.tools.jbpm3.releng
+
+# needed for Hudson, not for local?
+#projRelengRoot=svn://svn.jboss.org/repos/jbosstools/trunk/jmx
+#projRelengPath=releng
+#basebuilderBranch=R35_M6
+
+## END PROJECT BUILD PROPERTIES ##
