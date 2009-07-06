@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.jboss.tools.jbpm4.sdk.feature"
-      label="%"
-      version="4.0.0.qualifier">
+      label="%featureName"
+      version="4.0.0.qualifier"
+      provider-name="%featureProvider">
 
    <description>
       %description
@@ -16,7 +17,7 @@
       %license
    </license>
 
-  <includes
+   <includes
          id="org.jboss.tools.jbpm.common.feature"
          version="0.0.0"/>
 
@@ -31,7 +32,7 @@
    <includes
          id="org.jboss.tools.flow.common.source.feature"
          version="0.0.0"/>
-         
+
    <includes
          id="org.jboss.tools.flow.jpdl4.feature"
          version="0.0.0"/>
@@ -39,7 +40,5 @@
    <includes
          id="org.jboss.tools.flow.jpdl4.source.feature"
          version="0.0.0"/>
-
-
 
 </feature>
