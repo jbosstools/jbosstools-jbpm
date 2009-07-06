@@ -17,14 +17,6 @@
       %license
    </license>
 
-   <!-- <plugin
-         id="org.jboss.tools.flow.common.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-	-->
-
    <plugin
          id="org.eclipse.ant.optional.junit"
          download-size="0"
@@ -46,32 +38,6 @@
 
    <plugin
          id="org.jboss.tools.flow.jpdl4.multipage.test.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <!--
-   <plugin
-         id="org.jboss.tools.flow.jpdl4.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.jboss.tools.flow.jpdl4.test.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-	-->
-
-   <plugin
-         id="org.jboss.tools.jbpm.common.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.jboss.tools.jbpm.common.test.source"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
