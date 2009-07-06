@@ -1,5 +1,12 @@
-plugin@org.jbpm.gd.jpdl.help=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.help/
-plugin@org.jbpm.gd.jpdl.ui=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.ui/
-plugin@org.jbpm.gd.jpdl.core=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.core/
-plugin@org.jbpm.gd.jpdl=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl/
-feature@org.jbpm.gd.jpdl.feature=%cvsTag%,%jbpm-cvs-root%,,jbpm.3/designer/jpdl/org.jbpm.gd.jpdl.feature/
+!*** Contains features, plugins, and tests for jbpm4. 
+!*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4.
+
+!*** features
+feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jbpm.gd.jpdl.feature
+
+!*** plugins
+plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl
+
+!*** test feature
+
+!*** test plugins
