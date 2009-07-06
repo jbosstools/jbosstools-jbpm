@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.jboss.tools.jbpm4.feature"
+      label="%featureName"
+      version="4.0.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateSiteName" url="http://download.jboss.org/jbosstools/updates/stable"/>
+   </url>
+
+   <includes
+         id="org.jboss.tools.jbpm.common.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.jboss.tools.flow.common.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.jboss.tools.flow.jpdl4.feature"
+         version="0.0.0"/>
+
+</feature>
