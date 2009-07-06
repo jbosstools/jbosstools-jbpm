@@ -3,12 +3,12 @@
 <booleanAttribute key="org.eclipse.ant.ui.DEFAULT_VM_INSTALL" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${container}"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm4.releng/build.xml"/>
+<listEntry value="/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm3.releng/build.xml"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm4.releng}/buildlog.latest.txt"/>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm3.releng}/buildlog.latest.txt"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.ui.externaltools.launchGroup"/>
 </listAttribute>
