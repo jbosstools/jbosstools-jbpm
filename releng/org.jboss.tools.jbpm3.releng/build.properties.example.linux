@@ -21,7 +21,9 @@ relengBaseBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.releng.bas
 relengCommonBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.dash.common.releng
 
 JAVA_HOME=/usr/lib/jvm/java
+JAVA14_HOME=/usr/lib/jvm/java
 JAVA50_HOME=/usr/lib/jvm/java
+JAVA60_HOME=/usr/lib/jvm/java
 
 dependencyURLs=\
 http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.0RC2.zip,\
