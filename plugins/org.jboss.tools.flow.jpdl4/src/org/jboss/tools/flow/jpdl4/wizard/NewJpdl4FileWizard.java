@@ -3,6 +3,7 @@ package org.jboss.tools.flow.jpdl4.wizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -13,7 +14,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.jboss.tools.flow.jpdl4.Logger;
 
-public class NewJpdl4FileWizard extends Wizard implements IWorkbenchWizard {
+public class NewJpdl4FileWizard extends Wizard implements IWorkbenchWizard, INewWizard {
 	
 	private static String ID_PROP_SHEET = "org.eclipse.ui.views.PropertySheet";
 
