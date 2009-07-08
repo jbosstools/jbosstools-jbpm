@@ -6,7 +6,7 @@ public class AddParameterHandler extends AddChildHandler {
 	
 	@Override
 	protected String getChildId() {
-		return "org.jboss.tools.flow.jpdl4.wireObject";
+		return "org.jboss.tools.flow.jpdl4.primitive";
 	}
 
 	@Override
