@@ -31,7 +31,7 @@
          </include>
       </validator>
    </extension>
-	<extension id="org.jboss.tools.flow.jpdl4.problem" point="org.eclipse.core.resources.markers" name="jPDL 4 Problem">
+	<extension id="org.jboss.tools.flow.jpdl4.problem" point="org.eclipse.core.resources.markers" name="jPDL4 Problem">
    		<super type="org.eclipse.core.resources.problemmarker"/>
 	</extension>
 </plugin>
