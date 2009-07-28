@@ -90,7 +90,7 @@ public class Jpdl4Validator extends AbstractValidator {
 		}
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 		try {
-			Class problemClass = cl.loadClass("org.jbpm.api.Problem");
+			Class problemClass = cl.loadClass("org.jbpm.pvm.internal.xml.Problem");
 			Method getMsgMethod = problemClass.getMethod("getMsg", new Class[] {});
 			Method getLineMethod = problemClass.getMethod("getLine", new Class[] {});
 			Method getSeverityMethod = problemClass.getMethod("getSeverity", new Class[] {});
@@ -109,7 +109,7 @@ public class Jpdl4Validator extends AbstractValidator {
 		        attNames[2] = IMarker.SEVERITY;
 		        attValues[2] = new Integer("error".equals(severity) ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING);
 		        ValidatorMessage validatorMessage = ValidatorMessage.create(msg, file);
-		        validatorMessage.setType(IMarker.PROBLEM);
+		        validatorMessage.setType("org.jboss.tools.flow.jpdl4.problem");
 		        validatorMessage.setAttributes(attNames, attValues);
 		        validationResult.add(validatorMessage);
 			}
