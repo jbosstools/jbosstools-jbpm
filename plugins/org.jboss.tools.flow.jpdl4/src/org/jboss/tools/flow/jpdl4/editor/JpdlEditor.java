@@ -99,7 +99,7 @@ public class JpdlEditor extends GenericModelEditor implements
 			figure.paint(g);
 			ImageLoader imageLoader = new ImageLoader();
 			imageLoader.data = new ImageData[] { image.getImageData() };
-			imageLoader.save(getImageSavePath(), SWT.IMAGE_JPEG);
+			imageLoader.save(getImageSavePath(), SWT.IMAGE_PNG);
 			refreshProcessFolder();
 
 		} finally {
