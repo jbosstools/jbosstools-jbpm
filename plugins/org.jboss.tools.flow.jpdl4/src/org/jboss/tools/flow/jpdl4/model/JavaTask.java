@@ -12,12 +12,14 @@ public class JavaTask extends Task {
 	public static final String CLASS = "org.jboss.tools.flow.jpdl4.model.javaTask.class";
 	public static final String METHOD = "org.jboss.tools.flow.jpdl4.model.javaTask.method";
 	public static final String VAR = "org.jboss.tools.flow.jpdl4.model.javaTask.var";
+	public static final String EXPR = "org.jboss.tools.flow.jpdl4.model.javaTask.expression";
 	public static final String FIELDS = "org.jboss.tools.flow.jpdl4.model.javaTask.fields";
 	public static final String ARGS = "org.jboss.tools.flow.jpdl4.model.javaTask.args";
 	
 	private String className;
 	private String methodName;
 	private String variableName;
+	private String expression;
 	private List<Argument> arguments = new ArrayList<Argument>();
 	private List<Field> fields = new ArrayList<Field>();
 	
@@ -49,6 +51,14 @@ public class JavaTask extends Task {
 		this.variableName = variableName;
 	}
 	
+	public String getExpression() {
+		return expression;
+	}
+	
+	public void setExpression(String expression) {
+		this.expression = expression;
+	}
+	
 	protected boolean isPropagationExclusive() {
 		return true;
 	}
@@ -70,6 +80,8 @@ public class JavaTask extends Task {
 				return getMethodName();
 			} else if (VAR.equals(id)) {
 				return getVariableName();
+			} else if (EXPR.equals(id)) {
+				return getExpression();
 			} else if (FIELDS.equals(id)) {
 				return fields;
 			} else if (ARGS.equals(id)) {
@@ -85,6 +97,8 @@ public class JavaTask extends Task {
 				return getMethodName() != null;
 			} else if (VAR.equals(id)) {
 				return getVariableName() != null;
+			} else if (EXPR.equals(id)) {
+				return getExpression() != null;
 			} else if (FIELDS.equals(id)) {
 				return true;
 			} else if (ARGS.equals(id)) {
@@ -103,6 +117,8 @@ public class JavaTask extends Task {
 				setMethodName((String)value);
 			} else if (VAR.equals(id)) {
 				setVariableName((String)value);
+			} else if (EXPR.equals(id)) {
+				setExpression((String)value);
 			}
 		}
 		

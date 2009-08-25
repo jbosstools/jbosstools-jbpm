@@ -15,6 +15,7 @@ class JavaTaskSerializer extends ProcessNodeSerializer {
 		result.add("class");
 		result.add("method");
 		result.add("var");
+		result.add("expr");
 		return result;
 	}
 	protected String getPropertyName(String attributeName) {
@@ -24,6 +25,8 @@ class JavaTaskSerializer extends ProcessNodeSerializer {
 			return JavaTask.METHOD;
 		} else if ("var".equals(attributeName)) {
 			return JavaTask.VAR;
+		} else if ("expr".equals(attributeName)) {
+			return JavaTask.EXPR;
 		}
 		return super.getPropertyName(attributeName);
 	}

@@ -16,6 +16,7 @@ class JavaTaskDeserializer extends NodeDeserializer {
 		wrapper.setPropertyValue(JavaTask.CLASS, element.getAttribute("class"));
 		wrapper.setPropertyValue(JavaTask.METHOD, element.getAttribute("method"));
 		wrapper.setPropertyValue(JavaTask.VAR, element.getAttribute("var"));
+		wrapper.setPropertyValue(JavaTask.EXPR, element.getAttribute("expr"));
 	}
 	public Wrapper deserializeChildNode(Wrapper parent, Node node) {
 		Wrapper result = super.deserializeChildNode(parent, node);

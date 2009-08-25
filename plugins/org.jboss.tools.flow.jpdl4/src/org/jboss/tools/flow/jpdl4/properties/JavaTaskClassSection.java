@@ -5,7 +5,7 @@ import org.jboss.tools.flow.jpdl4.model.JavaTask;
 public class JavaTaskClassSection extends TextFieldPropertySection {
 	
 	public JavaTaskClassSection() {
-		super(JavaTask.CLASS, "Class Name");
+		super(JavaTask.CLASS, "Class");
 	}
 
 }
