@@ -3,6 +3,8 @@
  */
 package org.jboss.tools.flow.jpdl4.io;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.draw2d.geometry.Point;
@@ -74,27 +76,30 @@ class SequenceFlowDeserializer extends AbstractElementDeserializer {
 		}
 	}
 	
+	public void deserializeChildNodes(Wrapper wrapper,
+			Element element) {
+		if (wrapper == null) return;
+		NodeList nodeList = element.getChildNodes();
+		ArrayList<Node> unknownNodeList = new ArrayList<Node>();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if ("timer".equals(node.getNodeName())) {
+				deserializeTimer(wrapper, node, unknownNodeList);
+			} else if ("outcome-value".equals(node.getNodeName())) {
+				deserializeOutcomeValue(wrapper, node, unknownNodeList);
+			} else {
+				deserializeChildNode(wrapper, node, unknownNodeList);
+			}
+		}
+		wrapper.getElement().setMetaData("trailingNodes", unknownNodeList);
+	}
+	
 	public Wrapper deserializeChildNode(Wrapper parent, Node node) {
 		Wrapper result = null;
 		if (!(parent instanceof ConnectionWrapper)) return result;
 		ConnectionWrapper connectionWrapper = (ConnectionWrapper)parent;
 		if (node instanceof Element) {
-			if ("timer".equals(node.getNodeName())) {
-				String duedate = ((Element)node).getAttribute("duedate");
-				if (duedate != null && !("".equals(duedate))) {
-					parent.setPropertyValue(SequenceFlow.TIMER, duedate);
-				}
-			} else if ("outcome-value".equals(node.getNodeName())) {
-				NodeList nodeList = ((Element)node).getElementsByTagName("string");
-				if (nodeList.getLength() == 1) {
-					String value = ((Element)nodeList.item(0)).getAttribute("value");
-					if (value != null && !("".equals("value"))) {
-						parent.setPropertyValue(SequenceFlow.OUTCOME_VALUE, value);
-					}
-				}
-			} else {
-				result = Registry.createWrapper((Element)node);
-			}
+			result = Registry.createWrapper((Element)node);
 			if (result == null) return null;
 			if (result instanceof Wrapper) {
 				if (result.getElement() instanceof EventListener) {
@@ -103,6 +108,21 @@ class SequenceFlowDeserializer extends AbstractElementDeserializer {
 			}
 		}
 		return result;
+	}
+	
+	private void deserializeTimer(Wrapper parent, Node node, List<Node> unknownNodeList) {
+		if (!(node instanceof Element)) return;
+		parent.setMetaData("beforeTimerNodes", new ArrayList<Node>(unknownNodeList));
+		unknownNodeList.clear();
+		parent.setPropertyValue(SequenceFlow.TIMER, ((Element)node).getAttribute("duedate"));
+	}
+
+	private void deserializeOutcomeValue(Wrapper parent, Node node, List<Node> unknownNodeList) {
+		parent.setMetaData("beforeOutcomeValueNodes", new ArrayList<Node>(unknownNodeList));
+		unknownNodeList.clear();
+		// outome-value has only one child node
+		Node content = node.getChildNodes().item(0);
+		parent.setPropertyValue(SequenceFlow.OUTCOME_VALUE, content.getNodeValue());
 	}
 
 	

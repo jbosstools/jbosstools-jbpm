@@ -14,6 +14,7 @@ import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 
 class SequenceFlowSerializer extends AbstractElementSerializer {
+	
 	protected List<String> getAttributesToSave() {
 		ArrayList<String> result = new ArrayList<String>();
 		result.add("name");
@@ -21,6 +22,7 @@ class SequenceFlowSerializer extends AbstractElementSerializer {
 		result.add("g");
 		return result;
 	}
+	
 	protected void appendAttributeToSave(String attributeName, StringBuffer buffer, Wrapper wrapper) {
 		if (!(wrapper instanceof ConnectionWrapper)) return;
 		Element element = wrapper.getElement();
@@ -33,18 +35,21 @@ class SequenceFlowSerializer extends AbstractElementSerializer {
 			appendGraphics(buffer, (ConnectionWrapper)wrapper);
 		}
 	}
+	
 	protected void appendName(StringBuffer buffer, SequenceFlow sequenceFlow) {
 		if (sequenceFlow.getName() == null) return;
 		String value = sequenceFlow.getName();
 		if (value == null || "".equals(sequenceFlow.getName())) return;
 		buffer.append(" name=\"" + value + "\"");
 	}
+	
 	protected void appendTo(StringBuffer buffer, SequenceFlow sequenceFlow) {
 		if (sequenceFlow.getTo() == null) return;
 		String value = sequenceFlow.getTo().getName();
 		if (value == null || "".equals(value)) return;
 		buffer.append(" to=\"" + value + "\"");
 	}
+	
 	protected void appendGraphics(StringBuffer buffer, ConnectionWrapper wrapper) {
     	StringBuffer bendPointBuffer = new StringBuffer();
     	List<Point> bendPoints = wrapper.getBendpoints();
@@ -73,21 +78,19 @@ class SequenceFlowSerializer extends AbstractElementSerializer {
     	buffer.append(labelBuffer);
     	buffer.append("\"");
 	}
+	
     private boolean isEmpty(String str) {
     	return str == null || "".equals(str);
     }
+    
 	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
 		String timer = (String)wrapper.getPropertyValue(SequenceFlow.TIMER);
 		if (timer != null && !("".equals(timer))) {
-			buffer.append("\n");
-			appendPadding(buffer, level + 1);
-			buffer.append("<timer duedate=\"" + timer + "\"/>");
+			appendTimer(buffer, wrapper, timer, level);
 		}
 		String outcome = (String)wrapper.getPropertyValue(SequenceFlow.OUTCOME_VALUE);
 		if (outcome != null && !("".equals(outcome))) {
-			buffer.append("\n");
-			appendPadding(buffer, level + 1);
-			buffer.append("<outcome-value><string value=\"" + outcome + "\"/></outcome-value>");
+			appendOutcomeValue(buffer, wrapper, outcome, level);
 		}
 		List<Element> eventListeners = wrapper.getChildren("listener");
 		if (eventListeners != null) {
@@ -98,4 +101,16 @@ class SequenceFlowSerializer extends AbstractElementSerializer {
 			}
 		}
 	}
+	
+	private void appendTimer(StringBuffer buffer, Wrapper wrapper, String timer, int level) {
+		appendUnknownNodes("beforeTimerNodes", buffer, wrapper, level);
+		buffer.append("<timer duedate=\"").append(timer).append("\"/>");
+	}
+
+	private void appendOutcomeValue(StringBuffer buffer, Wrapper wrapper, String outcome, int level) {
+		appendUnknownNodes("beforeOutcomeValueNodes", buffer, wrapper, level);
+		buffer.append("<outcome-value>").append(outcome).append("</outcome-value>");
+	}
+
+	
 }
