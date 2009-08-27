@@ -26,13 +26,13 @@
  ]><book xmlns:diffmk="http://diffmk.sf.net/ns/diff">
     <bookinfo>
         <title>jBPM Tools Reference Guide</title>
-            <corpauthor>
-                <inlinemediaobject>
-                    <imageobject role="fo">
-                        <imagedata fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+            <corpauthor diffmk:change="added">
+                <inlinemediaobject diffmk:change="added">
+                    <imageobject diffmk:change="added" role="fo">
+                        <imagedata diffmk:change="added" fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
                     </imageobject>	
-                    <imageobject role="html">
-                        <imagedata></imagedata>
+                    <imageobject diffmk:change="added" role="html">
+                        <imagedata diffmk:change="added"></imagedata>
                     </imageobject>	
                 </inlinemediaobject>           
             </corpauthor>
@@ -180,13 +180,13 @@
 
      <row>
       <entry>
-       <link linkend="the_views">A large range of special views, including:</link>
+       <link diffmk:change="added" linkend="the_views"><diffmk:wrapper diffmk:change="added">A large range of special views, including:</diffmk:wrapper></link>
       </entry>
-      <entry></entry>
+      <entry diffmk:change="added"></entry>
      </row>
 
-     <row>
-      <entry>
+     <row diffmk:change="added">
+      <entry diffmk:change="added">
        <link linkend="source_mode">Support of XML code view</link>
       </entry>
       <entry>Shows the corresponding XML that's generated automatically in the Source view
@@ -202,14 +202,14 @@
 
      <row>
       <entry>
-       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
+       <link diffmk:change="added" linkend="jbpm_gpd_editor"><diffmk:wrapper diffmk:change="added">The jBPM Graphical Process Designer editor</diffmk:wrapper></link>
       </entry>
-      <entry>The plugin is used for designing the workflow.</entry>
+      <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">The plugin is used for designing the workflow.</diffmk:wrapper></entry>
      </row>
      
 
-     <row>
-      <entry>Interaction with all of the J2EE based integration technologies including Web Services,
+     <row diffmk:change="added">
+      <entry diffmk:change="added">Interaction with all of the J2EE based integration technologies including Web Services,
        Java Messaging, J2EE Connectors, JBDC, EJBs.</entry>
       <entry>Enables implementation, provides better functionality and flexibility.</entry>
      </row>
