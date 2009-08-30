@@ -286,14 +286,16 @@ public class ProcessDeployer {
 					return name.startsWith(className);
 				}
 			});
-			for (int i = 0; i < nestedClasses.length; i++) {
-				String fileName = classOrResource.substring(0, classOrResource.lastIndexOf("/") + 1) + nestedClasses[i];
-				zos.putNextEntry(new ZipEntry("classes/" + fileName));
-				is = loader.getResourceAsStream(fileName);
-				while ((read = is.read(buff)) != -1) {
-					zos.write(buff, 0, read);
+			if (nestedClasses != null) {
+				for (int i = 0; i < nestedClasses.length; i++) {
+					String fileName = classOrResource.substring(0, classOrResource.lastIndexOf("/") + 1) + nestedClasses[i];
+					zos.putNextEntry(new ZipEntry("classes/" + fileName));
+					is = loader.getResourceAsStream(fileName);
+					while ((read = is.read(buff)) != -1) {
+						zos.write(buff, 0, read);
+					}
+					is.close();
 				}
-				is.close();
 			}
 		}
 	}
