@@ -144,8 +144,4 @@ public class JpdlEditor extends Editor {
 		super.dispose();
 	}
 
-	public String getDefaultImageFileName() {
-		return "processimage.jpg";
-	}
-
 }

@@ -81,13 +81,20 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		return buffer.toString();
 	}
 
-	protected String getNotationInfoFileName(String semanticInfoFileName) {
+	public String getNotationInfoFileName(String semanticInfoFileName) {
 		return ".gpd." + semanticInfoFileName;
 	}
-
-	protected String getSemanticInfoFileName(String notationInfoFileName) {
-		return notationInfoFileName.substring(5);
+	
+	public String getDiagramImageFileName(String semanticInfoFileName) {
+		String result;
+		int index = semanticInfoFileName.indexOf(".xml");
+		result = index > -1 ? semanticInfoFileName.substring(0, index) : semanticInfoFileName;
+		return result + ".jpg";
 	}
+
+//	public String getSemanticInfoFileName(String notationInfoFileName) {
+//		return notationInfoFileName.substring(5);
+//	}
 
 	protected void processRootContainer(RootContainer rootContainer, Element notationInfo) {
 		addDimension(rootContainer, notationInfo);

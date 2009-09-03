@@ -36,7 +36,7 @@ import org.jbpm.gd.jpdl.model.Transition;
 
 public class JpdlContentProvider extends AbstractContentProvider{
 	
-	protected String getNotationInfoFileName(String semanticInfoFileName) {
+	public String getNotationInfoFileName(String semanticInfoFileName) {
 		if ("processdefinition.xml".equals(semanticInfoFileName)) {
 			return "gpd.xml";
 		} else {
@@ -44,13 +44,21 @@ public class JpdlContentProvider extends AbstractContentProvider{
 		}
 	}
 
-	protected String getSemanticInfoFileName(String notationInfoFileName) {
-		if ("gpd.xml".equals(notationInfoFileName)) {
-			return "processdefinition.xml";
+	public String getDiagramImageFileName(String semanticInfoFileName) {
+		if ("processdefinition.xml".equals(semanticInfoFileName)) {
+			return "processimage.jpg";
 		} else {
-			return super.getSemanticInfoFileName(notationInfoFileName);
+			return super.getDiagramImageFileName(semanticInfoFileName);
 		}
 	}
+
+//	public String getSemanticInfoFileName(String notationInfoFileName) {
+//		if ("gpd.xml".equals(notationInfoFileName)) {
+//			return "processdefinition.xml";
+//		} else {
+//			return super.getSemanticInfoFileName(notationInfoFileName);
+//		}
+//	}
 
 	protected void addNodes(NodeContainer nodeContainer, Element notationInfo) {
 		NodeElementContainer nodeElementContainer = (NodeElementContainer)nodeContainer.getSemanticElement();

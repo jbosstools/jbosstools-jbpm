@@ -131,18 +131,13 @@ public class GraphPage extends EditorPart {
 		}
 	}
 	
-	private String getImageSavePath() {
+	public String getImageSavePath() {
 		IFile file = ((FileEditorInput)getEditorInput()).getFile();
-		String name = file.getName();
-		if (name.startsWith(".gpd.") && name.length() > 7) {
-			name = name.substring(5, name.length() - 3) + "jpg";			
-		} else {
-			name = editor.getDefaultImageFileName();
-		}
+		String name = editor.getContentProvider().getDiagramImageFileName(file.getName());
 		IPath path = file.getRawLocation().removeLastSegments(1).append(name);
 		return path.toOSString();
 	}
-
+	
 	public void doSaveAs() {
 	}
 

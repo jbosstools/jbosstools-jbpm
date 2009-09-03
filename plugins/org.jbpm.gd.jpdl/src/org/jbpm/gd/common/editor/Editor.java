@@ -1,7 +1,13 @@
 package org.jbpm.gd.common.editor;
 
+import java.util.ArrayList;
 import java.util.EventObject;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourceAttributes;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditDomain;
@@ -11,6 +17,7 @@ import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
@@ -24,6 +31,7 @@ import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
@@ -84,6 +92,7 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 			initSourcePage();
 			initGraphPage();
 			setActivePage(0);
+			checkReadOnly();
 	}
 
 	protected void addPage(int index, IEditorPart part, String label) {
@@ -198,10 +207,14 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 	
 	private void handleCommandStackChanged() {
 		getActionRegistry().updateStackActions();
-		if (!isDirty() && getCommandStack().isDirty()) {
+		if (!isDirty() && getCommandStack().isDirty() && editAllowed()) {
 			isDirty = true;
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 		}
+	}
+	
+	private boolean editAllowed() {
+		return true;
 	}
 
 	protected void pageChange(int newPageIndex) {
@@ -302,6 +315,7 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 	}
 
 	public void doSave(IProgressMonitor monitor) {
+		if (!checkReadOnly()) return;
 		super.doSave(monitor);
 		getGraphPage().doSave(monitor);
 		boolean saved = getContentProvider().saveToInput(getEditorInput(), getRootContainer());
@@ -316,10 +330,51 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 		super.dispose();
 	}
 	
-	public abstract String getDefaultImageFileName();
-
 	protected SelectionSynchronizer createSelectionSynchronizer() {
 		return new SelectionSynchronizer(); 
+	}
+	
+	private boolean checkReadOnly() {
+		IFile inputFile = ((FileEditorInput)getEditorInput()).getFile();
+		IFolder inputFolder = (IFolder)inputFile.getParent();
+		IFile notationInfoFile = inputFolder.getFile(getContentProvider().getNotationInfoFileName(inputFile.getName()));
+		IFile diagramImageFile = inputFolder.getFile(getContentProvider().getDiagramImageFileName(inputFile.getName()));
+		String readOnlyFiles = "";
+		ArrayList readOnlyFilesList = new ArrayList();
+		if (inputFile.isReadOnly()) {
+			readOnlyFiles += ("- " + inputFile.getFullPath().toOSString() + "\n");
+			readOnlyFilesList.add(inputFile); 
+		}
+		if (notationInfoFile.exists() && notationInfoFile.isReadOnly()) {
+			readOnlyFiles += ("- " + notationInfoFile.getFullPath().toOSString() + "\n");
+			readOnlyFilesList.add(notationInfoFile);
+		}
+		if (diagramImageFile.exists() && diagramImageFile.isReadOnly()) {
+			readOnlyFiles += ("- " + diagramImageFile.getFullPath().toOSString() + "\n");
+			readOnlyFilesList.add(diagramImageFile);
+		}
+		if (readOnlyFilesList.isEmpty()) return true;
+		boolean answer = MessageDialog.openQuestion(
+				getSite().getShell(), 
+				"Read-only Input Files Detected", 
+				"The following files have a read-only indicator which needs to be changed to read-write in order to be able to save the process correctly.\n\n" +
+				readOnlyFiles + "\n" +
+				"Do you want to perform this change now?");
+		if (answer) {
+			try {
+				ResourceAttributes resourceAttributes = new ResourceAttributes();
+				resourceAttributes.setReadOnly(false);
+				for (int i = 0; i < readOnlyFilesList.size(); i++) {
+					((IFile)readOnlyFilesList.get(i)).setResourceAttributes(resourceAttributes);
+				}
+				return false;
+			} catch (CoreException e) {
+				Logger.logError("Error while trying to set files writeable", e);
+				return true;
+			}
+		} else {
+			return true;
+		}
 	}
 	
 	protected abstract ContentProvider createContentProvider();
