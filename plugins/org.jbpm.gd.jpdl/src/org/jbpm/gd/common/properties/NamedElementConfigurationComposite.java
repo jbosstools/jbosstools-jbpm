@@ -81,7 +81,7 @@ public class NamedElementConfigurationComposite implements FocusListener {
 	}
 	
 	private String getNameText() {
-		String text = nameText.getText();
+		String text = nameText.getText().trim();
 		if ("".equals(text) && !namedElement.isNameMandatory()) {
 			text = null;
 		}

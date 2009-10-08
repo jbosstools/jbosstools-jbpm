@@ -21,7 +21,10 @@ public class ChangeNameCommand extends Command {
 	
 	public void execute() {
 		oldName = namedElement.getName();
-		namedElement.setName(newName);
+		if ("".equals(newName) && !namedElement.isNameMandatory()) {
+			newName = null;
+		}
+		namedElement.setName(newName.trim());
 	}
 	
 	public void undo() {
