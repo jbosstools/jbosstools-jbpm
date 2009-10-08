@@ -2,6 +2,7 @@
 !*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4.
 
 !*** features
+feature@org.jboss.tools.jbpm4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.feature
 feature@org.jboss.tools.jbpm4.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.sdk.feature
 feature@org.jboss.tools.flow.jpdl4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.flow.jpdl4.feature
 feature@org.jboss.tools.flow.common.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/flow/features/org.jboss.tools.flow.common.feature
