@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.jboss.tools.jbpm3.feature"
+      label="%featureName"
+      version="3.2.0.qualifier"
+      provider-name="%featureProvider">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateSiteName" url="http://download.jboss.org/jbosstools/updates/stable"/>
+   </url>
+
+   <includes
+         id="org.jboss.tools.jbpm.common.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.jbpm.gd.jpdl.feature"
+         version="0.0.0"/>
+
+</feature>
