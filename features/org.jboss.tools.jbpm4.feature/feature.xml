@@ -3,7 +3,7 @@
       id="org.jboss.tools.jbpm4.feature"
       label="%featureName"
       version="4.0.0.qualifier"
-      provider-name="%providerName">
+      provider-name="%featureProvider">
 
    <description>
       %description
