@@ -14,33 +14,24 @@ testFeatureToBuildID=org.jboss.tools.jbpm4.tests.feature
 
 build.steps=buildUpdate,buildTests,generateDigests,test,publish,cleanup
 
-# Re-use local sources?
+# If using local sources, must copy or symlink jbosstools-trunk/flow/* into jbosstools-trunk/jbpm/ to find all plugins/features
 localSourceCheckoutDir=/home/nboldt/eclipse/workspace-jboss/jbosstools-trunk/jbpm
+
 relengBuilderDir=/home/nboldt/eclipse/workspace-jboss/jbosstools-trunk/jbpm/releng/org.jboss.tools.jbpm4.releng
 relengBaseBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.releng.basebuilder
 relengCommonBuilderDir=/home/nboldt/eclipse/workspace-jboss/org.eclipse.dash.common.releng
 
 JAVA_HOME=/usr/lib/jvm/java
+JAVA14_HOME=/usr/lib/jvm/java
 JAVA50_HOME=/usr/lib/jvm/java
+JAVA60_HOME=/usr/lib/jvm/java
 
 dependencyURLs=\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.0RC2.zip,\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/emf-runtime-2.5.0RC2.zip,\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/xsd-runtime-2.5.0RC2.zip,\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/wtp-S-3.1RC2-20090526075706.zip,\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/wtp-jpt-S-3.1RC2-20090526075706.zip,\
-http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-linux-gtk.tar.gz
-
-# alternate eclipse platforms - swap in above as needed
-#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-win32.zip,\
-#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-linux-gtk-x86_64.tar.gz,\
-#http://anonsvn.jboss.org/repos/repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5RC3-macosx-carbon.tar.gz,\
-
-# not needed for jbpm, copied for reference (other builds may need these)
-#http://www.eclipse.org/downloads/download.php?r=1&file=/birt/downloads/drops/M-R1-2.5M7-200905061338/birt-report-framework-2.5M7.zip,\
-#http://www.eclipse.org/downloads/download.php?r=1&file=/birt/downloads/drops/M-R1-2.5M7-200905061338/birt-wtp-integration-sdk-2.5M7.zip,\
-#http://www.eclipse.org/downloads/download.php?r=1&file=/datatools/downloads/drops/N_DTP_1.7/dtp-1.7.0M7-200905052200.zip,\
-#http://www.eclipse.org/downloads/download.php?r=1&file=/tptp/4.6.0/TPTP-4.6.0M7-200904260100/tptp.runtime-TPTP-4.6.0M7.zip,\
+http://repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.1.zip,\
+http://repository.jboss.org/eclipse/galileo/emf-runtime-2.5.0.zip,\
+http://repository.jboss.org/eclipse/galileo/xsd-runtime-2.5.0.zip,\
+http://repository.jboss.org/eclipse/galileo/wtp-R-3.1.1-20090917225226.zip,\
+http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk.tar.gz
 
 flattenDependencies=true
 parallelCompilation=true
