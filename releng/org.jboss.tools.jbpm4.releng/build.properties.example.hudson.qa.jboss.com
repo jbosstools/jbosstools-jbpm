@@ -25,7 +25,12 @@ http://repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.1.zip,\
 http://repository.jboss.org/eclipse/galileo/emf-runtime-2.5.0.zip,\
 http://repository.jboss.org/eclipse/galileo/xsd-runtime-2.5.0.zip,\
 http://repository.jboss.org/eclipse/galileo/wtp-R-3.1.1-20090917225226.zip,\
-http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk-x86_64.tar.gz
+http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk.tar.gz
+#http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk-x86_64.tar.gz
+
+repositoryURLs=\
+http://hudson.qa.jboss.com/hudson/view/DevStudio/job/jbosstools-cbi-jbpm3/lastSuccessfulBuild/artifact/build/N-SNAPSHOT/jbpm3-Update-N-SNAPSHOT.zip
+featureIDsToInstall=org.jboss.tools.jbpm.common.feature,org.jboss.tools.jbpm.common.source.feature
 
 flattenDependencies=true
 parallelCompilation=true
