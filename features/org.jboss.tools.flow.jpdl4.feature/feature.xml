@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.flow.jpdl4.feature"
       label="%featureName"
-      version="1.1.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="%featureProvider">
 
    <description>
