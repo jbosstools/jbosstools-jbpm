@@ -90,7 +90,7 @@ public class VariableTableItemWrapper implements DisposeListener, SelectionListe
 		tableItem.addDisposeListener(this);
 		tableItem.setData(this);
 		tableItem.setText(1, getName());
-		tableItem.setText(5, getMappedName());
+		tableItem.setText(2, getMappedName());
 	}
 
 	public void widgetDisposed(DisposeEvent e) {
