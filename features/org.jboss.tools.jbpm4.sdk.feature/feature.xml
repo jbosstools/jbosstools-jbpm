@@ -22,23 +22,17 @@
    </url>
 
    <includes
-         id="org.jboss.tools.jbpm.common.feature"
+         id="org.jboss.tools.jbpm4.feature"
          version="0.0.0"/>
 
+
+	<!-- sources -->
    <includes
          id="org.jboss.tools.jbpm.common.source.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.jboss.tools.flow.common.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.jboss.tools.flow.common.source.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.jboss.tools.flow.jpdl4.feature"
          version="0.0.0"/>
 
    <includes
