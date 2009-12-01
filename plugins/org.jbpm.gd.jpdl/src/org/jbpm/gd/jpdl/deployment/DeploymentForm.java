@@ -46,11 +46,13 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
@@ -84,11 +86,14 @@ public class DeploymentForm {
 	private Text portText;
 	private Text deployerText;
 	private Text locationText;
+	private Text usernameText;
+	private Text passwordText;
 	private Button deployButton;
 	private Button saveButton;
 	private Button locationButton;
 	private Button testConnectionButton;
 	private Button saveLocallyButton;
+	private Button useCredentialsButton;
 	
 	private IncludeInDeploymentTreeViewer includeFilesTreeViewer;
 	private IncludeInDeploymentTreeViewer includeClassesTreeViewer;
@@ -143,6 +148,11 @@ public class DeploymentForm {
 		result.setServerName(nameText.getText());
 		result.setServerPort(portText.getText());
 		result.setServerDeployer(deployerText.getText());
+		result.setUseCredentials(useCredentialsButton.getSelection());
+		if (useCredentialsButton.getSelection()) {
+			result.setUsername(usernameText.getText() == null ? "" : usernameText.getText());
+			result.setPassword(passwordText.getText() == null ? "" : passwordText.getText());
+		}
 		result.setShell(form.getShell());
 		result.setProcessFolder(processFolder);
 		result.setFilesAndFolders(getIncludedFiles());
@@ -223,6 +233,8 @@ public class DeploymentForm {
 		createServerNameField(serverInfoFormClient);
 		createServerPortField(serverInfoFormClient);
 		createServerDeployerField(serverInfoFormClient);
+		createUseCredentialsButton(serverInfoFormClient);
+		createUseCredentialsGroup(serverInfoFormClient);
 		createTestConnectionButton(serverInfoFormClient);
 	}
 
@@ -279,6 +291,51 @@ public class DeploymentForm {
 				updateTestConnectionAndDeployButtons();
 			}
 		});
+	}
+	
+	private void createUserNameField(Composite composite) {
+		Label usernameLabel = toolkit.createLabel(composite, "Username:");
+		usernameLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
+		usernameText = toolkit.createText(composite, "");
+		String usernameString = Plugin.getDefault().getPreferenceStore().getString("user name");
+		usernameText.setText(usernameString == null ? "" : usernameString);
+		usernameText.setEnabled(useCredentialsButton.getSelection());
+		usernameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+	
+	private void createPasswordField(Composite composite) {
+		Label passwordLabel = toolkit.createLabel(composite, "Password:");
+		passwordLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
+		passwordText = toolkit.createText(composite, "", SWT.PASSWORD);
+		String passwordString = Plugin.getDefault().getPreferenceStore().getString("password");
+		passwordText.setText(passwordString == null ? "" : passwordString);
+		passwordText.setEnabled(useCredentialsButton.getSelection());
+		passwordText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+	
+	private void createUseCredentialsButton(Composite infoFormClient) {
+		useCredentialsButton = toolkit.createButton(infoFormClient, "Use credentials", SWT.CHECK);
+		useCredentialsButton.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
+		useCredentialsButton.setSelection(Plugin.getDefault().getPreferenceStore().getBoolean("use credentials"));
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 3;
+		useCredentialsButton.setLayoutData(gridData);
+		useCredentialsButton.addSelectionListener(new SelectionAdapter() {			
+			public void widgetSelected(SelectionEvent e) {
+				usernameText.setEnabled(useCredentialsButton.getSelection());
+				passwordText.setEnabled(useCredentialsButton.getSelection());
+			}
+		});
+	}
+	
+	private void createUseCredentialsGroup(Composite infoFormClient) {
+		Composite useCredentialsGroup = toolkit.createComposite(infoFormClient, SWT.BORDER);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		useCredentialsGroup.setLayoutData(gridData);
+		useCredentialsGroup.setLayout(new GridLayout(2, false));
+		createUserNameField(useCredentialsGroup);
+		createPasswordField(useCredentialsGroup);
 	}
 	
 	private void createTestConnectionButton(Composite infoFormClient) {

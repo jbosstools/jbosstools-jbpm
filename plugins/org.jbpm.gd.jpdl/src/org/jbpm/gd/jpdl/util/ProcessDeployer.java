@@ -3,6 +3,7 @@ package org.jbpm.gd.jpdl.util;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -33,6 +34,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
+import org.jbpm.gd.common.util.Base64Converter;
 import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.Plugin;
 
@@ -48,6 +50,9 @@ public class ProcessDeployer {
 	String targetLocation;
 	List classesAndResources;
 	List filesAndFolders;
+	boolean useCredentials = false;
+	String username;
+	String password;
 	
 	public void setShell(Shell shell) {
 		this.shell = shell;
@@ -81,6 +86,18 @@ public class ProcessDeployer {
 		this.filesAndFolders = filesAndFolders;
 	}
 	
+	public void setUseCredentials(boolean useCredentials) {
+		this.useCredentials = useCredentials;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public boolean deploy() {
 		try {
 			showProgressMonitorDialog();
@@ -94,6 +111,18 @@ public class ProcessDeployer {
 			dialog.open();
 			return false;
         }
+		catch (IOException e) {
+			if (e.getMessage().contains("Server returned HTTP response code: 403 for URL")) {
+				MessageDialog dialog = new MessageDialog(shell, "Not Allowed", null,
+						"The server refused to perform the deployment. Check your credentials.",
+						SWT.ICON_INFORMATION, new String[] { "OK" }, 0);
+				dialog.open();
+				return false;
+			} else {
+				showErrorDialog(e);
+				return false;
+			}
+		}
         catch (Exception e) {
             // NOTE that Error's are not caught because that might halt the JVM and mask the original Error.
 			showErrorDialog(e);
@@ -103,7 +132,8 @@ public class ProcessDeployer {
 	
 	public void pingServer() {
 		try {
-			URL url = new URL("http://" + serverName + ":" + serverPort + serverDeployer);
+			String urlStr = "http://" + serverName + ":" + serverPort + serverDeployer;
+			URL url = new URL(urlStr);
 			URLConnection urlConnection = url.openConnection();
 			urlConnection.setDoOutput(true);
 			InputStream inputStream = urlConnection.getInputStream();
@@ -120,6 +150,12 @@ public class ProcessDeployer {
 		catch (ConnectException e) {
 			MessageDialog dialog = new MessageDialog(shell, "Connection Test", null,
 					"The server could not be reached.",
+					SWT.ICON_INFORMATION, new String[] { "OK" }, 0);
+			dialog.open();
+		}
+		catch (FileNotFoundException e) {
+			MessageDialog dialog = new MessageDialog(shell, "Connection Test", null,
+					"The server can be reached, but the deployer seems unavailable.",
 					SWT.ICON_INFORMATION, new String[] { "OK" }, 0);
 			dialog.open();
 		}
@@ -170,6 +206,12 @@ public class ProcessDeployer {
 					}
 					deployProcessWithServlet(baos);
 					return;
+				} catch (IOException e) {
+					if (e.getMessage().contains("Server returned HTTP response code: 403 for URL")) {
+						Logger.logError(
+								"The server refused to execute the deployment. Check your credentials.",
+								e);
+					}
 				} catch (Exception e) {
 					Logger
 							.logError(
@@ -193,8 +235,14 @@ public class ProcessDeployer {
 	}
 
 	private void deployProcessWithServlet(byte[] parBytes) throws Exception {
-		URL url = new URL("http://" + serverName + ":" + serverPort + serverDeployer);
+		String urlStr = "http://" + serverName + ":" + serverPort + serverDeployer;
+		URL url = new URL(urlStr);
 		URLConnection urlConnection = url.openConnection();
+		if (useCredentials) {
+			String userPassword = username + ":" + password;
+			String encoding = Base64Converter.encode(userPassword);
+			urlConnection.setRequestProperty ("Authorization", "Basic" + encoding);
+		}
 		urlConnection.setDoInput(true);
 		urlConnection.setDoOutput(true);
 		urlConnection.setUseCaches(false);

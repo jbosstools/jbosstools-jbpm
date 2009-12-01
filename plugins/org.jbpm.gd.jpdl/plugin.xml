@@ -358,7 +358,11 @@
             class="org.jbpm.gd.jpdl.prefs.AssignmentTypesPage"
             id="org.jbpm.gd.jpdl.prefs.assignmentTypes"
             name="Assignment Types"
-            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+            category="org.jbpm.gd.jpdl.prefs.jbpm3">
+       <enablement> 
+           <systemProperty name="MyTestProperty" value="puppy"/> 
+       </enablement> 
+       </page>
       <page
             class="org.jbpm.gd.jpdl.prefs.ServerDeploymentPage"
             id="org.jbpm.gd.jpdl.prefs.deployment"
