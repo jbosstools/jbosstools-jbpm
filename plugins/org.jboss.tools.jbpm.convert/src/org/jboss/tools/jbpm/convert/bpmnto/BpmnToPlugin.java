@@ -11,7 +11,6 @@
 
 package org.jboss.tools.jbpm.convert.bpmnto;
 
-import org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin;
 import org.jboss.tools.common.log.BaseUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -61,4 +60,12 @@ public class BpmnToPlugin extends BaseUIPlugin {
 		return plugin;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.jboss.tools.common.log.BaseUIPlugin#getId()
+	 */
+	@Override
+	public String getId() {
+		return PLUGIN_ID;
+	}
 }
