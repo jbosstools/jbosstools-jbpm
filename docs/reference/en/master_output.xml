@@ -26,13 +26,13 @@
  ]><book xmlns:diffmk="http://diffmk.sf.net/ns/diff">
     <bookinfo>
         <title>jBPM Tools Reference Guide</title>
-            <corpauthor diffmk:change="added">
-                <inlinemediaobject diffmk:change="added">
-                    <imageobject diffmk:change="added" role="fo">
-                        <imagedata diffmk:change="added" fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+            <corpauthor>
+                <inlinemediaobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
                     </imageobject>	
-                    <imageobject diffmk:change="added" role="html">
-                        <imagedata diffmk:change="added"></imagedata>
+                    <imageobject role="html">
+                        <imagedata></imagedata>
                     </imageobject>	
                 </inlinemediaobject>           
             </corpauthor>
@@ -66,9 +66,9 @@
         <copyright>
             <year>2007</year>
             <year>2009</year>
-            <holder><diffmk:wrapper diffmk:change="changed">JBoss by Red Hat</diffmk:wrapper></holder>
+            <holder>JBoss by Red Hat</holder>
         </copyright>
-        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.M2</diffmk:wrapper></releaseinfo>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.CR1</diffmk:wrapper></releaseinfo>
 
 <abstract>
    <title></title>
@@ -81,7 +81,7 @@
     
     <toc></toc>
     
-<chapter id="Introduction" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/Introduction.xml" xreflabel="Introduction">
+<chapter id="Introduction" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Introduction.xml" xreflabel="Introduction">
  <?dbhtml filename="TargetAudience.html"?>
  <chapterinfo>
   <keywordset>
@@ -180,13 +180,13 @@
 
      <row>
       <entry>
-       <link diffmk:change="added" linkend="the_views"><diffmk:wrapper diffmk:change="added">A large range of special views, including:</diffmk:wrapper></link>
+       <link linkend="the_views">A large range of special views, including:</link>
       </entry>
-      <entry diffmk:change="added"></entry>
+      <entry></entry>
      </row>
 
-     <row diffmk:change="added">
-      <entry diffmk:change="added">
+     <row>
+      <entry>
        <link linkend="source_mode">Support of XML code view</link>
       </entry>
       <entry>Shows the corresponding XML that's generated automatically in the Source view
@@ -202,14 +202,14 @@
 
      <row>
       <entry>
-       <link diffmk:change="added" linkend="jbpm_gpd_editor"><diffmk:wrapper diffmk:change="added">The jBPM Graphical Process Designer editor</diffmk:wrapper></link>
+       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
       </entry>
-      <entry diffmk:change="added"><diffmk:wrapper diffmk:change="added">The plugin is used for designing the workflow.</diffmk:wrapper></entry>
+      <entry>The plugin is used for designing the workflow.</entry>
      </row>
      
 
-     <row diffmk:change="added">
-      <entry diffmk:change="added">Interaction with all of the J2EE based integration technologies including Web Services,
+     <row>
+      <entry>Interaction with all of the J2EE based integration technologies including Web Services,
        Java Messaging, J2EE Connectors, JBDC, EJBs.</entry>
       <entry>Enables implementation, provides better functionality and flexibility.</entry>
      </row>
@@ -228,13 +228,14 @@
  <section>
   <title>Other relevant resources on the topic</title>
   <para>All JBoss Developer Studio/JBoss Tools release documentation you can find at<ulink url="http://docs.jboss.org/tools/">http://docs.jboss.org/tools</ulink> in the corresponding release directory.</para>
+  <para>There is some extra information on <ulink url="http://www.jboss.org/community/wiki/JBPMWiki">JBoss Wiki. </ulink></para>
   <para>The latest documentation builds are available at <ulink url="http://download.jboss.org/jbosstools/nightly-docs/">http://download.jboss.org/jbosstools/nightly-docs</ulink>.</para>
  </section>
 
 </chapter>
  
     
-<chapter id="jboss_jbpm_runtime_installation" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/jboss_jbpm_runtime_installation.xml" xreflabel="jboss_jbpm_runtime_installation">
+<chapter id="jboss_jbpm_runtime_installation" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/jboss_jbpm_runtime_installation.xml" xreflabel="jboss_jbpm_runtime_installation">
  <?dbhtml filename="jboss_jbpm_runtime_installation.html"?>
  <chapterinfo>
   <keywordset>
@@ -282,7 +283,7 @@
 </chapter>
  
     
-<chapter id="GuidedTourJBossjBPMGPD" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/guided_tour_jboss_jbpmgpd.xml" xreflabel="GuidedTourJBossjBPMGPD">
+<chapter id="GuidedTourJBossjBPMGPD" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/guided_tour_jboss_jbpmgpd.xml" xreflabel="GuidedTourJBossjBPMGPD">
 	<?dbhtml filename="GuidedTourJBossjBPMGPD.html"?>
 	<chapterinfo>
 		<keywordset>
@@ -501,7 +502,7 @@
 </chapter>
 
     
-<chapter id="the_views" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/the_views.xml" xreflabel="the_views">
+<chapter id="the_views" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/the_views.xml" xreflabel="the_views">
     <?dbhtml filename="the_views.html"?>
     <chapterinfo>
         <keywordset>
@@ -731,7 +732,7 @@
     </section>
 </chapter>
  
-<chapter id="Test_Drive_Proc_Development" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/Test_Drive_Proc.xml" xreflabel="Test_Drive_Proc_Development">
+<chapter id="Test_Drive_Proc_Development" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Test_Drive_Proc.xml" xreflabel="Test_Drive_Proc_Development">
     <?dbhtml filename="Test_Drive_Proc_Development.html"?>
     <chapterinfo>
         <keywordset>
@@ -904,7 +905,7 @@
 </chapter>
 
     
-<chapter id="The_JBoss_jBPM_Int_Mech" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/The_JBoss_jBPM_Int_Mech.xml" xreflabel="The_JBoss_jBPM_Int_Mech">
+<chapter id="The_JBoss_jBPM_Int_Mech" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/The_JBoss_jBPM_Int_Mech.xml" xreflabel="The_JBoss_jBPM_Int_Mech">
     <?dbhtml filename="The_JBoss_jBPM_Int_Mech.html"?>
     <chapterinfo>
         <keywordset>
@@ -1142,7 +1143,7 @@
 </chapter>
 
     
-<chapter id="Quick_Howto_Guide" xml:base="file:///home/ochikvina/WORK/for_compare/trunk/jbpm/docs/reference/en/modules/Quick_Howto_Guide.xml" xreflabel="Quick_Howto_Guide">
+<chapter id="Quick_Howto_Guide" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Quick_Howto_Guide.xml" xreflabel="Quick_Howto_Guide">
     <?dbhtml filename="Quick_Howto_Guide.html"?>
     <chapterinfo>
         <keywordset>
