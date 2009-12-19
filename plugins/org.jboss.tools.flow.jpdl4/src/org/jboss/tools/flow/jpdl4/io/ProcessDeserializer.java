@@ -31,6 +31,10 @@ class ProcessDeserializer extends AbstractElementDeserializer {
 		FlowWrapper flowWrapper = (FlowWrapper)parent;
 		if (node instanceof Element) {
 			result = Registry.createWrapper((Element)node);
+			if (result == null) {
+				return null;
+//				result = tryToCreateUnknownNodeWrapper((Element)node);
+			}
 			if (result == null) return null;
 			if (result instanceof NodeWrapper) {
 				flowWrapper.addElement((NodeWrapper)result);
@@ -44,5 +48,7 @@ class ProcessDeserializer extends AbstractElementDeserializer {
 		}
 		return result;
 	}
+	
+	
 	
 }

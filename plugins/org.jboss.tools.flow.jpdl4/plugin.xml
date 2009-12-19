@@ -162,6 +162,26 @@
             <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
          </node>
       </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.JmsTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.jmsTask"
+            label="jms"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.RuleTask"
+            figure="icons/16/task_empty.png"
+            id="org.jboss.tools.flow.jpdl4.ruleTask"
+            label="rule"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.TaskFigure"></figure>
+         </node>
+      </element>
 <!--      <element
             class="org.jboss.tools.flow.jpdl4.model.ServiceTask"
             figure="icons/16/task_empty.png"
@@ -207,6 +227,16 @@
             figure="icons/16/gateway_exclusive.png"
             id="org.jboss.tools.flow.jpdl4.exclusiveGateway"
             label="exclusive"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ExclusiveGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
+            class="org.jboss.tools.flow.jpdl4.model.RulesDecision"
+            figure="icons/16/gateway_exclusive.png"
+            id="org.jboss.tools.flow.jpdl4.rulesDecision"
+            label="rule"
             language="org.jboss.tools.flow.jpdl4">
          <node>
             <figure class="org.jboss.tools.flow.jpdl4.figure.ExclusiveGatewayFigure"></figure>

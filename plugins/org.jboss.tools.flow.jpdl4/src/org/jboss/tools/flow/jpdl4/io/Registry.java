@@ -18,12 +18,15 @@ import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
+import org.jboss.tools.flow.jpdl4.model.JmsTask;
 import org.jboss.tools.flow.jpdl4.model.JoinParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.MailTask;
 import org.jboss.tools.flow.jpdl4.model.Parameter;
 import org.jboss.tools.flow.jpdl4.model.PrimitiveObject;
 import org.jboss.tools.flow.jpdl4.model.Process;
 import org.jboss.tools.flow.jpdl4.model.QueryTask;
+import org.jboss.tools.flow.jpdl4.model.RuleTask;
+import org.jboss.tools.flow.jpdl4.model.RulesDecision;
 import org.jboss.tools.flow.jpdl4.model.ScriptTask;
 import org.jboss.tools.flow.jpdl4.model.SequenceFlow;
 import org.jboss.tools.flow.jpdl4.model.ServiceTask;
@@ -50,12 +53,15 @@ public class Registry {
 		else if ("sql".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sqlTask";
 		else if ("java".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.javaTask";
 		else if ("script".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.scriptTask";
+		else if ("jms".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.jmsTask";
+		else if ("rules".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.ruleTask";
 		else if ("esb".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.serviceTask";
 		else if ("mail".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.mailTask";
 		else if ("task".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.humanTask";
 		else if ("custom".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.customTask";
 		else if ("sub-process".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.subprocessTask";
 		else if ("decision".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.exclusiveGateway";
+		else if ("rules-decision".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.rulesDecision";
 		else if ("join".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelJoinGateway";
 		else if ("fork".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForkGateway";
 		else if ("transition".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.sequenceFlow";
@@ -142,12 +148,18 @@ public class Registry {
 			return new SubprocessTaskDeserializer();
 		} else if (element instanceof ExclusiveGateway) {
 			return new ExclusiveGatewayDeserializer();
+		} else if (element instanceof RulesDecision) {
+			return new RulesDecisionDeserializer();
 		} else if (element instanceof TerminateEndEvent) {
 			return new TerminateEndEventDeserializer();
 		} else if (element instanceof JavaTask) {
 			return new JavaTaskDeserializer();
 		} else if (element instanceof ScriptTask) {
 			return new ScriptTaskDeserializer();
+		} else if (element instanceof JmsTask) {
+			return new JmsTaskDeserializer();
+		} else if (element instanceof RuleTask) {
+			return new RuleTaskDeserializer();
 		} else if (element instanceof QueryTask) {
 			return new QueryTaskDeserializer();
 		} else {
@@ -195,6 +207,10 @@ public class Registry {
     		return new JavaTaskSerializer();
        	} else if (element instanceof ScriptTask) {
        		return new ScriptTaskSerializer();
+       	} else if (element instanceof JmsTask) {
+       		return new JmsTaskSerializer();
+       	} else if (element instanceof RuleTask) {
+       		return new RuleTaskSerializer();
        	} else if (element instanceof MailTask) {
        		return new ProcessNodeSerializer();
     	} else if (element instanceof ServiceTask) {
@@ -207,6 +223,8 @@ public class Registry {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof ExclusiveGateway) {
     		return new ExclusiveGatewaySerializer();
+    	} else if (element instanceof RulesDecision) {
+    		return new RulesDecisionSerializer();
     	} else if (element instanceof ForkParallelGateway) {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof JoinParallelGateway) {
@@ -244,12 +262,15 @@ public class Registry {
 		else if ("org.jboss.tools.flow.jpdl4.sqlTask".equals(elementId)) return "sql";
 		else if ("org.jboss.tools.flow.jpdl4.javaTask".equals(elementId)) return "java";
 		else if ("org.jboss.tools.flow.jpdl4.scriptTask".equals(elementId)) return "script";
+		else if ("org.jboss.tools.flow.jpdl4.jmsTask".equals(elementId)) return "jms";
+		else if ("org.jboss.tools.flow.jpdl4.ruleTask".equals(elementId)) return "rules";
 		else if ("org.jboss.tools.flow.jpdl4.mailTask".equals(elementId)) return "mail";
 		else if ("org.jboss.tools.flow.jpdl4.serviceTask".equals(elementId)) return "esb";
 		else if ("org.jboss.tools.flow.jpdl4.humanTask".equals(elementId)) return "task";
 		else if ("org.jboss.tools.flow.jpdl4.subprocessTask".equals(elementId)) return "sub-process";
 		else if ("org.jboss.tools.flow.jpdl4.customTask".equals(elementId)) return "custom";
 		else if ("org.jboss.tools.flow.jpdl4.exclusiveGateway".equals(elementId)) return "decision";
+		else if ("org.jboss.tools.flow.jpdl4.rulesDecision".equals(elementId)) return "rules-decision";
 		else if ("org.jboss.tools.flow.jpdl4.parallelJoinGateway".equals(elementId)) return "join";
 		else if ("org.jboss.tools.flow.jpdl4.parallelForkGateway".equals(elementId)) return "fork";
 		else if ("org.jboss.tools.flow.jpdl4.sequenceFlow".equals(elementId)) return "transition";
