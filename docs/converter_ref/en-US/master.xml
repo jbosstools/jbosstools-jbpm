@@ -2,8 +2,8 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3CR3//EN"
 "http://www.oasis-open.org/docbook/xml/4.3CR3/docbookx.dtd"
 
-[<!ENTITY  overview SYSTEM "modules/overview.xml">
-<!ENTITY bpmn2jpdl SYSTEM "modules/bpmn2jpdl.xml">
+[<!ENTITY  overview SYSTEM "overview.xml">
+<!ENTITY bpmn2jpdl SYSTEM "bpmn2jpdl.xml">
 ]>
 
 <book>
@@ -29,7 +29,7 @@
 	          <holder>JBoss by Red Hat</holder>
 	     </copyright>
          <releaseinfo>
-             Version: 1.1.0.CR1
+             Version: 1.1.0.M2
          </releaseinfo>
 <abstract>
    <title/>
