@@ -62,11 +62,10 @@
             <email>tom.baeyens@jboss.com</email>
         </author>
 
-
-        <pubdate>April 2008</pubdate>
         <copyright>
             <year>2007</year>
             <year>2009</year>
+            <year>2010</year>
             <holder>JBoss by Red Hat</holder>
         </copyright>
         <releaseinfo> Version: 4.0.0.CR1</releaseinfo>
