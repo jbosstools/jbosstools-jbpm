@@ -241,7 +241,7 @@ public class ProcessDeployer {
 		if (useCredentials) {
 			String userPassword = username + ":" + password;
 			String encoding = Base64Converter.encode(userPassword);
-			urlConnection.setRequestProperty ("Authorization", "Basic" + encoding);
+			urlConnection.setRequestProperty ("Authorization", "Basic " + encoding);
 		}
 		urlConnection.setDoInput(true);
 		urlConnection.setDoOutput(true);

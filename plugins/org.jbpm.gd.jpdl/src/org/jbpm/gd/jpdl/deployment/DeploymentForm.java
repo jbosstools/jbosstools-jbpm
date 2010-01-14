@@ -296,7 +296,7 @@ public class DeploymentForm {
 	private void createUserNameField(Composite composite) {
 		Label usernameLabel = toolkit.createLabel(composite, "Username:");
 		usernameLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		usernameText = toolkit.createText(composite, "");
+		usernameText = toolkit.createText(composite, "", SWT.BORDER);
 		String usernameString = Plugin.getDefault().getPreferenceStore().getString("user name");
 		usernameText.setText(usernameString == null ? "" : usernameString);
 		usernameText.setEnabled(useCredentialsButton.getSelection());
@@ -306,7 +306,7 @@ public class DeploymentForm {
 	private void createPasswordField(Composite composite) {
 		Label passwordLabel = toolkit.createLabel(composite, "Password:");
 		passwordLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		passwordText = toolkit.createText(composite, "", SWT.PASSWORD);
+		passwordText = toolkit.createText(composite, "", SWT.PASSWORD | SWT.BORDER);
 		String passwordString = Plugin.getDefault().getPreferenceStore().getString("password");
 		passwordText.setText(passwordString == null ? "" : passwordString);
 		passwordText.setEnabled(useCredentialsButton.getSelection());
