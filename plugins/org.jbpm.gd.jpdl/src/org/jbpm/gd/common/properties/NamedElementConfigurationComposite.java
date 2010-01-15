@@ -1,5 +1,8 @@
 package org.jbpm.gd.common.properties;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.layout.FormAttachment;
@@ -10,7 +13,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 import org.jbpm.gd.common.model.NamedElement;
 
-public class NamedElementConfigurationComposite implements FocusListener {
+public class NamedElementConfigurationComposite implements FocusListener, PropertyChangeListener {
 	
 	public static NamedElementConfigurationComposite create(TabbedPropertySheetWidgetFactory widgetFactory, Composite parent) {
 		NamedElementConfigurationComposite result = new NamedElementConfigurationComposite();
@@ -32,21 +35,25 @@ public class NamedElementConfigurationComposite implements FocusListener {
 	
 	public void setNamedElement(NamedElement namedElement) {
 		if (this.namedElement == namedElement) return;
-		unhookSelectionListener();
+		unhookListeners();
 		clearControls();
 		this.namedElement = namedElement;
+		updateControls();
+		hookListeners();
+	}
+	
+	private void hookListeners() {
+		nameText.addFocusListener(this);
 		if (namedElement != null) {
-			updateControls();
-			hookSelectionListener();
+			namedElement.addPropertyChangeListener(this);
 		}
 	}
 	
-	private void hookSelectionListener() {
-		nameText.addFocusListener(this);
-	}
-	
-	private void unhookSelectionListener() {
+	private void unhookListeners() {
 		nameText.removeFocusListener(this);
+		if (namedElement != null) {
+			namedElement.removePropertyChangeListener(this);
+		}
 	}
 	
 	private void clearControls() {
@@ -54,8 +61,10 @@ public class NamedElementConfigurationComposite implements FocusListener {
 	}
 	
 	private void updateControls() {
-		String name = namedElement.getName();
-		nameText.setText(name == null ? "" : name);
+		if (namedElement != null) {
+			String name = namedElement.getName();
+			nameText.setText(name == null ? "" : name);
+		}
 	}
 	
 	private void create() {
@@ -97,4 +106,9 @@ public class NamedElementConfigurationComposite implements FocusListener {
 		}
 	}
 	
+	public void propertyChange(PropertyChangeEvent evt) {
+		if ("name".equals(evt.getPropertyName())) {
+			nameText.setText(evt.getNewValue() != null ? (String)evt.getNewValue() : "");
+		}
+	}			
 }
