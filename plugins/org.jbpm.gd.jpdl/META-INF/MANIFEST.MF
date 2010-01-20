@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %bundleName
 Bundle-SymbolicName: org.jbpm.gd.jpdl;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-ClassPath: ui.jar,
+Bundle-ClassPath: .,
  lib/dom4j-1.4.jar
 Bundle-Activator: org.jbpm.gd.jpdl.Plugin
 Bundle-Vendor: %bundleProvider
