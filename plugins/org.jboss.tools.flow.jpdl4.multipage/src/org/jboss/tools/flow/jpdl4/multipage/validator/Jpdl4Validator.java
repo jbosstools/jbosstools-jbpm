@@ -36,7 +36,7 @@ public class Jpdl4Validator extends AbstractValidator {
 		clearMarkers((IFile)resource);
 		ValidationResult validationResult = super.validate(resource, kind, state, monitor);
 		if (!(resource instanceof IFile) || resource == null) return validationResult;
-		PreferencesManager manager = PreferencesManager.getPreferencesManager(Activator.getDefault());
+		PreferencesManager manager = PreferencesManager.INSTANCE;
 		if (manager == null) return validationResult;
 		String jbpmName = Activator.getDefault().getPluginPreferences().getString(Constants.JBPM_NAME);
 		if (jbpmName == null) return validationResult;
