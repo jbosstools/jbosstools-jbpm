@@ -24,4 +24,13 @@
       </category>
    </extension>
    
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.jboss.tools.jbpm.preferences.JbpmLocationsPage"
+            id="org.jboss.tools.jbpm.locations"
+            name="Runtime Locations"
+            category="org.jboss.tools.jbpm"/>
+   </extension>
+   
 </plugin>

@@ -43,7 +43,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public abstract class AddJbpmInstallationDialog extends StatusDialog {
+public class AddJbpmInstallationDialog extends StatusDialog {
 	
 	private static final String ENTER_NAME = "Enter the name of the jBPM installation.";
 	private static final String ENTER_LOCATION = "Enter the location of the jBPM installation.";
@@ -185,7 +185,7 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 	}
 	
 	private boolean isNameAlreadyUsed() {
-		return PreferencesManager.getPreferencesManager(plugin).getJbpmInstallation(nameText.getText()) != null;
+		return PreferencesManager.INSTANCE.getJbpmInstallation(nameText.getText()) != null;
 	}
 	
 	private boolean isLocationExisting() {
@@ -221,7 +221,25 @@ public abstract class AddJbpmInstallationDialog extends StatusDialog {
 		return location;
 	}
 
-	protected abstract String getVersion(); 
-	protected abstract boolean isValidJbpmInstallation();
+	private boolean isJbpm3() {
+		return new Path(location).append("/src/resources/gpd/version.info.xml").toFile().exists();
+	}
+	
+	private boolean isJbpm4() {
+		return new Path(getLocation()).append("/jbpm.jar").toFile().exists();
+	}
+	
+	protected String getVersion() {
+		if (isJbpm3()) {
+			return "jBPM3";
+		} else if (isJbpm4()) {
+			return "jBPM4";
+		} else {
+			return "unknown";
+		}
+	}
+	protected boolean isValidJbpmInstallation() {
+		return isJbpm3() || isJbpm4();
+	}
 
 }

@@ -40,24 +40,23 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.jboss.tools.jbpm.Activator;
 import org.jboss.tools.jbpm.Constants;
 import org.jboss.tools.jbpm.util.AutoResizeTableLayout;
 
-public abstract class JbpmLocationsPage extends PreferencePage implements IWorkbenchPreferencePage {
+public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPreferencePage {
 	
 	private TableViewer tableViewer;
 	private Button addButton, editButton, removeButton;
 	
-	private AbstractUIPlugin plugin;
-
-	public JbpmLocationsPage(AbstractUIPlugin plugin) {
+	public JbpmLocationsPage() {
 		super();
-		this.plugin = plugin;
-		setPreferenceStore(plugin.getPreferenceStore());
+		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 	}
 	
-	protected abstract AddJbpmInstallationDialog createAddJbpmInstallationDialog(Shell shell);
+	protected AddJbpmInstallationDialog createAddJbpmInstallationDialog(Shell shell) {
+		 return new AddJbpmInstallationDialog(shell, Activator.getDefault());
+	}
 
 	protected Control createContents(Composite parent) {
 		Composite clientArea = createClientArea(parent);
@@ -179,12 +178,12 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 	}
 	
 	private void initializeInput(TableViewer viewer) {
-		viewer.setInput(PreferencesManager.getPreferencesManager(plugin));
+		viewer.setInput(PreferencesManager.INSTANCE);
 		checkItemToCheck(viewer);
 	}
 
 	private void checkItemToCheck(TableViewer viewer) {
-		String name = plugin.getPreferenceStore().getString(Constants.JBPM_NAME);
+		String name = Activator.getDefault().getPreferenceStore().getString(Constants.JBPM_NAME);
 		if (name != null) {
 			TableItem tableItem = getItemToCheck(viewer, name);
 			if (tableItem != null) {
@@ -208,13 +207,9 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 		ColumnWeightData nameColumnData = new ColumnWeightData(30);
 		AutoResizeTableLayout layout = (AutoResizeTableLayout)table.getLayout();
 		layout.addColumnData(nameColumnData);
-		TableColumn versionColumn = new TableColumn(table, SWT.LEFT);
-		versionColumn.setText("Version");
-		ColumnWeightData versionColumnData = new ColumnWeightData(30);
-		layout.addColumnData(versionColumnData);
 		TableColumn locationColumn = new TableColumn(table, SWT.LEFT);
 		locationColumn.setText("Location");
-		ColumnWeightData locationColumnData = new ColumnWeightData(40);
+		ColumnWeightData locationColumnData = new ColumnWeightData(70);
 		layout.addColumnData(locationColumnData);
 	}
 	
@@ -301,7 +296,7 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 		if (item != null) {
 			name = item.getText(0);
 		}
-		plugin.getPluginPreferences().setValue(Constants.JBPM_NAME, name);		
+		Activator.getDefault().getPluginPreferences().setValue(Constants.JBPM_NAME, name);		
 		return true;
 	}
 	
@@ -314,7 +309,7 @@ public abstract class JbpmLocationsPage extends PreferencePage implements IWorkb
 	}
 	
 	public void performDefaults() {
-		plugin.getPluginPreferences().setToDefault(Constants.JBPM_NAME);
+		Activator.getDefault().getPluginPreferences().setToDefault(Constants.JBPM_NAME);
 		PreferencesManager inputManager = 
 			(PreferencesManager)tableViewer.getInput();
 		inputManager.getJbpmInstallationMap().clear();

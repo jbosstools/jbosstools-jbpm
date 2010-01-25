@@ -31,32 +31,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.XMLMemento;
+import org.jboss.tools.jbpm.Activator;
 import org.jboss.tools.jbpm.Constants;
 
 public class PreferencesManager {
 	
-	private static Map<Plugin, PreferencesManager> managerMap = new HashMap<Plugin, PreferencesManager>();
-
 	private Map<String, JbpmInstallation> jbpmInstallations = null;
 	private File installationsFile = null;
-	private Plugin plugin;
 	
-	public static PreferencesManager getPreferencesManager(Plugin key) {
-		PreferencesManager preferencesManager = managerMap.get(key);
-		if (preferencesManager == null) {
-			preferencesManager = new PreferencesManager(key);
-			managerMap.put(key, preferencesManager);
-		}
-		return preferencesManager;
-	}
-		
-	private PreferencesManager(Plugin plugin) {
-		this.plugin = plugin;
+	public static final PreferencesManager INSTANCE = new PreferencesManager();
+	
+	private PreferencesManager() {
 		initializeInstallations();
 	}
 	
@@ -75,12 +64,12 @@ public class PreferencesManager {
 	}
 		
 	private Preferences getPreferences() {
-		return plugin.getPluginPreferences();
+		return Activator.getDefault().getPluginPreferences();
 	}
 	
 	private void initializeInstallations() {
 		installationsFile = 
-			plugin.getStateLocation().append("jbpm-installations.xml").toFile();
+			Activator.getDefault().getStateLocation().append("jbpm-installations.xml").toFile();
 		if (!installationsFile.exists()) {
 			createInstallationsFile();
 		} else {

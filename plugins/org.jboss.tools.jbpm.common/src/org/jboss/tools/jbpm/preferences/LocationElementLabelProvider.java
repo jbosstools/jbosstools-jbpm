@@ -39,8 +39,7 @@ public class LocationElementLabelProvider extends LabelProvider implements
 		JbpmInstallation installation = (JbpmInstallation)((Map.Entry)element).getValue();
 		switch (columnIndex) {
 			case 0: return installation.name;
-			case 1: return installation.version;
-			case 2: return installation.location;
+			case 1: return installation.location;
 			default: return null;
 		}
 	}

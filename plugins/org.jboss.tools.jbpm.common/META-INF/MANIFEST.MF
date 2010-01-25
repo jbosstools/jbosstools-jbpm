@@ -15,3 +15,5 @@ Export-Package: org.jboss.tools.jbpm,
  org.jboss.tools.jbpm.java,
  org.jboss.tools.jbpm.preferences,
  org.jboss.tools.jbpm.util
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.jboss.tools.jbpm.Activator
