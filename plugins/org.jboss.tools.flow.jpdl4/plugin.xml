@@ -943,18 +943,6 @@
    </extension> 
 
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page class="org.jboss.tools.jbpm.preferences.DefaultPage"
-            id="org.jboss.tools.flow.jpdl4"
-            name="jBPM 4"
-            category="org.jboss.tools.jbpm"/>
-      <page
-            class="org.jboss.tools.flow.jpdl4.preferences.Jbpm4LocationsPage"
-            id="org.jboss.tools.flow.jpdl4.locations"
-            name="Runtime Locations"
-            category="org.jboss.tools.flow.jpdl4"/>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
