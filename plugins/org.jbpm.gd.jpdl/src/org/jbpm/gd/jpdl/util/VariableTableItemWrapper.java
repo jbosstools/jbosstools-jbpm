@@ -153,6 +153,7 @@ public class VariableTableItemWrapper implements DisposeListener, SelectionListe
 
 	private void applyMappedName() {
 		mappedNameText.setVisible(false);
+		variable.setMappedName(mappedNameText.getText());
 		tableItem.setText(2, getMappedName());
 	}
 
@@ -162,6 +163,7 @@ public class VariableTableItemWrapper implements DisposeListener, SelectionListe
 
 	private void applyName() {
 		nameText.setVisible(false);
+		variable.setName(nameText.getText());
 		tableItem.setText(1, getName());
 	}
 

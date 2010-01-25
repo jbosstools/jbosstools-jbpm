@@ -22,11 +22,7 @@
 package org.jbpm.gd.jpdl.wizard;
 
 import java.io.File;
-import java.net.MalformedURLException;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -47,13 +43,13 @@ import org.eclipse.swt.widgets.Text;
 
 public class ConfigureRuntimePage extends WizardPage {
 	
-	private static final String ENTER_NAME_MSG = "Choose a name for the JBoss jBPM Runtime, e.g. 'jBPM jPDL 3.2.2'";
-	private static final String ENTER_LOCATION_MSG = "Enter or search a location for the JBoss jBPM Runtime";
+	private static final String ENTER_NAME_MSG = "Choose a name for the jBPM 3 Runtime, e.g. 'jBPM jPDL 3.2.2'";
+	private static final String ENTER_LOCATION_MSG = "Enter or search a location for the jBPM 3 Runtime";
 	private static final String CONTINUE_MSG = "Press next to continue the project creation";
 	private static final String UNEXISTING_LOCATION_MSG = "This location does not exist";
-	private static final String INVALID_LOCATION_MSG = "This location does not contain a valid JBoss jBPM runtime, please retry";
+	private static final String INVALID_LOCATION_MSG = "This location does not contain a valid jBPM 3 runtime, please retry";
 	
-	Text nameText, locationText, versionText;
+	Text nameText, locationText;
 	
 	public ConfigureRuntimePage() {
 		super("Configure JBoss jBPM Runtime");
@@ -71,12 +67,11 @@ public class ConfigureRuntimePage extends WizardPage {
 	
 	private void update() {
 		updateMessage();
-		updateVersion();
 		updatePages();
 	}
 	
 	private void updatePages() {
-		setPageComplete(!isNameEmpty() && !isLocationEmpty() && !isVersionEmpty());
+		setPageComplete(!isNameEmpty() && !isLocationEmpty());
 		if (!isNameEmpty()) {
 			NewProcessProjectDetailsWizardPage page = (NewProcessProjectDetailsWizardPage)getNextPage();
 			page.combo.removeAll();
@@ -113,15 +108,6 @@ public class ConfigureRuntimePage extends WizardPage {
 		group.setLayoutData(gridData);
 		createJbpmRuntimeNameField(group);
 		createJbpmRuntimeLocationField(group);
-		createJbpmRuntimeVersionField(group);
-	}
-	
-	private void createJbpmRuntimeVersionField(Composite composite) {
-		Label versionLabel = new Label(composite, SWT.NONE);
-		versionLabel.setText("Version :");
-		versionText = new Text(composite, SWT.BORDER);
-		versionText.setEditable(false);
-		versionText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 	
 	private void createJbpmRuntimeNameField(Composite composite) {
@@ -182,7 +168,7 @@ public class ConfigureRuntimePage extends WizardPage {
 			setMessage(ENTER_LOCATION_MSG);
 		} else if (!isLocationExisting()) {
 			setErrorMessage(UNEXISTING_LOCATION_MSG);
-		} else if (!isValidJbpmInstallation()) {
+		} else if (!isValidJbpm3Installation()) {
 			setErrorMessage(INVALID_LOCATION_MSG);
 		} else if (isNameEmpty()) {
 			setMessage(ENTER_NAME_MSG);
@@ -191,29 +177,6 @@ public class ConfigureRuntimePage extends WizardPage {
 		}
 	}
 	
-	private void updateVersion() {
-		String version = getVersion();
-		if (version != null) {
-			versionText.setText(version);
-		}
-	}
-	
-	private String getVersion() {
-		String result = null;
-		File versionInfoFile;
-		if (!isLocationEmpty() && isLocationExisting() && isValidJbpmInstallation()) {
-			versionInfoFile = getJbpmVersionInfoFile();
-			if (versionInfoFile == null) return result;			
-			try {
-				Document document = new SAXReader().read(versionInfoFile);
-				result = document.getRootElement().attribute("name").getValue();
-			} 
-			catch (DocumentException e) {} 
-			catch (MalformedURLException e) {}
-		}
-		return result;
-	}
-
 	private boolean isNameEmpty() {
 		String text = nameText.getText();
 		return text == null || "".equals(text);
@@ -224,16 +187,11 @@ public class ConfigureRuntimePage extends WizardPage {
 		return text == null || "".equals(text);
 	}
 	
-	private boolean isVersionEmpty() {
-		String text = versionText.getText();
-		return text == null || "".equals(text);
-	}
-	
 	private boolean isLocationExisting() {
 		return new Path(locationText.getText()).toFile().exists();
 	}
 	
-	private boolean isValidJbpmInstallation() {
+	private boolean isValidJbpm3Installation() {
 		return getJbpmVersionInfoFile().exists();		
 	}
 	

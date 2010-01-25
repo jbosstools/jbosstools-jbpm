@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -82,9 +83,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.part.ISetSelectionTarget;
+import org.jboss.tools.jbpm.preferences.JbpmInstallation;
+import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
-import org.jbpm.gd.jpdl.prefs.JbpmInstallation;
-import org.jbpm.gd.jpdl.prefs.PreferencesManager;
 import org.jbpm.gd.jpdl.util.JbpmClasspathContainer;
 
 public class NewProcessProjectWizard extends Wizard implements INewWizard {
@@ -107,14 +108,22 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 
 	public void addPages() {
 		addMainPage();
-		if (!isRuntimeAvailable()) {
+		if (!isJbpm3RuntimeAvailable()) {
 			addConfigureRuntimePage();
 		}
 		addChooseRuntimePage();
 	}
 	
-	private boolean isRuntimeAvailable() {
-		return !PreferencesManager.INSTANCE.getJbpmInstallationMap().isEmpty();
+	private boolean isJbpm3RuntimeAvailable() {
+		Map<String, JbpmInstallation> installations = PreferencesManager.INSTANCE.getJbpmInstallationMap();
+		Iterator<String> iterator = installations.keySet().iterator();
+		while (iterator.hasNext()) {
+			JbpmInstallation installation = installations.get(iterator.next());
+			if ("jBPM3".equals(installation.version)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private void addConfigureRuntimePage() {
@@ -427,10 +436,10 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 	}
 
 	public boolean performFinish() {
-		if (!isRuntimeAvailable()) {
+		if (!isJbpm3RuntimeAvailable()) {
 			String name = configureRuntimePage.nameText.getText();
 			String location = configureRuntimePage.locationText.getText();
-			String version = configureRuntimePage.versionText.getText();
+			String version = "jBPM3";
 			PreferencesManager.INSTANCE.initializeDefaultJbpmInstallation(name, location, version);
 		}
 		getContainer().updateButtons();

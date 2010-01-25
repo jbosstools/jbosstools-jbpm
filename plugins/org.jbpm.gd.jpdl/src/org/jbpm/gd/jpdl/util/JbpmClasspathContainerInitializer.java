@@ -27,9 +27,9 @@ import org.eclipse.jdt.core.ClasspathContainerInitializer;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.jboss.tools.jbpm.preferences.JbpmInstallation;
+import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
-import org.jbpm.gd.jpdl.prefs.JbpmInstallation;
-import org.jbpm.gd.jpdl.prefs.PreferencesManager;
 
 public class JbpmClasspathContainerInitializer extends
 		ClasspathContainerInitializer {

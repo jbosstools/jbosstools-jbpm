@@ -47,10 +47,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
+import org.jboss.tools.jbpm.preferences.JbpmInstallation;
+import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.Plugin;
-import org.jbpm.gd.jpdl.prefs.JbpmInstallation;
-import org.jbpm.gd.jpdl.prefs.PreferencesManager;
 
 public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 

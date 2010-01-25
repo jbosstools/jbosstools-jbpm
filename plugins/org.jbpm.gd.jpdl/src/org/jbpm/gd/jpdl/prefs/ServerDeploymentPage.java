@@ -161,7 +161,7 @@ public class ServerDeploymentPage extends PreferencePage implements IWorkbenchPr
 		passwordText.setText(null);
 		getPreferenceStore().setValue("server name", "localhost");
 		getPreferenceStore().setValue("server port", "8080");
-		getPreferenceStore().setValue("server deployer", "jbpm-console/upload");
+		getPreferenceStore().setValue("server deployer", "/jbpm-console/upload");
 		getPreferenceStore().setValue("use credentials", false);
 		getPreferenceStore().setValue("user name", "");
 		getPreferenceStore().setValue("password", "");

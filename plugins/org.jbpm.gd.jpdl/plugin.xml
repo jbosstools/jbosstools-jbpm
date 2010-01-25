@@ -350,11 +350,6 @@
             name="jBPM 3"
             category="org.jboss.tools.jbpm"/>
       <page
-            class="org.jbpm.gd.jpdl.prefs.JbpmLocationsPage"
-            id="org.jbpm.gd.jpdl.prefs.jbpmLocations"
-            name="Runtime Locations"
-            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
-      <page
             class="org.jbpm.gd.jpdl.prefs.AssignmentTypesPage"
             id="org.jbpm.gd.jpdl.prefs.assignmentTypes"
             name="Assignment Types"

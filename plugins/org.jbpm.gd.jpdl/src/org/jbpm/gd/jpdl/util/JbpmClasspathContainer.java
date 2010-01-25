@@ -41,9 +41,9 @@ import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.jboss.tools.jbpm.preferences.JbpmInstallation;
 import org.jbpm.gd.jpdl.Constants;
 import org.jbpm.gd.jpdl.Logger;
-import org.jbpm.gd.jpdl.prefs.JbpmInstallation;
 
 public class JbpmClasspathContainer implements IClasspathContainer, Constants {
 
