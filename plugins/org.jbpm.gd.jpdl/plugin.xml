@@ -334,6 +334,19 @@
                class="org.eclipse.core.resources.IResource">
          </selection>
       </wizard>
+      <wizard
+            name="jBPM 3 Action Handler"
+            icon="icons/full/obj16/process_definition_enabled.gif"
+            category="org.jboss.tools.jbpm"
+            class="org.jbpm.gd.jpdl.wizard.NewActionWizard"
+            id="org.jbpm.gd.jpdl.wizard.new.action">
+         <description>
+            A wizard that creates a jBPM action
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
    </extension>
    
    <extension
