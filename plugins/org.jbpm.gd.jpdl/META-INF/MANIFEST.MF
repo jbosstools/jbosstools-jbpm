@@ -7,6 +7,7 @@ Bundle-ClassPath: .,
  lib/dom4j-1.4.jar
 Bundle-Activator: org.jbpm.gd.jpdl.Plugin
 Bundle-Vendor: %bundleProvider
+Bundle-Localization: plugin
 Export-Package: org.jbpm.gd.common.command,
  org.jbpm.gd.common.editor,
  org.jbpm.gd.common.figure,
