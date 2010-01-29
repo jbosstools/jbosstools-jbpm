@@ -82,11 +82,11 @@ public class EsbNode extends Node implements EsbElement {
 	}
 	
 	public void setReplyToOriginator(String value) {
-		setConfigurationElement("reply-to-originator", value);
+		setConfigurationElement("replyToOriginator", value);
 	}
 	
 	public String getReplyToOriginator() {
-		return getConfigurationElementValue("reply-to-originator");
+		return getConfigurationElementValue("replyToOriginator");
 	}
 	
 	private void addMapping(GenericElement mapping, String configurationElementName) {
