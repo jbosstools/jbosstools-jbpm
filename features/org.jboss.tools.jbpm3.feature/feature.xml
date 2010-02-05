@@ -17,9 +17,9 @@
       %license
    </license>
 
-   <url>
-      <update label="%updateSiteName" url="http://download.jboss.org/jbosstools/updates/stable"/>
-   </url>
+   <!-- <url>
+      <update label="%updateSiteName" url="http://download.jboss.org/jbosstools/updates/stable/galileo/"/>
+   </url> -->
 
    <includes
          id="org.jboss.tools.jbpm.common.feature"
