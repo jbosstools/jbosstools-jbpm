@@ -43,6 +43,7 @@ import org.jbpm.gd.common.editor.GraphicalViewer;
 import org.jbpm.gd.common.editor.OutlineViewer;
 import org.jbpm.gd.common.editor.SelectionSynchronizer;
 import org.jbpm.gd.common.model.SemanticElement;
+import org.jbpm.gd.jpdl.deployment.DeploymentInfo;
 import org.jbpm.gd.jpdl.model.ProcessDefinition;
 import org.jbpm.gd.jpdl.part.JpdlEditorOutlineEditPartFactory;
 import org.jbpm.gd.jpdl.part.JpdlGraphicalEditPartFactory;
@@ -50,6 +51,7 @@ import org.jbpm.gd.jpdl.part.JpdlGraphicalEditPartFactory;
 public class JpdlEditor extends Editor { 
 
 	private IResourceChangeListener resourceChangeListener;
+	private JpdlDeploymentEditorPage deploymentEditorPage;
 	
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
@@ -107,7 +109,7 @@ public class JpdlEditor extends Editor {
 	}
 
 	protected ContentProvider createContentProvider() {
-		return new JpdlContentProvider();
+		return new JpdlContentProvider(this);
 	}
 
 	protected GraphicalViewer createGraphicalViewer() {
@@ -128,7 +130,15 @@ public class JpdlEditor extends Editor {
 
 	protected void createPages() {
 		super.createPages();
-		addPage(1, new JpdlDeploymentEditorPage(this), "Deployment");
+		initDeploymentPage();
+	}
+	
+	protected void initDeploymentPage() {
+		deploymentEditorPage = new JpdlDeploymentEditorPage(this);
+		addPage(1, deploymentEditorPage, "Deployment");	
+		DeploymentInfo deploymentInfo = getDeploymentInfo();
+		((JpdlContentProvider)getContentProvider()).addDeploymentInfo(deploymentInfo, getEditorInput());
+		deploymentEditorPage.setDeploymentInfo(deploymentInfo);
 	}
 
 	protected SemanticElement createMainElement() {
@@ -137,6 +147,10 @@ public class JpdlEditor extends Editor {
 
 	public ProcessDefinition getProcessDefinition() {
 		return (ProcessDefinition)getRootContainer().getSemanticElement();
+	}
+	
+	public DeploymentInfo getDeploymentInfo() {
+		return deploymentEditorPage.getDeploymentInfo();
 	}
 
 	public void dispose() {

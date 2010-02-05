@@ -92,10 +92,6 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		return result + ".jpg";
 	}
 
-//	public String getSemanticInfoFileName(String notationInfoFileName) {
-//		return notationInfoFileName.substring(5);
-//	}
-
 	protected void processRootContainer(RootContainer rootContainer, Element notationInfo) {
 		addDimension(rootContainer, notationInfo);
 		addNodes(rootContainer, notationInfo);
@@ -273,13 +269,13 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		return result;
 	 }	
 	
-	private String toNotationInfoXml(RootContainer rootContainer) {
+	protected String toNotationInfoXml(RootContainer rootContainer) {
 		StringWriter writer = new StringWriter();
 		write(rootContainer, writer);
 		return writer.toString();
 	}
 
-	private void write(
+	protected void write(
 			RootContainer rootContainer, Writer writer) {
 		try {
 			Document document = DocumentHelper.createDocument();
@@ -292,7 +288,7 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		}
 	}
 	
-	private void write(
+	protected void write(
 			RootContainer rootContainer,
 			Element element) {
 		addAttribute(element, "name", ((NamedElement)rootContainer.getSemanticElement()).getName());
@@ -304,7 +300,7 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		}
 	}
 	
-	private void write(Node node, Element element) {
+	protected void write(Node node, Element element) {
 		Element newElement = null;
 		if (node instanceof AbstractNodeContainer) {
 			newElement = addElement(element, "node-container");
@@ -329,7 +325,7 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		}
 	}
 
-	private void write(Edge edge,
+	protected void write(Edge edge,
 			Element element) {
 		Point offset = edge.getLabel().getOffset();
 		if (offset != null) {
@@ -343,7 +339,7 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		}
 	}
 
-	private void write(BendPoint bendpoint, Element bendpointElement) {
+	protected void write(BendPoint bendpoint, Element bendpointElement) {
 		addAttribute(bendpointElement, "w1", String.valueOf(bendpoint
 				.getFirstRelativeDimension().width));
 		addAttribute(bendpointElement, "h1", String.valueOf(bendpoint
@@ -354,12 +350,12 @@ public abstract class AbstractContentProvider implements ContentProvider{
 				.getSecondRelativeDimension().height));
 	}
 	
-	private Element addElement(Element element, String elementName) {
+	protected Element addElement(Element element, String elementName) {
 		Element newElement = element.addElement(elementName);
 		return newElement;
 	}
 
-	private void addAttribute(Element e, String attributeName,
+	protected void addAttribute(Element e, String attributeName,
 			String value) {
 		if (value != null) {
 			e.addAttribute(attributeName, value);
@@ -374,7 +370,7 @@ public abstract class AbstractContentProvider implements ContentProvider{
 		}
 	}
 	
-	private IFile getNotationInfoFile(IFile semanticInfoFile) {
+	protected IFile getNotationInfoFile(IFile semanticInfoFile) {
 		IProject project = semanticInfoFile.getProject();
 		IPath semanticInfoPath = semanticInfoFile.getProjectRelativePath();
 		IPath notationInfoPath = semanticInfoPath.removeLastSegments(1).append(getNotationInfoFileName(semanticInfoFile.getName()));

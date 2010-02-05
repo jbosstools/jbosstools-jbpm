@@ -35,12 +35,16 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
+import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -80,6 +84,7 @@ public class DeploymentForm {
 	private Composite composite;
 	private IFolder processFolder;
 	private JpdlEditor editor;
+	private DeploymentInfo deploymentInfo;
 	
 	private Form form;
 	private Text nameText;
@@ -136,6 +141,31 @@ public class DeploymentForm {
 				}
 			}
 		});
+	}
+	
+	private IPreferenceStore getPreferenceStore() {
+		return Plugin.getDefault().getPreferenceStore();
+	}
+	
+	public DeploymentInfo getDeploymentInfo() {
+		if (deploymentInfo == null) {
+			deploymentInfo = new DeploymentInfo();
+			String serverName = getPreferenceStore().getString("server name");
+			deploymentInfo.setServerName(serverName == null ? "localhost" : serverName);
+			String serverPort = getPreferenceStore().getString("server port");
+			deploymentInfo.setServerPort(serverPort == null ? "8080" : serverPort);
+			String serverDeployer = getPreferenceStore().getString("server deployer");
+			deploymentInfo.setServerDeployer(serverDeployer == null ? "/jbpm-console/upload" : serverDeployer);
+			final IJavaProject project = JavaCore.create(processFolder.getProject());
+			deploymentInfo.setClassesAndResources(new ArrayList(getElementsToCheckFor(project)).toArray());
+			deploymentInfo.setFilesAndFolders(getElementsToCheckFor(processFolder).toArray());
+		}
+		return deploymentInfo;
+	}
+	
+	public void setDeploymentInfo(DeploymentInfo deploymentInfo) {
+		this.deploymentInfo = deploymentInfo;
+		refresh();
 	}
 	
 	private ProcessDeployer createProcessDeployer() {
@@ -249,14 +279,16 @@ public class DeploymentForm {
 		Label nameLabel = toolkit.createLabel(infoFormClient, "Server Name:");
 		nameLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
 		nameText = toolkit.createText(infoFormClient, "");
-		String nameString = Plugin.getDefault().getPreferenceStore().getString("server name");
-		nameText.setText(nameString == null || "".equals(nameString) ? "localhost" : nameString);
+		String nameString = getDeploymentInfo().getServerName();
+		nameText.setText(nameString == null ? "localhost" : nameString);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 2;
 		nameText.setLayoutData(gridData);
 		nameText.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				updateTestConnectionAndDeployButtons();
+				getDeploymentInfo().setServerName(nameText.getText());
+				editor.setDirty(true);
 			}
 		});
 	}
@@ -265,14 +297,16 @@ public class DeploymentForm {
 		Label portLabel = toolkit.createLabel(infoFormClient, "Server Port:");
 		portLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
 		portText = toolkit.createText(infoFormClient, "");
-		String portString = Plugin.getDefault().getPreferenceStore().getString("server port");
-		portText.setText(portString == null || "".equals(portString)? "8080" : portString);
+		String portString = getDeploymentInfo().getServerPort();
+		portText.setText(portString == null ? "8080" : portString);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 2;
 		portText.setLayoutData(gridData);
 		portText.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				updateTestConnectionAndDeployButtons();
+				getDeploymentInfo().setServerPort(portText.getText());
+				editor.setDirty(true);
 			}
 		});
 	}
@@ -281,14 +315,16 @@ public class DeploymentForm {
 		Label deployerLabel = toolkit.createLabel(infoFormClient, "Server Deployer:");
 		deployerLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
 		deployerText = toolkit.createText(infoFormClient, "");
-		String deployerString = Plugin.getDefault().getPreferenceStore().getString("server deployer");
-		deployerText.setText(deployerString == null || "".equals(deployerString)? "/jbpm-console/upload" : deployerString);
+		String deployerString = deploymentInfo.getServerDeployer();
+		deployerText.setText(deployerString == null ? "/jbpm-console/upload" : deployerString);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 2;
 		deployerText.setLayoutData(gridData);
 		deployerText.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				updateTestConnectionAndDeployButtons();
+				getDeploymentInfo().setServerDeployer(deployerText.getText());
+				editor.setDirty(true);
 			}
 		});
 	}
@@ -373,8 +409,14 @@ public class DeploymentForm {
 		includeFilesTreeViewer.setInput(processFolder);
 		tree.getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				includeFilesTreeViewer.setCheckedElements(getElementsToCheckFor(processFolder).toArray());
+				includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
 			}			
+		});
+		includeFilesTreeViewer.addCheckStateListener(new ICheckStateListener() {			
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				getDeploymentInfo().setFilesAndFolders(includeFilesTreeViewer.getCheckedElements());
+				editor.setDirty(true);
+			}
 		});
 		
 		final Button includeFilesDefaultButton = toolkit.createButton(includeFilesFormClient, "Reset Defaults", SWT.PUSH);
@@ -383,7 +425,7 @@ public class DeploymentForm {
 			public void widgetSelected(SelectionEvent e) {
 				includeFilesDefaultButton.getDisplay().asyncExec(new Runnable() {
 					public void run() {
-						includeFilesTreeViewer.setCheckedElements(getElementsToCheckFor(processFolder).toArray());
+						includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
 					}			
 				});
 			}			
@@ -458,8 +500,14 @@ public class DeploymentForm {
 		}
 		composite.getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				includeClassesTreeViewer.setCheckedElements(getElementsToCheckFor(project).toArray());
+				includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
 			}			
+		});
+		includeClassesTreeViewer.addCheckStateListener(new ICheckStateListener() {			
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				getDeploymentInfo().setClassesAndResources(includeClassesTreeViewer.getCheckedElements());
+				editor.setDirty(true);
+			}
 		});
 
 		final Button includeClassesDefaultButton = toolkit.createButton(includeClassesFormClient, "Reset Defaults", SWT.PUSH);
@@ -468,7 +516,7 @@ public class DeploymentForm {
 			public void widgetSelected(SelectionEvent e) {
 				composite.getDisplay().asyncExec(new Runnable() {
 					public void run() {
-						includeClassesTreeViewer.setCheckedElements(getElementsToCheckFor(project).toArray());
+						includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
 					}			
 				});
 			}			
@@ -476,7 +524,7 @@ public class DeploymentForm {
 		
 		return includeClassesFormClient;
 	}
-
+	
 	private Composite createLocalSaveFormClient() {
 		Section httpInfoDetails = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
 		httpInfoDetails.marginWidth = 5;
@@ -592,49 +640,49 @@ public class DeploymentForm {
 		});
 	}
 	
-	public void refresh(final ArrayList objectsToRefresh) {		
-		form.getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				refreshIncludeClassesTreeViewer(objectsToRefresh);
-				refreshIncludeFilesTreeViewer(objectsToRefresh);
-			}			
-		});
-	}
+//	public void refresh(final ArrayList objectsToRefresh) {		
+//		form.getDisplay().asyncExec(new Runnable() {
+//			public void run() {
+//				refreshIncludeClassesTreeViewer(objectsToRefresh);
+//				refreshIncludeFilesTreeViewer(objectsToRefresh);
+//			}			
+//		});
+//	}
 	
-	private void refreshIncludeFilesTreeViewer(ArrayList objectsToRefresh) {
-		Object[] elements = includeFilesTreeViewer.getCheckedElements();
-		includeFilesTreeViewer.refresh();
-		includeFilesTreeViewer.setCheckedElements(elements);
-		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
-		for (int i = 0; i < objectsToRefresh.size(); i++) {
-			IPath path = (IPath)objectsToRefresh.get(i);
-			if (root.getFile(path).exists()) {
-				includeFilesTreeViewer.setChecked(root.getFile(path), true);
-			} else if (root.getFolder(path).exists()) {
-				includeFilesTreeViewer.setChecked(root.getFolder(path), true);
-			}
-		}
-	}
+//	private void refreshIncludeFilesTreeViewer(ArrayList objectsToRefresh) {
+//		Object[] elements = includeFilesTreeViewer.getCheckedElements();
+//		includeFilesTreeViewer.refresh();
+//		includeFilesTreeViewer.setCheckedElements(elements);
+//		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
+//		for (int i = 0; i < objectsToRefresh.size(); i++) {
+//			IPath path = (IPath)objectsToRefresh.get(i);
+//			if (root.getFile(path).exists()) {
+//				includeFilesTreeViewer.setChecked(root.getFile(path), true);
+//			} else if (root.getFolder(path).exists()) {
+//				includeFilesTreeViewer.setChecked(root.getFolder(path), true);
+//			}
+//		}
+//	}
 	
-	private void refreshIncludeClassesTreeViewer(ArrayList objectsToRefresh) {
-		Set referencedJavaClassNames = null;
-		Object[] elements = includeClassesTreeViewer.getCheckedElements();
-		includeClassesTreeViewer.refresh();
-		includeClassesTreeViewer.setCheckedElements(elements);
-		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
-		for (int i = 0; i < objectsToRefresh.size(); i++) {
-			IPath path = (IPath)objectsToRefresh.get(i);
-			IJavaElement javaElement = JavaCore.create(root.getFile(path));
-			if (javaElement != null && javaElement instanceof ICompilationUnit) {
-				if (referencedJavaClassNames == null) {
-					referencedJavaClassNames = JavaClassNameCollector.getJavaClassNames(editor.getProcessDefinition());
-				}
-				String name = getTypeName((ICompilationUnit)javaElement);
-				boolean checkNeeded = referencedJavaClassNames.contains(name);
-				includeClassesTreeViewer.setChecked(javaElement, checkNeeded);
-			}
-		}
-	}
+//	private void refreshIncludeClassesTreeViewer(ArrayList objectsToRefresh) {
+//		Set referencedJavaClassNames = null;
+//		Object[] elements = includeClassesTreeViewer.getCheckedElements();
+//		includeClassesTreeViewer.refresh();
+//		includeClassesTreeViewer.setCheckedElements(elements);
+//		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
+//		for (int i = 0; i < objectsToRefresh.size(); i++) {
+//			IPath path = (IPath)objectsToRefresh.get(i);
+//			IJavaElement javaElement = JavaCore.create(root.getFile(path));
+//			if (javaElement != null && javaElement instanceof ICompilationUnit) {
+//				if (referencedJavaClassNames == null) {
+//					referencedJavaClassNames = JavaClassNameCollector.getJavaClassNames(editor.getProcessDefinition());
+//				}
+//				String name = getTypeName((ICompilationUnit)javaElement);
+//				boolean checkNeeded = referencedJavaClassNames.contains(name);
+//				includeClassesTreeViewer.setChecked(javaElement, checkNeeded);
+//			}
+//		}
+//	}
 	
 	private String getTypeName(ICompilationUnit unit) {
 		try {
@@ -688,12 +736,14 @@ public class DeploymentForm {
 	
 	public void refresh() {
 		if (composite.isDisposed()) return;
-		final IJavaProject project = JavaCore.create(processFolder.getProject());
+		nameText.setText(getDeploymentInfo().getServerName());
+		portText.setText(getDeploymentInfo().getServerPort());
+		deployerText.setText(getDeploymentInfo().getServerDeployer());
 		composite.getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				if (!includeClassesTreeViewer.getTree().isDisposed()) {
 					includeClassesTreeViewer.refresh();
-					includeClassesTreeViewer.setCheckedElements(getElementsToCheckFor(project).toArray());
+					includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
 				}
 			}			
 		});
@@ -701,7 +751,7 @@ public class DeploymentForm {
 			public void run() {
 				if (!includeFilesTreeViewer.getTree().isDisposed()) {
 					includeFilesTreeViewer.refresh();
-					includeFilesTreeViewer.setCheckedElements(getElementsToCheckFor(processFolder).toArray());
+					includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
 				}
 			}			
 		});

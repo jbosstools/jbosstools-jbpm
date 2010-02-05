@@ -36,6 +36,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.EditorPart;
 import org.jbpm.gd.jpdl.deployment.DeploymentForm;
+import org.jbpm.gd.jpdl.deployment.DeploymentInfo;
 
 public class JpdlDeploymentEditorPage extends EditorPart {
 	
@@ -64,11 +65,11 @@ public class JpdlDeploymentEditorPage extends EditorPart {
 		IFolder folder = getProcessFolder();
 		deploymentForm = new DeploymentForm(toolkit, form, folder, editor);
 		deploymentForm.create();
-		folder.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
-			public void resourceChanged(IResourceChangeEvent event) {
-				deploymentForm.refresh();
-			}			
-		});
+//		folder.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+//			public void resourceChanged(IResourceChangeEvent event) {
+//				deploymentForm.refresh();
+//			}			
+//		});
 	}
 	
 	private IFolder getProcessFolder() {
@@ -83,6 +84,14 @@ public class JpdlDeploymentEditorPage extends EditorPart {
 	}
 	
 	public void doSave(IProgressMonitor monitor) {
+	}
+	
+	public DeploymentInfo getDeploymentInfo() {
+		return deploymentForm.getDeploymentInfo();
+	}
+	
+	public void setDeploymentInfo(DeploymentInfo deploymentInfo) {
+		deploymentForm.setDeploymentInfo(deploymentInfo);
 	}
 	
 	public void doSaveAs() {
@@ -100,4 +109,5 @@ public class JpdlDeploymentEditorPage extends EditorPart {
 		setSite(site);
 		setInput(input);
 	}
-	}
+
+}

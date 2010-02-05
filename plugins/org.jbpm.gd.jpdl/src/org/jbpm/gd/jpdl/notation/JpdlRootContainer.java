@@ -7,6 +7,7 @@ import org.jbpm.gd.common.model.NamedElement;
 import org.jbpm.gd.common.notation.Edge;
 import org.jbpm.gd.common.notation.Node;
 import org.jbpm.gd.common.notation.RootContainer;
+import org.jbpm.gd.jpdl.deployment.DeploymentInfo;
 import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Transition;
 

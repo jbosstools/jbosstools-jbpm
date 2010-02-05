@@ -208,8 +208,7 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 	private void handleCommandStackChanged() {
 		getActionRegistry().updateStackActions();
 		if (!isDirty() && getCommandStack().isDirty() && editAllowed()) {
-			isDirty = true;
-			firePropertyChange(IEditorPart.PROP_DIRTY);
+			setDirty(true);
 		}
 	}
 	
@@ -230,6 +229,7 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 
 	public void setDirty(boolean dirty) {
 		isDirty = dirty;
+		firePropertyChange(IEditorPart.PROP_DIRTY);
 	}
 
 	public boolean isDirty() {
