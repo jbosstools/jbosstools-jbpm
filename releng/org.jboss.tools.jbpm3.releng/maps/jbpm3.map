@@ -2,15 +2,15 @@
 !*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4.
 
 !*** features
-feature@org.jboss.tools.jbpm3.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.sdk.feature
-feature@org.jboss.tools.jbpm3.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.feature
-feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jbpm.gd.jpdl.feature
+feature@org.jboss.tools.jbpm3.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm3.sdk.feature
+feature@org.jboss.tools.jbpm3.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm3.feature
+feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jbpm.gd.jpdl.feature
 
 !*** plugins
-plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl
+plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/plugins/org.jbpm.gd.jpdl
 
 !*** test feature
-feature@org.jboss.tools.jbpm3.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.feature
+feature@org.jboss.tools.jbpm3.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm3.tests.feature
 
 !*** test plugins
-plugin@org.jbpm.gd.jpdl.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jbpm.gd.jpdl.test
+plugin@org.jbpm.gd.jpdl.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/tests/org.jbpm.gd.jpdl.test

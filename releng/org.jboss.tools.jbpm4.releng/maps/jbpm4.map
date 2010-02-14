@@ -2,20 +2,20 @@
 !*** See common.map for features, plugins, and tests common to both jbpm3 and jbpm4.
 
 !*** features
-feature@org.jboss.tools.jbpm4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.feature
-feature@org.jboss.tools.jbpm4.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.sdk.feature
-feature@org.jboss.tools.flow.jpdl4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.flow.jpdl4.feature
-feature@org.jboss.tools.flow.common.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/flow/features/org.jboss.tools.flow.common.feature
+feature@org.jboss.tools.jbpm4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm4.feature
+feature@org.jboss.tools.jbpm4.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm4.sdk.feature
+feature@org.jboss.tools.flow.jpdl4.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.flow.jpdl4.feature
+feature@org.jboss.tools.flow.common.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/flow/features/org.jboss.tools.flow.common.feature
 
 !*** plugins
-plugin@org.jboss.tools.flow.jpdl4=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4
-plugin@org.jboss.tools.flow.jpdl4.multipage=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jboss.tools.flow.jpdl4.multipage
-plugin@org.jboss.tools.flow.common=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/flow/plugins/org.jboss.tools.flow.common
+plugin@org.jboss.tools.flow.jpdl4=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/plugins/org.jboss.tools.flow.jpdl4
+plugin@org.jboss.tools.flow.jpdl4.multipage=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/plugins/org.jboss.tools.flow.jpdl4.multipage
+plugin@org.jboss.tools.flow.common=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/flow/plugins/org.jboss.tools.flow.common
 
 !*** test feature
-feature@org.jboss.tools.jbpm4.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm4.tests.feature
+feature@org.jboss.tools.jbpm4.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm4.tests.feature
 
 !*** test plugins
-plugin@org.jboss.tools.flow.jpdl4.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.test
-plugin@org.jboss.tools.flow.jpdl4.multipage.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/tests/org.jboss.tools.flow.jpdl4.multipage.test
-plugin@org.jboss.tools.flow.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/flow/tests/org.jboss.tools.flow.common.test
+plugin@org.jboss.tools.flow.jpdl4.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/tests/org.jboss.tools.flow.jpdl4.test
+plugin@org.jboss.tools.flow.jpdl4.multipage.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/tests/org.jboss.tools.flow.jpdl4.multipage.test
+plugin@org.jboss.tools.flow.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/flow/tests/org.jboss.tools.flow.common.test
