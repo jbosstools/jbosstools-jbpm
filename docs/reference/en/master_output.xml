@@ -61,14 +61,13 @@
             <email>tom.baeyens@jboss.com</email>
         </author>
 
-
-        <pubdate>April 2008</pubdate>
         <copyright>
             <year>2007</year>
             <year>2009</year>
+            <year diffmk:change="added"><diffmk:wrapper diffmk:change="added">2010</diffmk:wrapper></year>
             <holder>JBoss by Red Hat</holder>
         </copyright>
-        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.CR1</diffmk:wrapper></releaseinfo>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.trunk</diffmk:wrapper></releaseinfo>
 
 <abstract>
    <title></title>
@@ -81,7 +80,7 @@
     
     <toc></toc>
     
-<chapter id="Introduction" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Introduction.xml" xreflabel="Introduction">
+<chapter id="Introduction" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Introduction.xml" xreflabel="Introduction">
  <?dbhtml filename="TargetAudience.html"?>
  <chapterinfo>
   <keywordset>
@@ -235,7 +234,7 @@
 </chapter>
  
     
-<chapter id="jboss_jbpm_runtime_installation" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/jboss_jbpm_runtime_installation.xml" xreflabel="jboss_jbpm_runtime_installation">
+<chapter id="jboss_jbpm_runtime_installation" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/jboss_jbpm_runtime_installation.xml" xreflabel="jboss_jbpm_runtime_installation">
  <?dbhtml filename="jboss_jbpm_runtime_installation.html"?>
  <chapterinfo>
   <keywordset>
@@ -249,10 +248,11 @@
  <title>JBoss jBPM Runtime Installation</title>
  <para>The main purpose of this chapter is to let you know how to launch the <property moreinfo="none">JBoss
   jBPM</property> (business process management).</para>
- <para>The jBPM plugin (jBPM Designer) is already included in the <property moreinfo="none">JBoss Tools</property>.
-  To make it work, you should only download the jBPM runtime (<ulink url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377">jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
-  either when you create a jBPM project or by using the jBPM preference pages.</para>
-
+    <para>The jBPM plugin (jBPM Designer) is already included in the <property>JBoss Tools</property>.
+        To make it work, you should only download the jBPM runtime (<ulink
+            url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377"
+            >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
+        either when you create a jBPM project or by using the jBPM preference pages.</para>
  <note>
   <title>Note:</title>
   <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
@@ -283,7 +283,7 @@
 </chapter>
  
     
-<chapter id="GuidedTourJBossjBPMGPD" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/guided_tour_jboss_jbpmgpd.xml" xreflabel="GuidedTourJBossjBPMGPD">
+<chapter id="GuidedTourJBossjBPMGPD" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/guided_tour_jboss_jbpmgpd.xml" xreflabel="GuidedTourJBossjBPMGPD">
 	<?dbhtml filename="GuidedTourJBossjBPMGPD.html"?>
 	<chapterinfo>
 		<keywordset>
@@ -502,7 +502,7 @@
 </chapter>
 
     
-<chapter id="the_views" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/the_views.xml" xreflabel="the_views">
+<chapter id="the_views" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/the_views.xml" xreflabel="the_views">
     <?dbhtml filename="the_views.html"?>
     <chapterinfo>
         <keywordset>
@@ -732,7 +732,7 @@
     </section>
 </chapter>
  
-<chapter id="Test_Drive_Proc_Development" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Test_Drive_Proc.xml" xreflabel="Test_Drive_Proc_Development">
+<chapter id="Test_Drive_Proc_Development" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Test_Drive_Proc.xml" xreflabel="Test_Drive_Proc_Development">
     <?dbhtml filename="Test_Drive_Proc_Development.html"?>
     <chapterinfo>
         <keywordset>
@@ -905,7 +905,7 @@
 </chapter>
 
     
-<chapter id="The_JBoss_jBPM_Int_Mech" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/The_JBoss_jBPM_Int_Mech.xml" xreflabel="The_JBoss_jBPM_Int_Mech">
+<chapter id="The_JBoss_jBPM_Int_Mech" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/The_JBoss_jBPM_Int_Mech.xml" xreflabel="The_JBoss_jBPM_Int_Mech">
     <?dbhtml filename="The_JBoss_jBPM_Int_Mech.html"?>
     <chapterinfo>
         <keywordset>
@@ -1143,7 +1143,7 @@
 </chapter>
 
     
-<chapter id="Quick_Howto_Guide" xml:base="file:///home/ochikvina/WORK/for_compare/jbosstools-3.1.0.CR1/jbpm/docs/reference/en/modules/Quick_Howto_Guide.xml" xreflabel="Quick_Howto_Guide">
+<chapter id="Quick_Howto_Guide" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Quick_Howto_Guide.xml" xreflabel="Quick_Howto_Guide">
     <?dbhtml filename="Quick_Howto_Guide.html"?>
     <chapterinfo>
         <keywordset>
@@ -1305,7 +1305,8 @@
             </mediaobject>
         </figure>
         <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-            workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
+            workflow on the whole. Besides, for additional information you are welcome on <ulink
+                url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
     </section>
 </chapter>
 
