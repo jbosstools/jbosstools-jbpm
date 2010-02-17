@@ -30,13 +30,17 @@ dependencyURLs=\
 http://repository.jboss.org/eclipse/galileo/GEF-runtime-3.5.1.zip,\
 http://repository.jboss.org/eclipse/galileo/emf-runtime-2.5.0.zip,\
 http://repository.jboss.org/eclipse/galileo/xsd-runtime-2.5.0.zip,\
-http://repository.jboss.org/eclipse/galileo/wtp-R-3.1.1-20090917225226.zip,\
-http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk.tar.gz
+http://repository.jboss.org/eclipse/galileo/wtp-R-3.1.1-20090917225226.zip
 #http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk-x86_64.tar.gz
+#http://repository.jboss.org/eclipse/galileo/eclipse-SDK-3.5.1-linux-gtk.tar.gz
 
 repositoryURLs=\
+http://download.jboss.org/jbosstools/updates/nightly/trunk/,\
+http://download.eclipse.org/releases/galileo/,\
+http://repository.jboss.org/eclipse/galileo/repos/eclipse-Update-R-3.5.1-200909170800.zip,\
 http://hudson.qa.jboss.com/hudson/view/DevStudio/job/jbosstools-cbi-jbpm3/lastSuccessfulBuild/artifact/build/N-SNAPSHOT/jbpm3-Update-N-SNAPSHOT.zip
-featureIDsToInstall=org.jboss.tools.jbpm.common.feature,org.jboss.tools.jbpm.common.source.feature
+IUsToInstall=org.eclipse.sdk.feature.group+org.eclipse.sdk.ide+org.eclipse.core.net+org.eclipse.equinox.common+org.eclipse.core.runtime+org.eclipse.debug.core+org.eclipse.rcp.feature.group+\
+org.jboss.tools.jbpm.common.feature.feature.group,org.jboss.tools.jbpm.common.source.feature.feature.group
 
 flattenDependencies=true
 parallelCompilation=true
