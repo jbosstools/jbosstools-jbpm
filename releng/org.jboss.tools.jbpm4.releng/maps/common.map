@@ -1,10 +1,10 @@
 !*** Contains features, plugins, and tests common to both jbpm3 and jbpm4.
 
 !*** features
-!*** feature@org.jboss.tools.jbpm.common.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/features/org.jboss.tools.jbpm.common.feature
+!*** feature@org.jboss.tools.jbpm.common.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.x/jbpm/features/org.jboss.tools.jbpm.common.feature
 
 !*** plugins
-!*** plugin@org.jboss.tools.jbpm.common=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/plugins/org.jboss.tools.jbpm.common
+!*** plugin@org.jboss.tools.jbpm.common=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.x/jbpm/plugins/org.jboss.tools.jbpm.common
 
 !*** test plugins
-plugin@org.jboss.tools.jbpm.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.0.RC2/jbpm/tests/org.jboss.tools.jbpm.common.test
+plugin@org.jboss.tools.jbpm.common.test=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/branches/jbosstools-3.1.x/jbpm/tests/org.jboss.tools.jbpm.common.test
