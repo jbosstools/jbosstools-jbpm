@@ -22,7 +22,6 @@
 package org.jboss.tools.flow.jpdl4.wizard;
 
 import java.io.File;
-import java.net.MalformedURLException;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.wizard.WizardPage;
@@ -41,7 +40,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
-import org.w3c.dom.Document;
 
 public class ConfigureJpdl4RuntimePage extends WizardPage {
 	

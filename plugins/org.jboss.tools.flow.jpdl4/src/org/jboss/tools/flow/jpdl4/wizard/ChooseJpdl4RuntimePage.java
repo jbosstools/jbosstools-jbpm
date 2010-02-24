@@ -21,8 +21,6 @@
  */
 package org.jboss.tools.flow.jpdl4.wizard;
 
-import java.util.Iterator;
-
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -33,7 +31,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.jboss.tools.jbpm.preferences.PreferencesManager;
 
 public class ChooseJpdl4RuntimePage extends WizardPage {
 	
