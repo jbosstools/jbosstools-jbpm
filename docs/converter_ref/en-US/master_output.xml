@@ -24,11 +24,11 @@
 	     <copyright>
 	          <year>2008</year>
 	          <year>2009</year>
-	          <year diffmk:change="added"><diffmk:wrapper diffmk:change="added">2010</diffmk:wrapper></year>
+	          <year>2010</year>
 	          <holder>JBoss by Red Hat</holder>
 	     </copyright>
          <releaseinfo><diffmk:wrapper diffmk:change="changed">
-             Version: 1.1.0.CR2
+             Version: 1.1.0.GA
          </diffmk:wrapper></releaseinfo>
 <abstract>
    <title></title>

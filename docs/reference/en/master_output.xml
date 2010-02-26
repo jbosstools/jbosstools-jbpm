@@ -64,7 +64,7 @@
         <copyright>
             <year>2007</year>
             <year>2009</year>
-            <year diffmk:change="added"><diffmk:wrapper diffmk:change="added">2010</diffmk:wrapper></year>
+            <year>2010</year>
             <holder>JBoss by Red Hat</holder>
         </copyright>
         <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.trunk</diffmk:wrapper></releaseinfo>
@@ -248,11 +248,13 @@
  <title>JBoss jBPM Runtime Installation</title>
  <para>The main purpose of this chapter is to let you know how to launch the <property moreinfo="none">JBoss
   jBPM</property> (business process management).</para>
-    <para>The jBPM plugin (jBPM Designer) is already included in the <property>JBoss Tools</property>.
-        To make it work, you should only download the jBPM runtime (<ulink
-            url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377"
-            >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
-        either when you create a jBPM project or by using the jBPM preference pages.</para>
+ <para>The jBPM plugin (jBPM Designer) is already included in the <property moreinfo="none">JBoss Tools</property>.
+  To make it work, you should only download the jBPM runtime (<ulink
+      url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;
+      package_id=145174&amp;release_id=607377"
+      >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
+  either when you create a jBPM project or by using the jBPM preference pages.</para>
+
  <note>
   <title>Note:</title>
   <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
@@ -1305,8 +1307,8 @@
             </mediaobject>
         </figure>
         <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-            workflow on the whole. Besides, for additional information you are welcome on <ulink
-                url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
+            workflow on the whole. Besides, for additional information you are welcome on
+            <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
     </section>
 </chapter>
 
