@@ -3,13 +3,13 @@
 "http://www.docbook.org/xml/4.3/docbookx.dtd"
 
 
-[<!ENTITY introduction  SYSTEM "modules/Introduction.xml">
-<!ENTITY jboss_jbpm_runtime_installation  SYSTEM "modules/jboss_jbpm_runtime_installation.xml">
-<!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "modules/guided_tour_jboss_jbpmgpd.xml">
-<!ENTITY the_views SYSTEM "modules/the_views.xml">
-<!ENTITY Test_Drive_Proc SYSTEM "modules/Test_Drive_Proc.xml">
-<!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "modules/The_JBoss_jBPM_Int_Mech.xml">
-<!ENTITY Quick_Howto_Guide SYSTEM "modules/Quick_Howto_Guide.xml">
+[<!ENTITY introduction  SYSTEM "Introduction.xml">
+<!ENTITY jboss_jbpm_runtime_installation  SYSTEM "jboss_jbpm_runtime_installation.xml">
+<!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "guided_tour_jboss_jbpmgpd.xml">
+<!ENTITY the_views SYSTEM "the_views.xml">
+<!ENTITY Test_Drive_Proc SYSTEM "Test_Drive_Proc.xml">
+<!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "The_JBoss_jBPM_Int_Mech.xml">
+<!ENTITY Quick_Howto_Guide SYSTEM "Quick_Howto_Guide.xml">
 
 <!ENTITY seamlink "../../seam/html_single/index.html">
 <!ENTITY aslink "../../as/html_single/index.html">
@@ -68,7 +68,7 @@
             <year>2010</year>
             <holder>JBoss by Red Hat</holder>
         </copyright>
-        <releaseinfo> Version: 4.0.0.CR1</releaseinfo>
+        <releaseinfo> Version: 4.0.0.trunk</releaseinfo>
 
 <abstract>
    <title/>
