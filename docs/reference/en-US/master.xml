@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+"http://www.docbook.org/xml/4.3/docbookx.dtd"
+
+
+[<!ENTITY introduction  SYSTEM "Introduction.xml">
+<!ENTITY jboss_jbpm_runtime_installation  SYSTEM "jboss_jbpm_runtime_installation.xml">
+<!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "guided_tour_jboss_jbpmgpd.xml">
+<!ENTITY the_views SYSTEM "the_views.xml">
+<!ENTITY Test_Drive_Proc SYSTEM "Test_Drive_Proc.xml">
+<!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "The_JBoss_jBPM_Int_Mech.xml">
+<!ENTITY Quick_Howto_Guide SYSTEM "Quick_Howto_Guide.xml">
+
+<!ENTITY seamlink "../../seam/html_single/index.html">
+<!ENTITY aslink "../../as/html_single/index.html">
+<!ENTITY esblink "../../esb_ref_guide/html_single/index.html">
+<!ENTITY gsglink "../../GettingStartedGuide/html_single/index.html">
+<!ENTITY hibernatelink "../../hibernatetools/html_single/index.html">
+<!ENTITY jbpmlink "../../jbpm/html_single/index.html">
+<!ENTITY jsflink "../../jsf/html_single/index.html">
+<!ENTITY jsfreflink "../../jsf_tools_ref_guide/html_single/index.html">
+<!ENTITY jsftutoriallink "../../jsf_tools_tutorial/html_single/index.html">
+<!ENTITY strutsreflink "../../struts_tools_ref_guide/html_single/index.html">
+<!ENTITY strutstutoriallink "../../struts_tools_tutorial/html_single/index.html">                         
+
+ ]>
+<book>
+    <bookinfo>
+        <title>jBPM Tools Reference Guide</title>
+            <corpauthor>
+                <inlinemediaobject>
+                    <imageobject role="fo">
+                        <imagedata format="PNG" fileref="images/jbosstools_logo.png" />
+                    </imageobject>	
+                    <imageobject role="html">
+                        <imagedata/>
+                    </imageobject>	
+                </inlinemediaobject>           
+            </corpauthor>
+        
+        <author>
+            <firstname>Anatoly</firstname>
+            <surname>Fedosik</surname>
+        </author>
+        <author>
+            <firstname>Koen</firstname>
+            <surname>Aers</surname>
+            <email>koen.aers@jboss.com</email>
+        </author>
+        <author>
+            <firstname>Olga</firstname>
+            <surname>Chikvina</surname>
+        </author>
+        <author>
+            <firstname>Svetlana</firstname>
+            <surname>Mukhina</surname>
+            <email>smukhina@exadel.com</email>
+        </author>
+        <author>
+            <firstname>Tom</firstname>
+            <surname>Baeyens</surname>
+            <email>tom.baeyens@jboss.com</email>
+        </author>
+
+        <copyright>
+            <year>2007</year>
+            <year>2009</year>
+            <year>2010</year>
+            <holder>JBoss by Red Hat</holder>
+        </copyright>
+        <releaseinfo> Version: 4.0.0.trunk</releaseinfo>
+
+<abstract>
+   <title/>
+       <para>
+           <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/jbpm/pdf/JBPM_Reference_Guide.pdf">PDF version</ulink>
+       </para>
+</abstract>
+
+    </bookinfo>
+    
+    <toc/>
+    &introduction; 
+    &jboss_jbpm_runtime_installation; 
+    &guided_tour_jboss_jbpmgpd;
+    &the_views; &Test_Drive_Proc;
+    &The_JBoss_jBPM_Int_Mech;
+    &Quick_Howto_Guide;
+    
+    <!-- TODO: drools used in this section is not available for eclipse .3.3 &AddBusinessProcess; -->
+</book>

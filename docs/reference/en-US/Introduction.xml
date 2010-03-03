@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="Introduction" xreflabel="Introduction">
+ <?dbhtml filename="TargetAudience.html"?>
+ <chapterinfo>
+  <keywordset>
+   <keyword>jBPM</keyword>
+   <keyword>Target</keyword>
+   <keyword>developers</keyword>
+   <keyword>Audience</keyword>
+  </keywordset>
+ </chapterinfo>
+ <title>Introduction</title>
+ <para>All developers and process analysts who are beginning to use JBoss jBPM should read this
+  Getting Started guide. It will give them a jumpstart showing how to create a process definition.</para>
+ <section id="Preface">
+  <?dbhtml filename="Preface.html"?>
+  <title>Preface</title>
+  <para>This document introduces the use of the JBoss jBPM Graphical Process Designer (GPD) to
+   create workflow processes. It will help first time users with the following tasks :</para>
+  <itemizedlist>
+   <listitem>
+    <para>Install the JBoss jBPM GPD Eclipse plugin available from the JBoss jBPM download
+    area</para>
+   </listitem>
+   <listitem>
+    <para>Set up a Java project in Eclipse and prepare it to do test driven process
+    development</para>
+   </listitem>
+   <listitem>
+    <para>Using the creation wizard to create an empty process definition</para>
+   </listitem>
+   <listitem>
+    <para>Use the designer palette to draw the first processdefinition</para>
+   </listitem>
+   <listitem>
+    <para>Show how the xml processdefinition can be inspected as an xml file</para>
+   </listitem>
+   <listitem>
+    <para>Set up a Java project in Eclipse and prepare it to do test driven process
+    development</para>
+   </listitem>
+   <listitem>
+    <para>Write an example process test case</para>
+   </listitem>
+  </itemizedlist>
+  <para>If you have questions, please feel free to contact <ulink url="mailto:koen.aers@jboss.com"
+    >Koen Aers</ulink> or <ulink url="mailto:tom.baeyens@jboss.com">Tom Baeyens</ulink> for more
+   information.</para>
+ </section>
+
+ <section id="feature_list">
+
+  <title>Feature list</title>
+
+  <para> JBoss jBPM is a workflow that enables creating and automatization business processes. Look
+   at the list of features below to understand its main functionality.</para>
+  <table>
+   <title>Key Functionality for JBoss jBPM</title>
+   <tgroup cols="2">
+    <thead>
+     <row>
+      <entry>Feature</entry>
+      <entry>Benefit</entry>
+     </row>
+    </thead>
+    <tbody>
+
+     <row>
+      <entry>
+       <link linkend="minimal_process_definition">jBDL support</link>
+      </entry>
+      <entry>Enables managing workflow processes as well as human tasks and interactions between
+       them. jBDL combines the best both Java and declarative process techniques.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="GuidedTourJBossjBPMGPD">Support of Graphical Process Designer (GPD)</link>
+      </entry>
+      <entry>Is used for simplifying declarative process development and visualizations of all
+       actions.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="CreatingjBPMProject">Project Creation wizard</link>
+      </entry>
+      <entry>Allows to create a new jBPM template project that already includes all advanced
+       artifacts and core jBPM libraries.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="minimal_process_definition">Rich palette of pre-build process nodes</link>
+      </entry>
+      <entry>Provides process-building functionality and gives opportunity even non-programmers to
+       develop processes.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="the_views">A large range of special views, including:</link>
+      </entry>
+      <entry></entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="source_mode">Support of XML code view</link>
+      </entry>
+      <entry>Shows the corresponding XML that&apos;s generated automatically in the Source view
+       of the process definition editor when developing the process.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="the_properties_view">Properties view</link>
+      </entry>
+      <entry>Facilitates configuring and editing of all nodes properties.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
+      </entry>
+      <entry>The plugin is used for designing the workflow.</entry>
+     </row>
+     
+
+     <row>
+      <entry>Interaction with all of the J2EE based integration technologies including Web Services,
+       Java Messaging, J2EE Connectors, JBDC, EJBs.</entry>
+      <entry>Enables implementation, provides better functionality and flexibility.</entry>
+     </row>
+
+     <row>
+      <entry>Integration with jBoss Seam</entry>
+      <entry>Allows to write applications with complex workflows and provides easier interactions
+       between them.</entry>
+     </row>
+
+    </tbody>
+   </tgroup>
+  </table>
+ </section>
+ 
+ <section>
+  <title>Other relevant resources on the topic</title>
+  <para>All JBoss Developer Studio/JBoss Tools release documentation you can find at<ulink url="http://docs.jboss.org/tools/">http://docs.jboss.org/tools</ulink> in the corresponding release directory.</para>
+  <para>There is some extra information on <ulink url="http://www.jboss.org/community/wiki/JBPMWiki">JBoss Wiki. </ulink></para>
+  <para>The latest documentation builds are available at <ulink url="http://download.jboss.org/jbosstools/nightly-docs/">http://download.jboss.org/jbosstools/nightly-docs</ulink>.</para>
+ </section>
+
+</chapter>

@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+"http://www.docbook.org/xml/4.3/docbookx.dtd"
+
+
+[<!ENTITY introduction  SYSTEM "modules/Introduction.xml">
+<!ENTITY jboss_jbpm_runtime_installation  SYSTEM "modules/jboss_jbpm_runtime_installation.xml">
+<!ENTITY guided_tour_jboss_jbpmgpd SYSTEM "modules/guided_tour_jboss_jbpmgpd.xml">
+<!ENTITY the_views SYSTEM "modules/the_views.xml">
+<!ENTITY Test_Drive_Proc SYSTEM "modules/Test_Drive_Proc.xml">
+<!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "modules/The_JBoss_jBPM_Int_Mech.xml">
+<!ENTITY Quick_Howto_Guide SYSTEM "modules/Quick_Howto_Guide.xml">
+
+<!ENTITY seamlink "../../seam/html_single/index.html">
+<!ENTITY aslink "../../as/html_single/index.html">
+<!ENTITY esblink "../../esb_ref_guide/html_single/index.html">
+<!ENTITY gsglink "../../GettingStartedGuide/html_single/index.html">
+<!ENTITY hibernatelink "../../hibernatetools/html_single/index.html">
+<!ENTITY jbpmlink "../../jbpm/html_single/index.html">
+<!ENTITY jsflink "../../jsf/html_single/index.html">
+<!ENTITY jsfreflink "../../jsf_tools_ref_guide/html_single/index.html">
+<!ENTITY jsftutoriallink "../../jsf_tools_tutorial/html_single/index.html">
+<!ENTITY strutsreflink "../../struts_tools_ref_guide/html_single/index.html">
+<!ENTITY strutstutoriallink "../../struts_tools_tutorial/html_single/index.html">                         
+
+ ]><book xmlns:diffmk="http://diffmk.sf.net/ns/diff">
+    <bookinfo>
+        <title>jBPM Tools Reference Guide</title>
+            <corpauthor>
+                <inlinemediaobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/jbosstools_logo.png" format="PNG"></imagedata>
+                    </imageobject>	
+                    <imageobject role="html">
+                        <imagedata></imagedata>
+                    </imageobject>	
+                </inlinemediaobject>           
+            </corpauthor>
+        
+        <author>
+            <firstname>Anatoly</firstname>
+            <surname>Fedosik</surname>
+        </author>
+        <author>
+            <firstname>Koen</firstname>
+            <surname>Aers</surname>
+            <email>koen.aers@jboss.com</email>
+        </author>
+        <author>
+            <firstname>Olga</firstname>
+            <surname>Chikvina</surname>
+        </author>
+        <author>
+            <firstname>Svetlana</firstname>
+            <surname>Mukhina</surname>
+            <email>smukhina@exadel.com</email>
+        </author>
+        <author>
+            <firstname>Tom</firstname>
+            <surname>Baeyens</surname>
+            <email>tom.baeyens@jboss.com</email>
+        </author>
+
+        <copyright>
+            <year>2007</year>
+            <year>2009</year>
+            <year>2010</year>
+            <holder>JBoss by Red Hat</holder>
+        </copyright>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.trunk</diffmk:wrapper></releaseinfo>
+
+<abstract>
+   <title></title>
+       <para>
+           <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/jbpm/pdf/JBPM_Reference_Guide.pdf">PDF version</ulink>
+       </para>
+</abstract>
+
+    </bookinfo>
+    
+    <toc></toc>
+    
+<chapter id="Introduction" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Introduction.xml" xreflabel="Introduction">
+ <?dbhtml filename="TargetAudience.html"?>
+ <chapterinfo>
+  <keywordset>
+   <keyword>jBPM</keyword>
+   <keyword>Target</keyword>
+   <keyword>developers</keyword>
+   <keyword>Audience</keyword>
+  </keywordset>
+ </chapterinfo>
+ <title>Introduction</title>
+ <para>All developers and process analysts who are beginning to use JBoss jBPM should read this
+  Getting Started guide. It will give them a jumpstart showing how to create a process definition.</para>
+ <section id="Preface">
+  <?dbhtml filename="Preface.html"?>
+  <title>Preface</title>
+  <para>This document introduces the use of the JBoss jBPM Graphical Process Designer (GPD) to
+   create workflow processes. It will help first time users with the following tasks :</para>
+  <itemizedlist>
+   <listitem>
+    <para>Install the JBoss jBPM GPD Eclipse plugin available from the JBoss jBPM download
+    area</para>
+   </listitem>
+   <listitem>
+    <para>Set up a Java project in Eclipse and prepare it to do test driven process
+    development</para>
+   </listitem>
+   <listitem>
+    <para>Using the creation wizard to create an empty process definition</para>
+   </listitem>
+   <listitem>
+    <para>Use the designer palette to draw the first processdefinition</para>
+   </listitem>
+   <listitem>
+    <para>Show how the xml processdefinition can be inspected as an xml file</para>
+   </listitem>
+   <listitem>
+    <para>Set up a Java project in Eclipse and prepare it to do test driven process
+    development</para>
+   </listitem>
+   <listitem>
+    <para>Write an example process test case</para>
+   </listitem>
+  </itemizedlist>
+  <para>If you have questions, please feel free to contact <ulink url="mailto:koen.aers@jboss.com">Koen Aers</ulink> or <ulink url="mailto:tom.baeyens@jboss.com">Tom Baeyens</ulink> for more
+   information.</para>
+ </section>
+
+ <section id="feature_list">
+
+  <title>Feature list</title>
+
+  <para> JBoss jBPM is a workflow that enables creating and automatization business processes. Look
+   at the list of features below to understand its main functionality.</para>
+  <table>
+   <title>Key Functionality for JBoss jBPM</title>
+   <tgroup cols="2">
+    <thead>
+     <row>
+      <entry>Feature</entry>
+      <entry>Benefit</entry>
+     </row>
+    </thead>
+    <tbody>
+
+     <row>
+      <entry>
+       <link linkend="minimal_process_definition">jBDL support</link>
+      </entry>
+      <entry>Enables managing workflow processes as well as human tasks and interactions between
+       them. jBDL combines the best both Java and declarative process techniques.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="GuidedTourJBossjBPMGPD">Support of Graphical Process Designer (GPD)</link>
+      </entry>
+      <entry>Is used for simplifying declarative process development and visualizations of all
+       actions.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="CreatingjBPMProject">Project Creation wizard</link>
+      </entry>
+      <entry>Allows to create a new jBPM template project that already includes all advanced
+       artifacts and core jBPM libraries.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="minimal_process_definition">Rich palette of pre-build process nodes</link>
+      </entry>
+      <entry>Provides process-building functionality and gives opportunity even non-programmers to
+       develop processes.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="the_views">A large range of special views, including:</link>
+      </entry>
+      <entry></entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="source_mode">Support of XML code view</link>
+      </entry>
+      <entry>Shows the corresponding XML that's generated automatically in the Source view
+       of the process definition editor when developing the process.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="the_properties_view">Properties view</link>
+      </entry>
+      <entry>Facilitates configuring and editing of all nodes properties.</entry>
+     </row>
+
+     <row>
+      <entry>
+       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
+      </entry>
+      <entry>The plugin is used for designing the workflow.</entry>
+     </row>
+     
+
+     <row>
+      <entry>Interaction with all of the J2EE based integration technologies including Web Services,
+       Java Messaging, J2EE Connectors, JBDC, EJBs.</entry>
+      <entry>Enables implementation, provides better functionality and flexibility.</entry>
+     </row>
+
+     <row>
+      <entry>Integration with jBoss Seam</entry>
+      <entry>Allows to write applications with complex workflows and provides easier interactions
+       between them.</entry>
+     </row>
+
+    </tbody>
+   </tgroup>
+  </table>
+ </section>
+ 
+ <section>
+  <title>Other relevant resources on the topic</title>
+  <para>All JBoss Developer Studio/JBoss Tools release documentation you can find at<ulink url="http://docs.jboss.org/tools/">http://docs.jboss.org/tools</ulink> in the corresponding release directory.</para>
+  <para>There is some extra information on <ulink url="http://www.jboss.org/community/wiki/JBPMWiki">JBoss Wiki. </ulink></para>
+  <para>The latest documentation builds are available at <ulink url="http://download.jboss.org/jbosstools/nightly-docs/">http://download.jboss.org/jbosstools/nightly-docs</ulink>.</para>
+ </section>
+
+</chapter>
+ 
+    
+<chapter id="jboss_jbpm_runtime_installation" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/jboss_jbpm_runtime_installation.xml" xreflabel="jboss_jbpm_runtime_installation">
+ <?dbhtml filename="jboss_jbpm_runtime_installation.html"?>
+ <chapterinfo>
+  <keywordset>
+   <keyword>jBPM</keyword>
+   <keyword>designer</keyword>
+   <keyword>process</keyword>
+   <keyword>JBoss Developer Studio</keyword>
+   <keyword>jBPM runtime</keyword>
+  </keywordset>
+ </chapterinfo>
+ <title>JBoss jBPM Runtime Installation</title>
+ <para>The main purpose of this chapter is to let you know how to launch the <property moreinfo="none">JBoss
+  jBPM</property> (business process management).</para>
+ <para>The jBPM plugin (jBPM Designer) is already included in the <property moreinfo="none">JBoss Tools</property>.
+  To make it work, you should only download the jBPM runtime (<ulink
+      url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;
+      package_id=145174&amp;release_id=607377"
+      >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
+  either when you create a jBPM project or by using the jBPM preference pages.</para>
+
+ <note>
+  <title>Note:</title>
+  <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
+   some situations with Sun-based VMs.</para>
+ </note>
+
+ <para>Navigate to <emphasis>
+   <property moreinfo="none">Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property>.
+  </emphasis> Here you can add, edit and remove JBoss jBPM installation locations. Click <emphasis>
+   <property moreinfo="none">Add</property>
+  </emphasis> button. In the dialog that appeared enter a name for a newly added jBPM runtime and
+  point to the correct location of this package on your harddrive. Click <emphasis>
+   <property moreinfo="none">OK</property>
+  </emphasis> then click <emphasis>
+   <property moreinfo="none">OK</property>
+  </emphasis> again.</para>
+
+ <figure float="0">
+  <title>Adding jBPM Location</title>
+  <mediaobject>
+   <imageobject>
+    <imagedata fileref="images/runtime_installation/runtime_installation_1.png"></imagedata>
+   </imageobject>
+  </mediaobject>
+ </figure>
+ <para>Now, when you have a runtime installed, we are going to demonstrate some powerful features of
+  the jBPM.</para>
+</chapter>
+ 
+    
+<chapter id="GuidedTourJBossjBPMGPD" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/guided_tour_jboss_jbpmgpd.xml" xreflabel="GuidedTourJBossjBPMGPD">
+	<?dbhtml filename="GuidedTourJBossjBPMGPD.html"?>
+	<chapterinfo>
+		<keywordset>
+			<keyword>jBPM</keyword>
+			<keyword>JBoss</keyword>
+			<keyword>Process</keyword>
+			<keyword>Definition</keyword>
+		</keywordset>
+	</chapterinfo>
+	<title>A Guided Tour of JBoss jBPM GPD</title>
+	<para>In this chapter we suggest a step-by-step walk-through of creating and configuring your
+		own simple process. Let's try to organize a new jBPM project.</para>
+	<para>A wizard for creating a jBPM project is included in the GPD plugin. We have opted to
+		create a project based on a template already containing a number of advanced artifacts that
+		we will ignore for this section. In the future we will elaborate this wizard and offer the
+		possibility to create an empty jBPM project as well as projects based on templates taken
+		from the jBPM tutorial.</para>
+	<section id="CreatingjBPMProject">
+		<?dbhtml filename="CreatingjBPMProject.html"?>
+		<title>Creating a jBPM Project</title>
+		<para>This section will show you how to use the Creation wizard for creating a new jBPM
+			project with already included source folders.</para>
+		<para>At first you should select <emphasis>
+				<property moreinfo="none">File &gt;New Project...</property>
+			</emphasis> and then <emphasis>
+				<property moreinfo="none">JBoss jBPM &gt; Process Project</property>
+			</emphasis> in the New Project dialog:</para>
+		<figure float="0">
+			<title>New Project Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_1.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para> Clicking <emphasis>
+				<property moreinfo="none">Next</property>
+			</emphasis> brings us to the wizard page where it's necessary to specify the
+			name and location for the project. We choose, for example, <emphasis>
+				<property moreinfo="none">HellojBPM</property>
+			</emphasis> as the name and accept the default location. </para>
+		<figure float="0">
+			<title>Process Name and Location</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_2.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>Thus, our project will be created in the workspace root directory by default. If you
+			want to change the directory for your future project, deselect <emphasis>
+				<property moreinfo="none">Use default location</property>
+			</emphasis> and click <emphasis>
+				<property moreinfo="none">Browse...</property>
+			</emphasis> button to set needed location or simply type it.</para>
+		<para>On the next screen you'll be prompted to select the core jBPM location that
+			we have defined in the previous chapter.</para>
+		<figure float="0">
+			<title>Core jBPM Location Specifying</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_9.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>Clicking on <emphasis>
+				<property moreinfo="none">Finish</property>
+			</emphasis> results in the project being generated. The wizard creates four source
+			folders: one for the processes (<emphasis>
+				<property moreinfo="none">src/main/jpdl</property>
+			</emphasis>), one for the java sources (<emphasis>
+				<property moreinfo="none">src/main/java</property>
+			</emphasis>), one for the unit tests (<emphasis>
+				<property moreinfo="none">src/test/java</property>
+			</emphasis>) and one for the resources such as the jbpm.properties and the
+			hibernate.properties files (<emphasis>
+				<property moreinfo="none">src/main/config</property>
+			</emphasis>). In addition a classpath container with all the core jBPM libraries is
+			added to the project</para>
+		<figure float="0">
+			<title>Layout of the Process Project</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_3.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>Looking inside the different source folders will reveal a number of other artifacts
+			that were generated, but we will leave these untouched for the moment. Instead, we will
+			look at another wizard that enables us to create an empty process definition.</para>
+	</section>
+	<section id="creating_an_empty_process_definition">
+		<?dbhtml filename="creating_an_empty_process_definition.html"?>
+		<title>Creating an Empty Process Definition</title>
+		<para>Now when the project is set up, we can use a Creation wizard to create an empty
+			process definition. Bring up the <emphasis>
+				<property moreinfo="none">New</property>
+			</emphasis> wizard by clicking the <emphasis>
+				<property moreinfo="none">File &gt; New &gt; Other...</property>
+			</emphasis> menu item. The wizard opens on the <emphasis>
+				<property moreinfo="none">Select Wizard</property>
+			</emphasis> page.</para>
+		<figure float="0">
+			<title>The Select Wizard Page</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_4.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>Selecting the <emphasis>
+				<property moreinfo="none">JBoss jBPM</property>
+			</emphasis> category, then the <emphasis>
+				<property moreinfo="none">Process Definition</property>
+			</emphasis> item and clicking on the <emphasis>
+				<property moreinfo="none">Next</property>
+			</emphasis> button brings us to the <emphasis>
+				<property moreinfo="none">Create Process Definition</property>
+			</emphasis> page.</para>
+		<figure float="0">
+			<title>The Create New Process Defining Page</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_5.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>We choose <emphasis>
+				<property moreinfo="none">hello</property>
+			</emphasis> as the name of the process archive file. Click on the <emphasis>
+				<property moreinfo="none">Finish</property>
+			</emphasis> button to end the wizard and open the process definition editor.</para>
+		<figure float="0">
+			<title>The Process Definition Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_6.png" scale="60"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+
+		<para>You can see in the Package Explorer that creating a process definition involves
+			creating a folder with the name of the process definition and populating this folder
+			with two .xml files : <emphasis>
+				<property moreinfo="none">gpd.xml</property>
+			</emphasis> and <emphasis>
+				<property moreinfo="none">processdefinition.xml</property>. </emphasis></para>
+		<para>The <emphasis>
+				<property moreinfo="none">gpd.xml</property>
+			</emphasis> contains the graphical information used by the process definition editor.
+			The <emphasis>
+				<property moreinfo="none">processdefinition.xml</property>
+			</emphasis> file contains the actual process definition info without the graphical
+			rendering info. At present, the GPD assumes that these two files are siblings. More
+			sophisticated configuration will be supported later.</para>
+
+		<section id="minimal_process_definition">
+			<?dbhtml filename="minimal_process_definition.html"?>
+			<title>A Minimal Process Definition</title>
+			<para>Now we are ready to create a very simple process definition consisting of a begin
+				state, an intermediate state and an end state.</para>
+			<para>To make the configuration of actions much easier it's better to use the
+				jPDL perspective. It provides the tabbed Properties Editor which allows to configure
+				all the relevant properties of the current selected item. </para>
+
+			<section id="adding_the_nodes">
+				<?dbhtml filename="adding_the_nodes.html"?>
+				<title>Adding the Nodes</title>
+				<para>At first select respectively <emphasis>
+						<property moreinfo="none">Start</property>, </emphasis>
+					<emphasis>
+						<property moreinfo="none">State</property>
+					</emphasis> and <emphasis>
+						<property moreinfo="none">End</property>
+					</emphasis> on the tools palette and click on the canvas to add these nodes to
+					the process definition. The result should look similar to this:</para>
+				<figure float="0">
+					<title>A Simple Process With Three Nodes</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_7.png" scale="60"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</section>
+			<section id="adding_transitions">
+				<?dbhtml filename="adding_transitions.html"?>
+				<title>Adding Transitions</title>
+				<para>Then, we will connect the nodes with transitions. To do that select the <emphasis>
+						<property moreinfo="none">Transition</property>
+					</emphasis> tool in the tools palette and click on the <emphasis>
+						<property moreinfo="none">Start</property>
+					</emphasis> node, then move to the <emphasis>
+						<property moreinfo="none">State</property>
+					</emphasis> node and click again to see the transition being drawn. Perform the
+					same steps to create a transition from the <emphasis>
+						<property moreinfo="none">State</property>
+					</emphasis> node to the <emphasis>
+						<property moreinfo="none">End</property>
+					</emphasis> node. The result will look like:</para>
+				<figure float="0">
+					<title>A Simple Process With Transitions</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/guided_tour_jboss_jbpmgpd/guided_tour_8.png" scale="60"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
+				<para>Now, when you've got background knowledge of simple project creation,
+					let's move to more advanced tools.</para>
+			</section>
+		</section>
+	</section>
+
+</chapter>
+
+    
+<chapter id="the_views" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/the_views.xml" xreflabel="the_views">
+    <?dbhtml filename="the_views.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>jBPM</keyword>
+        </keywordset>
+    </chapterinfo>
+
+    <title>The views</title>
+
+    <para>Here, it will be explained how to work with views and editors provided by JBDS.</para>
+    <para>The views are used for representation and navigation the resources you are working on at
+        the moment. One of the advantages of all the views is that all modifications made in the
+        current active file are immediately displayed in them. Let’s get acquainted more closely
+        with those that the <property moreinfo="none">jPDL perspective</property> provides. </para>
+
+    <figure float="0">
+        <title>The jPDL Perspective Views and Editors</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/the_views/the_views_0.png" scale="80"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>As you can see in the picture above, the <property moreinfo="none">jPDL perspective</property> contains a
+        complete set of functionality that's necessary for working on the jBPM project.</para>
+
+    <section id="the_outline_view">
+        <?dbhtml filename="the_outline_view.html"?>
+        <title>The Outline View</title>
+        <para>To have a way to quickly see an outline of the process use the <emphasis>
+                <property moreinfo="none">Outline view</property>
+            </emphasis> that is presented as the classical tree. If it is not visible select <emphasis>
+                <property moreinfo="none">Window &gt; Show view &gt; Outline</property>. </emphasis></para>
+
+        <figure float="0">
+            <title>The Overview View</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views_1.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+
+    <section id="the_overview">
+        <?dbhtml filename="the_outline_view.html"?>
+        <title>The Overview</title>
+        <para>The main advantage of this view is that it gives visual representation of the whole
+            current developing process. Besides, the <emphasis>
+                <property moreinfo="none">Overview</property>
+            </emphasis> comes as a scrollable thumbnail which enables a better navigation of the
+            process structure if it's too large.</para>
+
+        <figure float="0">
+            <title>The Overview</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views_2.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+
+    <section id="the_properties_view">
+        <?dbhtml filename="the_properties_view.html"?>
+        <title>The Properties View</title>
+        <para> Here, we dwell on the JBDS <property moreinfo="none">Properties view</property>.</para>
+        <para>Notice if it's not visible you can access it by navigating <emphasis>
+                <property moreinfo="none">Window &gt; Show view &gt; Properties</property>. </emphasis></para>
+        <para>The view shows the relevant properties of the selected item in the tabbed form. Every
+            item has its own set of properties, which can be directly editable in the Properties
+            view or by brining up the context menu.</para>
+
+        <figure float="0">
+            <title>The Properties View of selected Transition</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views_3.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>For example, on the picture above the Properties view displays all the properties for
+            a selected transition. Its name has been changed to <emphasis>
+                <property moreinfo="none">to_auction</property>. </emphasis> We've done it directly in
+            active General tab of the view. The same way let's change the name for the
+            second transition to <emphasis>
+                <property moreinfo="none">to_end</property>. </emphasis></para>
+        <para>If no one item is selected, the view represents the properties of the whole process
+            definition. </para>
+
+        <figure float="0">
+            <title>The Properties View of Process Definition</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/the_views/the_views_4.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>In this case, it contains six tabs. The first one is the <emphasis>
+                <property moreinfo="none">General</property>.</emphasis> It allows to specify a process name and add
+            necessary description. To illustrate let's change the process definition name
+            to <emphasis>
+                <property moreinfo="none">jbay</property>. </emphasis></para>
+    </section>
+
+    <section id="jbpm_gpd_editor">
+        <?dbhtml filename="direct_editing.html"?>
+        <title>The jBPM Graphical Process Designer editor.</title>
+        <para>The <property moreinfo="none">jBPM GPD editor</property> includes four modes: Diagram, Deployment,
+            Design and Source, which are available as switchable tabs at the bottom of the editor.
+            Let's dwell on each of them.</para>
+
+        <section id="the_diagram_mode">
+            <title>The Diagram mode</title>
+            <para> In this mode we define the process in the form of a diagram by means of tools
+                provided on the left-hand side of the jBPM GPD. </para>
+
+            <figure float="0">
+                <title>The Diagram mode</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_5.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Besides, some properties can be directly edited in the <property moreinfo="none">Diagram
+                mode</property> of the graphical editor. One example of this is the <emphasis>
+                    <property moreinfo="none">name</property>
+                </emphasis> property of nodes. You can edit this directly by selecting the node of
+                which you want to change the name and then click once inside this node. This enables
+                an editor in the node. We change the name of the node to <emphasis>
+                    <property moreinfo="none">auction</property>. </emphasis></para>
+        </section>
+
+        <section id="source_mode">
+            <?dbhtml filename="the_source_view.html"?>
+            <title>The Source Mode</title>
+            <para>Now, that we have defined a simple process definition, we can have a look at the
+                XML that is being generated under the covers. To see this XML click on the Source
+                tab of the graphical process designer editor.</para>
+
+            <figure float="0">
+                <title>The Source Mode</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_6.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>The <property moreinfo="none">Source mode</property> enables to easily manipulate our XML. That is
+                manually inserting and editing necessary elements or attributes. In addition, here
+                you can take advantage of content assist.</para>
+        </section>
+
+        <section id="design_mode">
+            <?dbhtml filename="the_design_view.html"?>
+            <title>The Design Mode</title>
+            <para>One more way to edit your file is to use <property moreinfo="none">Design mode</property>. You can
+                see it in the next picture:</para>
+            <figure float="0">
+                <title>The Design Mode</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_7.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>As you can see above, this mode looks like a table in the first column of which
+                the process structure is performed. Here, you can also insert, remove and edit
+                elements or attributes, moreover add comments and instructions. Their values can be
+                directly edited in the second column of the Design mode table.</para>
+            <para>For instance, let’s add a comment on the second transition. For that, you should
+                bring up the context menu for it and choose <emphasis>
+                    <property moreinfo="none">Add Before &gt; Comment</property>. </emphasis></para>
+
+            <figure float="0">
+                <title>Adding a Comment</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_8.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>Then, we can put the text <emphasis>This transition leads to the end
+                state</emphasis> in the right column as its value.</para>
+
+            <figure float="0">
+                <title>Comment is added</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_9.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+        </section>
+
+        <section id="deployment_mode">
+            <?dbhtml filename="the_deployment_view.html"?>
+            <title>The Deployment Mode</title>
+            <para>Finally, to adjust the deployment settings of the project you should switch on to
+                the tab that opens the <property moreinfo="none">Deployment mode</property>. On the picture below
+                the <property moreinfo="none">Deployment mode</property> is performed with default settings. Here,
+                you can easily modify them or, if the settings won't match your needs, to
+                reset defaults. </para>
+            <figure float="0">
+                <title>The Deployment Mode</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_10.png"></imagedata>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>The button <emphasis>
+                    <property moreinfo="none">Test Connections</property>
+                </emphasis> is necessary to make sure whether all your settings are valid before
+                deploying the process.</para>
+            <para>Now that we've seen how to work with <property moreinfo="none">jPDL
+                perspective</property>, let's pass on to the project testing.</para>
+        </section>
+    </section>
+</chapter>
+ 
+<chapter id="Test_Drive_Proc_Development" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Test_Drive_Proc.xml" xreflabel="Test_Drive_Proc_Development">
+    <?dbhtml filename="Test_Drive_Proc_Development.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>jBPM</keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+        </keywordset>
+    </chapterinfo>
+    <title>Test Driven Process Development</title>
+
+    <para> One of the most important advantages of JBoss jBPM's lightweight approach to BPM
+        and workflow management is that developers can easily leverage their usual programming
+        skills and techniques. One of these well-known techniques is Unit Testing and Test Driven
+        Development. </para>
+    <para>In this chapter we will show how developers, making use of the JBoss jBPM GPD, can use a
+        technique we have baptized <property moreinfo="none">Test Driven Process Development</property> to create
+        process definitions and test their correctness. </para>
+
+    <para> When creating the <emphasis>
+            <property moreinfo="none">HellojBPM</property>
+        </emphasis> project the Project Creation wizard has already put in place all the library
+        requirements we need to start writing the jBPM unit tests. They are contained in the jBPM
+        Library container and the most important of them is the <emphasis>
+            <property moreinfo="none">.jar</property>
+        </emphasis> file containing the core jBPM classes. While working on the project you could
+        find them all in the <property moreinfo="none">Package Explorer</property>.</para>
+
+    <figure float="0">
+        <title>The jBPM Libraries</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_1.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>It must be noted that it is possible to change the location of the core jBPM installation
+        by changing the preference settings. More on this <link linkend="change_core_jbpm_inst">see
+            later</link> in this book.</para>
+
+    <para> With that extra knowledge on the project settings, you can create your first test. To do
+        this, we create the <emphasis>
+            <property moreinfo="none">com.jbay</property>
+        </emphasis> package in the <emphasis>
+            <property moreinfo="none">test/java</property>
+        </emphasis> source folder. Then we bring up the context menu on this package and select <emphasis>
+            <property moreinfo="none">New &gt; Other...</property>
+        </emphasis></para>
+
+    <figure float="0">
+        <title>Call the JUnit Test Case Creation wizard</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_2.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para> And then <emphasis>
+            <property moreinfo="none">Java &gt; JUnit &gt; JUnit Test Case</property>
+        </emphasis> to call the specialized JUnite Test case creation wizard.</para>
+    <figure float="0">
+        <title>Call the JUnit Test Case Creation wizard</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_3.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>The wizard looks as follows:</para>
+
+    <figure float="0">
+        <title>Create Test Dialog</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_4.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>By default JUnite 3 version of testing framework is selected. Of course, you can choose
+        new advanced JUnit 4 version. In this case you'll be prompted to add new JUnit
+        Library to your build path. To add it automatically just click on the appropriate link. In
+        the <emphasis>
+            <property moreinfo="none">Class under test</property>
+        </emphasis> section you can specify the class to test.</para>
+
+    <figure float="0">
+        <title>A First Test Scenario</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_5.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>Then, we call the test class <emphasis>
+            <property moreinfo="none">HelloTest</property>
+        </emphasis> and press <emphasis>
+            <property moreinfo="none">Finish</property>
+        </emphasis> button to complete.</para>
+
+    <para> Next, we should write a simple test scenario as shown on the next figure. Let's
+        study the code of this test case. </para>
+
+    <figure float="0" id="hello_test">
+        <title>A First Test Scenario</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_6.png" scale="75"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para>In the first line of the method, a jBPM process archive object is created. We use a
+        constructor accepting the filename of the archive. In our case it is the <emphasis>
+            <property moreinfo="none">hello</property>
+        </emphasis> file we created earlier and which lives in the <emphasis>
+            <property moreinfo="none">src/main/jpdl</property>
+        </emphasis> folder of our project. After asserting that this object is really created, we
+        extract a process definition object from it. This object is fed to the constructor of a
+        process instance object. We have a process instance object, but this process is not yet
+        started, so we can safely assert that its root token still resides in the start node. After
+        signalling the token will move to the next state and the process will be in the <emphasis>
+            <property moreinfo="none">auction</property>
+        </emphasis> state. Finally another signal will end the process. </para>
+
+
+    <para> After writing this test we can check whether it works as expected by running it .</para>
+
+    <figure float="0">
+        <title>Running the Process Test</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_7.png" scale="75"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>All went well as we have a green light:</para>
+
+    <figure float="0">
+        <title>Successful Test Run</title>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/Test_Drive_Proc/test_driv_proc_8.png" scale="75"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+
+    <para> Of course, this simple scenario was not very interesting, but the purpose of it was to
+        show how you can reuse your development skills in a very straightforward way when doing
+        process development. To see how more interesting processes and process test
+        scenario's can be developed, we suggest you to read the <ulink url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink> and to
+        study the API reference. You can find it in the jBPM download folder. (To get started we
+        downloaded jbpm-jpdl-3.2.2 in <link linkend="jboss_jbpm_runtime_installation">the second
+            chapter</link>. You should just remember where you extracted it.) All we've mentioned are in the 'javadoc- *' subfolders of the 'doc' folder.
+        Moreover, some more examples will be given later in this book.</para>
+
+</chapter>
+
+    
+<chapter id="The_JBoss_jBPM_Int_Mech" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/The_JBoss_jBPM_Int_Mech.xml" xreflabel="The_JBoss_jBPM_Int_Mech">
+    <?dbhtml filename="The_JBoss_jBPM_Int_Mech.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>jBPM</keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+        </keywordset>
+    </chapterinfo>
+    <title>Actions : The JBoss jBPM Integration Mechanism</title>
+
+    <para> In this chapter we will show how to do software integration with <property moreinfo="none">JBoss
+        jBPM</property>. The standard mechanism to implement this is to wrap the functionality you
+        want to integrate in a class that implements the <emphasis>
+            <property moreinfo="none">ActionHandler</property>
+        </emphasis> interface. In order to demonstrate it let's specify Hello World action for our
+        process.</para>
+
+    <section>
+        <title>Creating a Hello World Action</title>
+
+        <para>Each Hello World process should integrate one or more Hello World actions, so this is
+            what we will be doing. We can integrate custom code at different points in the process
+            definition. To do this we have to specify an action handler, represented by an
+            implementation of the <emphasis>
+                <property moreinfo="none">ActionHandler</property>
+            </emphasis> interface, and attach this piece of code to a particular event. These events
+            are amongst others, going over a transition, leaving or entering nodes, after and before
+            signalling. </para>
+
+        <para> To make things a little bit more concrete, let's create a new class called <emphasis>
+                <property moreinfo="none">HelloActionHandler</property>.
+            </emphasis> For that firstly we'll create a new package <emphasis>
+                <property moreinfo="none">com.jbay.action</property>
+            </emphasis> in the <emphasis>
+                <property moreinfo="none">src/java/main</property>
+            </emphasis> folder of our project. Then, we should call New Class Creation wizard as
+            usual by right-clicking and navigating <emphasis>
+                <property moreinfo="none">New &gt; Class</property>.
+            </emphasis> </para>
+
+        <figure float="0">
+            <title>Creating HelloActionHendler Class</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_1.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>Notice that two first gaps have been filled automatically. Here, instead of <emphasis>
+                <property moreinfo="none">Package</property>
+            </emphasis> option <emphasis>
+                <property moreinfo="none">Enclose type</property>
+            </emphasis> option can be selected where a type in which to enclose a new class should
+            be specified.</para>
+
+        <para>In our case, we leave everything as it is, just type <emphasis>
+                <property moreinfo="none">HelloActionHandler</property>
+            </emphasis> as a name of new class and add <emphasis>
+                <property moreinfo="none">org.jbpm.graph.ActionHendler</property>
+            </emphasis> interface as it's shown in the picture above.</para>
+
+        <para>Thus, our <emphasis>
+                <property moreinfo="none">HelloActionHandler</property>
+            </emphasis> implements the <emphasis>
+                <property moreinfo="none">ActionHandler</property>
+            </emphasis> interface including the <emphasis>
+                <property moreinfo="none">execute</property>
+            </emphasis> method as shown in the next figure. Here, we add a variable named <emphasis>
+                <property moreinfo="none">greeting</property>
+            </emphasis> to the collection of process variables and put     a message in it :
+                <emphasis>"Hello from ActionHandler"</emphasis>. </para>
+
+        <figure float="0">
+            <title>A Simple Hello Action</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_2.png" scale="75"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>Now, as we have <emphasis>
+                <property moreinfo="none">HelloActionHandler</property>
+            </emphasis> class defined, let's explore how we can handle it.</para>
+    </section>
+
+    <section>
+        <title>Integrating the Hello World Action</title>
+
+        <para>The main purpose of this chapter is to provide you with the steps associating our
+            Hello World action with a particular event and test the correctness of our actions as
+            well.</para>
+
+        <para> As good Testcity citizens we will first create a Unit Test that proves the behaviour
+            we want to achieve by adding the <emphasis>
+                <property moreinfo="none">ActionHandler</property>
+            </emphasis> to the process. So we implement another test.</para>
+            
+           <para>At first, let's return to the
+               code we already saw <link linkend="hello_test">in the previous chapter</link> and add new test method <emphasis>
+                   <property moreinfo="none">testActionHendler</property></emphasis> to it. </para>
+               
+           <figure float="0">
+                   <title>Create the Hello Action Test</title>
+                   
+                   <mediaobject>
+                       <imageobject>
+                           <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_3.png" scale="75"></imagedata>
+                       </imageobject>
+                   </mediaobject>
+            </figure>
+               
+           <para>We assert
+            that no variable called <emphasis>
+                <property moreinfo="none">greeting</property>
+            </emphasis> exist. Then we give the process a signal to move it to the auction state. We
+            want to associate the execution of the action with the event of going over the
+            transition from the start state to the auction state. So after the signal, the process
+            should be in the auction state as in the previous scenario. But moreover, the <emphasis>
+                <property moreinfo="none">greeting</property>
+            </emphasis> variable should exist and contain the string <emphasis>"Hello from
+            ActionHandler"</emphasis>. That's what we assert in the last lines of the test
+            method.</para>
+
+        
+
+        <para> Running the tests now results in a failure. The point is that we did not associate
+            the action with any particular event in the process definition, so the process variable
+            did not get set. </para>
+
+        <figure float="0">
+            <title>Test Results Before Integration</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_4.png" scale="75"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para> Let's do something about it and add an action to the first transition of our
+            sample process. To do this you can use the Actions tab in the Properties Editor that is
+            under the graphical canvas. Bring up the popup menu of the action element container and
+            chose New Action as it's shown on the figure below. The other way to add an action
+            to the transition is simply to use the dropdown menu that is available under the action
+            icon in the right upper corner of the Properties View.</para>
+
+        <figure float="0">
+            <title>Adding an Action to a Transition</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_5.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>After adding the action a tabbed view with three pages will appear.</para>
+
+        <figure float="0">
+            <title>Configuration Dialog for an Action</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_6.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>The first of these three pages allows you to give the Action a name. The last page
+            contains some advanced attributes such as whether the Action is asynchronous. The
+            Details page is the most important. It allows to choose and configure the actual action
+            handler implementation. </para>
+
+        <figure float="0">
+            <title>The Details page of an Action Configuration Dialog</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_7.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+
+        <para>Clicking on the <emphasis>
+                <property moreinfo="none">Search...</property>
+            </emphasis> button brings us to a Choose Class dialog.</para>
+
+
+        <figure float="0">
+            <title>The Choose Action Handler Dialog</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_8.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+
+        <para> We choose our previously created 'HelloActionHandler' class and
+            push the <property moreinfo="none">OK</property> button. After the selection of the action handler for
+            the action, we can run the test and observe it gives us a green light.</para>
+
+        <figure float="0">
+            <title>Test Results</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/The_JBoss_jBPM_Int_Mech/jboss_jbpm_int_mech_9.png" scale="70"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>There we are. The above objective has been achieved.</para>
+    </section>
+
+    <section>
+        <title> Integration Points</title>
+
+        <para> The different integration points in a process definition are thoroughly documented in
+            the <ulink url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink>. Instance nodes can contain many action
+            elements. Each of these will appear in the Action element list of the Actions tab. But
+            each Action also has a properties view of itself. You can navigate to this view by
+            selecting the added Action in the outline view. </para>
+
+    </section>
+
+</chapter>
+
+    
+<chapter id="Quick_Howto_Guide" xml:base="file:///home/vchukhutsina/repos/ochik_jboss/jbpm/docs/reference/en/modules/Quick_Howto_Guide.xml" xreflabel="Quick_Howto_Guide">
+    <?dbhtml filename="Quick_Howto_Guide.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>jBPM</keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+            <keyword></keyword>
+        </keywordset>
+    </chapterinfo>
+    <title>Quick Howto Guide</title>
+
+    <para>This chapter contains additional information related to the <property moreinfo="none">JBoss
+        jBPM</property>.</para>
+
+    <section id="change_core_jbpm_inst">
+        <title>Change the Default Core jBPM Installation</title>
+
+        <para> You can change the default <property moreinfo="none">jBPM</property> installation by means of the
+            Eclipse preference mechanism. Open the Preferences dialog by selecting <emphasis>
+                <property moreinfo="none">Window &gt; Preferences</property>
+            </emphasis> and select the <emphasis>
+                <property moreinfo="none">JBoss jBPM &gt; Runtime Location</property>
+            </emphasis> category. Using this page you can add multiple <property moreinfo="none">jBPM</property>
+            installation locations and change the default one. The default installation is used for
+            the classpath settings when creating a new Process Project. Changing the preferences has
+            no influence on already created projects. Getting rid of a <property moreinfo="none">jBPM</property>
+            installation that's being referenced by a project however will cause the
+            classpath to contain errors. </para>
+
+
+        <figure float="0">
+            <title>The jBPM Preferences Page</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_1.png"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+    </section>
+
+    <section>
+        <title>Configuring Task Nodes</title>
+
+        <para>Here, we'll examine how you can configure the Task nodes in jBPM jPDL GPD.</para>
+
+        <para> You can add Tasks to Task nodes and then configure them in a similar manner as the
+            Action configuration mechanism. Let's consider the process definition similar
+            to the previous one that contains three nodes: Start state, Task node and End state. The
+            <property moreinfo="none">Properties view</property> for selected Task node includes several tabs. </para>
+
+        <figure float="0">
+            <title>The Properties View of the selected Task Node</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_2.png" scale="75"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>We should choose the Task tab and then bring up the context menu or click the button
+            in the top right corner of the view to add a Task to our Task node.</para>
+
+        <figure float="0">
+            <title>Adding a Task to the Task Node</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_3.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>Every added Task has its own configuration possibilities. You can access them through
+            the <property moreinfo="none">Properties view</property> as well.</para>
+
+        <figure float="0">
+            <title>The Task properties</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_4.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>The <property moreinfo="none">General page</property> is a place where you can specify the name of a
+            Task and its description. For instance, let it be <emphasis>
+                <property moreinfo="none">approve oder</property>
+            </emphasis> with appropriate description that you can see in the figure below.</para>
+
+        <figure float="0">
+            <title>The Task General Page</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_5.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>Now, look at <property moreinfo="none">Details page</property>. First, you should specify the due date
+            that is a mandatory property for the Task. The due date is the date on which the task
+            should be accomplished. Here you can also set a Task priority as well as signalling,
+            notifying or blocking. The <emphasis>
+                <property moreinfo="none">Blocking</property>
+            </emphasis> attribute indicates that the process will not be able to continue if this
+            task is still unaccomplished. The <emphasis>
+                <property moreinfo="none">Generate Form...</property>
+            </emphasis> button is for creating a simple task form that can be rendered by the jBPM
+            console.</para>
+
+        <figure float="0">
+            <title>The Task Details Page</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_6.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>For our example, we specify the due date as 2 business days, choose the high priority
+            and also check the <emphasis>
+                <property moreinfo="none">Signalling</property>
+            </emphasis> and <emphasis>
+                <property moreinfo="none">Notify</property>
+            </emphasis> attributes. It means that the Task should be accomplished in 2 business days
+            and the assignee will be notified by email when the task is assigned. To specify how the
+            Task should be assigned switch on to the <property moreinfo="none">Assignment page</property>.</para>
+
+        <figure float="0">
+            <title>The Task Assignment Page</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_7.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>On the <property moreinfo="none">Reminder page</property> you can specify whether the assignee will be reminded of the task
+            that awaits him.</para>
+
+        <figure float="0">
+            <title>The Task Reminder Page</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_8.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <para>In our case, the assignee will be reminded by email after two business hours and
+            continue to get reminding every business hour after that.</para>
+        <para>In the next figure you can see our configuring generated into XML.</para>
+        <figure float="0">
+            <title>The Task Reminder Page</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Quick_Howto_Guide/quick_howto_guide_9.png" scale="80"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>We hope, our guide will help you to get started with the jPDL process language and jBPM
+            workflow on the whole. Besides, for additional information you are welcome on
+            <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
+    </section>
+</chapter>
+
+    
+    <!-- TODO: drools used in this section is not available for eclipse .3.3 &AddBusinessProcess; -->
+</book>
