@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="jboss_jbpm_runtime_installation" xreflabel="jboss_jbpm_runtime_installation">
+ <?dbhtml filename="jboss_jbpm_runtime_installation.html"?>
+ <chapterinfo>
+  <keywordset>
+   <keyword>jBPM</keyword>
+   <keyword>designer</keyword>
+   <keyword>process</keyword>
+   <keyword>JBoss Developer Studio</keyword>
+   <keyword>jBPM runtime</keyword>
+  </keywordset>
+ </chapterinfo>
+ <title>JBoss jBPM Runtime Installation</title>
+ <para>The main purpose of this chapter is to let you know how to launch the <property>JBoss
+  jBPM</property> (business process management).</para>
+ <para>The jBPM plugin (jBPM Designer) is already included in the <property>JBoss Tools</property>.
+  To make it work, you should only download the jBPM runtime (<ulink
+   url="http://sourceforge.net/project/showfiles.php?group_id=70542&amp;package_id=145174&amp;release_id=607377"
+   >jbpm-jpdl-3.2.3</ulink> currently) and specify the directory where you extracted the runtime
+  either when you create a jBPM project or by using the jBPM preference pages.</para>
+
+ <note>
+  <title>Note:</title>
+  <para>Try to avoid using spaces in the names of installation folders. It can provoke problems in
+   some situations with Sun-based VMs.</para>
+ </note>
+
+ <para>Navigate to <emphasis>
+   <property>Window &gt; Preferences &gt; JBoss jBPM &gt; Runtime Locations</property>.
+  </emphasis> Here you can add, edit and remove JBoss jBPM installation locations. Click <emphasis>
+   <property>Add</property>
+  </emphasis> button. In the dialog that appeared enter a name for a newly added jBPM runtime and
+  point to the correct location of this package on your harddrive. Click <emphasis>
+   <property>OK</property>
+  </emphasis> then click <emphasis>
+   <property>OK</property>
+  </emphasis> again.</para>
+
+ <figure>
+  <title>Adding jBPM Location</title>
+  <mediaobject>
+   <imageobject>
+    <imagedata fileref="images/runtime_installation/runtime_installation_1.png"/>
+   </imageobject>
+  </mediaobject>
+ </figure>
+ <para>Now, when you have a runtime installed, we are going to demonstrate some powerful features of
+  the jBPM.</para>
+</chapter>
