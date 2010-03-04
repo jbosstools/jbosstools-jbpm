@@ -178,7 +178,7 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 	}
 	
 	private void initializeInput(TableViewer viewer) {
-		viewer.setInput(PreferencesManager.INSTANCE);
+		viewer.setInput(PreferencesManager.getInstance());
 		checkItemToCheck(viewer);
 	}
 

@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.jboss.tools.jbpm.preferences.JbpmInstallation;
-import org.jboss.tools.jbpm.preferences.PreferencesManager;
+import org.jbpm.gd.jpdl.prefs.Jbpm3PreferencesManager;
 
 public class NewProcessProjectDetailsWizardPage extends WizardPage {
 	
@@ -91,7 +91,7 @@ public class NewProcessProjectDetailsWizardPage extends WizardPage {
 	}
 	
 	private void fillComboWithPreferenceRuntimes() {
-		Map<String, JbpmInstallation> installations = PreferencesManager.INSTANCE.getJbpmInstallationMap();
+		Map<String, JbpmInstallation> installations = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallationMap();
 		Iterator<String> iterator = installations.keySet().iterator();
 		int counter = 0;
 		while (iterator.hasNext()) {
@@ -100,7 +100,7 @@ public class NewProcessProjectDetailsWizardPage extends WizardPage {
 			if ("jBPM3".equals(installation.version)) {
 				counter++;
 				combo.add(next);
-				if (PreferencesManager.INSTANCE.getPreferredJbpmName().equals(next)) {
+				if (Jbpm3PreferencesManager.INSTANCE.getPreferredJbpmName().equals(next)) {
 					combo.select(counter - 1);
 				}
 			}

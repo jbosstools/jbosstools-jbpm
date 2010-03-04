@@ -185,7 +185,7 @@ public class AddJbpmInstallationDialog extends StatusDialog {
 	}
 	
 	private boolean isNameAlreadyUsed() {
-		return PreferencesManager.INSTANCE.getJbpmInstallation(nameText.getText()) != null;
+		return PreferencesManager.getInstance().getJbpmInstallation(nameText.getText()) != null;
 	}
 	
 	private boolean isLocationExisting() {

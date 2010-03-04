@@ -355,8 +355,9 @@
             class="org.jbpm.gd.jpdl.util.JbpmClasspathContainerInitializer"
             id="JBPM"/>
    </extension>
-   
-   <extension
+
+ 
+    <extension
          point="org.eclipse.ui.preferencePages">
       <page class="org.jboss.tools.jbpm.preferences.DefaultPage"
             id="org.jbpm.gd.jpdl.prefs.jbpm3"
@@ -367,9 +368,6 @@
             id="org.jbpm.gd.jpdl.prefs.assignmentTypes"
             name="Assignment Types"
             category="org.jbpm.gd.jpdl.prefs.jbpm3">
-       <enablement> 
-           <systemProperty name="MyTestProperty" value="puppy"/> 
-       </enablement> 
        </page>
       <page
             class="org.jbpm.gd.jpdl.prefs.ServerDeploymentPage"

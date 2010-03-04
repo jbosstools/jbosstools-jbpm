@@ -48,9 +48,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.jboss.tools.jbpm.preferences.JbpmInstallation;
-import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.Plugin;
+import org.jbpm.gd.jpdl.prefs.Jbpm3PreferencesManager;
 
 public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 
@@ -141,7 +141,7 @@ public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 			IProject project = page.getProcessFolder().getProject();
 			String jbpmName = project.getPersistentProperty(new QualifiedName("", "jbpmName"));
 			if (jbpmName == null) return "";
-			JbpmInstallation jbpmInstallation = PreferencesManager.INSTANCE.getJbpmInstallation(jbpmName);
+			JbpmInstallation jbpmInstallation = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(jbpmName);
 			if (jbpmInstallation == null) return "";
 			String location = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(jbpmInstallation.location);
 			if (location == null) return "";
