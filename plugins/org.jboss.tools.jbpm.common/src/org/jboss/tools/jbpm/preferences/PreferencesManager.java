@@ -43,9 +43,16 @@ public class PreferencesManager {
 	private Map<String, JbpmInstallation> jbpmInstallations = null;
 	private File installationsFile = null;
 	
-	public static final PreferencesManager INSTANCE = new PreferencesManager();
+	private static PreferencesManager INSTANCE;
 	
-	private PreferencesManager() {
+	public static PreferencesManager getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new PreferencesManager();
+		}
+		return INSTANCE;
+	}
+	
+	protected PreferencesManager() {
 		initializeInstallations();
 	}
 	
@@ -63,7 +70,7 @@ public class PreferencesManager {
 		return jbpmInstallations;
 	}
 		
-	private Preferences getPreferences() {
+	protected Preferences getPreferences() {
 		return Activator.getDefault().getPluginPreferences();
 	}
 	
@@ -86,10 +93,10 @@ public class PreferencesManager {
 		}
 	}
 	
-	private void loadInstallations() {
+	protected void loadInstallations(File installationsFile) {
 		Reader reader = null;
 		try {
-			reader = new FileReader(getInstallationFile());
+			reader = new FileReader(installationsFile);
 			XMLMemento memento = XMLMemento.createReadRoot(reader);
 			IMemento[] children = memento.getChildren("installation");
 			for (int i = 0; i < children.length; i++) {
@@ -112,6 +119,10 @@ public class PreferencesManager {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	protected void loadInstallations() {
+		loadInstallations(getInstallationFile());
 	}
 	
 	public void saveInstallations() {

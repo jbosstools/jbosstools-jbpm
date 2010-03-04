@@ -28,15 +28,15 @@ import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.jboss.tools.jbpm.preferences.JbpmInstallation;
-import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
+import org.jbpm.gd.jpdl.prefs.Jbpm3PreferencesManager;
 
 public class JbpmClasspathContainerInitializer extends
 		ClasspathContainerInitializer {
 	
 	private JbpmInstallation getJbpmInstallation(IPath containerPath) {
 		String jbpmInstallationName = containerPath.lastSegment();
-		return PreferencesManager.INSTANCE.getJbpmInstallation(jbpmInstallationName);
+		return Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(jbpmInstallationName);
 	}
 
 	public void initialize(IPath containerPath, IJavaProject project) throws CoreException {

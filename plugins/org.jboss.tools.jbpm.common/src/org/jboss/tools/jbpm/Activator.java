@@ -30,7 +30,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 	
 	public PreferencesManager getPreferencesManager() {
-		return PreferencesManager.INSTANCE;
+		return PreferencesManager.getInstance();
 	}
 
 	public void start(BundleContext context) throws Exception {
