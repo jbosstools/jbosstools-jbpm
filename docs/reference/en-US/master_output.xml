@@ -67,7 +67,7 @@
             <year>2010</year>
             <holder>JBoss by Red Hat</holder>
         </copyright>
-        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.0.0.trunk</diffmk:wrapper></releaseinfo>
+        <releaseinfo><diffmk:wrapper diffmk:change="changed"> Version: 4.3.0.trunk</diffmk:wrapper></releaseinfo>
 
 <abstract>
    <title></title>
