@@ -46,7 +46,7 @@
   	    <itemizedlist>
   	        <listitem>
   	      	  <para>Select 'test.bpmn' file and right-click it. Open the export wizard by 
-  	          <emphasis><property>Export... > BPMN Export > BPMN -> JPDL</property></emphasis>
+  	      	      <emphasis><property>Export... -> BPMN -> BPMN to jPDL</property></emphasis>
   	          .
   	          </para>
               <figure>
