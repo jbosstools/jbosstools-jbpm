@@ -87,13 +87,13 @@
         </mediaobject>
     </figure>
 
-    <para>By default JUnite 3 version of testing framework is selected. Of course, you can choose
+    <para>By default JUnit 3 version of testing framework is selected. Of course, you can choose
         new advanced JUnit 4 version. In this case you&apos;ll be prompted to add new JUnit
         Library to your build path. To add it automatically just click on the appropriate link. In
         the <emphasis>
             <property>Class under test</property>
         </emphasis> section you can specify the class to test.</para>
-
+    <para>In this guide we will use JUnit 3 version.</para>
     <figure>
         <title>A First Test Scenario</title>
 

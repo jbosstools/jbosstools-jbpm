@@ -67,10 +67,10 @@
 
      <row>
       <entry>
-       <link linkend="minimal_process_definition">jBDL support</link>
+       <link linkend="minimal_process_definition">jPDL support</link>
       </entry>
       <entry>Enables managing workflow processes as well as human tasks and interactions between
-       them. jBDL combines the best both Java and declarative process techniques.</entry>
+       them. jPDL combines the best both Java and declarative process techniques.</entry>
      </row>
 
      <row>

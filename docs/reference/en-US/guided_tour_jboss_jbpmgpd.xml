@@ -147,15 +147,19 @@
 			creating a folder with the name of the process definition and populating this folder
 			with two .xml files : <emphasis>
 				<property>gpd.xml</property>
-			</emphasis> and <emphasis>
-				<property>processdefinition.xml</property>. </emphasis></para>
+			</emphasis> , <emphasis>
+				<property>processdefinition.xml</property> </emphasis> and a .jpg file:<emphasis>
+					<property>processimage.jpg</property></emphasis>.</para>
 		<para>The <emphasis>
 				<property>gpd.xml</property>
 			</emphasis> contains the graphical information used by the process definition editor.
 			The <emphasis>
 				<property>processdefinition.xml</property>
-			</emphasis> file contains the actual process definition info without the graphical
-			rendering info. At present, the GPD assumes that these two files are siblings. More
+			</emphasis> file contains the actual process definition info.
+			The graphical view of the process is automatically saved in <emphasis>
+				<property>processimage.jpg</property> 
+			</emphasis>file.
+			At present, the GPD assumes that these three files are siblings. More
 			sophisticated configuration will be supported later.</para>
 
 		<section id="minimal_process_definition">
@@ -164,7 +168,7 @@
 			<para>Now we are ready to create a very simple process definition consisting of a begin
 				state, an intermediate state and an end state.</para>
 			<para>To make the configuration of actions much easier it&apos;s better to use the
-				jPDL perspective. It provides the tabbed Properties Editor which allows to configure
+				<emphasis>><property>"jBPM jPDL 3"</property></emphasis> perspective. It provides the tabbed Properties Editor which allows to configure
 				all the relevant properties of the current selected item. </para>
 
 			<section id="adding_the_nodes">
