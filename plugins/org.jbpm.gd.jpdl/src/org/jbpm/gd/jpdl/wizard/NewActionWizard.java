@@ -68,7 +68,7 @@ public class NewActionWizard extends NewClassWizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		IProject p = getProject(selection);
 		adapter = new NewTypeWizardAdapter(p);
-		adapter.setRawSuperClassName(ACTION_HANDLER_CLASS);
+		adapter.addRawInterfaceName(ACTION_HANDLER_CLASS);
 		IPackageFragment f = getPackageFragment(selection);
 		if(f != null) {
 			String name = "";
