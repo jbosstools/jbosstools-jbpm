@@ -187,7 +187,9 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 		if (parent != null && !parent.exists() && parent instanceof IFolder) {
 			createFolder((IFolder)parent);
 		}
-		folder.create(true, true, null);
+		if (!(folder.exists())) {
+			folder.create(true, true, null);
+		}
 	}
 	
 	private JbpmInstallation getJbpmInstallation() {
