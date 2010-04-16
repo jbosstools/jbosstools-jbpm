@@ -1531,4 +1531,8 @@
       </propertySections>
    </extension> 
    
+   <extension point="org.eclipse.ui.startup">
+      <startup class="org.jbpm.gd.jpdl.StartupClass"/>   
+   </extension> 
+
 </plugin>
