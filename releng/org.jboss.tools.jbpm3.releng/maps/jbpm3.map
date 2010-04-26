@@ -9,7 +9,8 @@ feature@org.jbpm.gd.jpdl.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools
 !*** plugins
 plugin@org.jbpm.gd.jpdl=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl
 
-!*** test feature
+!*** test features
+feature@org.jboss.tools.jbpm3.tests.sdk.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.sdk.feature
 feature@org.jboss.tools.jbpm3.tests.feature=SVN,,http://anonsvn.jboss.org/repos,,jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.feature
 
 !*** test plugins

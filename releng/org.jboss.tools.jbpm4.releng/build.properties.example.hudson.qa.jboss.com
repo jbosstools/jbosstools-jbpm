@@ -10,7 +10,7 @@ buildType=N
 version=4.0.0
 
 mainFeatureToBuildID=org.jboss.tools.jbpm4.sdk.feature
-testFeatureToBuildID=org.jboss.tools.jbpm4.tests.feature
+testFeatureToBuildID=org.jboss.tools.jbpm4.tests.sdk.feature
 
 build.steps=buildUpdate,buildTests,generateDigests,test,publish,cleanup
 

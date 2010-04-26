@@ -11,7 +11,8 @@
   <!-- !*** plugins -->
   <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/plugins/org.jbpm.gd.jpdl,org.jbpm.gd.jpdl"/>
   
-  <!-- !*** test feature -->
+  <!-- !*** test features -->
+  <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.sdk.feature,org.jboss.tools.jbpm3.tests.sdk.feature"/>
   <project reference="1.0.1,http://anonsvn.jboss.org/repos/jbosstools/trunk/jbpm/features/org.jboss.tools.jbpm3.tests.feature,org.jboss.tools.jbpm3.tests.feature"/>
 
   <!-- !*** test plugins -->

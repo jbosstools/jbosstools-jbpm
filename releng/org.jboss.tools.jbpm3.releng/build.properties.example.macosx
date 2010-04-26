@@ -10,7 +10,7 @@ buildType=N
 version=3.2.0
 
 mainFeatureToBuildID=org.jboss.tools.jbpm3.sdk.feature
-testFeatureToBuildID=org.jboss.tools.jbpm3.tests.feature
+testFeatureToBuildID=org.jboss.tools.jbpm3.tests.sdk.feature
 
 build.steps=buildUpdate,buildTests,generateDigests,testLocal,publish,cleanup
 

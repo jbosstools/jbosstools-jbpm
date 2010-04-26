@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.jboss.tools.jbpm4.tests.feature"
+      id="org.jboss.tools.jbpm3.tests.sdk.feature"
       label="%featureName"
-      version="4.3.0.qualifier"
+      version="3.2.0.qualifier"
       provider-name="%featureProvider">
 
    <description>
@@ -17,20 +17,19 @@
       %license
    </license>
 
-   <plugin
-         id="org.jboss.tools.jbpm.common.test"
-         download-size="0"
-         install-size="0"
+   <includes
+         id="org.jboss.tools.jbpm3.tests.feature"
          version="0.0.0"/>
 
    <plugin
-         id="org.jboss.tools.flow.jpdl4.test"
+         id="org.eclipse.ant.optional.junit"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         fragment="true"/>
 
    <plugin
-         id="org.jboss.tools.flow.jpdl4.multipage.test"
+         id="org.eclipse.test"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
