@@ -156,6 +156,17 @@
             <para>The <property>Source mode</property> enables to easily manipulate our XML. That is
                 manually inserting and editing necessary elements or attributes. In addition, here
                 you can take advantage of content assist.</para>
+            
+            <para>A template is added to better render the jBPM task forms in the Visual editor. 
+                  Now the jBPM Graphical Process designer can create facelets that are associated with tasks and are rendered in the jBPM console.</para>
+            <figure>
+                <title>A task form in VPE</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/the_views_6a.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
         </section>
 
         <section id="design_mode">
