@@ -61,7 +61,7 @@ public class ConfigureRuntimePage extends WizardPage {
 		Composite composite = createClientArea(parent);
 		createLocateJbpmRuntimeGroup(composite);
 		createSpace(composite);
-		createDownloadJbpmRuntimeLink(composite);
+//		createDownloadJbpmRuntimeLink(composite);
 		setControl(composite);
 	}
 	
@@ -85,19 +85,19 @@ public class ConfigureRuntimePage extends WizardPage {
 		label.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
 	
-	private void createDownloadJbpmRuntimeLink(Composite composite) {
-		Link link = new Link(composite, SWT.NONE);
-		link.setText("<a>Download the JBoss jBPM package if you have none available yet.</a>");
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalAlignment = SWT.CENTER;
-		gridData.verticalIndent = 5;
-		link.setLayoutData(gridData);
-		link.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				Program.launch("http://labs.jboss.com/jbossjbpm/downloads/");
-			}			
-		});
-	}
+//	private void createDownloadJbpmRuntimeLink(Composite composite) {
+//		Link link = new Link(composite, SWT.NONE);
+//		link.setText("<a>Download the JBoss jBPM package if you have none available yet.</a>");
+//		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+//		gridData.horizontalAlignment = SWT.CENTER;
+//		gridData.verticalIndent = 5;
+//		link.setLayoutData(gridData);
+//		link.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				Program.launch("http://labs.jboss.com/jbossjbpm/downloads/");
+//			}			
+//		});
+//	}
 	
 	private void createLocateJbpmRuntimeGroup(Composite composite) {
 		Group group = new Group(composite, SWT.NONE);
