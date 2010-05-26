@@ -1,14 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter id="the_views" xreflabel="the_views">
-    <?dbhtml filename="the_views.html"?>
+<chapter id="reference" xreflabel="reference">
     <chapterinfo>
         <keywordset>
             <keyword>jBPM</keyword>
         </keywordset>
     </chapterinfo>
+    <title>Reference</title>
+    <section>
+        <title>Wizards</title>
+       <section>
+           <title>Process Project Wizard</title>
+           <para>This wizard helps to create new jBPM project.It is available with clicking
+               <property>File->New->Other->jBPM 3 Project</property> in the menu bar.</para>
+           <figure>
+               <title>New Process Project Wizard</title>
+               <mediaobject>
+                   <imageobject>
+                       <imagedata fileref="images/the_views/jbpm_2.png"/>
+                   </imageobject>
+               </mediaobject>
+           </figure>
+           <para>It consists of several pages:</para>
+           <itemizedlist>
+               <listitem><para>On the first page you can adjust the name of the project and the directory where it will be created.</para>
+                   <para>If "<property>Use default</property>" option is checked the output directory will be the workspace,
+                       othervise the user should specify it by himself using <property>Browse</property> button.</para>
+                   <figure>
+                       <title>New Process Project Wizard</title>
+                       <mediaobject>
+                           <imageobject>
+                               <imagedata fileref="images/the_views/jbpm_1.png"/>
+                           </imageobject>
+                       </mediaobject>
+                   </figure>
+               </listitem>
+               <listitem><para>On the second page you should point the location of your jbpm runtime.</para></listitem>
+               <listitem><para>The last page is only available for unabling/disabling 
+                   <emphasis>Generate simple process definition,action handling and Unit test</emphasis>.</para></listitem>
+           </itemizedlist>
+         
+       </section>
+        <section>
+            <title>New JBPM Action Wizard</title>
+            <para>This wizard is available by clicking 
+                <property>File->New->Other->jBPM 3 Action Handler</property>.</para>
+            
+            <figure>
+                <title>New JBPM Action Wizard</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/the_views/jbpm_3.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>It includes the next options to adjust:</para>
+            
+            <table>
+                <title>New JBPM Action Wizard. Options.</title>   
+                <tgroup cols="3">
+                    <colspec colnum="1" align="left" colwidth="1*"/>
+                    <colspec colnum="2" colwidth="3*"/>
+                    <colspec colnum="3" align="left" colwidth="1*"/>
+                    
+                    <thead>
+                        <row>
+                            <entry>Option</entry>									
+                            <entry>Description</entry>
+                            <entry>Default</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        
+                        <row>
+                            <entry>Source folder</entry>
+                            <entry>The path to the source folder relative to the selected project</entry>
+                            <entry>The source folder of the project selected in the <emphasis><property>Project</property></emphasis> field</entry>
+                        </row> 
+                        
+                        <row>
+                            <entry>Package</entry>
+                            <entry>Enter a package to contain an Action Handler.
+                                Either type a valid package name or click 
+                                <emphasis><property>Browse</property></emphasis>
+                                to select a package via the dialog box.</entry>
+                            <entry>&lt;blank&gt;</entry>
+                        </row> 
+                        
+                        <row>
+                            <entry>Enclosing type</entry>
+                            <entry>Select the enclosing type of your jBPM action using
+                                <emphasis><property>Browse</property></emphasis>
+                                button.</entry>
+                            <entry>&lt;blank&gt;</entry>
+                        </row>
+                        <row>
+                            <entry>Modifiers</entry>
+                            <entry>Select the modifiers that will be added to the generated class.</entry>
+                            <entry>Public</entry>
+                        </row>   
+                        <row>
+                            <entry>Name</entry>
+                            <entry>Type a name for a new Action Handler</entry>
+                            <entry>&lt;blank&gt;</entry>
+                        </row> 
+                        
+                        <row>
+                            <entry>Superclass</entry>
+                            <entry>Type or click <emphasis><property>Browse</property></emphasis>
+                                to select a superclass for an Action Handler</entry>
+                            <entry>org.jbpm.graph.def.ActionHandler</entry>
+                        </row> 
+                        
+                        <row>
+                            <entry>Interface</entry>
+                            <entry>Type or click <emphasis><property>Add</property></emphasis>
+                                to select an interface/interfaces for an Action Handler</entry>
+                            <entry>org.jbpm.graph.def.ActionHandler</entry>
+                        </row> 
 
+                        <row>
+                            <entry>Which method stubs you would like to create?</entry>
+                            <entry>Select the stubs that you would like to be created automatically.</entry>
+                            <entry><itemizedlist>
+                                <listitem><para>Constructors from superclass</para></listitem>
+                                <listitem><para>Inherited abstract methods</para></listitem>
+                            </itemizedlist>
+                            </entry>
+                        </row> 
+                        
+                        <row>
+                            <entry>Do you want to add comments?</entry>
+                            <entry>Select <property>Generate comments</property> check box if you want comment mask 
+                                 to be generated before the class definition.
+                            </entry>
+                            <entry>&lt;blank&gt;</entry>
+                        </row> 
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        
+        
+    </section>
+    
+    <section id="the_views" xreflabel="the_views">
+    <?dbhtml filename="the_views.html"?>
     <title>The views</title>
-
     <para>Here, it will be explained how to work with views and editors provided by JBDS.</para>
     <para>The views are used for representation and navigation the resources you are working on at
         the moment. One of the advantages of all the views is that all modifications made in the
@@ -238,4 +375,5 @@
                 perspective</property>, let's pass on to the project testing.</para>
         </section>
     </section>
+</section>
 </chapter>

@@ -10,7 +10,7 @@
 <!ENTITY Test_Drive_Proc SYSTEM "Test_Drive_Proc.xml">
 <!ENTITY The_JBoss_jBPM_Int_Mech SYSTEM "The_JBoss_jBPM_Int_Mech.xml">
 <!ENTITY Quick_Howto_Guide SYSTEM "Quick_Howto_Guide.xml">
-
+<!ENTITY tasks SYSTEM "tasks.xml">
 <!ENTITY seamlink "../../seam/html_single/index.html">
 <!ENTITY aslink "../../as/html_single/index.html">
 <!ENTITY esblink "../../esb_ref_guide/html_single/index.html">
@@ -81,11 +81,15 @@
     
     <toc/>
     &introduction; 
-    &jboss_jbpm_runtime_installation; 
-    &guided_tour_jboss_jbpmgpd;
-    &the_views; &Test_Drive_Proc;
+    
+    <!-- &jboss_jbpm_runtime_installation; 
+    &guided_tour_jboss_jbpmgpd; -->
+    &tasks;
+    &the_views; 
+    
+    <!-- &Test_Drive_Proc;
     &The_JBoss_jBPM_Int_Mech;
-    &Quick_Howto_Guide;
+    &Quick_Howto_Guide; -->
     
     <!-- TODO: drools used in this section is not available for eclipse .3.3 &AddBusinessProcess; -->
 </book>
