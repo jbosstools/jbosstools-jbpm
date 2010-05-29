@@ -367,10 +367,16 @@
                 </mediaobject>
             </figure>
 
-            <para>The button <emphasis>
-                    <property>Test Connections</property>
-                </emphasis> is necessary to make sure whether all your settings are valid before
+            <para>The <property>Test Connections</property> button can be used to check whether all your settings are valid before
                 deploying the process.</para>
+
+               <para>To deploy the process on the server you should click the <property>Delpoy Process Archive</property> button.</para>
+
+                  <para>However, prior to testing the connection and deploying the process on the server you need to
+                  make sure the server is configured to support jBPM functionality and is running.</para> 
+
+                  <para>Please, also note that if authentication for deployment is required you may use the process deployer that is available at <property>/gpd-deployer/upload</property>.</para>
+                
             <para>Now that we&apos;ve seen how to work with <property>jPDL
                 perspective</property>, let's pass on to the project testing.</para>
         </section>
