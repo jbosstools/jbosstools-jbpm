@@ -43,7 +43,7 @@
     <para>Write an example process test case</para>
    </listitem>
   </itemizedlist>
-  <para>If you have questions, please feel free to contact <ulink url="mailto:koen.aers@jboss.com"
+  <para>If you have any questions, please feel free to contact <ulink url="mailto:koen.aers@jboss.com"
     >Koen Aers</ulink> or <ulink url="mailto:tom.baeyens@jboss.com">Tom Baeyens</ulink> for more
    information.</para>
  </section>
@@ -70,7 +70,7 @@
        <link linkend="minimal_process_definition">jPDL support</link>
       </entry>
       <entry>Enables managing workflow processes as well as human tasks and interactions between
-       them. jPDL combines the best both Java and declarative process techniques.</entry>
+       them. jPDL combines the best techniques both in Java and in declarative process.</entry>
      </row>
 
      <row>
