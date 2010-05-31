@@ -36,7 +36,7 @@
                </listitem>
                <listitem><para>On the second page you should point the location of your jbpm runtime.</para></listitem>
                <listitem><para>The last page is only available for unabling/disabling 
-                   <emphasis>Generate simple process definition,action handling and Unit test</emphasis>.</para></listitem>
+                   <emphasis>Generate simple process definition,action handling and Unit test</emphasis>.If you unable the option all the mentioned code will be generated automatically.</para></listitem>
            </itemizedlist>
          
        </section>
