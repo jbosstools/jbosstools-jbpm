@@ -5,11 +5,13 @@
 <xi:include href="Book_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
-<xi:include href="jboss_jbpm_runtime_installation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+<!--<xi:include href="jboss_jbpm_runtime_installation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="guided_tour_jboss_jbpmgpd.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="the_views.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="Test_Drive_Proc.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="The_JBoss_jBPM_Int_Mech.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
-<xi:include href="Quick_Howto_Guide.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+<xi:include href="Quick_Howto_Guide.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include> -->
+<xi:include href="tasks.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+<xi:include href="the_views.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 </book>

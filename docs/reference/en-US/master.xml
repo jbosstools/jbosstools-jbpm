@@ -71,13 +71,12 @@
            <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/jbpm/pdf/JBPM_Reference_Guide.pdf">PDF version</ulink>
        </para>
 </abstract>
-
-    </bookinfo>
+</bookinfo>
+    <toc/>  
     
-    <toc/>
-    &introduction; 
+    &introduction;
     &tasks;
-    &the_views; 
+    &the_views;
    
     
     <!-- TODO: drools used in this section is not available for eclipse .3.3 &AddBusinessProcess; -->
