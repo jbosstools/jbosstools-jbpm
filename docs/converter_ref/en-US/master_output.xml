@@ -27,9 +27,9 @@
 	          <year>2010</year>
 	          <holder>JBoss by Red Hat</holder>
 	     </copyright>
-         <releaseinfo><diffmk:wrapper diffmk:change="changed">
+         <releaseinfo>
              Version: 1.1.0.GA
-         </diffmk:wrapper></releaseinfo>
+         </releaseinfo>
 <abstract>
    <title></title>
        <para>
@@ -140,8 +140,8 @@
   	    <para>A Bpmn file may include more than one pool. Every pool can be mapped to a corresponding Jpdl file.</para>
   	    <itemizedlist>
   	        <listitem>
-  	      	  <para>Select 'test.bpmn' file and right-click it. Open the export wizard by 
-  	          <emphasis><property moreinfo="none">Export... &gt; BPMN Export &gt; BPMN -&gt; JPDL</property></emphasis>
+  	      	  <para><diffmk:wrapper diffmk:change="changed">Select 'test.bpmn' file and right-click it. Open the export wizard by 
+  	      	      </diffmk:wrapper><emphasis><property moreinfo="none"><diffmk:wrapper diffmk:change="changed">Export... -&gt; BPMN -&gt; BPMN to jPDL</diffmk:wrapper></property></emphasis>
   	          .
   	          </para>
               <figure float="0">

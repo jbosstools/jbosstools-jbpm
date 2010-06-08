@@ -7,5 +7,4 @@
 <xi:include href="overview.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="bpmn2jpdl.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 <xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
-<index></index>
 </book>
