@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<description>To install these features, point Eclipse at this site.</description>
+	<!-- JBoss Tools jbpm Nightly Build Update Site -->
+	<category-def label="JBoss Tools jbpm Nightly Build Update Site" name="JBoss Tools jbpm Nightly Build Update Site">
+		<description>JBoss Tools jbpm Nightly Build Update Site: contains all features in this build.</description>
+	</category-def>
+	<feature url="features/org.jboss.tools.flow.jpdl4.feature_0.0.0.jar" id="org.jboss.tools.flow.jpdl4.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+	<feature url="features/org.jboss.tools.jbpm.common.feature_0.0.0.jar" id="org.jboss.tools.jbpm.common.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+	<feature url="features/org.jboss.tools.jbpm.convert.feature_0.0.0.jar" id="org.jboss.tools.jbpm.convert.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+	<feature url="features/org.jboss.tools.jbpm3.feature_0.0.0.jar" id="org.jboss.tools.jbpm3.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+	<feature url="features/org.jboss.tools.jbpm4.feature_0.0.0.jar" id="org.jboss.tools.jbpm4.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+	<feature url="features/org.jbpm.gd.jpdl.feature_0.0.0.jar" id="org.jbpm.gd.jpdl.feature" version="0.0.0">
+		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
+	</feature>
+
+</site>
