@@ -35,10 +35,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.jbpm.gd.jpdl.Constants;
 import org.jbpm.gd.jpdl.Plugin;
 
-public class ServerDeploymentPage extends PreferencePage implements IWorkbenchPreferencePage, Constants {
+public class ServerDeploymentPage extends PreferencePage implements IWorkbenchPreferencePage, PreferencesConstants {
 	
 	private Text nameText, portText, deployerText, usernameText, passwordText;
 	private Button useCredentialsCheckbox;
@@ -142,12 +141,12 @@ public class ServerDeploymentPage extends PreferencePage implements IWorkbenchPr
 	}
 	
 	public boolean performOk() {
-		getPreferenceStore().setValue("server name", nameText.getText());
-		getPreferenceStore().setValue("server port", portText.getText());
-		getPreferenceStore().setValue("server deployer", deployerText.getText());
-		getPreferenceStore().setValue("use credentials", useCredentialsCheckbox.getSelection());
-		getPreferenceStore().setValue("user name", useCredentialsCheckbox.getSelection() ? usernameText.getText() : "");
-		getPreferenceStore().setValue("password", useCredentialsCheckbox.getSelection() ? passwordText.getText() : "");
+		getPreferenceStore().setValue(SERVER_NAME, nameText.getText());
+		getPreferenceStore().setValue(SERVER_PORT, portText.getText());
+		getPreferenceStore().setValue(SERVER_DEPLOYER, deployerText.getText());
+		getPreferenceStore().setValue(USE_CREDENTIALS, useCredentialsCheckbox.getSelection());
+		getPreferenceStore().setValue(USER_NAME, useCredentialsCheckbox.getSelection() ? usernameText.getText() : "");
+		getPreferenceStore().setValue(PASSWORD, useCredentialsCheckbox.getSelection() ? passwordText.getText() : "");
 		return true;
 	}
 	
@@ -158,12 +157,12 @@ public class ServerDeploymentPage extends PreferencePage implements IWorkbenchPr
 		useCredentialsCheckbox.setSelection(false);
 		usernameText.setText(null);
 		passwordText.setText(null);
-		getPreferenceStore().setValue("server name", "localhost");
-		getPreferenceStore().setValue("server port", "8080");
-		getPreferenceStore().setValue("server deployer", "/jbpm-console/upload");
-		getPreferenceStore().setValue("use credentials", false);
-		getPreferenceStore().setValue("user name", "");
-		getPreferenceStore().setValue("password", "");
+		getPreferenceStore().setValue(SERVER_NAME, "localhost");
+		getPreferenceStore().setValue(SERVER_PORT, "8080");
+		getPreferenceStore().setValue(SERVER_DEPLOYER, "/jbpm-console/upload");
+		getPreferenceStore().setValue(USE_CREDENTIALS, false);
+		getPreferenceStore().setValue(USER_NAME, "");
+		getPreferenceStore().setValue(PASSWORD, "");
 	}
 
 }

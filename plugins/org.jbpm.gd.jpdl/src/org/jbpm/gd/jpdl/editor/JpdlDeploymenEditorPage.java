@@ -21,29 +21,23 @@
  */
 package org.jbpm.gd.jpdl.editor;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.EditorPart;
 import org.jbpm.gd.jpdl.deployment.DeploymentForm;
-import org.jbpm.gd.jpdl.deployment.DeploymentInfo;
 
-public class JpdlDeploymentEditorPage extends EditorPart {
+public class JpdlDeploymenEditorPage extends EditorPart {
 	
 	JpdlEditor editor;
-	DeploymentForm deploymentForm;
+	DeploymentForm deploymentInfoForm;
 	
-	public JpdlDeploymentEditorPage(JpdlEditor editor) {
+	public JpdlDeploymenEditorPage(JpdlEditor editor) {
 		this.editor = editor;
 	}
 		
@@ -62,36 +56,15 @@ public class JpdlDeploymentEditorPage extends EditorPart {
 	}
 
 	private void createForm(FormToolkit toolkit, Composite form) {
-		IFolder folder = getProcessFolder();
-		deploymentForm = new DeploymentForm(toolkit, form, folder, editor);
-		deploymentForm.create();
-//		folder.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
-//			public void resourceChanged(IResourceChangeEvent event) {
-//				deploymentForm.refresh();
-//			}			
-//		});
-	}
-	
-	private IFolder getProcessFolder() {
-		IFile file = ((IFileEditorInput)editor.getEditorInput()).getFile();
-		if (file.getParent() instanceof IFolder) {
-			return (IFolder)file.getParent();
-		}
-		return null;
+		deploymentInfoForm = new DeploymentForm(toolkit, form, editor);
+		deploymentInfoForm.create();
+		deploymentInfoForm.refresh();
 	}
 	
 	public void setFocus() {	
 	}
 	
 	public void doSave(IProgressMonitor monitor) {
-	}
-	
-	public DeploymentInfo getDeploymentInfo() {
-		return deploymentForm.getDeploymentInfo();
-	}
-	
-	public void setDeploymentInfo(DeploymentInfo deploymentInfo) {
-		deploymentForm.setDeploymentInfo(deploymentInfo);
 	}
 	
 	public void doSaveAs() {

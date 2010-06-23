@@ -21,33 +21,19 @@
  */
 package org.jbpm.gd.jpdl.deployment;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.CheckStateChangedEvent;
-import org.eclipse.jface.viewers.ICheckStateListener;
+import org.eclipse.jdt.ui.JavaElementLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -55,73 +41,71 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.forms.FormColors;
-import org.eclipse.ui.forms.widgets.Form;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.dialogs.ISelectionStatusValidator;
+import org.eclipse.ui.forms.IFormColors;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.Plugin;
 import org.jbpm.gd.jpdl.editor.JpdlEditor;
-import org.jbpm.gd.jpdl.util.JavaClassNameCollector;
-import org.jbpm.gd.jpdl.util.ProcessDeployer;
 
 public class DeploymentForm {
-
-	public static final int NONE = 0;
-	public static final int EXPRESSION = 1;
-	public static final int HANDLER = 2;
 	
+	private static ILabelProvider LABELPROVIDER = new WorkbenchLabelProvider();
+
 	private FormToolkit toolkit;
 	private Composite composite;
-	private IFolder processFolder;
 	private JpdlEditor editor;
 	private DeploymentInfo deploymentInfo;
 	
-	private Form form;
-	private Text nameText;
-	private Text portText;
-	private Text deployerText;
-	private Text locationText;
-	private Text usernameText;
-	private Text passwordText;
-	private Button deployButton;
-	private Button saveButton;
-	private Button locationButton;
-	private Button testConnectionButton;
-	private Button saveLocallyButton;
+	private ScrolledForm form;
+
+	private Button includeProcessInfoFileButton;
+	private Text processInfoFileText;
+	private Button includeGraphicalInfoFileButton;
+	private Text graphicalInfoFileText;
+	private Button browseGraphicalInfoFileButton;
+	private Button includeImageFileButton;
+	private Text imageFileText;
+	private Button browseImageFileButton;
+	private Button additionalFilesAddButton;
+	private Button additionalFilesRemoveButton;
+	private Table additionalFilesList;
+	private Button classesAndResourcesAddButton;
+	private Button classesAndResourcesRemoveButton;
+	private Table classesAndResourcesList;
+	private Text serverNameText;
+	private Text serverPortText;
+	private Text serverDeployerText;
 	private Button useCredentialsButton;
+	private Text userNameText;
+	private Text passwordText;
 	
-	private IncludeInDeploymentTreeViewer includeFilesTreeViewer;
-	private IncludeInDeploymentTreeViewer includeClassesTreeViewer;
-	
-	public DeploymentForm(FormToolkit toolkit, Composite composite, IFolder processFolder, JpdlEditor editor) {
+	public DeploymentForm(FormToolkit toolkit, Composite composite, JpdlEditor editor) {
 		this.toolkit = toolkit;
 		this.composite = composite;
-		this.processFolder = processFolder;
 		this.editor = editor;
+		deploymentInfo = editor.getDeploymentInfo();
 	}	
 		
 	public void create() {
 		createMainForm();
-		createIncludeFilesSection();
-		createIncludeClassesSection();
-		createLocalSaveSection();
+		createMainFilesSection();
+		createAdditionalFilesSection();
+		createClassesAndResourcesSection();
+		createUserCredentialsSection();
 		createServerInfoSection();
-		toolkit.createForm(form.getBody()); // Create an empty grid cell
-		createDeployButton();
 	}
 	
 	private void createMainForm() {
-		form = toolkit.createForm(composite);
+		form = toolkit.createScrolledForm(composite);
 		GridData layoutData = new GridData(GridData.FILL_BOTH);
 		form.setLayoutData(layoutData);		
 		GridLayout layout = new GridLayout();
@@ -130,631 +114,546 @@ public class DeploymentForm {
 		form.getBody().setLayout(layout);
 		form.getBody().setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
-
-	private void createDeployButton() {
-		deployButton = toolkit.createButton(form.getBody(), "Deploy Process Archive...", SWT.PUSH);
-		deployButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-		deployButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				if (cancelOrSaveAndContinue()) {
-					createProcessDeployer().deploy();
-				}
-			}
-		});
-	}
 	
-	private IPreferenceStore getPreferenceStore() {
-		return Plugin.getDefault().getPreferenceStore();
-	}
-	
-	public DeploymentInfo getDeploymentInfo() {
-		if (deploymentInfo == null) {
-			deploymentInfo = new DeploymentInfo();
-			String serverName = getPreferenceStore().getString("server name");
-			deploymentInfo.setServerName(serverName == null ? "localhost" : serverName);
-			String serverPort = getPreferenceStore().getString("server port");
-			deploymentInfo.setServerPort(serverPort == null ? "8080" : serverPort);
-			String serverDeployer = getPreferenceStore().getString("server deployer");
-			deploymentInfo.setServerDeployer(serverDeployer == null ? "/jbpm-console/upload" : serverDeployer);
-			final IJavaProject project = JavaCore.create(processFolder.getProject());
-			deploymentInfo.setClassesAndResources(new ArrayList(getElementsToCheckFor(project)).toArray());
-			deploymentInfo.setFilesAndFolders(getElementsToCheckFor(processFolder).toArray());
-		}
-		return deploymentInfo;
-	}
-	
-	public void setDeploymentInfo(DeploymentInfo deploymentInfo) {
-		this.deploymentInfo = deploymentInfo;
-		refresh();
-	}
-	
-	private ProcessDeployer createProcessDeployer() {
-		ProcessDeployer result = new ProcessDeployer();		
-		String location = null;
-		if (saveButton.isEnabled()) {
-			location = locationText.getText();
-		}
-		result.setTargetLocation(location);
-		result.setServerName(nameText.getText());
-		result.setServerPort(portText.getText());
-		result.setServerDeployer(deployerText.getText());
-		result.setUseCredentials(useCredentialsButton.getSelection());
-		if (useCredentialsButton.getSelection()) {
-			result.setUsername(usernameText.getText() == null ? "" : usernameText.getText());
-			result.setPassword(passwordText.getText() == null ? "" : passwordText.getText());
-		}
-		result.setShell(form.getShell());
-		result.setProcessFolder(processFolder);
-		result.setFilesAndFolders(getIncludedFiles());
-		result.setClassesAndResources(getClassesAndResources());
-		return result;
-	}
-	
-	private ArrayList getIncludedFiles() {
-		ArrayList result = new ArrayList();
-		Object[] objects = includeFilesTreeViewer.getCheckedElements();
-		for (int i = 0; i < objects.length; i++) {
-			result.add(objects[i]);
-		}
-		return result;
-	}
-	
-	private ArrayList getClassesAndResources() {
-		ArrayList result = new ArrayList();
-		Object[] objects = includeClassesTreeViewer.getCheckedElements();
-		for (int i = 0; i < objects.length; i++) {
-			if (objects[i] instanceof ICompilationUnit) {
-				String string = getResourceName(((ICompilationUnit)objects[i]).getResource());
-				result.add(string.substring(0, string.lastIndexOf(".java")) + ".class");
-			} else if (objects[i] instanceof IFile) {
-				result.add(getResourceName((IFile)objects[i]));
-			}
-		}
-		return result;
-	}
-	
-	private String getResourceName(IResource resource) {
-		IPackageFragmentRoot root = getPackageFragmentRoot(resource);
-		if (root == null) {
-			return null;
-		} else {
-			int index = root.getResource().getProjectRelativePath().toString().length() + 1;
-			return resource.getProjectRelativePath().toString().substring(index);
-		}
-	}
-	
-	private IPackageFragmentRoot getPackageFragmentRoot(IResource resource) {
-		IPackageFragmentRoot root = null;
-		IResource r = resource;
-		while (r != null) {
-			IJavaElement javaElement = JavaCore.create(r);
-			if (javaElement != null && javaElement instanceof IPackageFragmentRoot) {
-				root = (IPackageFragmentRoot)javaElement;
-				break;
-			}
-			r = r.getParent();
-		}
-		return root;
-	}
-	
-	private Composite createServerInfoFormClient() {
-		Section serverInfoDetails = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
-		serverInfoDetails.marginWidth = 5;
-		serverInfoDetails.setText("Deployment Server Settings");
+	private void createMainFilesSection() {
+		Section mainFilesSection = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
+		mainFilesSection.marginWidth = 5;
+		mainFilesSection.setText("Main Process Files");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.verticalAlignment = GridData.BEGINNING;
-		serverInfoDetails.setLayoutData(gridData);
+		gridData.horizontalSpan = 2;
+		mainFilesSection.setLayoutData(gridData);
 		
-		Composite infoFormClient =  toolkit.createComposite(serverInfoDetails);
-		serverInfoDetails.setClient(infoFormClient);
-		serverInfoDetails.setDescription("Specify the settings of the server you wish to deploy to.");
-		toolkit.paintBordersFor(infoFormClient);
+		Composite mainFilesClient =  toolkit.createComposite(mainFilesSection);
+		mainFilesSection.setClient(mainFilesClient);
+		mainFilesSection.setDescription("Check and select the files to be included in the deployment.");
+		toolkit.paintBordersFor(mainFilesClient);
 		
 		GridLayout layout = new GridLayout();
 		layout.marginWidth = 2;
 		layout.marginHeight = 2;
 		layout.numColumns = 3;
-		infoFormClient.setLayout(layout);
-		return infoFormClient;
+		mainFilesClient.setLayout(layout);
+		createProcessInfoFileField(mainFilesClient);
+		createGraphicalInfoFileField(mainFilesClient);
+		createImageFileField(mainFilesClient);
 	}
 	
-	private void createServerInfoSection() {		
-		Composite serverInfoFormClient = createServerInfoFormClient();		
-		createServerNameField(serverInfoFormClient);
-		createServerPortField(serverInfoFormClient);
-		createServerDeployerField(serverInfoFormClient);
-		createUseCredentialsButton(serverInfoFormClient);
-		createUseCredentialsGroup(serverInfoFormClient);
-		createTestConnectionButton(serverInfoFormClient);
+	private void createProcessInfoFileField(Composite parent) {
+		includeProcessInfoFileButton = toolkit.createButton(parent, "Process Info File:", SWT.CHECK);
+		includeProcessInfoFileButton.setSelection(true);
+		includeProcessInfoFileButton.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		processInfoFileText = toolkit.createText(parent, "");
+		processInfoFileText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		processInfoFileText.setEditable(false);
+		toolkit.createLabel(parent, "");
+	}
+	
+	private void createGraphicalInfoFileField(Composite parent) {
+		includeGraphicalInfoFileButton = toolkit.createButton(parent, "Graphical Info File:", SWT.CHECK);
+		includeGraphicalInfoFileButton.setSelection(true);
+		includeGraphicalInfoFileButton.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		graphicalInfoFileText = toolkit.createText(parent, "");
+		graphicalInfoFileText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		graphicalInfoFileText.setEditable(false);
+		browseGraphicalInfoFileButton = toolkit.createButton(parent, "Browse...", SWT.NONE);
 	}
 
-	private void createLocalSaveSection() {		
-		Composite localSaveFormClient = createLocalSaveFormClient();	
-		createSaveLocallyCheckBox(localSaveFormClient);
-		createSaveLocationField(localSaveFormClient);
-		createSaveButton(localSaveFormClient);
+	private void createImageFileField(Composite parent) {
+		includeImageFileButton = toolkit.createButton(parent, "Image File:", SWT.CHECK);
+		includeImageFileButton.setSelection(true);
+		includeImageFileButton.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		imageFileText = toolkit.createText(parent, "");
+		imageFileText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		imageFileText.setEditable(false);
+		browseImageFileButton = toolkit.createButton(parent, "Browse...", SWT.NONE);
+	}
+	
+	private void createAdditionalFilesSection() {
+		Section additionalFilesSection = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
+		additionalFilesSection.marginWidth = 5;
+		additionalFilesSection.setText("Additional Files");
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+//		gridData.verticalAlignment = GridData.BEGINNING;
+		additionalFilesSection.setLayoutData(gridData);
+		
+		Composite additionalFilesClient =  toolkit.createComposite(additionalFilesSection);
+		additionalFilesSection.setClient(additionalFilesClient);
+		additionalFilesSection.setDescription("Add additional files such as forms that need to be included in the deployment.");
+		toolkit.paintBordersFor(additionalFilesClient);
+		
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		additionalFilesClient.setLayout(layout);
+		createAdditionalFilesList(additionalFilesClient);
+		createAdditionalFilesButtons(additionalFilesClient);
+	}
+	
+	private void createAdditionalFilesList(Composite parent) {
+		additionalFilesList = toolkit.createTable(parent, SWT.SINGLE | SWT.V_SCROLL | SWT.H_SCROLL);
+		GridData gridData = new GridData(GridData.FILL_BOTH);
+		gridData.heightHint = 70;
+		gridData.widthHint = 100;
+		additionalFilesList.setLayoutData(gridData);
+	}
+	
+	private void createAdditionalFilesButtons(Composite parent) {
+		Composite composite = toolkit.createComposite(parent);
+		composite.setLayoutData(new GridData(GridData.FILL_VERTICAL));
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 1;
+		composite.setLayout(gridLayout);		
+		additionalFilesAddButton = toolkit.createButton(composite, "Add...", SWT.NONE);
+		additionalFilesAddButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		additionalFilesRemoveButton = toolkit.createButton(composite, "Remove", SWT.NONE);
+		additionalFilesRemoveButton.setEnabled(false);
+	}
+	
+	private void createClassesAndResourcesSection() {
+		Section classesAndResourcesSection = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
+		classesAndResourcesSection.marginWidth = 5;
+		classesAndResourcesSection.setText("Classes and Resources");
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		classesAndResourcesSection.setLayoutData(gridData);
+		
+		Composite classesAndResourcesClient =  toolkit.createComposite(classesAndResourcesSection);
+		classesAndResourcesSection.setClient(classesAndResourcesClient);
+		classesAndResourcesSection.setDescription("Add classes and/or resources that need to be included in the deployment.");
+		toolkit.paintBordersFor(classesAndResourcesClient);
+		
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		classesAndResourcesClient.setLayout(layout);
+		createClassesAndResourcesList(classesAndResourcesClient);
+		createClassesAndResourcesButtons(classesAndResourcesClient);
 	}
 
-	private void createServerNameField(Composite infoFormClient) {
-		Label nameLabel = toolkit.createLabel(infoFormClient, "Server Name:");
-		nameLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		nameText = toolkit.createText(infoFormClient, "");
-		String nameString = getDeploymentInfo().getServerName();
-		nameText.setText(nameString == null ? "localhost" : nameString);
+	private void createClassesAndResourcesList(Composite parent) {
+		classesAndResourcesList = toolkit.createTable(parent, SWT.SINGLE | SWT.V_SCROLL | SWT.H_SCROLL);
+		GridData gridData = new GridData(GridData.FILL_BOTH | GridData.GRAB_VERTICAL);
+		gridData.heightHint = 70;
+		gridData.widthHint = 100;
+		classesAndResourcesList.setLayoutData(gridData);
+	}
+	
+	private void createClassesAndResourcesButtons(Composite parent) {
+		Composite composite = toolkit.createComposite(parent);
+		composite.setLayoutData(new GridData(GridData.FILL_VERTICAL));
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 1;
+		composite.setLayout(gridLayout);
+		
+		classesAndResourcesAddButton = toolkit.createButton(composite, "Add", SWT.NONE);
+		classesAndResourcesAddButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		classesAndResourcesRemoveButton = toolkit.createButton(composite, "Remove", SWT.NONE);
+		classesAndResourcesRemoveButton.setEnabled(false);
+	}
+	
+	private void createUserCredentialsSection() {
+		Section userCredentialsSection = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
+		userCredentialsSection.marginWidth = 5;
+		userCredentialsSection.setText("User Credentials");
+
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 2;
-		nameText.setLayoutData(gridData);
-		nameText.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				updateTestConnectionAndDeployButtons();
-				getDeploymentInfo().setServerName(nameText.getText());
-				editor.setDirty(true);
-			}
-		});
-	}
-	
-	private void createServerPortField(Composite infoFormClient) {
-		Label portLabel = toolkit.createLabel(infoFormClient, "Server Port:");
-		portLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		portText = toolkit.createText(infoFormClient, "");
-		String portString = getDeploymentInfo().getServerPort();
-		portText.setText(portString == null ? "8080" : portString);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 2;
-		portText.setLayoutData(gridData);
-		portText.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				updateTestConnectionAndDeployButtons();
-				getDeploymentInfo().setServerPort(portText.getText());
-				editor.setDirty(true);
-			}
-		});
-	}
-	
-	private void createServerDeployerField(Composite infoFormClient) {
-		Label deployerLabel = toolkit.createLabel(infoFormClient, "Server Deployer:");
-		deployerLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		deployerText = toolkit.createText(infoFormClient, "");
-		String deployerString = deploymentInfo.getServerDeployer();
-		deployerText.setText(deployerString == null ? "/jbpm-console/upload" : deployerString);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 2;
-		deployerText.setLayoutData(gridData);
-		deployerText.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				updateTestConnectionAndDeployButtons();
-				getDeploymentInfo().setServerDeployer(deployerText.getText());
-				editor.setDirty(true);
-			}
-		});
-	}
-	
-	private void createUserNameField(Composite composite) {
-		Label usernameLabel = toolkit.createLabel(composite, "Username:");
-		usernameLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		usernameText = toolkit.createText(composite, "", SWT.BORDER);
-		String usernameString = Plugin.getDefault().getPreferenceStore().getString("user name");
-		usernameText.setText(usernameString == null ? "" : usernameString);
-		usernameText.setEnabled(useCredentialsButton.getSelection());
-		usernameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	}
-	
-	private void createPasswordField(Composite composite) {
-		Label passwordLabel = toolkit.createLabel(composite, "Password:");
-		passwordLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		passwordText = toolkit.createText(composite, "", SWT.PASSWORD | SWT.BORDER);
-		String passwordString = Plugin.getDefault().getPreferenceStore().getString("password");
-		passwordText.setText(passwordString == null ? "" : passwordString);
-		passwordText.setEnabled(useCredentialsButton.getSelection());
+		userCredentialsSection.setLayoutData(gridData);
+		
+		Composite userCredentialsClient =  toolkit.createComposite(userCredentialsSection);
+		userCredentialsSection.setClient(userCredentialsClient);
+		userCredentialsSection.setDescription("Specify the user credentials for the chosen server.");
+		toolkit.paintBordersFor(userCredentialsClient);
+		
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		userCredentialsClient.setLayout(layout);
+		
+		useCredentialsButton = toolkit.createButton(userCredentialsClient, "Use credentials", SWT.CHECK);
+		useCredentialsButton.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		GridData buttonData = new GridData();
+		buttonData.horizontalSpan = 2;
+		useCredentialsButton.setLayoutData(buttonData);
+		
+		Label userNameLabel = toolkit.createLabel(userCredentialsClient, "Username:");
+		userNameLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		userNameText = toolkit.createText(userCredentialsClient, "");
+		userNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		Label passwordLabel = toolkit.createLabel(userCredentialsClient, "Password:");
+		passwordLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		passwordText = toolkit.createText(userCredentialsClient, "", SWT.PASSWORD);
 		passwordText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 	
-	private void createUseCredentialsButton(Composite infoFormClient) {
-		useCredentialsButton = toolkit.createButton(infoFormClient, "Use credentials", SWT.CHECK);
-		useCredentialsButton.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		useCredentialsButton.setSelection(Plugin.getDefault().getPreferenceStore().getBoolean("use credentials"));
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 3;
-		useCredentialsButton.setLayoutData(gridData);
-		useCredentialsButton.addSelectionListener(new SelectionAdapter() {			
-			public void widgetSelected(SelectionEvent e) {
-				usernameText.setEnabled(useCredentialsButton.getSelection());
-				passwordText.setEnabled(useCredentialsButton.getSelection());
-			}
-		});
-	}
-	
-	private void createUseCredentialsGroup(Composite infoFormClient) {
-		Composite useCredentialsGroup = toolkit.createComposite(infoFormClient, SWT.BORDER);
+	private void createServerInfoSection() {
+		Section serverInfoSection = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
+		serverInfoSection.marginWidth = 5;
+		serverInfoSection.setText("Server Settings");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 3;
-		useCredentialsGroup.setLayoutData(gridData);
-		useCredentialsGroup.setLayout(new GridLayout(2, false));
-		createUserNameField(useCredentialsGroup);
-		createPasswordField(useCredentialsGroup);
-	}
-	
-	private void createTestConnectionButton(Composite infoFormClient) {
-		testConnectionButton = toolkit.createButton(infoFormClient, "Test Connection...", SWT.PUSH);
-		testConnectionButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				createProcessDeployer().pingServer();
-			}
-		});
-	}
-	
-	private Composite createIncludeFilesSection() {
-		Section includeFilesDetails = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
-		includeFilesDetails.marginWidth = 5;
-		includeFilesDetails.setText("Files and Folders");
-		includeFilesDetails.setLayoutData(new GridData(GridData.FILL_BOTH));
+		serverInfoSection.setLayoutData(gridData);
 		
-		Composite includeFilesFormClient =  toolkit.createComposite(includeFilesDetails);
-		includeFilesDetails.setClient(includeFilesFormClient);
-		includeFilesDetails.setDescription("Select the files and folders to include in the process archive.");
-		toolkit.paintBordersFor(includeFilesFormClient);
+		Composite serverInfoClient =  toolkit.createComposite(serverInfoSection);
+		serverInfoSection.setClient(serverInfoClient);
+		serverInfoSection.setDescription("Specify the settings of the server you wish to deploy to.");
+		toolkit.paintBordersFor(serverInfoClient);
 		
 		GridLayout layout = new GridLayout();
-		layout.marginWidth = 2;
-		layout.marginHeight = 2;
-		layout.numColumns = 1;
-		includeFilesFormClient.setLayout(layout);
-
-		Tree tree = toolkit.createTree(includeFilesFormClient, SWT.CHECK);
-		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
+		layout.numColumns = 2;
+		serverInfoClient.setLayout(layout);
 		
-		includeFilesTreeViewer = new IncludeInDeploymentTreeViewer(tree);
-		includeFilesTreeViewer.setContentProvider(new IncludeFilesTreeContentProvider());
-		includeFilesTreeViewer.setLabelProvider(new WorkbenchLabelProvider());
-		includeFilesTreeViewer.setInput(processFolder);
-		tree.getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
-			}			
-		});
-		includeFilesTreeViewer.addCheckStateListener(new ICheckStateListener() {			
-			public void checkStateChanged(CheckStateChangedEvent event) {
-				getDeploymentInfo().setFilesAndFolders(includeFilesTreeViewer.getCheckedElements());
-				editor.setDirty(true);
-			}
-		});
-		
-		final Button includeFilesDefaultButton = toolkit.createButton(includeFilesFormClient, "Reset Defaults", SWT.PUSH);
-		includeFilesDefaultButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-		includeFilesDefaultButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				includeFilesDefaultButton.getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
-					}			
-				});
-			}			
-		});
-		
-
-		return includeFilesFormClient;
-	}
-	
-	private ArrayList getElementsToCheckFor(IFolder folder) {
-		ArrayList list = new ArrayList();
-		try {
-			IResource[] members = folder.members();
-			for (int i = 0; i < members.length; i++) {
-				list.add(members[i]);
-				if (members[i] instanceof IFolder) {
-					list.addAll(getElementsToCheckFor((IFolder)members[i]));
-				}
-			}
-		} catch(CoreException e) {
-			Logger.logError(e);
-		}
-		return list;
-	}
-	
-	private Set getElementsToCheckFor(IJavaProject project) {
-		Set result = new HashSet();
-		try {
-			if (project != null) {
-				Set javaClassNames = JavaClassNameCollector.getJavaClassNames(editor.getProcessDefinition());
-				Iterator iterator = javaClassNames.iterator();
-				while (iterator.hasNext()) {
-					IType type = project.findType((String)iterator.next());	
-					if (type != null) {
-						result.add(type.getCompilationUnit());
-					}
-				}
-			}
-		}
-		catch (JavaModelException e) {
-			Logger.logError(e);
-		}
-		return result;
-	}
-	
-	private Composite createIncludeClassesSection() {
-		Section includeClassesDetails = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
-		includeClassesDetails.marginWidth = 5;
-		includeClassesDetails.setText("Java Classes and Resources");
-		includeClassesDetails.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		Composite includeClassesFormClient =  toolkit.createComposite(includeClassesDetails);
-		includeClassesDetails.setClient(includeClassesFormClient);
-		includeClassesDetails.setDescription("Select the Java classes and resources to include in the process archive.");
-		toolkit.paintBordersFor(includeClassesFormClient);
-		
-		GridLayout layout = new GridLayout();
-		layout.marginWidth = 2;
-		layout.marginHeight = 2;
-		layout.numColumns = 1;
-		includeClassesFormClient.setLayout(layout);
-
-		Tree tree = toolkit.createTree(includeClassesFormClient, SWT.CHECK);
-		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		includeClassesTreeViewer = new IncludeInDeploymentTreeViewer(tree);
-		includeClassesTreeViewer.setContentProvider(new IncludeClassesTreeContentProvider());
-		includeClassesTreeViewer.setLabelProvider(new WorkbenchLabelProvider());
-		final IJavaProject project = JavaCore.create(processFolder.getProject());
-		if (project != null) {
-			includeClassesTreeViewer.setInput(project);
-		}
-		composite.getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
-			}			
-		});
-		includeClassesTreeViewer.addCheckStateListener(new ICheckStateListener() {			
-			public void checkStateChanged(CheckStateChangedEvent event) {
-				getDeploymentInfo().setClassesAndResources(includeClassesTreeViewer.getCheckedElements());
-				editor.setDirty(true);
-			}
-		});
-
-		final Button includeClassesDefaultButton = toolkit.createButton(includeClassesFormClient, "Reset Defaults", SWT.PUSH);
-		includeClassesDefaultButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-		includeClassesDefaultButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				composite.getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
-					}			
-				});
-			}			
-		});
-		
-		return includeClassesFormClient;
-	}
-	
-	private Composite createLocalSaveFormClient() {
-		Section httpInfoDetails = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION);
-		httpInfoDetails.marginWidth = 5;
-		httpInfoDetails.setText("Local Save Settings");
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.verticalAlignment = GridData.BEGINNING;
-		httpInfoDetails.setLayoutData(gridData);
-		
-		Composite detailClient =  toolkit.createComposite(httpInfoDetails);
-		httpInfoDetails.setClient(detailClient);
-		httpInfoDetails.setDescription("Choose if and where you wish to save the process archive locally.");
-		toolkit.paintBordersFor(detailClient);
-		
-		GridLayout layout = new GridLayout();
-		layout.marginWidth = 2;
-		layout.marginHeight = 2;
-		layout.numColumns = 3;
-		detailClient.setLayout(layout);
-		return detailClient;
-	}
-
-	private void createSaveLocallyCheckBox(Composite localSaveFormclient) {
-		saveLocallyButton = toolkit.createButton(localSaveFormclient, "Save Process Archive Locally", SWT.CHECK);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 3;
-		saveLocallyButton.setLayoutData(gridData);
-		saveLocallyButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				boolean selection = ((Button)e.widget).getSelection();
-				locationText.setEditable(selection);
-				locationButton.setEnabled(selection);
-				updateSaveAndDeployButtons(selection);
-			}
-		});
-	}
-	
-	private void updateSaveAndDeployButtons(boolean selection) {
-		if (!selection) {
-			deployButton.setEnabled(testConnectionButton.isEnabled());
-			saveButton.setEnabled(false);
-		} else {
-			if (notEmpty(locationText)) {
-				saveButton.setEnabled(true);
-				deployButton.setEnabled(testConnectionButton.isEnabled());
-			} else {
-				saveButton.setEnabled(false);
-				deployButton.setEnabled(false);
-			}
-		}
-	}
-	
-	private boolean notEmpty(Text text) {
-		String string = text.getText();
-		return string != null && !"".equals(string);
-	}
-	
-	private void updateTestConnectionAndDeployButtons() {
-		if (notEmpty(nameText) && notEmpty(portText) && notEmpty(deployerText)) {
-			testConnectionButton.setEnabled(true);
-			if (saveLocallyButton.getSelection()) {
-				deployButton.setEnabled(saveButton.isEnabled());
-			} else {
-				deployButton.setEnabled(true);
-			}
-		} else {
-			testConnectionButton.setEnabled(false);
-			deployButton.setEnabled(false);
-		}
-	}
-	
-	private void createSaveLocationField(Composite localSaveFormclient) {
-		Label locationLabel = toolkit.createLabel(localSaveFormclient, "Location:");
-		locationLabel.setForeground(toolkit.getColors().getColor(FormColors.TITLE));
-		locationText = toolkit.createText(localSaveFormclient, "");
-		locationText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		locationText.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				updateSaveAndDeployButtons(true);
-			}
-		});
-		locationText.setEditable(false);
-		locationButton = toolkit.createButton(localSaveFormclient, "Search...", SWT.PUSH);
-		locationButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				searchLocation();
-			}
-		});
-		locationButton.setEnabled(false);
-	}
-	
-	private void searchLocation() {
-		FileDialog dialog = new FileDialog(form.getShell(), SWT.OPEN);
-		String result = dialog.open();
-		if (result != null) {
-			locationText.setText(result);
-			updateSaveAndDeployButtons(true);
-		}		
-	}
-	
-	private void createSaveButton(Composite localSaveFormClient) {
-		saveButton = toolkit.createButton(localSaveFormClient, "Save Without Deploying...", SWT.PUSH);
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 3;
-		gridData.horizontalAlignment = SWT.BEGINNING;
-		saveButton.setLayoutData(gridData);
-		saveButton.setEnabled(false);
-		saveButton.addSelectionListener(new SelectionAdapter(){
-			public void widgetSelected(SelectionEvent e) {
-				if (cancelOrSaveAndContinue()) {
-					createProcessDeployer().saveWithoutDeploying();
-				}
-			}			
-		});
-	}
-	
-//	public void refresh(final ArrayList objectsToRefresh) {		
-//		form.getDisplay().asyncExec(new Runnable() {
-//			public void run() {
-//				refreshIncludeClassesTreeViewer(objectsToRefresh);
-//				refreshIncludeFilesTreeViewer(objectsToRefresh);
-//			}			
-//		});
-//	}
-	
-//	private void refreshIncludeFilesTreeViewer(ArrayList objectsToRefresh) {
-//		Object[] elements = includeFilesTreeViewer.getCheckedElements();
-//		includeFilesTreeViewer.refresh();
-//		includeFilesTreeViewer.setCheckedElements(elements);
-//		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
-//		for (int i = 0; i < objectsToRefresh.size(); i++) {
-//			IPath path = (IPath)objectsToRefresh.get(i);
-//			if (root.getFile(path).exists()) {
-//				includeFilesTreeViewer.setChecked(root.getFile(path), true);
-//			} else if (root.getFolder(path).exists()) {
-//				includeFilesTreeViewer.setChecked(root.getFolder(path), true);
-//			}
-//		}
-//	}
-	
-//	private void refreshIncludeClassesTreeViewer(ArrayList objectsToRefresh) {
-//		Set referencedJavaClassNames = null;
-//		Object[] elements = includeClassesTreeViewer.getCheckedElements();
-//		includeClassesTreeViewer.refresh();
-//		includeClassesTreeViewer.setCheckedElements(elements);
-//		IWorkspaceRoot root = processFolder.getWorkspace().getRoot();
-//		for (int i = 0; i < objectsToRefresh.size(); i++) {
-//			IPath path = (IPath)objectsToRefresh.get(i);
-//			IJavaElement javaElement = JavaCore.create(root.getFile(path));
-//			if (javaElement != null && javaElement instanceof ICompilationUnit) {
-//				if (referencedJavaClassNames == null) {
-//					referencedJavaClassNames = JavaClassNameCollector.getJavaClassNames(editor.getProcessDefinition());
-//				}
-//				String name = getTypeName((ICompilationUnit)javaElement);
-//				boolean checkNeeded = referencedJavaClassNames.contains(name);
-//				includeClassesTreeViewer.setChecked(javaElement, checkNeeded);
-//			}
-//		}
-//	}
-	
-	private String getTypeName(ICompilationUnit unit) {
-		try {
-			IType[] types = unit.getTypes();
-			if (types.length > 0) {
-				return types[0].getFullyQualifiedName();
-			} 
-			} catch (JavaModelException e) {
-				Logger.logError(e);
-			}
-		return null;
-	}
-	
-	private boolean cancelOrSaveAndContinue() {
-		IEditorPart editor = getEditorPart();
-		boolean result = true;
-		if (editor.isDirty()) {
-			int saveProceedCancel = openSaveProceedCancelDialog();
-			if (saveProceedCancel == 2) {
-				result = false;
-			} else if (saveProceedCancel == 0) {
-				editor.doSave(null);
-			}
-		}
-		return result;
-	}
-
-	private int openSaveProceedCancelDialog() {
-        MessageDialog dialog = new MessageDialog(
-        		getWorkBenchWindow().getShell(), 
-        	"Save Resource", 
-        	null, 
-        	"'" + processFolder.getName() + "' has been modified. Save changes before deploying?", 
-        	MessageDialog.QUESTION, 
-        	new String[] { 
-        		IDialogConstants.YES_LABEL, 
-        		IDialogConstants.NO_LABEL,
-        		IDialogConstants.CANCEL_LABEL}, 
-        	0);
-        return dialog.open();
-		
-	}
-	
-	private IWorkbenchWindow getWorkBenchWindow() {
-		return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-	}
-	
-	private IEditorPart getEditorPart() {
-		return getWorkBenchWindow().getActivePage().getActiveEditor();
+		Label serverNameLabel = toolkit.createLabel(serverInfoClient, "Server Name:");
+		serverNameLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		serverNameText = toolkit.createText(serverInfoClient, "");
+		serverNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		Label serverPortLabel = toolkit.createLabel(serverInfoClient, "Server Port:");
+		serverPortLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		serverPortText = toolkit.createText(serverInfoClient, "");
+		serverPortText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		Label serverDeployerLabel = toolkit.createLabel(serverInfoClient, "Server Deployer:");
+		serverDeployerLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
+		serverDeployerText = toolkit.createText(serverInfoClient, "");
+		serverDeployerText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 	
 	public void refresh() {
-		if (composite.isDisposed()) return;
-		nameText.setText(getDeploymentInfo().getServerName());
-		portText.setText(getDeploymentInfo().getServerPort());
-		deployerText.setText(getDeploymentInfo().getServerDeployer());
-		composite.getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				if (!includeClassesTreeViewer.getTree().isDisposed()) {
-					includeClassesTreeViewer.refresh();
-					includeClassesTreeViewer.setCheckedElements(getDeploymentInfo().getClassesAndResources());
-				}
-			}			
-		});
-		composite.getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				if (!includeFilesTreeViewer.getTree().isDisposed()) {
-					includeFilesTreeViewer.refresh();
-					includeFilesTreeViewer.setCheckedElements(getDeploymentInfo().getFilesAndFolders());
-				}
-			}			
-		});
+		unhookListeners();
+		updateControls();	
+		hookListeners();
+	}	
+	
+	private void unhookListeners() {
+		includeGraphicalInfoFileButton.removeSelectionListener(includeGraphicalInfoFileButtonSelectionListener);
+		browseGraphicalInfoFileButton.removeSelectionListener(browseGraphicalInfoFileButtonSelectionListener);
+		includeImageFileButton.removeSelectionListener(includeImageFileButtonSelectionListener);
+		browseImageFileButton.removeSelectionListener(browseImageFileButtonSelectionListener);
+		additionalFilesList.removeSelectionListener(additionalFilesListSelectionListener);
+		additionalFilesAddButton.removeSelectionListener(additionaFilesAddButtonSelectionListener);
+		additionalFilesRemoveButton.removeSelectionListener(additionaFilesRemoveButtonSelectionListener);
+		classesAndResourcesList.removeSelectionListener(classesAndResourcesListSelectionListener);
+		classesAndResourcesAddButton.removeSelectionListener(classesAndResourcesAddButtonSelectionListener);
+		classesAndResourcesRemoveButton.removeSelectionListener(classesAndResourcesRemoveButtonSelectionListener);
+		serverNameText.removeModifyListener(serverNameTextListener);
+		serverPortText.removeModifyListener(serverPortTextListener);
+		serverDeployerText.removeModifyListener(serverDeployerTextListener);		
 	}
+	
+	private void updateControls() {
+		updateProcessInfoFileControls();
+		updateGraphicalInfoFileControls();
+		updateImageFileControls();
+		updateAdditionalFilesControls();
+		updateClassesAndResourcesControls();
+		updateUseCredentialsControls();
+		updateServerInfoControls();
+	}
+	
+	private void updateProcessInfoFileControls() {
+		IFile processInfoFile = deploymentInfo.getProcessInfoFile();
+		String value = "";
+		if (processInfoFile != null) {
+			value = processInfoFile.getFullPath().toString();
+		}
+		includeProcessInfoFileButton.setSelection(!"".equals(value));
+		includeProcessInfoFileButton.setEnabled(false);
+		processInfoFileText.setText(value);
+	}
+	
+	private void updateGraphicalInfoFileControls() {
+		IFile graphicalInfoFile = deploymentInfo.getGraphicalInfoFile();
+		String value = "";
+		if (graphicalInfoFile != null) {
+			value = graphicalInfoFile.getFullPath().toString();
+		}
+		includeGraphicalInfoFileButton.setSelection(graphicalInfoFile != null);
+		graphicalInfoFileText.setText(value);
+		browseGraphicalInfoFileButton.setEnabled(graphicalInfoFile != null);
+	}
+	
+	private void updateImageFileControls() {
+		IFile imageFile = deploymentInfo.getImageFile();
+		String value = "";
+		if (imageFile != null) {
+			value = imageFile.getFullPath().toString();
+		}
+		includeImageFileButton.setSelection(imageFile != null);
+		imageFileText.setText(value);
+		browseImageFileButton.setEnabled(imageFile != null);
+	}
+	
+	private void updateAdditionalFilesControls() {
+		Object[] additionalFiles = deploymentInfo.getAdditionalFiles();
+		for (Object object : additionalFiles) {
+			if (object instanceof IFile) {
+				IFile file = (IFile)object;
+				TableItem tableItem = new TableItem(additionalFilesList, SWT.NULL);
+				tableItem.setText(LABELPROVIDER.getText(file) + " (" + file.getFullPath() + ")");
+				tableItem.setImage(LABELPROVIDER.getImage(file));
+				tableItem.setData(object);				
+			}
+		}
+	}
+	
+	private void updateClassesAndResourcesControls() {
+		Object[] classesAndResources = deploymentInfo.getClassesAndResources();
+		for (Object object : classesAndResources) {
+			IPath path = null;
+			if (object instanceof IFile) {
+				path = ((IFile)object).getFullPath();
+			} else if (object instanceof ICompilationUnit) {
+				path = ((ICompilationUnit)object).getPath();
+			} else if (object instanceof IClassFile) {
+				path = ((IClassFile)object).getPath();
+			}
+			if (path != null) {
+				TableItem tableItem = new TableItem(classesAndResourcesList, SWT.NULL);
+				tableItem.setData(object);
+				tableItem.setText(LABELPROVIDER.getText(object) + " (" + path + ")");
+				tableItem.setImage(LABELPROVIDER.getImage(object));
+			}
+		}
+	}
+	
+	private void updateUseCredentialsControls() {
+		boolean useCredentials = deploymentInfo.getUseCredentials();
+		useCredentialsButton.setSelection(useCredentials);
+		String userName = deploymentInfo.getUserName();
+		if (userName != null) {
+			userNameText.setText(userName);
+		}
+		userNameText.setEnabled(useCredentials);
+		String password = deploymentInfo.getPassword();
+		if (password != null) {
+			passwordText.setText(password);
+		}
+		passwordText.setEnabled(useCredentials);
+	}
+	
+	private void updateServerInfoControls() {
+		String serverName = deploymentInfo.getServerName();
+		if (serverName != null) {
+			 serverNameText.setText(serverName);
+		}
+		String serverPort = deploymentInfo.getServerPort();
+		if (serverPort != null) {
+			serverPortText.setText(serverPort);
+		}
+		String serverDeployer = deploymentInfo.getServerDeployer();
+		if (serverDeployer != null) {
+			serverDeployerText.setText(serverDeployer);
+		}		
+	}
+	
+	private void hookListeners() {
+		includeGraphicalInfoFileButton.addSelectionListener(includeGraphicalInfoFileButtonSelectionListener);
+		browseGraphicalInfoFileButton.addSelectionListener(browseGraphicalInfoFileButtonSelectionListener);
+		includeImageFileButton.addSelectionListener(includeImageFileButtonSelectionListener);
+		browseImageFileButton.addSelectionListener(browseImageFileButtonSelectionListener);
+		additionalFilesList.addSelectionListener(additionalFilesListSelectionListener);
+		additionalFilesAddButton.addSelectionListener(additionaFilesAddButtonSelectionListener);
+		additionalFilesRemoveButton.addSelectionListener(additionaFilesRemoveButtonSelectionListener);
+		classesAndResourcesList.addSelectionListener(classesAndResourcesListSelectionListener);
+		classesAndResourcesAddButton.addSelectionListener(classesAndResourcesAddButtonSelectionListener);
+		classesAndResourcesRemoveButton.addSelectionListener(classesAndResourcesRemoveButtonSelectionListener);
+		serverNameText.addModifyListener(serverNameTextListener);
+		serverPortText.addModifyListener(serverPortTextListener);
+		serverDeployerText.addModifyListener(serverDeployerTextListener);
+		useCredentialsButton.addSelectionListener(useCredentialsButtonSelectionListener);
+	}
+	
+	private SelectionListener useCredentialsButtonSelectionListener = new SelectionAdapter() {		
+		public void widgetSelected(SelectionEvent event) {
+			userNameText.setEnabled(useCredentialsButton.getSelection());
+			passwordText.setEnabled(useCredentialsButton.getSelection());
+		}
+	};
+		
+	private ModifyListener serverNameTextListener = new ModifyListener() {		
+		public void modifyText(ModifyEvent event) {
+			deploymentInfo.setServerName(serverNameText.getText());
+			editor.setDirty(true);
+		}
+	};
+	
+	private ModifyListener serverPortTextListener = new ModifyListener() {		
+		public void modifyText(ModifyEvent event) {
+			deploymentInfo.setServerPort(serverPortText.getText());
+			editor.setDirty(true);
+		}
+	};
+	
+	private ModifyListener serverDeployerTextListener = new ModifyListener() {		
+		public void modifyText(ModifyEvent event) {
+			deploymentInfo.setServerDeployer(serverDeployerText.getText());
+			editor.setDirty(true);
+		}
+	};
+	
+	private SelectionListener includeGraphicalInfoFileButtonSelectionListener = new SelectionAdapter() {		
+		public void widgetSelected(SelectionEvent event) {
+			boolean include = includeGraphicalInfoFileButton.getSelection();
+			browseGraphicalInfoFileButton.setEnabled(include);
+			if (include && graphicalInfoFileText.getData() != null) {
+				deploymentInfo.setGraphicalInfoFile((IFile)graphicalInfoFileText.getData());
+			} else {
+				deploymentInfo.setGraphicalInfoFile(null);
+			}
+			editor.setDirty(true);
+		}
+	};
+	
+	private SelectionListener includeImageFileButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			boolean include = includeImageFileButton.getSelection();
+			browseImageFileButton.setEnabled(include);
+			if (include && imageFileText.getData() != null) {
+				deploymentInfo.setImageFile((IFile)imageFileText.getData());
+			} else {
+				deploymentInfo.setImageFile(null);
+			}
+			editor.setDirty(true);
+		}
+	};
+	
+	private SelectionListener browseGraphicalInfoFileButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(null, new WorkbenchLabelProvider(), new WorkbenchContentProvider());
+			dialog.setTitle("Graphical Info File Selection");
+			dialog.setMessage("Select the graphical info file.");
+			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+			dialog.setValidator(fileSelectionStatusValidator);
+			dialog.open();
+			if (dialog.getFirstResult() != null && dialog.getFirstResult() instanceof IFile) {
+				IFile file = (IFile)dialog.getFirstResult();
+				graphicalInfoFileText.setText(file.getFullPath().toString());
+				graphicalInfoFileText.setData(file);
+				deploymentInfo.setGraphicalInfoFile(file);
+				editor.setDirty(true);
+			}
+		}
+	};
+	
+	private SelectionListener browseImageFileButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(null, new WorkbenchLabelProvider(), new WorkbenchContentProvider());
+			dialog.setTitle("Image File Selection");
+			dialog.setMessage("Select the image file.");
+			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+			dialog.setValidator(fileSelectionStatusValidator);
+			dialog.open();
+			if (dialog.getFirstResult() != null && dialog.getFirstResult() instanceof IFile) {
+				IFile file = (IFile)dialog.getFirstResult();
+				imageFileText.setText(file.getFullPath().toString());
+				imageFileText.setData(file);
+				deploymentInfo.setImageFile(file);
+				editor.setDirty(true);
+			}
+		}
+	};
+	
+	private SelectionListener additionalFilesListSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			additionalFilesRemoveButton.setEnabled(additionalFilesList.getSelectionCount() > 0);
+		}
+	};
+	
+	private SelectionListener additionaFilesAddButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(null, new WorkbenchLabelProvider(), new WorkbenchContentProvider());
+			dialog.setTitle("Additional File Selection");
+			dialog.setMessage("Select the additional file.");
+			dialog.setAllowMultiple(false);
+			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+			dialog.setValidator(fileSelectionStatusValidator);
+			dialog.open();
+			if (dialog.getFirstResult() != null && dialog.getFirstResult() instanceof IFile) {
+				IFile file = (IFile)dialog.getFirstResult();
+				TableItem tableItem = new TableItem(additionalFilesList, SWT.NULL);
+				tableItem.setText(LABELPROVIDER.getText(file) + " (" + file.getFullPath() + ")");
+				tableItem.setImage(LABELPROVIDER.getImage(file));
+				deploymentInfo.addToAdditionalFiles(file);
+				editor.setDirty(true);
+			}
+		}
+	};
+	
+	private ISelectionStatusValidator fileSelectionStatusValidator = 
+		new ISelectionStatusValidator() {
+			public IStatus validate(Object[] arg0) {
+				if (arg0.length == 1 && arg0[0] instanceof IFile) {
+					return new Status(IStatus.OK, Plugin.getDefault().getBundle().getSymbolicName(), "Press OK to confirm.");
+				} else {
+					return new Status(IStatus.ERROR, Plugin.getDefault().getBundle().getSymbolicName(), "Select a single file.");
+				}
+			}
+	};
+	
+	private SelectionListener additionaFilesRemoveButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			int[] indices = additionalFilesList.getSelectionIndices();
+			if (indices.length > 0) {
+				TableItem tableItem = additionalFilesList.getItem(indices[0]);
+				Object object = tableItem.getData();
+				deploymentInfo.removeFromAdditionalFiles(object);
+				additionalFilesList.remove(indices[0]);
+				editor.setDirty(true);
+			}
+		}
+	};
+	
+	private SelectionListener classesAndResourcesListSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			classesAndResourcesRemoveButton.setEnabled(classesAndResourcesList.getSelectionCount() > 0);
+		}
+	};
+	
+	private SelectionListener classesAndResourcesAddButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(null, new JavaElementLabelProvider(), new ClassesAndResourcesContentProvider());
+			dialog.setTitle("Classes and Resources Selection");
+			dialog.setAllowMultiple(false);
+			dialog.setMessage("Select a class or resouce.");
+			dialog.setInput(JavaCore.create(ResourcesPlugin.getWorkspace().getRoot()));
+			dialog.setValidator(classesAndResourcesSelectionStatusValidator);
+			dialog.open();
+			if (dialog.getFirstResult() != null) {  //&& dialog.getFirstResult() instanceof IFile) {
+				IPath path = null;
+				if (dialog.getFirstResult() instanceof IFile) {
+					path = ((IFile)dialog.getFirstResult()).getFullPath();
+				} else if (dialog.getFirstResult() instanceof ICompilationUnit) {
+					path = ((ICompilationUnit)dialog.getFirstResult()).getPath();
+				} else if (dialog.getFirstResult() instanceof IClassFile) {
+					path = ((IClassFile)dialog.getFirstResult()).getPath();
+				}
+				if (path != null) {
+					TableItem tableItem = new TableItem(classesAndResourcesList, SWT.NULL);
+					tableItem.setData(dialog.getFirstResult());
+					tableItem.setText(LABELPROVIDER.getText(dialog.getFirstResult()) + " (" + path + ")");
+					tableItem.setImage(LABELPROVIDER.getImage(dialog.getFirstResult()));
+					deploymentInfo.addToClassesAndResources(dialog.getFirstResult());
+					editor.setDirty(true);
+				}
+			}
+		}
+	};
+	
+	private ISelectionStatusValidator classesAndResourcesSelectionStatusValidator = 
+		new ISelectionStatusValidator() {
+			public IStatus validate(Object[] arg0) {
+				if (arg0.length == 1 && (arg0[0] instanceof IFile || arg0[0] instanceof ICompilationUnit || arg0[0] instanceof IClassFile)) {
+					return new Status(IStatus.OK, Plugin.getDefault().getBundle().getSymbolicName(), "Press OK to confirm.");
+				} else {
+					return new Status(IStatus.ERROR, Plugin.getDefault().getBundle().getSymbolicName(), "Select a single file.");
+				}
+			}
+	};
+	
+	private SelectionListener classesAndResourcesRemoveButtonSelectionListener = new SelectionAdapter() {
+		public void widgetSelected(SelectionEvent event) {
+			int[] indices = classesAndResourcesList.getSelectionIndices();
+			if (indices.length > 0) {
+				TableItem tableItem = classesAndResourcesList.getItem(indices[0]);
+				Object object = tableItem.getData();
+				deploymentInfo.removeFromClassesAndResources(object);
+				classesAndResourcesList.remove(indices[0]);
+			}
+		}
+	};
 	
 }

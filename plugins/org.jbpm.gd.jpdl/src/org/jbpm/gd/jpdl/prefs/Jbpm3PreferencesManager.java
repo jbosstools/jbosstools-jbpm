@@ -30,7 +30,7 @@ import org.jbpm.gd.jpdl.Plugin;
 public class Jbpm3PreferencesManager extends PreferencesManager {
 		
 	public static final Jbpm3PreferencesManager INSTANCE = new Jbpm3PreferencesManager();
-	
+		
 	protected Jbpm3PreferencesManager() {
 		super();
 		initialize();
@@ -52,6 +52,7 @@ public class Jbpm3PreferencesManager extends PreferencesManager {
 		installationsFile.delete();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void initializePreferredJbpmName() {
 		String preferredJbpmName = Plugin.getDefault().getPluginPreferences().getString(Constants.JBPM_NAME);
 		if (preferredJbpmName != null) {
