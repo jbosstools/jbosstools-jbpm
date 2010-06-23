@@ -22,15 +22,10 @@
 package org.jbpm.gd.common.editor;
 
 import org.eclipse.gef.ui.actions.ActionRegistry;
-import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.actions.RetargetAction;
 import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
@@ -39,7 +34,7 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
 public class ActionBarContributor extends
 		MultiPageEditorActionBarContributor {
 	
-	ActionRegistry actionRegistry = new ActionRegistry();
+//	ActionRegistry actionRegistry = new ActionRegistry();
 	
     private static final String[] WORKBENCH_ACTION_IDS = {
     	ActionFactory.PRINT.getId(),
@@ -75,8 +70,8 @@ public class ActionBarContributor extends
 			hookGlobalGraphicalEditorActions((GraphPage)activeEditor, actionBars);
 		} else if (activeEditor instanceof StructuredTextEditor) {
 			hookGlobalXmlEditorActions((StructuredTextEditor)activeEditor, actionBars);
-		} else {
-			actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_SNAP_TO_GEOMETRY, null);			
+//		} else {
+//			actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_SNAP_TO_GEOMETRY, null);			
 		}
 		actionBars.updateActionBars();
 	}
@@ -88,7 +83,7 @@ public class ActionBarContributor extends
 					WORKBENCH_ACTION_IDS[i],
 					part.getAction(TEXTEDITOR_ACTION_IDS[i]));
 		}
-		actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_GRID_VISIBILITY, null);
+//		actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_GRID_VISIBILITY, null);
 	}
 
 	private void hookGlobalGraphicalEditorActions(
@@ -100,38 +95,38 @@ public class ActionBarContributor extends
 					WORKBENCH_ACTION_IDS[i],
 					action);
 		}
-		IAction action = registry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY);
-		actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_GRID_VISIBILITY, action);
+//		IAction action = registry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY);
+//		actionBars.setGlobalActionHandler( GEFActionConstants.TOGGLE_GRID_VISIBILITY, action);
 	}
 
-	protected void addRetargetAction(RetargetAction action) {
-		actionRegistry.registerAction(action);
-		getPage().addPartListener(action);
-	}
+//	protected void addRetargetAction(RetargetAction action) {
+//		actionRegistry.registerAction(action);
+//		getPage().addPartListener(action);
+//	}
 	
-	public void init(IActionBars bars) {
-		buildActions();
-		super.init(bars);
-	}
+//	public void init(IActionBars bars) {
+//		buildActions();
+//		super.init(bars);
+//	}
 	
-	public void dispose() {
-		RetargetAction action = (RetargetAction)actionRegistry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY);
-		getPage().removePartListener(action);
-		action.dispose();
-		actionRegistry.dispose();
-		super.dispose();
-	}
+//	public void dispose() {
+//		RetargetAction action = (RetargetAction)actionRegistry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY);
+//		getPage().removePartListener(action);
+//		action.dispose();
+//		actionRegistry.dispose();
+//		super.dispose();
+//	}
 
-	protected void buildActions() {
-		addRetargetAction(new RetargetAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY, 
-				"Show Grid", IAction.AS_CHECK_BOX));
-	}
+//	protected void buildActions() {
+//		addRetargetAction(new RetargetAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY, 
+//				"Show Grid", IAction.AS_CHECK_BOX));
+//	}
 
-	public void contributeToMenu(IMenuManager menubar) {
-		super.contributeToMenu(menubar);
-		MenuManager viewMenu = new MenuManager("View");
-		viewMenu.add(actionRegistry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY));
-		menubar.insertAfter(IWorkbenchActionConstants.M_EDIT, viewMenu);
-	}
+//	public void contributeToMenu(IMenuManager menubar) {
+//		super.contributeToMenu(menubar);
+//		MenuManager viewMenu = new MenuManager("View");
+//		viewMenu.add(actionRegistry.getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY));
+//		menubar.insertAfter(IWorkbenchActionConstants.M_EDIT, viewMenu);
+//	}
 	
 }

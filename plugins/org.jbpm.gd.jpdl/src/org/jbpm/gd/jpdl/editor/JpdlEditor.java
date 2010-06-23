@@ -21,20 +21,9 @@
  */
 package org.jbpm.gd.jpdl.editor;
 
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.WorkspaceJob;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.jbpm.gd.common.editor.ContentProvider;
@@ -50,58 +39,28 @@ import org.jbpm.gd.jpdl.part.JpdlGraphicalEditPartFactory;
 
 public class JpdlEditor extends Editor { 
 
-	private IResourceChangeListener resourceChangeListener;
-	private JpdlDeploymentEditorPage deploymentEditorPage;
+	private JpdlDeploymenEditorPage deploymentInfoEditorPage;
+	private DeploymentInfo deploymentInfo;
 	
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		super.init(site, input);
-		initResourceChangeListener();
 		initPartName();
-	}
-	
-	private void initResourceChangeListener() {
-		resourceChangeListener = new IResourceChangeListener() {
-			public void resourceChanged(IResourceChangeEvent event) {
-				handleResourceChange(event);
-			}
-		};
-		getWorkspace().addResourceChangeListener(resourceChangeListener);
-	}
-	
-
-	private void handleResourceChange(IResourceChangeEvent event) {
-		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
-			IFile file = ((IFileEditorInput)getEditorInput()).getFile();
-			if (!file.exists()) {
-				deleteProcessFolder(file);
-			}
-		} 
-	}
-	
-	private void deleteProcessFolder(IFile file) {
-		final IContainer processFolder = getWorkspace().getRoot().getFolder(file.getFullPath().removeLastSegments(1));
-		if (processFolder != null && processFolder.exists()) {
-			WorkspaceJob job = new WorkspaceJob("delete") {
-				public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-					processFolder.delete(true, null);
-					return Status.OK_STATUS;
-				}
-			};
-			job.setRule(getWorkspace().getRuleFactory().deleteRule(processFolder));
-			job.schedule();
-		}
-	}
-	
-	private IWorkspace getWorkspace() {
-		return ((IFileEditorInput)getEditorInput()).getFile().getWorkspace();
 	}
 	
 	private void initPartName() {
 		FileEditorInput fileInput = (FileEditorInput) getEditorInput();
-		IPath path = fileInput.getPath().removeLastSegments(1);
-		path = path.removeFirstSegments(path.segmentCount() - 1);
-		setPartName(path.lastSegment());
+		String fileName = fileInput.getFile().getName();
+		String processName = fileName;
+		if ("processdefinition.xml".equals(fileName)) {
+			IPath path = fileInput.getPath().removeLastSegments(1);
+			path = path.removeFirstSegments(path.segmentCount() - 1);
+			processName = path.lastSegment();
+		} else if (fileName.endsWith(".jpdl.xml")){
+			int index = fileName.indexOf(".jpdl.xml");
+			processName = fileName.substring(0, index);
+		}
+		setPartName(processName);
 	}
 
 	protected SelectionSynchronizer createSelectionSynchronizer() {
@@ -130,15 +89,13 @@ public class JpdlEditor extends Editor {
 
 	protected void createPages() {
 		super.createPages();
-		initDeploymentPage();
+		initDeploymentInfoPage();
 	}
 	
-	protected void initDeploymentPage() {
-		deploymentEditorPage = new JpdlDeploymentEditorPage(this);
-		addPage(1, deploymentEditorPage, "Deployment");	
-		DeploymentInfo deploymentInfo = getDeploymentInfo();
-		((JpdlContentProvider)getContentProvider()).addDeploymentInfo(deploymentInfo, getEditorInput());
-		deploymentEditorPage.setDeploymentInfo(deploymentInfo);
+	protected void initDeploymentInfoPage() {
+		((JpdlContentProvider)getContentProvider()).initializeDeploymentInfo(getDeploymentInfo(), getEditorInput());
+		deploymentInfoEditorPage = new JpdlDeploymenEditorPage(this);
+		addPage(1, deploymentInfoEditorPage, "DeploymentInfo");
 	}
 
 	protected SemanticElement createMainElement() {
@@ -150,12 +107,15 @@ public class JpdlEditor extends Editor {
 	}
 	
 	public DeploymentInfo getDeploymentInfo() {
-		return deploymentEditorPage.getDeploymentInfo();
+		if (deploymentInfo == null) {
+			deploymentInfo = new DeploymentInfo();
+		}
+		return deploymentInfo;
 	}
-
-	public void dispose() {
-		getWorkspace().removeResourceChangeListener(resourceChangeListener);
-		super.dispose();
+	
+	@SuppressWarnings("restriction")
+	public boolean isSaveOnCloseNeeded() {
+		return isDirty() || super.isSaveOnCloseNeeded();
 	}
 
 }

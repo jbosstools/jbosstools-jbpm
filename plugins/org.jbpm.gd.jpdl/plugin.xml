@@ -1531,6 +1531,49 @@
       </propertySections>
    </extension> 
    
+   <extension point="org.eclipse.ui.editorActions"> 
+      <editorContribution 
+            id="org.jbpm.gd.jpdl.actions" 
+            targetID="org.jbpm.gd.jpdl.editor">
+         <menu
+               id="org.jbpm.gd.jpdl.menu"
+               label="jBPM"
+               path="additions">
+            <separator name="graphTools"/>
+            <separator name="deployTools"/>
+         </menu>
+         <action
+               id="org.jbpm.gd.jpdl.grid" 
+               label="Show Grid" 
+               tooltip="Toggle the grid for the jPDL editor"
+               menubarPath="org.jbpm.gd.jpdl.menu/graphTools"
+               style="toggle"
+               class="org.jbpm.gd.jpdl.action.ToggleGridActionDelegate">
+         </action> 
+         <action
+               id="org.jbpm.gd.jpdl.deploy"
+               label="Deploy Process"
+               tooltip="Deploy the process to the server"
+               menubarPath="org.jbpm.gd.jpdl.menu/deployTools"
+               class="org.jbpm.gd.jpdl.action.DeployProcessActionDelegate">
+         </action>
+         <action
+               id="org.jbpm.gd.jpdl.ping"
+               label="Ping Server"
+               tooltip="Check if the server can be reached with the current connection parameters."
+               menubarPath="org.jbpm.gd.jpdl.menu/deployTools"
+               class="org.jbpm.gd.jpdl.action.PingServerActionDelegate">
+         </action>
+         <action
+               id="org.jbpm.gd.jpdl.save"
+               label="Save Process Archive..."
+               tooltip="Save the process archive to a local file."
+               menubarPath="org.jbpm.gd.jpdl.menu/deployTools"
+               class="org.jbpm.gd.jpdl.action.SaveProcessArchiveActionDelegate">
+         </action>
+      </editorContribution> 
+   </extension>   
+   
    <extension point="org.eclipse.ui.startup">
       <startup class="org.jbpm.gd.jpdl.StartupClass"/>   
    </extension> 

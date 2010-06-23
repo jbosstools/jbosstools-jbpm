@@ -24,13 +24,12 @@ package org.jbpm.gd.jpdl.wizard;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -55,11 +54,11 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 public class NewProcessDefinitionWizardPage extends WizardPage {
 	
 	private Text containerText;
-	private Text processText;
+	private Text processNameText;
 	private Button browseButton;
-	
+
 	private IWorkspaceRoot workspaceRoot;
-	private String containerName;
+	private String containerName;	
 
 	public NewProcessDefinitionWizardPage() {
 		super("Process Definition");
@@ -77,6 +76,12 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 			} else if (IContainer.class.isInstance(object)) {
 				container = (IContainer)object;
 			}
+		} else {
+			IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			IProject[] projects = workspaceRoot.getProjects();
+			if (projects != null && projects.length != 0) {
+				container = projects[0];
+			}			
 		}
 		initContainerName(container);
 	}
@@ -84,22 +89,12 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		Composite composite = createClientArea(parent);		
-//		createLabel(composite);	
+		createProcessNameField(composite);
 		createContainerField(composite);
-		createProcessField(composite);
 		setControl(composite);
 		Dialog.applyDialogFont(composite);		
-		setPageComplete(false);
+		checkPage();
 	}
-
-//	private void createLabel(Composite composite) {
-//		Label label= new Label(composite, SWT.WRAP);
-//		label.setText("Choose a source folder and a process definition name.");
-//		GridData gd= new GridData();
-//		gd.widthHint= convertWidthInCharsToPixels(80);
-//		gd.horizontalSpan= 3;
-//		label.setLayoutData(gd);
-//	}
 
 	private Composite createClientArea(Composite parent) {
 		Composite composite= new Composite(parent, SWT.NONE);
@@ -113,12 +108,12 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	
 	private void createContainerField(Composite parent) {
 		Label label = new Label(parent, SWT.NONE);
-		label.setText("Source folder : ");
+		label.setText("Source Folder: ");
 		containerText = new Text(parent, SWT.BORDER);
 		containerText.setText(containerName);
 		containerText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				verifyContentsValid();
+				checkPage();
 			}
 		});
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -132,20 +127,39 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 		});
 		gd = new GridData();
 		gd.widthHint = convertWidthInCharsToPixels(15);
+		gd.heightHint = 18;
 		browseButton.setLayoutData(gd);
 	}
 	
-	private void createProcessField(Composite parent) {
+	private void createProcessNameField(Composite parent) {
 		Label label = new Label(parent, SWT.NONE);
-		label.setText("Process name : ");
-		processText = new Text(parent, SWT.BORDER);
-		processText.addModifyListener(new ModifyListener() {
+		label.setText("Process Name: ");
+		processNameText = new Text(parent, SWT.BORDER);
+		processNameText.setText(findInitialProcessName());
+		processNameText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				verifyContentsValid();
+				checkPage();
 			}
 		});
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		processText.setLayoutData(gd);		
+		processNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));	
+		new Label(parent, SWT.NONE);
+	}
+	
+	private String findInitialProcessName() {
+		String baseName = "process";
+		String result = baseName;
+		if (processExists(result)) {
+			int runner = 1;
+			do {
+				result = baseName + "-" + runner;
+			} while (processExists(result));
+		}
+		return result;
+	}
+	
+	private boolean processExists(String name) {
+		IResource resource = workspaceRoot.findMember(new Path(containerName).append(name + ".jpdl.xml"));
+		return resource != null && resource.exists();
 	}
 	
 	private void chooseContainer() {
@@ -164,16 +178,7 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	private ViewerFilter createViewerFilter() {
 		ViewerFilter filter= new ViewerFilter() {
 			public boolean select(Viewer viewer, Object parent, Object element) {
-				if (!(element instanceof IContainer)) {
-					return false;
-				}
-				boolean isJavaProjectMember = false;
-				try {
-					isJavaProjectMember = ((IContainer)element).getProject().hasNature(JavaCore.NATURE_ID);
-				} catch (CoreException ce) {
-					// Ignore
-				}
-				return isJavaProjectMember;
+				return element instanceof IContainer;
 			}
 		};
 		return filter;
@@ -184,54 +189,51 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 		containerName = (elem == null) ? "" : elem.getFullPath().makeRelative().toString(); 
 	}
 	
-	private void verifyContentsValid() {
-		if (!checkContainerPathValid()) {
-			setErrorMessage("Source folder is not valid.");
-			setPageComplete(false);
-		} else if (isProcessNameEmpty()) {
-			setErrorMessage("Enter a name for the process.");
-			setPageComplete(false);
-		} else if (processExists()){
-			setErrorMessage("A process with this name already exists.");
-			setPageComplete(false);
-		} else {
-			setErrorMessage(null);
-			setPageComplete(true);
-		}
+	private void checkPage() {
+		if (!checkProcessNameText()) return;
+		if (!checkContainerText()) return;
 	}
 	
-	private boolean processExists() {
-		IPath path = new Path(containerText.getText()).append(getProcessName());
-		return workspaceRoot.getFolder(path).exists();
-	}
-	
-	private boolean isProcessNameEmpty() {
-		String str = processText.getText();
-		return str == null || "".equals(str);
-	}
-	
-	private boolean checkContainerPathValid() {
+	private boolean checkContainerText() {
 		if ("".equals(containerText.getText())) {
+			setMessage("Select the source folder or enter its name.");
+			setPageComplete(false);
 			return false;
+		} else if (!containerExists()) {
+			setMessage("The source folder does not exist and will be created.");
+			setPageComplete(true);
+			return true;
+		} else {
+			setMessage(null);
+			setPageComplete(true);
+			return true;
 		}
+	}
+	
+	private boolean containerExists() {
 		IPath path = new Path(containerText.getText());
 		IResource resource = workspaceRoot.findMember(path);
-		boolean isJavaProject = false;
-		try {
-			isJavaProject = resource.getProject().hasNature(JavaCore.NATURE_ID);
-		} catch (CoreException ce) {
-			// Ignore
-		}
-		return resource.exists() && isJavaProject;
+		return resource != null && resource.exists();
 	}
 	
-	private String getProcessName() {
-		return processText.getText(); // + ".par";
+	private boolean checkProcessNameText() {
+		if ("".equals(processNameText.getText())) {
+			setMessage("Enter a name for the process.");
+			setPageComplete(false);
+			return false;
+		} else {
+			setMessage(null);
+			setPageComplete(true);
+			return true;
+		}
 	}
 	
 	public IFolder getProcessFolder() {
-		IPath path = new Path(containerText.getText()).append(getProcessName());
-		return workspaceRoot.getFolder(path);
+		return workspaceRoot.getFolder(new Path(containerText.getText()));
+	}
+	
+	public String getProcessName() {
+		return processNameText.getText();
 	}
 	
 }

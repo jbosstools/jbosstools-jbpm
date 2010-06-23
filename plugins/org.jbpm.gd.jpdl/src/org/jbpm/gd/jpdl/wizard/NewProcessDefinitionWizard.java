@@ -74,10 +74,9 @@ public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		try {
 			IFolder folder = page.getProcessFolder();
-			folder.create(true, true, null);
-			IFile processDefinitionFile = folder.getFile("processdefinition.xml");
+			IFile processDefinitionFile = folder.getFile(page.getProcessName() + ".jpdl.xml");
 			processDefinitionFile.create(createInitialProcessDefinition(), true, null);
-			IFile gpdFile = folder.getFile("gpd.xml");
+			IFile gpdFile = folder.getFile("." + page.getProcessName() + ".gpd.xml");
 			gpdFile.create(createInitialGpdInfo(), true, null);
 			IDE.openEditor(getActivePage(), processDefinitionFile);
 			openPropertiesView();
@@ -108,13 +107,11 @@ public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 	}
 	
 	private ByteArrayInputStream createInitialProcessDefinition() throws JavaModelException {
-		String parName = page.getProcessFolder().getName();
-		String processName = parName; //.substring(0, parName.indexOf(".par"));
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		buffer.append("\n");
 		buffer.append("\n");
-		buffer.append("<process-definition" + getSchemaText() + "  name=\"" + processName + "\"></process-definition>");	
+		buffer.append("<process-definition" + getSchemaText() + "  name=\"" + page.getProcessName() + "\"></process-definition>");	
 		return new ByteArrayInputStream(buffer.toString().getBytes());
 	}
 	

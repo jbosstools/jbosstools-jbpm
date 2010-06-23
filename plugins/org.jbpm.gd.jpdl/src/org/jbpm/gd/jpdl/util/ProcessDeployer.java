@@ -44,6 +44,7 @@ public class ProcessDeployer {
 	
 	Shell shell;
 	IFolder processFolder;
+	IFile processFile;
 	String serverName;
 	String serverPort;
 	String serverDeployer;
@@ -60,6 +61,10 @@ public class ProcessDeployer {
 	
 	public void setProcessFolder(IFolder processFolder) {
 		this.processFolder = processFolder;
+	}
+	
+	public void setProcessFile(IFile file) {
+		this.processFile = file;
 	}
 	
 	public void setServerName(String serverName) {
@@ -362,11 +367,15 @@ public class ProcessDeployer {
 	}
 
 	private URL[] getProjectClasspathUrls() throws CoreException, MalformedURLException {
+		URL[] urls = new URL[0];
 		IProject project = processFolder.getProject();
 		IJavaProject javaProject = JavaCore.create(project);
+		if (javaProject == null) {
+			return urls;
+		}
 		String[] pathArray = JavaRuntime
 				.computeDefaultRuntimeClassPath(javaProject);
-		URL[] urls = new URL[pathArray.length];
+		urls = new URL[pathArray.length];
 		for (int i = 0; i < pathArray.length; i++) {
 			urls[i] = new File(pathArray[i]).toURI().toURL();
 		}

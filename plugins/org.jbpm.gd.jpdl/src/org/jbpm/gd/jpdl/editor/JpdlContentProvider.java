@@ -22,7 +22,6 @@
 package org.jbpm.gd.jpdl.editor;
 
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -32,14 +31,15 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.IFileEditorInput;
 import org.jbpm.gd.common.editor.AbstractContentProvider;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.notation.Edge;
@@ -47,12 +47,14 @@ import org.jbpm.gd.common.notation.Node;
 import org.jbpm.gd.common.notation.NodeContainer;
 import org.jbpm.gd.common.notation.NotationElement;
 import org.jbpm.gd.common.notation.RootContainer;
+import org.jbpm.gd.jpdl.Plugin;
 import org.jbpm.gd.jpdl.deployment.DeploymentInfo;
 import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.NodeElementContainer;
 import org.jbpm.gd.jpdl.model.Transition;
+import org.jbpm.gd.jpdl.prefs.PreferencesConstants;
 
-public class JpdlContentProvider extends AbstractContentProvider{
+public class JpdlContentProvider extends AbstractContentProvider implements PreferencesConstants {
 	
 	JpdlEditor jpdlEditor;
 	
@@ -63,6 +65,9 @@ public class JpdlContentProvider extends AbstractContentProvider{
 	public String getNotationInfoFileName(String semanticInfoFileName) {
 		if ("processdefinition.xml".equals(semanticInfoFileName)) {
 			return "gpd.xml";
+		} else if (semanticInfoFileName.endsWith("jpdl.xml")) {
+			int index = semanticInfoFileName.indexOf("jpdl.xml");
+			return "." + semanticInfoFileName.substring(0, index) + "gpd.xml";
 		} else {
 			return super.getNotationInfoFileName(semanticInfoFileName);
 		}
@@ -71,6 +76,9 @@ public class JpdlContentProvider extends AbstractContentProvider{
 	public String getDiagramImageFileName(String semanticInfoFileName) {
 		if ("processdefinition.xml".equals(semanticInfoFileName)) {
 			return "processimage.jpg";
+		} else if (semanticInfoFileName.endsWith("jpdl.xml")) {
+			int index = semanticInfoFileName.indexOf("jpdl.xml");
+			return semanticInfoFileName.substring(0, index) + "jpg";
 		} else {
 			return super.getDiagramImageFileName(semanticInfoFileName);
 		}
@@ -121,43 +129,66 @@ public class JpdlContentProvider extends AbstractContentProvider{
  	}
 	
 	private void writeDeploymentInfo(DeploymentInfo deploymentInfo, Element element) {
+		if (deploymentInfo.isEmpty()) return;
 		Element deploymentElement = addElement(element, "deployment");
-		addAttribute(deploymentElement, "serverName", deploymentInfo.getServerName());
-		addAttribute(deploymentElement, "serverPort", deploymentInfo.getServerPort());
-		addAttribute(deploymentElement, "serverDeployer", deploymentInfo.getServerDeployer());
-		Element classesAndResourcesElement = addElement(deploymentElement, "classesAndResources");
+		if (deploymentInfo.getGraphicalInfoFile() != null) {
+			addAttribute(deploymentElement, "graphicalInfoFile", deploymentInfo.getGraphicalInfoFile().getFullPath().toString());
+		}
+		if (deploymentInfo.getImageFile() != null) {
+			addAttribute(deploymentElement, "imageFile", deploymentInfo.getImageFile().getFullPath().toString());
+		}
+		if (deploymentInfo.getServerName() != null) {
+			addAttribute(deploymentElement, "serverName", deploymentInfo.getServerName());
+		}
+		if (deploymentInfo.getServerPort() != null) {
+			addAttribute(deploymentElement, "serverPort", deploymentInfo.getServerPort());
+		}
+		if (deploymentInfo.getServerDeployer() != null) {
+			addAttribute(deploymentElement, "serverDeployer", deploymentInfo.getServerDeployer());
+		}
 		Object[] classesAndResources = deploymentInfo.getClassesAndResources();
-		for (int i = 0; i < classesAndResources.length; i++) {
-			Object object = classesAndResources[i];
-			String value = null;
-			if (object instanceof ICompilationUnit) {
-				value = ((ICompilationUnit)object).getResource().getFullPath().toString();
-			} else if (object instanceof IResource) {
-				value = ((IResource)object).getFullPath().toString();
-			}
-			if (value != null) {
-				Element el = addElement(classesAndResourcesElement, "element");
-				addAttribute(el, "value", value);
+		if (classesAndResources.length > 0) {
+			Element classesAndResourcesElement = addElement(deploymentElement, "classesAndResources");
+			for (int i = 0; i < classesAndResources.length; i++) {
+				String value = null;
+				String type = null;
+				if (classesAndResources[i] instanceof ICompilationUnit) {
+					value = ((ICompilationUnit)classesAndResources[i]).getPath().toString();
+					type = "java";
+				} else if (classesAndResources[i] instanceof IClassFile) {
+					value = ((IClassFile)classesAndResources[i]).getHandleIdentifier();
+					type = "class";
+				} else if (classesAndResources[i] instanceof IFile) {
+					value = ((IFile)classesAndResources[i]).getFullPath().toString();
+					type = "file";
+				}
+				if (value != null) {
+					Element el = addElement(classesAndResourcesElement, "element");
+					addAttribute(el, "type", type);
+					addAttribute(el, "value", value);
+				}
 			}
 		}
-		Element filesAndFoldersElement = addElement(deploymentElement, "filesAndFolders");
-		Object[] filesAndFolders = deploymentInfo.getFilesAndFolders();
-		for (int i = 0; i < filesAndFolders.length; i++) {
-			Object object = filesAndFolders[i];
-			if (object instanceof IFile) {
-				Element el = addElement(filesAndFoldersElement, "element");
-				addAttribute(el, "value", ((IFile)object).getFullPath().toString());
+		Object[] additionalFiles = deploymentInfo.getAdditionalFiles();
+		if (additionalFiles.length > 0) {
+			Element filesAndFoldersElement = addElement(deploymentElement, "additionalFiles");
+			for (int i = 0; i < additionalFiles.length; i++) {
+				if (additionalFiles[i] instanceof IFile) {
+					IFile file = (IFile)additionalFiles[i];
+					Element el = addElement(filesAndFoldersElement, "element");
+					addAttribute(el, "value", file.getFullPath().toString());
+				}
 			}
 		}
 	}
 	
-	protected void addDeploymentInfo(DeploymentInfo deploymentInfo, IEditorInput editorInput) {
+	protected void initializeDeploymentInfo(DeploymentInfo deploymentInfo, IEditorInput editorInput) {
 		try {
-			IFile file = getNotationInfoFile(((FileEditorInput)editorInput).getFile());
+			IFile file = getNotationInfoFile(((IFileEditorInput)editorInput).getFile());
 			// the file should exist as this is performed by the addNotationInfo previously
 			InputStreamReader reader = new InputStreamReader(file.getContents());
 			Element rootElement = new SAXReader().read(reader).getRootElement();
-			processDeploymentInfo(deploymentInfo, rootElement);
+			processDeploymentInfo(deploymentInfo, rootElement, (IFileEditorInput)editorInput);
 		} catch (DocumentException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -167,66 +198,130 @@ public class JpdlContentProvider extends AbstractContentProvider{
 		}
 	}
 	
-	protected void processDeploymentInfo(DeploymentInfo deploymentInfo, Element element) {
+	protected void processDeploymentInfo(DeploymentInfo deploymentInfo, Element element, IFileEditorInput editorInput) {
 		Element deploymentElement = element.element("deployment");
+		processProcessInfoFile(deploymentInfo, deploymentElement, editorInput);
+		processGraphicalInfoFile(deploymentInfo, deploymentElement, editorInput);
+		processImageFile(deploymentInfo, deploymentElement, editorInput);
+		processClassesAndResources(deploymentInfo, deploymentElement, editorInput);
+		processAdditionalFiles(deploymentInfo, deploymentElement, editorInput);
+		processServerInfo(deploymentInfo, deploymentElement, editorInput);
+	}
+	
+	protected void processServerInfo(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
 		if (deploymentElement == null) return;
-		processServerName(deploymentInfo, deploymentElement.attribute("serverName"));
-		processServerPort(deploymentInfo, deploymentElement.attribute("serverPort"));
-		processServerDeployer(deploymentInfo, deploymentElement.attribute("serverDeployer"));
-		processClassesAndResources(deploymentInfo, deploymentElement.element("classesAndResources"));
-		processFilesAndFolders(deploymentInfo, deploymentElement.element("filesAndFolders"));
+		IPreferenceStore prefs = Plugin.getDefault().getPreferenceStore();
+		processServerName(deploymentInfo, deploymentElement.attribute("serverName"), prefs);
+		processServerPort(deploymentInfo, deploymentElement.attribute("serverPort"), prefs);
+		processServerDeployer(deploymentInfo, deploymentElement.attribute("serverDeployer"), prefs);
+		
 	}
 	
-	protected void processServerName(DeploymentInfo deploymentInfo, Attribute attribute) {
-		if (attribute == null) return;
-		String value = attribute.getValue();
-		if (value == null) return;
-		deploymentInfo.setServerName(value);
+	private void processServerName(DeploymentInfo deploymentInfo, Attribute attribute, IPreferenceStore prefs) {
+		if (attribute == null) {
+			deploymentInfo.setServerName(prefs.getString(SERVER_NAME));
+		} else {
+			deploymentInfo.setServerName(attribute.getValue());
+		}
 	}
 	
-	protected void processServerPort(DeploymentInfo deploymentInfo, Attribute attribute) {
-		if (attribute == null) return;
-		String value = attribute.getValue();
-		if (value == null) return;
-		deploymentInfo.setServerPort(value);
+	private void processServerPort(DeploymentInfo deploymentInfo, Attribute attribute, IPreferenceStore prefs) {
+		if (attribute == null) {
+			deploymentInfo.setServerPort(prefs.getString(SERVER_PORT));
+		} else {
+			deploymentInfo.setServerPort(attribute.getValue());
+		}
 	}
 	
-	protected void processServerDeployer(DeploymentInfo deploymentInfo, Attribute attribute) {
-		if (attribute == null) return;
-		String value = attribute.getValue();
-		if (value == null) return;
-		deploymentInfo.setServerDeployer(value);
+	private void processServerDeployer(DeploymentInfo deploymentInfo, Attribute attribute, IPreferenceStore prefs) {
+		if (attribute == null) {
+			deploymentInfo.setServerDeployer(prefs.getString(SERVER_DEPLOYER));
+		} else {
+			deploymentInfo.setServerDeployer(attribute.getValue());
+		}
 	}
 	
-	protected void processClassesAndResources(DeploymentInfo deploymentInfo, Element element) {
-		if (element == null) return;
-		ArrayList classesAndResources = new ArrayList();
-		List elements = element.elements("element");
-		for (int i = 0; i < elements.size(); i++) {
-			String value = ((Element)elements.get(i)).attributeValue("value");
-			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(value));
-			if (!file.exists()) continue;
-			IJavaElement javaElement = JavaCore.create(file);
-			if (javaElement != null) {
-				classesAndResources.add(javaElement);
-			} else {
-				classesAndResources.add(file);
+	protected void processProcessInfoFile(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
+		deploymentInfo.setProcessInfoFile(editorInput.getFile());
+	}
+	
+	protected void processGraphicalInfoFile(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
+		if (deploymentElement == null) return;
+		Attribute attribute = deploymentElement.attribute("graphicalInfoFile");
+		if (attribute == null) {
+			attribute = deploymentElement.attribute("gpdFile");
+		}
+		IFile graphicalInfoFile = null;
+		if (attribute != null && attribute.getValue() != null) {
+			IResource resource = editorInput.getFile().getWorkspace().getRoot().findMember(new Path(attribute.getValue()));
+			if (resource instanceof IFile) {
+				graphicalInfoFile = (IFile)resource;
 			}
 		}
-		deploymentInfo.setClassesAndResources(classesAndResources.toArray());
+		deploymentInfo.setGraphicalInfoFile(graphicalInfoFile);
 	}
 	
-	protected void processFilesAndFolders(DeploymentInfo deploymentInfo, Element element) {
-		if (element == null) return;
-		ArrayList filesAndFolders = new ArrayList();
-		List elements = element.elements("element");
+	protected void processImageFile(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
+		if (deploymentElement == null) return;
+		Attribute attribute = deploymentElement.attribute("imageFile");
+		IFile imageFile = null;
+		if (attribute != null && attribute.getValue() != null) {
+			IResource resource = editorInput.getFile().getWorkspace().getRoot().findMember(new Path(attribute.getValue()));
+			if (resource instanceof IFile) {
+				imageFile = (IFile)resource;
+			}
+		}
+		deploymentInfo.setImageFile(imageFile);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void processClassesAndResources(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
+		if (deploymentElement == null) return;
+		Element classesAndResourcesElement = deploymentElement.element("classesAndResources");
+		if (classesAndResourcesElement == null) return;
+		List elements = classesAndResourcesElement.elements("element");
+		for (int i = 0; i < elements.size(); i++) {
+			Element element = (Element)elements.get(i);
+			String type = element.attributeValue("type");
+			String value = element.attributeValue("value");
+			if ("java".equals(type)) {
+				IResource resource = editorInput.getFile().getWorkspace().getRoot().findMember(new Path(value));
+				if (resource instanceof IFile) {
+					IJavaElement javaElement = JavaCore.create((IFile)resource);
+					if (javaElement instanceof ICompilationUnit) {
+						deploymentInfo.addToClassesAndResources(javaElement);
+					}
+				}
+			} else if ("class".equals(type)) {
+				IJavaElement javaElement = JavaCore.create(value);
+				if (javaElement instanceof IClassFile) {
+					deploymentInfo.addToClassesAndResources(javaElement);
+				}
+			} else if ("file".equals(type)) {
+				IResource resource = editorInput.getFile().getWorkspace().getRoot().findMember(new Path(value));
+				if (resource instanceof IFile) {
+					deploymentInfo.addToClassesAndResources(resource);
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void processAdditionalFiles(DeploymentInfo deploymentInfo, Element deploymentElement, IFileEditorInput editorInput) {
+		if (deploymentElement == null) return;
+		Element additionalFilesElement = deploymentElement.element("additionalFiles");
+		if (additionalFilesElement == null) {
+			additionalFilesElement = deploymentElement.element("filesAndFolders");
+		}
+		if (additionalFilesElement == null) return;
+		List elements = additionalFilesElement.elements("element");
 		for (int i = 0; i < elements.size(); i++) {
 			String value = ((Element)elements.get(i)).attributeValue("value");
-			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(value));
-			if (!file.exists()) continue;
-			filesAndFolders.add(file);
+			IResource resource = editorInput.getFile().getWorkspace().getRoot().findMember(new Path(value));
+			if (resource instanceof IFile) {
+				deploymentInfo.addToAdditionalFiles(resource);
+			}
 		}
-		deploymentInfo.setFilesAndFolders(filesAndFolders.toArray());
 	}
 	
 	
