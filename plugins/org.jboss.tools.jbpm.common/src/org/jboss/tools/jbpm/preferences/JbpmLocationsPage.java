@@ -296,7 +296,7 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 		if (item != null) {
 			name = item.getText(0);
 		}
-		Activator.getDefault().getPluginPreferences().setValue(Constants.JBPM_NAME, name);		
+		Activator.getDefault().getPreferenceStore().setValue(Constants.JBPM_NAME, name);		
 		return true;
 	}
 	
@@ -309,7 +309,7 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 	}
 	
 	public void performDefaults() {
-		Activator.getDefault().getPluginPreferences().setToDefault(Constants.JBPM_NAME);
+		Activator.getDefault().getPreferenceStore().setToDefault(Constants.JBPM_NAME);
 		PreferencesManager inputManager = 
 			(PreferencesManager)tableViewer.getInput();
 		inputManager.getJbpmInstallationMap().clear();

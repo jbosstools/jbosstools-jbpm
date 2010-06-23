@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Preferences;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.XMLMemento;
@@ -70,8 +70,8 @@ public class PreferencesManager {
 		return jbpmInstallations;
 	}
 		
-	protected Preferences getPreferences() {
-		return Activator.getDefault().getPluginPreferences();
+	private IPreferenceStore getPreferenceStore() {
+		return Activator.getDefault().getPreferenceStore();
 	}
 	
 	private void initializeInstallations() {
@@ -163,11 +163,11 @@ public class PreferencesManager {
 	}
 	
 	public String getPreferredJbpmName() {
-		return getPreferences().getString(Constants.JBPM_NAME);
+		return getPreferenceStore().getString(Constants.JBPM_NAME);
 	}
 	
 	public void setPreferredJbpmName(String name) {
-		getPreferences().setDefault(Constants.JBPM_NAME, name);
+		getPreferenceStore().setValue(Constants.JBPM_NAME, name);
 	}
 	
 	public void addJbpmInstallation(String name, String location, String version) {
