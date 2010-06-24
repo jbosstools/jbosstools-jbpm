@@ -19,6 +19,7 @@ class SwimlaneSerializer extends AbstractElementSerializer {
 		result.add("name");
 		result.add(Assignment.ASSIGNEE);
 		result.add(Assignment.CANDIDATE_GROUPS);
+		result.add(Assignment.CANDIDATE_USERS);
 		result.add(Assignment.SWIMLANE);
 		return result;
 	}
@@ -29,6 +30,8 @@ class SwimlaneSerializer extends AbstractElementSerializer {
 			appendExpression(Assignment.ASSIGNEE, buffer, wrapper);
 		} else if (Assignment.CANDIDATE_GROUPS.equals(attributeName)) {
 			appendExpression(Assignment.CANDIDATE_GROUPS, buffer, wrapper);
+		} else if (Assignment.CANDIDATE_USERS.equals(attributeName)) {
+			appendExpression(Assignment.CANDIDATE_USERS, buffer, wrapper);
 		} else if (Assignment.SWIMLANE.equals(attributeName)) {
 			appendExpression(Assignment.SWIMLANE, buffer, wrapper);
 		} else if ("name".equals(attributeName)){

@@ -28,6 +28,14 @@ class AssignmentDeserializer extends AbstractElementDeserializer {
 			wrapper.setPropertyValue(Assignment.ASSIGNMENT_EXPRESSION, candidateGroups);
 			return;
 		}
+		String candidateUsers = element.getAttribute(Assignment.CANDIDATE_USERS);
+		if (!"".equals(candidateUsers)) {
+			wrapper.setPropertyValue(
+					Assignment.ASSIGNMENT_TYPE, 
+					AssignmentPropertySource.getAssignmentTypesIndex(Assignment.CANDIDATE_USERS));
+			wrapper.setPropertyValue(Assignment.ASSIGNMENT_EXPRESSION, candidateUsers);
+			return;
+		}
 		String swimlane = element.getAttribute(HumanTask.SWIMLANE);
 		if (!"".equals(swimlane)) {
 			wrapper.setPropertyValue(

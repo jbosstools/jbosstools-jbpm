@@ -10,9 +10,10 @@ public interface Assignment {
 	
 	public final String ASSIGNEE = "assignee";
 	public final String CANDIDATE_GROUPS = "candidate-groups";
+	public final String CANDIDATE_USERS = "candidate-users";
 	public final String SWIMLANE = "swimlane";
 	public final String NONE = "none";
 	
-	public final String[] ASSIGNMENT_TYPES = { ASSIGNEE, CANDIDATE_GROUPS, SWIMLANE, NONE };
+	public final String[] ASSIGNMENT_TYPES = { ASSIGNEE, CANDIDATE_GROUPS, CANDIDATE_USERS, SWIMLANE, NONE };
 	
 }

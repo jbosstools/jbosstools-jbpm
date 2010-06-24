@@ -16,6 +16,7 @@ class HumanTaskSerializer extends ProcessNodeSerializer {
 		List<String> result = super.getAttributesToSave();
 		result.add(Assignment.ASSIGNEE);
 		result.add(Assignment.CANDIDATE_GROUPS);
+		result.add(Assignment.CANDIDATE_USERS);
 		result.add(Assignment.SWIMLANE);
 		return result;
 	}
@@ -27,6 +28,8 @@ class HumanTaskSerializer extends ProcessNodeSerializer {
 			appendExpression(HumanTask.ASSIGNEE, buffer, wrapper);
 		} else if (HumanTask.CANDIDATE_GROUPS.equals(attributeName)) {
 			appendExpression(HumanTask.CANDIDATE_GROUPS, buffer, wrapper);
+		} else if (HumanTask.CANDIDATE_USERS.equals(attributeName)) {
+			appendExpression(HumanTask.CANDIDATE_USERS, buffer, wrapper);
 		} else if (HumanTask.SWIMLANE.equals(attributeName)) {
 			appendExpression(HumanTask.SWIMLANE, buffer, wrapper);
 		} else {
