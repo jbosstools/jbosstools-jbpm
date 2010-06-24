@@ -95,7 +95,7 @@ public class JpdlEditor extends Editor {
 	protected void initDeploymentInfoPage() {
 		((JpdlContentProvider)getContentProvider()).initializeDeploymentInfo(getDeploymentInfo(), getEditorInput());
 		deploymentInfoEditorPage = new JpdlDeploymenEditorPage(this);
-		addPage(1, deploymentInfoEditorPage, "DeploymentInfo");
+		addPage(1, deploymentInfoEditorPage, "Deployment");
 	}
 
 	protected SemanticElement createMainElement() {
