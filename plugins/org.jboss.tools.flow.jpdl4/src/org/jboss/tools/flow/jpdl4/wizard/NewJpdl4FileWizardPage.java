@@ -58,6 +58,7 @@ public class NewJpdl4FileWizardPage extends WizardNewFileCreationPage {
 		combo = new Combo(versionControlsParent, SWT.BORDER | SWT.READ_ONLY);
 		combo.setFont(parent.getFont());
 		combo.setSize(50, combo.getSize().y);
+		combo.add("  4.4");
 		combo.add("  4.3");
 		combo.add("  4.2");
 		combo.add("  4.1");
