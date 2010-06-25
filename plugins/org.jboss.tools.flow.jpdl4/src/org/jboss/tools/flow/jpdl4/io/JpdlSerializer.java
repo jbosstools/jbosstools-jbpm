@@ -12,7 +12,7 @@ public class JpdlSerializer {
     public static void serialize(Wrapper wrapper, OutputStream os) throws IOException {
     	StringBuffer buffer = new StringBuffer();
     	serialize(wrapper, buffer, 0);
-    	Writer writer = new OutputStreamWriter(os);
+    	Writer writer = new OutputStreamWriter(os, "UTF-8");
     	writer.write(buffer.toString());
     	writer.close();
     }
