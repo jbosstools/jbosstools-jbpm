@@ -5,7 +5,6 @@ package org.jboss.tools.flow.jpdl4.io;
 
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.Argument;
-import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,9 +22,7 @@ class JavaTaskDeserializer extends NodeDeserializer {
 		if (result == null) return result;
 		if (result.getElement() instanceof Argument) {
 			parent.addChild(JavaTask.ARGS, result);
-		} else if (result.getElement() instanceof Field) {
-			parent.addChild(JavaTask.FIELDS, result);
-		}
+		} 
 		return result;
 	}
 }

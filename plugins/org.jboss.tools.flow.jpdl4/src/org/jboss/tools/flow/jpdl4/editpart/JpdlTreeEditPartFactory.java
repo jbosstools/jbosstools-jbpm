@@ -8,6 +8,7 @@ import org.jboss.tools.flow.common.wrapper.FlowWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.model.Argument;
+import org.jboss.tools.flow.jpdl4.model.CustomTask;
 import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.Field;
@@ -27,6 +28,7 @@ public class JpdlTreeEditPartFactory implements EditPartFactory {
 			Element element = ((NodeWrapper)model).getElement();
 			if (element instanceof SubprocessTask) return new SubprocessTaskTreeRootEditPart((Wrapper)model);
 			if (element instanceof JavaTask) return new JavaTaskTreeRootEditPart((Wrapper)model);
+			if (element instanceof CustomTask) return new CustomTaskTreeRootEditPart((Wrapper)model);
 			if (element instanceof QueryTask) return new QueryTaskTreeRootEditPart((Wrapper)model);
 			return new TaskTreeRootEditPart((NodeWrapper)model);
 		}

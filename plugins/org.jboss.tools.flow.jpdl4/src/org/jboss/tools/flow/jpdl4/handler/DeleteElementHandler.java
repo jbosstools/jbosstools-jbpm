@@ -72,7 +72,7 @@ public class DeleteElementHandler extends AbstractHandler implements IHandler {
 		} else if (child.getElement() instanceof OutputParameter) {
 			deleteChildCommand.setType(SubprocessTask.OUTPUT_PARAMETERS);
 		} else if (child.getElement() instanceof Field) {
-			deleteChildCommand.setType(JavaTask.FIELDS);
+			deleteChildCommand.setType(Field.FIELDS);
 		} else if (child.getElement() instanceof Argument) {
 			deleteChildCommand.setType(JavaTask.ARGS);
 		}

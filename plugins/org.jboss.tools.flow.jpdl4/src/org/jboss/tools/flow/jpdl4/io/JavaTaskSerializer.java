@@ -31,14 +31,7 @@ class JavaTaskSerializer extends ProcessNodeSerializer {
 		return super.getPropertyName(attributeName);
 	}
 	public void appendBody(StringBuffer buffer, Wrapper wrapper, int level) {
-		List<Element> fields = wrapper.getChildren(JavaTask.FIELDS);
-		if (fields != null) {
-    		for (Element field : fields) {
-    			if (field instanceof Wrapper) {
-    				JpdlSerializer.serialize((Wrapper)field, buffer, level+1);
-    			}
-    		}
-		}
+
 		List<Element> arguments = wrapper.getChildren(JavaTask.ARGS);
 		if (arguments != null) {
 			for (Element argument : arguments) {

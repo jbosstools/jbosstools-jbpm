@@ -154,6 +154,8 @@ public class Registry {
 			return new TerminateEndEventDeserializer();
 		} else if (element instanceof JavaTask) {
 			return new JavaTaskDeserializer();
+		} else if (element instanceof CustomTask) {
+			return new CustomTaskDeserializer();
 		} else if (element instanceof ScriptTask) {
 			return new ScriptTaskDeserializer();
 		} else if (element instanceof JmsTask) {
@@ -205,6 +207,8 @@ public class Registry {
     		return new ProcessNodeSerializer();
     	} else if (element instanceof JavaTask) {
     		return new JavaTaskSerializer();
+       	} else if (element instanceof CustomTask) {
+    		return new CustomTaskSerializer();
        	} else if (element instanceof ScriptTask) {
        		return new ScriptTaskSerializer();
        	} else if (element instanceof JmsTask) {

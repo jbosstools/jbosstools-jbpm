@@ -13,7 +13,6 @@ public class JavaTask extends Task {
 	public static final String METHOD = "org.jboss.tools.flow.jpdl4.model.javaTask.method";
 	public static final String VAR = "org.jboss.tools.flow.jpdl4.model.javaTask.var";
 	public static final String EXPR = "org.jboss.tools.flow.jpdl4.model.javaTask.expression";
-	public static final String FIELDS = "org.jboss.tools.flow.jpdl4.model.javaTask.fields";
 	public static final String ARGS = "org.jboss.tools.flow.jpdl4.model.javaTask.args";
 	
 	private String className;
@@ -82,7 +81,7 @@ public class JavaTask extends Task {
 				return getVariableName();
 			} else if (EXPR.equals(id)) {
 				return getExpression();
-			} else if (FIELDS.equals(id)) {
+			} else if (Field.FIELDS.equals(id)) {
 				return fields;
 			} else if (ARGS.equals(id)) {
 				return arguments;
@@ -99,7 +98,7 @@ public class JavaTask extends Task {
 				return getVariableName() != null;
 			} else if (EXPR.equals(id)) {
 				return getExpression() != null;
-			} else if (FIELDS.equals(id)) {
+			} else if (Field.FIELDS.equals(id)) {
 				return true;
 			} else if (ARGS.equals(id)) {
 				return true;

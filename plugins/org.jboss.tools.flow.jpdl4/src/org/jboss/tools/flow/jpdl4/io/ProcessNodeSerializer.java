@@ -11,6 +11,7 @@ import org.jboss.tools.flow.common.model.Element;
 import org.jboss.tools.flow.common.wrapper.ConnectionWrapper;
 import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
+import org.jboss.tools.flow.jpdl4.model.Field;
 import org.jboss.tools.flow.jpdl4.model.ProcessNode;
 
 class ProcessNodeSerializer extends AbstractElementSerializer {
@@ -58,6 +59,14 @@ class ProcessNodeSerializer extends AbstractElementSerializer {
 					JpdlSerializer.serialize((Wrapper)eventListenerContainer, buffer, level+1);
 				}
 			}
+		}
+		List<Element> fields = wrapper.getChildren(Field.FIELDS);
+		if (fields != null) {
+    		for (Element field : fields) {
+    			if (field instanceof Wrapper) {
+    				JpdlSerializer.serialize((Wrapper)field, buffer, level+1);
+    			}
+    		}
 		}
     	List<ConnectionWrapper> children = nodeWrapper.getOutgoingConnections();
     	for (ConnectionWrapper connectionWrapper : children) {

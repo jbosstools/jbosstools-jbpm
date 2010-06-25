@@ -12,6 +12,7 @@ import org.jboss.tools.flow.common.wrapper.NodeWrapper;
 import org.jboss.tools.flow.common.wrapper.Wrapper;
 import org.jboss.tools.flow.jpdl4.Logger;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
+import org.jboss.tools.flow.jpdl4.model.Field;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -64,7 +65,10 @@ class NodeDeserializer extends AbstractElementDeserializer {
 					flows.add((ConnectionWrapper)result);
 				} else if (result.getElement() instanceof EventListenerContainer) {
 					parent.addChild("eventListener", result);
+				} else if (result.getElement() instanceof Field) {
+					parent.addChild(Field.FIELDS, result);
 				}
+				
 			}
 		}
 		return result;

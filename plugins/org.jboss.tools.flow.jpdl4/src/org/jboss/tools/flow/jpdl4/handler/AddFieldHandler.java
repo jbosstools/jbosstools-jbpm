@@ -1,6 +1,6 @@
 package org.jboss.tools.flow.jpdl4.handler;
 
-import org.jboss.tools.flow.jpdl4.model.JavaTask;
+import org.jboss.tools.flow.jpdl4.model.Field;
 
 public class AddFieldHandler extends AddChildHandler {
 	
@@ -11,7 +11,7 @@ public class AddFieldHandler extends AddChildHandler {
 
 	@Override
 	protected String getChildType() {
-		return JavaTask.FIELDS;
+		return Field.FIELDS;
 	}
 
 }
