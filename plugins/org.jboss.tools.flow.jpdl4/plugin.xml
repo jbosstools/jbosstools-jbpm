@@ -253,6 +253,16 @@
          </node>
       </element>
       <element
+            class="org.jboss.tools.flow.jpdl4.model.ForeachParallelGateway"
+            figure="icons/16/gateway_parallel.png"
+            id="org.jboss.tools.flow.jpdl4.parallelForEachGateway"
+            label="foreach"
+            language="org.jboss.tools.flow.jpdl4">
+         <node>
+            <figure class="org.jboss.tools.flow.jpdl4.figure.ParallelGatewayFigure"></figure>
+         </node>
+      </element>
+      <element
             class="org.jboss.tools.flow.jpdl4.model.JoinParallelGateway"
             figure="icons/16/gateway_parallel.png"
             id="org.jboss.tools.flow.jpdl4.parallelJoinGateway"
@@ -690,6 +700,20 @@
                 id="org.jboss.tools.jpdl4.primitiveObject.value"
                 tab="org.jboss.tools.jpdl4.general">
             <input type="org.jboss.tools.flow.jpdl4.model.PrimitiveObject"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.name"
+                class="org.jboss.tools.flow.jpdl4.properties.ForEachVarSection"
+                id="org.jboss.tools.jpdl4.foreachGateway.var"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ForeachParallelGateway"/>
+          </propertySection>
+          <propertySection
+                afterSection="org.jboss.tools.jpdl4.var"
+                class="org.jboss.tools.flow.jpdl4.properties.ForEachInSection"
+                id="org.jboss.tools.jpdl4.foreachGateway.in"
+                tab="org.jboss.tools.jpdl4.general">
+            <input type="org.jboss.tools.flow.jpdl4.model.ForeachParallelGateway"/>
           </propertySection>
       </propertySections>
    </extension>

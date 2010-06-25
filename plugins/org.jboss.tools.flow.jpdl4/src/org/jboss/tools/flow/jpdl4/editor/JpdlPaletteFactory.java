@@ -238,6 +238,15 @@ public class JpdlPaletteFactory extends PaletteFactory {
             );
         entries.add(combined);
         combined = new CombinedTemplateCreationEntry(
+                "foreach",
+                "Create a new ForEach activity",
+                "org.jboss.tools.flow.jpdl4.parallelForEachGateway",
+                ElementRegistry.getCreationFactory("org.jboss.tools.flow.jpdl4.parallelForEachGateway"),                
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/16/gateway_parallel.png")),
+                ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/32/gateway_parallel.png"))
+            );
+        entries.add(combined);
+        combined = new CombinedTemplateCreationEntry(
                 "join",
                 "Create a new Join",
                 "org.jboss.tools.flow.jpdl4.parallelJoinGateway",

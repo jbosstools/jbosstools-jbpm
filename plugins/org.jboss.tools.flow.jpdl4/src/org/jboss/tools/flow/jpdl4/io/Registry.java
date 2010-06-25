@@ -15,6 +15,7 @@ import org.jboss.tools.flow.jpdl4.model.EventListener;
 import org.jboss.tools.flow.jpdl4.model.EventListenerContainer;
 import org.jboss.tools.flow.jpdl4.model.ExclusiveGateway;
 import org.jboss.tools.flow.jpdl4.model.Field;
+import org.jboss.tools.flow.jpdl4.model.ForeachParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.ForkParallelGateway;
 import org.jboss.tools.flow.jpdl4.model.HumanTask;
 import org.jboss.tools.flow.jpdl4.model.JavaTask;
@@ -93,6 +94,7 @@ public class Registry {
 		else if ("long".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
 		else if ("short".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
 		else if ("true".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.primitive";
+		else if ("foreach".equals(nodeName)) return "org.jboss.tools.flow.jpdl4.parallelForEachGateway";
 		// no corresponding element
 		else return null;
 	}
@@ -164,6 +166,8 @@ public class Registry {
 			return new RuleTaskDeserializer();
 		} else if (element instanceof QueryTask) {
 			return new QueryTaskDeserializer();
+		} else if (element instanceof ForeachParallelGateway) {
+			return new ForEachParallelGatewayDeserializer();
 		} else {
 			return new NodeDeserializer();
 		}
@@ -249,6 +253,8 @@ public class Registry {
     		return new ArgumentSerializer();
     	} else if (element instanceof Field) {
     		return new FieldSerializer();
+    	}else if (element instanceof ForeachParallelGateway) {
+    		return new ForEachParallelGatewaySerializer();
     	}
 		return null;
 	}
@@ -286,6 +292,7 @@ public class Registry {
 		else if ("org.jboss.tools.flow.jpdl4.outputParameter".equals(elementId)) return "parameter-out";
 		else if ("org.jboss.tools.flow.jpdl4.argument".equals(elementId)) return "arg";
 		else if ("org.jboss.tools.flow.jpdl4.field".equals(elementId)) return "field";
+		else if ("org.jboss.tools.flow.jpdl4.parallelForEachGateway".equals(elementId)) return "foreach";
 		else return null;
     }
     
