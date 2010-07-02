@@ -8,24 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.jboss.tools.jbpm.convert.b2j.translate.*;
 
 public class BpmnConvertTest extends TestCase {
 
 	public void testConvert() throws IOException {
-		String absolutePath = "";
-		if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
-			absolutePath = Platform.getBundle(
-					"org.jboss.tools.jbpm.convert.test").getLocation()
-					.substring(16);
-		} else {
-			absolutePath = Platform.getBundle(
-					"org.jboss.tools.jbpm.convert.test").getLocation()
-					.substring(15);
-		}
-		String bpmnfilePath = absolutePath + "testfile";
-		String expectedPath = absolutePath + "resultfile";
+		File absolutePath = FileLocator.getBundleFile(Platform.getBundle(
+					"org.jboss.tools.jbpm.convert.test"));
+		String bpmnfilePath = new File(absolutePath,"testfile").getAbsolutePath();
+		String expectedPath = new File(absolutePath,"resultfile").getAbsolutePath();
+		
 		File[] bpmnFiles = listAll(bpmnfilePath);
 
 		BPMN2JPDL jpdltranformer = null;

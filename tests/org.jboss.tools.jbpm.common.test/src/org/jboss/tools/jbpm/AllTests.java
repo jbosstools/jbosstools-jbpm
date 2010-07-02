@@ -10,6 +10,7 @@ public class AllTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 		suite.addTestSuite(JavaUtilTest.class);
+		suite.addTestSuite(JBPMCommonPluginLoadTest.class);
 		return suite;
 	}
 
