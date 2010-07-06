@@ -85,11 +85,18 @@ public class NameSection extends JpdlPropertySection implements IPropertyId {
 
 	protected void updateValues() {
 		IPropertySource input = getInput();
+		String newValue = getValueNotNull((String)input.getPropertyValue(NAME));
 		if (input != null) {
-			nameText.setText(getValueNotNull((String)input.getPropertyValue(NAME)));
+			if (isUpdateNeeded(newValue)) {
+				nameText.setText(newValue);
+			}
 		} else {
 			nameText.setText("");
 		}
+	}
+	
+	private boolean isUpdateNeeded(String newValue) {
+		return !newValue.equals(nameText.getText());
 	}
 
 }
