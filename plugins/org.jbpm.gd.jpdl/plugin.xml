@@ -1578,4 +1578,9 @@
       <startup class="org.jbpm.gd.jpdl.StartupClass"/>   
    </extension> 
 
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="org.jbpm.gd.jpdl.prefs.Initializer"/>
+   </extension> 
+   
 </plugin>
