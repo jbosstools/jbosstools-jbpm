@@ -174,7 +174,6 @@ public class DeploymentForm {
 		additionalFilesSection.marginWidth = 5;
 		additionalFilesSection.setText("Additional Files");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-//		gridData.verticalAlignment = GridData.BEGINNING;
 		additionalFilesSection.setLayoutData(gridData);
 		
 		Composite additionalFilesClient =  toolkit.createComposite(additionalFilesSection);
