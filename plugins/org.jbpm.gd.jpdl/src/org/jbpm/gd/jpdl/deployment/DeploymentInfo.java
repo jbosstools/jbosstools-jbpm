@@ -50,6 +50,9 @@ public class DeploymentInfo implements PreferencesConstants {
 	}
 	
 	public String getServerName() {
+		if (serverName == null) {
+			serverName = getPrefs().getString(SERVER_NAME);
+		}
 		return serverName;
 	}
 
@@ -58,6 +61,9 @@ public class DeploymentInfo implements PreferencesConstants {
 	}
 	
 	public String getServerPort() {
+		if (serverPort == null) {
+			serverPort = getPrefs().getString(SERVER_PORT);
+		}
 		return serverPort;
 	}
 
@@ -66,6 +72,9 @@ public class DeploymentInfo implements PreferencesConstants {
 	}
 	
 	public String getServerDeployer() {
+		if (serverDeployer == null) {
+			serverDeployer = getPrefs().getString(SERVER_DEPLOYER);
+		}
 		return serverDeployer;
 	}
 
