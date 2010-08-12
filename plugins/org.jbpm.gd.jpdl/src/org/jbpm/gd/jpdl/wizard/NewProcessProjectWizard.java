@@ -266,7 +266,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 //		if (!processesFolder.exists()) {
 //			processesFolder.create(true, true, null);
 //		}
-		IFolder folder = javaProject.getProject().getFolder("src/main/jpdl/simple");
+		IFolder folder = javaProject.getProject().getFolder("src/main/jpdl");
 		if (!folder.exists()) {
 			folder.create(true, true, null);
 		}
@@ -281,11 +281,21 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 		File fromDir = new File(fromPath);
 		if (!fromDir.exists()) return;
 		File[] files = fromDir.listFiles();
+		IFile destination = null;
 		for (int i = 0; i < files.length; i++) {
-			copyJbpmResource(files[i], folder);
+			if ("processdefinition.xml".equals(files[i].getName())) {
+				destination = folder.getFile("simple.jpdl.xml");
+			} else if ("gpd.xml".equals(files[i].getName())) {
+				destination = folder.getFile(".simple.gpd.xml");
+			} else if ("processimage.jpg".equals(files[i].getName())) {
+				destination = folder.getFile("simple.jpg");
+			}
+			if (destination != null) {
+				destination.create(new FileInputStream(files[i]), true, null);
+			}
 		}
 	}
-
+	
 	private void createSimpleProcessTest(IJavaProject javaProject) throws JavaModelException, IOException {
 		String resourceName = "org/jbpm/gd/jpdl/resource/SimpleProcessTest.java.template";
 		IFolder folder = javaProject.getProject().getFolder("src/test/java");

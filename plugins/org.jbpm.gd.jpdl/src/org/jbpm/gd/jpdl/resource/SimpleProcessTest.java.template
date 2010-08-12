@@ -10,7 +10,7 @@ public class SimpleProcessTest extends TestCase {
 	public void testSimpleProcess() throws Exception {
 
 		// Extract a process definition from the processdefinition.xml file.
-		ProcessDefinition processDefinition = ProcessDefinition.parseXmlResource("simple/processdefinition.xml");
+		ProcessDefinition processDefinition = ProcessDefinition.parseXmlResource("simple.jpdl.xml");
 		assertNotNull("Definition should not be null", processDefinition);
 
 		// Create an instance of the process definition.
