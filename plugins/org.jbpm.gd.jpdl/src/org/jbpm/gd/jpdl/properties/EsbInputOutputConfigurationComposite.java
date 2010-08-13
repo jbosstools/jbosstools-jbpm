@@ -1,6 +1,7 @@
 package org.jbpm.gd.jpdl.properties;
 
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.FocusEvent;
@@ -12,6 +13,8 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -124,7 +127,8 @@ public class EsbInputOutputConfigurationComposite implements SelectionListener, 
 	private void initTable() {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		AutoResizeTableLayout handlerConfigBeanTableLayout = new AutoResizeTableLayout(table);
+//		AutoResizeTableLayout handlerConfigBeanTableLayout = new AutoResizeTableLayout(table);
+		TableLayout handlerConfigBeanTableLayout = new TableLayout();
 		handlerConfigBeanTableLayout.addColumnData(new ColumnWeightData(50));
 		handlerConfigBeanTableLayout.addColumnData(new ColumnWeightData(50));
 		table.setLayout(handlerConfigBeanTableLayout);
