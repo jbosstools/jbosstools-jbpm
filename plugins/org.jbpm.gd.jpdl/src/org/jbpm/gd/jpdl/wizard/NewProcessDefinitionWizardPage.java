@@ -221,11 +221,22 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 			setMessage("Enter a name for the process.");
 			setPageComplete(false);
 			return false;
+		} else if (processExists()) {
+			setMessage("A process with this name already exists in this container.");
+			setPageComplete(false);
+			return false;
 		} else {
 			setMessage(null);
 			setPageComplete(true);
 			return true;
 		}
+	}
+	
+	private boolean processExists() {
+		IFolder folder = getProcessFolder();
+		IFile processDefinitionFile = folder.getFile(getProcessName() + ".jpdl.xml");
+		IFile gpdFile = folder.getFile("." + getProcessName() + ".gpd.xml");
+		return processDefinitionFile.exists() || gpdFile.exists();
 	}
 	
 	public IFolder getProcessFolder() {
