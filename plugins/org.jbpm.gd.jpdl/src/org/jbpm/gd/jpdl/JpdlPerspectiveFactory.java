@@ -22,9 +22,10 @@ public class JpdlPerspectiveFactory implements IPerspectiveFactory {
  		String editorArea = layout.getEditorArea();
 		
 		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.20, editorArea); //$NON-NLS-1$
-		folder.addView(JavaUI.ID_PACKAGES);
+		folder.addView("org.eclipse.ui.navigator.ProjectExplorer");
+		folder.addPlaceholder(JavaUI.ID_PACKAGES);
 		folder.addPlaceholder(JavaUI.ID_TYPE_HIERARCHY);
-		folder.addPlaceholder(IPageLayout.ID_RES_NAV);
+		folder.addPlaceholder("org.eclipse.ui.views.ResourceNavigator");
 		
 		IFolderLayout outputfolder= layout.createFolder("bottom", IPageLayout.BOTTOM, (float)0.70, editorArea); //$NON-NLS-1$
 		outputfolder.addView(IPageLayout.ID_PROP_SHEET);
