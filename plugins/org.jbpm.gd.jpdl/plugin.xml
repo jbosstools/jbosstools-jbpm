@@ -1577,10 +1577,29 @@
    <extension point="org.eclipse.ui.startup">
       <startup class="org.jbpm.gd.jpdl.StartupClass"/>   
    </extension> 
-
+   
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer class="org.jbpm.gd.jpdl.prefs.Initializer"/>
+   </extension> 
+   
+   <extension 
+         point="org.eclipse.ui.handlers">
+      <handler
+             class="org.jbpm.gd.jpdl.refactoring.RenameProcessHandler"
+             commandId="org.eclipse.ltk.ui.refactoring.commands.renameResource">
+          <activeWhen>
+             <iterate>
+				<and>
+					<instanceof value="org.eclipse.core.resources.IResource" />
+					<or>
+          				<test property="org.eclipse.core.resources.name" value="*.jpdl.xml" />
+          				<test property="org.eclipse.core.resources.name" value="*.gpd.xml" />
+          			</or>
+				</and>
+             </iterate>
+          </activeWhen>
+      </handler>
    </extension> 
    
 </plugin>
