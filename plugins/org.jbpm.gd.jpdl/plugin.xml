@@ -1600,6 +1600,21 @@
              </iterate>
           </activeWhen>
       </handler>
+      <handler
+             class="org.jbpm.gd.jpdl.refactoring.MoveProcessHandler"
+             commandId="org.eclipse.ltk.ui.refactoring.commands.moveResources">
+          <activeWhen>
+             <iterate>
+				<and>
+					<instanceof value="org.eclipse.core.resources.IResource" />
+					<or>
+          				<test property="org.eclipse.core.resources.name" value="*.jpdl.xml" />
+          				<test property="org.eclipse.core.resources.name" value="*.gpd.xml" />
+          			</or>
+				</and>
+             </iterate>
+          </activeWhen>
+      </handler>
    </extension> 
    
 </plugin>
