@@ -1600,7 +1600,7 @@
              </iterate>
           </activeWhen>
       </handler>
-<!--      <handler
+      <handler
              class="org.jbpm.gd.jpdl.refactoring.MoveProcessHandler"
              commandId="org.eclipse.ltk.ui.refactoring.commands.moveResources">
           <activeWhen>
@@ -1615,7 +1615,7 @@
              </iterate>
           </activeWhen>
       </handler>
-      <handler
+<!--      <handler
              class="org.jbpm.gd.jpdl.refactoring.DeleteProcessHandler"
              commandId="org.eclipse.ltk.ui.refactoring.commands.deleteResources">
           <activeWhen>
