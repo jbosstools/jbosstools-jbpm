@@ -32,7 +32,7 @@ public class RenameProcessProcessor extends RenameProcessor {
 
 	public RenameProcessProcessor(IResource resource) {
 		if (resource == null || !resource.exists()) {
-			throw new IllegalArgumentException("resource must not be null and must exist"); //$NON-NLS-1$
+			throw new IllegalArgumentException("resource must not be null and must exist"); 
 		}
 		
 		if (isJpdlFile(resource)) {

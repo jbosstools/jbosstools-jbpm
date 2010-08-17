@@ -11,6 +11,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class RenameProcessHandler extends AbstractProcessHandler {
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell= HandlerUtil.getActiveShell(event);
 		ISelection sel= HandlerUtil.getCurrentSelection(event);
