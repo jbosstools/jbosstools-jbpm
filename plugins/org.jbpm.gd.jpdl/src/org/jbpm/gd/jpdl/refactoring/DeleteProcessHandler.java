@@ -6,7 +6,6 @@ import org.eclipse.core.commands.ExecutionException;
 
 public class DeleteProcessHandler extends AbstractHandler {
 
-	@Override
 	public Object execute(ExecutionEvent arg0) throws ExecutionException {
 		System.out.println("hello, delete world");
 		return null;
