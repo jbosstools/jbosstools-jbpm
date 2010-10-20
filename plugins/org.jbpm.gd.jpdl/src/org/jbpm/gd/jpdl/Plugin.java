@@ -25,7 +25,6 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.jbpm.gd.jpdl.prefs.Jbpm3PreferencesManager;
 import org.osgi.framework.BundleContext;
 
 public class Plugin extends AbstractUIPlugin implements Constants {
@@ -46,7 +45,6 @@ public class Plugin extends AbstractUIPlugin implements Constants {
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		Jbpm3PreferencesManager.INSTANCE.getPreferredJbpmName();
 	}
 
 	public void stop(BundleContext context) throws Exception {

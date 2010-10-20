@@ -84,8 +84,8 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.part.ISetSelectionTarget;
 import org.jboss.tools.jbpm.preferences.JbpmInstallation;
+import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
-import org.jbpm.gd.jpdl.prefs.Jbpm3PreferencesManager;
 import org.jbpm.gd.jpdl.util.JbpmClasspathContainer;
 
 public class NewProcessProjectWizard extends Wizard implements INewWizard {
@@ -115,7 +115,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 	}
 	
 	private boolean isJbpm3RuntimeAvailable() {
-		Map<String, JbpmInstallation> installations = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallationMap();
+		Map<String, JbpmInstallation> installations = PreferencesManager.getInstance().getJbpmInstallationMap();
 		Iterator<String> iterator = installations.keySet().iterator();
 		while (iterator.hasNext()) {
 			JbpmInstallation installation = installations.get(iterator.next());
@@ -193,7 +193,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 	}
 	
 	private JbpmInstallation getJbpmInstallation() {
-		return Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(getCoreJbpmName());
+		return PreferencesManager.getInstance().getJbpmInstallation(getCoreJbpmName());
 	}
 	
 	private void createJbpmLibraryContainer(IJavaProject javaProject) throws JavaModelException {
@@ -260,7 +260,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 	}
 	
 	private void createSimpleProcessDefinition(IJavaProject javaProject) throws CoreException, JavaModelException, IOException {
-		JbpmInstallation jbpmInstallation = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(getCoreJbpmName());
+		JbpmInstallation jbpmInstallation = PreferencesManager.getInstance().getJbpmInstallation(getCoreJbpmName());
 		if (jbpmInstallation == null) return;
 //		IFolder processesFolder = javaProject.getProject().getFolder("processes");
 //		if (!processesFolder.exists()) {
@@ -317,7 +317,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 	}
 	
 	private void copyJbpmResources(IJavaProject javaProject) throws CoreException {
-		JbpmInstallation jbpmInstallation = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(getCoreJbpmName());
+		JbpmInstallation jbpmInstallation = PreferencesManager.getInstance().getJbpmInstallation(getCoreJbpmName());
 		if (jbpmInstallation == null) return;
 		String location = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(jbpmInstallation.location);
 		IFolder folder = javaProject.getProject().getFolder("src/main/config");
@@ -452,7 +452,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 			String name = configureRuntimePage.nameText.getText();
 			String location = configureRuntimePage.locationText.getText();
 			String version = "jBPM3";
-			Jbpm3PreferencesManager.INSTANCE.initializeDefaultJbpmInstallation(name, location, version);
+			PreferencesManager.getInstance().initializeDefaultJbpmInstallation(name, location, version);
 		}
 		getContainer().updateButtons();
 		createJavaProject();
