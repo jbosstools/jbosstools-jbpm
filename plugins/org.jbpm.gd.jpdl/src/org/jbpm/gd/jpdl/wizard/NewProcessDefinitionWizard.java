@@ -73,10 +73,9 @@ public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 	
 	public boolean performFinish() {
 		try {
-			IFolder folder = page.getProcessFolder();
-			IFile processDefinitionFile = folder.getFile(page.getProcessName() + ".jpdl.xml");
+			IFile processDefinitionFile = page.getProcessDefinitionFile();
 			processDefinitionFile.create(createInitialProcessDefinition(), true, null);
-			IFile gpdFile = folder.getFile("." + page.getProcessName() + ".gpd.xml");
+			IFile gpdFile = page.getGpdFile();
 			gpdFile.create(createInitialGpdInfo(), true, null);
 			IDE.openEditor(getActivePage(), processDefinitionFile);
 			openPropertiesView();
@@ -135,7 +134,7 @@ public class NewProcessDefinitionWizard extends Wizard implements INewWizard {
 	
 	private String getJbpmSchemaNameSpace() throws JavaModelException {
 		try {
-			IProject project = page.getProcessFolder().getProject();
+			IProject project = page.getProcessDefinitionFile().getProject();
 			String jbpmName = project.getPersistentProperty(new QualifiedName("", "jbpmName"));
 			if (jbpmName == null) return "";
 			JbpmInstallation jbpmInstallation = Jbpm3PreferencesManager.INSTANCE.getJbpmInstallation(jbpmName);

@@ -23,7 +23,6 @@ package org.jbpm.gd.jpdl.wizard;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -233,14 +232,25 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	}
 	
 	private boolean processExists() {
-		IFolder folder = getProcessFolder();
-		IFile processDefinitionFile = folder.getFile(getProcessName() + ".jpdl.xml");
-		IFile gpdFile = folder.getFile("." + getProcessName() + ".gpd.xml");
-		return processDefinitionFile.exists() || gpdFile.exists();
+		return getProcessDefinitionFile().exists() || getGpdFile().exists();
 	}
 	
-	public IFolder getProcessFolder() {
-		return workspaceRoot.getFolder(new Path(containerText.getText()));
+	private IPath getProcessDefinitionFilePath() {
+		String path = containerText.getText() + "/" + getProcessName() + ".jpdl.xml";
+		return new Path(path);
+	}
+	
+	private IPath getGpdFilePath() {
+		String path = containerText.getText() + "/." + getProcessName() + ".gpd.xml";
+		return new Path(path);
+	}
+	
+	IFile getProcessDefinitionFile() {
+		return workspaceRoot.getFile(getProcessDefinitionFilePath());
+	}
+	
+	IFile getGpdFile() {
+		return workspaceRoot.getFile(getGpdFilePath());
 	}
 	
 	public String getProcessName() {

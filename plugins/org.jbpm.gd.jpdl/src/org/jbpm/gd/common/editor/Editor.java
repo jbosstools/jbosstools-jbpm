@@ -9,6 +9,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.CommandStack;
@@ -336,9 +337,9 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 	
 	private boolean checkReadOnly() {
 		IFile inputFile = ((FileEditorInput)getEditorInput()).getFile();
-		IFolder inputFolder = (IFolder)inputFile.getParent();
-		IFile notationInfoFile = inputFolder.getFile(getContentProvider().getNotationInfoFileName(inputFile.getName()));
-		IFile diagramImageFile = inputFolder.getFile(getContentProvider().getDiagramImageFileName(inputFile.getName()));
+		IContainer inputFolder = (IContainer)inputFile.getParent();
+		IFile notationInfoFile = inputFolder.getFile(new Path(getContentProvider().getNotationInfoFileName(inputFile.getName())));
+		IFile diagramImageFile = inputFolder.getFile(new Path(getContentProvider().getDiagramImageFileName(inputFile.getName())));
 		String readOnlyFiles = "";
 		ArrayList readOnlyFilesList = new ArrayList();
 		if (inputFile.isReadOnly()) {
