@@ -57,11 +57,13 @@ public class NamedElementConfigurationComposite implements FocusListener, Proper
 	}
 	
 	private void clearControls() {
-		nameText.setText("");
+		if (!nameText.isDisposed()) {
+			nameText.setText("");
+		}
 	}
 	
 	private void updateControls() {
-		if (namedElement != null) {
+		if (namedElement != null && !nameText.isDisposed()) {
 			String name = namedElement.getName();
 			nameText.setText(name == null ? "" : name);
 		}
@@ -107,7 +109,7 @@ public class NamedElementConfigurationComposite implements FocusListener, Proper
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
-		if ("name".equals(evt.getPropertyName())) {
+		if ("name".equals(evt.getPropertyName()) && !nameText.isDisposed()) {
 			nameText.setText(evt.getNewValue() != null ? (String)evt.getNewValue() : "");
 		}
 	}			
