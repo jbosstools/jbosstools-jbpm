@@ -36,8 +36,7 @@ public class ProcessArchiveDeployer {
 		if (response == null) {
 			return false;
 		}
-		System.out.println(response);
-		return true;
+		return response.contains("deployed successfully");
 	}
 	
 	public boolean pingServer() {
@@ -50,8 +49,7 @@ public class ProcessArchiveDeployer {
 		if (response == null) {
 			return false;
 		}
-		System.out.println(response);
-		return true;
+		return response.contains("GPD deployer is operational");
 	}
 	
 	private String constructUrlString() {
