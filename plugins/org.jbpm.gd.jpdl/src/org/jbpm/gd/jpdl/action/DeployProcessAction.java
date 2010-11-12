@@ -21,6 +21,8 @@ public class DeployProcessAction extends Action {
 		boolean success = new ProcessArchiveDeployer(jpdlEditor).deploy(processArchive);
 		if (success) {
 			showSuccessDialog();
+		} else {
+			showFailureDialog();
 		}
 	}
 	
@@ -31,6 +33,18 @@ public class DeployProcessAction extends Action {
 				null,
 				"The process archive deployed successfully.",
 				SWT.ICON_INFORMATION, 
+				new String[] { "OK" }, 
+				0);
+		dialog.open();
+	}
+
+	private void showFailureDialog() {
+		MessageDialog dialog = new MessageDialog(
+				jpdlEditor.getSite().getShell(), 
+				"Deployment Failed", 
+				null,
+				"The process archive could not be deployed.",
+				SWT.ICON_ERROR, 
 				new String[] { "OK" }, 
 				0);
 		dialog.open();

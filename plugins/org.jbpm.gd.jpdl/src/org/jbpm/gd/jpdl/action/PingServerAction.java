@@ -18,6 +18,8 @@ public class PingServerAction extends Action {
 		boolean success = new ProcessArchiveDeployer(jpdlEditor).pingServer();
 		if (success) {
 			showSuccessDialog();
+		} else {
+			showFailureDialog();
 		}
 	}
 	
@@ -28,6 +30,18 @@ public class PingServerAction extends Action {
 				null,
 				"The server could be reached successfully.",
 				SWT.ICON_INFORMATION, 
+				new String[] { "OK" }, 
+				0);
+		dialog.open();
+	}
+
+	private void showFailureDialog() {
+		MessageDialog dialog = new MessageDialog(
+				jpdlEditor.getSite().getShell(), 
+				"Ping Server Failure", 
+				null,
+				"The server could not be reached. Check your connection information.",
+				SWT.ICON_ERROR, 
 				new String[] { "OK" }, 
 				0);
 		dialog.open();
