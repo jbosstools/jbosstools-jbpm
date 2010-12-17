@@ -29,8 +29,15 @@ import org.jbpm.gd.jpdl.Plugin;
 
 public class Jbpm3PreferencesManager extends PreferencesManager {
 		
-	public static final Jbpm3PreferencesManager INSTANCE = new Jbpm3PreferencesManager();
-		
+	private static Jbpm3PreferencesManager INSTANCE = new Jbpm3PreferencesManager();
+	
+	public static PreferencesManager getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new Jbpm3PreferencesManager();
+		}
+		return INSTANCE;
+	}
+	
 	protected void initialize() {
 		File installationsFile = 
 			Plugin.getDefault().getStateLocation().append("jbpm-installations.xml").toFile();
@@ -41,6 +48,7 @@ public class Jbpm3PreferencesManager extends PreferencesManager {
 			loadInstallations();
 		}
 		installationsFile.delete();
+		super.initialize();
 	}
 	
 	@SuppressWarnings("deprecation")

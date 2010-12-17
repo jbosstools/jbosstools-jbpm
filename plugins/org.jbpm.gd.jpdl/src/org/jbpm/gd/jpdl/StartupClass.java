@@ -7,7 +7,7 @@ public class StartupClass implements IStartup {
 
 	public void earlyStartup() {
 		// Reference the Jbpm3PreferencesManager to trigger the initialization.
-		Jbpm3PreferencesManager.INSTANCE.toString();
+//		Jbpm3PreferencesManager.INSTANCE.toString();
 	}
 
 }
