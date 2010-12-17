@@ -53,6 +53,10 @@ public class PreferencesManager {
 	}
 	
 	protected PreferencesManager() {
+		initialize();
+	}
+	
+	protected void initialize() {
 		initializeInstallations();
 	}
 	

@@ -31,20 +31,11 @@ public class Jbpm3PreferencesManager extends PreferencesManager {
 		
 	public static final Jbpm3PreferencesManager INSTANCE = new Jbpm3PreferencesManager();
 		
-	protected Jbpm3PreferencesManager() {
-		super();
-		initialize();
-	}
-	
-	void initialize() {
-		initializeInstallations();
-		initializePreferredJbpmName();
-	}
-		
-	private void initializeInstallations() {
+	protected void initialize() {
 		File installationsFile = 
 			Plugin.getDefault().getStateLocation().append("jbpm-installations.xml").toFile();
 		if (installationsFile.exists()) {
+			initializePreferredJbpmName();
 			loadInstallations(installationsFile);
 			saveInstallations();
 			loadInstallations();

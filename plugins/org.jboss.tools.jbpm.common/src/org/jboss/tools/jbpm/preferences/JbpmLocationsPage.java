@@ -183,7 +183,10 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 	}
 
 	private void checkItemToCheck(TableViewer viewer) {
-		String name = Activator.getDefault().getPreferenceStore().getString(Constants.JBPM_NAME);
+//		String name = Activator.getDefault().getPreferenceStore().getString(Constants.JBPM_NAME);
+		PreferencesManager inputManager = 
+			(PreferencesManager)tableViewer.getInput();
+		String name = inputManager.getPreferredJbpmName();
 		if (name != null) {
 			TableItem tableItem = getItemToCheck(viewer, name);
 			if (tableItem != null) {
@@ -296,7 +299,8 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 		if (item != null) {
 			name = item.getText(0);
 		}
-		Activator.getDefault().getPreferenceStore().setValue(Constants.JBPM_NAME, name);		
+//		Activator.getDefault().getPreferenceStore().setValue(Constants.JBPM_NAME, name);	
+		inputManager.setPreferredJbpmName(name);
 		return true;
 	}
 	
@@ -309,9 +313,10 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 	}
 	
 	public void performDefaults() {
-		Activator.getDefault().getPreferenceStore().setToDefault(Constants.JBPM_NAME);
+//		Activator.getDefault().getPreferenceStore().setToDefault(Constants.JBPM_NAME);
 		PreferencesManager inputManager = 
 			(PreferencesManager)tableViewer.getInput();
+		inputManager.setPreferredJbpmName(null);
 		inputManager.getJbpmInstallationMap().clear();
 		tableViewer.setInput(inputManager);
 		checkItemToCheck(tableViewer);

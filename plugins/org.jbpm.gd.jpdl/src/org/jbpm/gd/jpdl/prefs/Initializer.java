@@ -1,8 +1,8 @@
 package org.jbpm.gd.jpdl.prefs;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
-import org.jbpm.gd.jpdl.Plugin;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.jbpm.gd.jpdl.Plugin;
 
 public class Initializer extends AbstractPreferenceInitializer implements PreferencesConstants {
 
