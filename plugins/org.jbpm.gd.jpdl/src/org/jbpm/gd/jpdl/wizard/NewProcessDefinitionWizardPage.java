@@ -189,13 +189,17 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	}
 	
 	private void checkPage() {
-		if (!checkProcessNameText()) return;
 		if (!checkContainerText()) return;
+		if (!checkProcessNameText()) return;
 	}
 	
 	private boolean checkContainerText() {
 		if ("".equals(containerText.getText())) {
 			setMessage("Select the source folder or enter its name.");
+			setPageComplete(false);
+			return false;
+		} else if (!projectExists()) {
+			setMessage("The source folder needs to be contained in an existing project");
 			setPageComplete(false);
 			return false;
 		} else if (!containerExists()) {
@@ -207,6 +211,13 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 			setPageComplete(true);
 			return true;
 		}
+	}
+	
+	private boolean projectExists() {
+		IPath path = new Path(containerText.getText());
+		String project = path.segment(0);
+		IResource resource = workspaceRoot.getProject(project);
+		return resource != null && resource.exists();
 	}
 	
 	private boolean containerExists() {
@@ -246,6 +257,7 @@ public class NewProcessDefinitionWizardPage extends WizardPage {
 	}
 	
 	IFile getProcessDefinitionFile() {
+		
 		return workspaceRoot.getFile(getProcessDefinitionFilePath());
 	}
 	
