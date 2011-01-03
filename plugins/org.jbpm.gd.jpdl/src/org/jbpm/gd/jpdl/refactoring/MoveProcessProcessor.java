@@ -31,7 +31,7 @@ public class MoveProcessProcessor extends MoveProcessor {
 	private IContainer destination;
 
 	public MoveProcessProcessor(IResource resource) {
-		IResource jpdlResource = null, gpdResource = null;
+		IResource jpdlResource = null, gpdResource = null, jpgResource = null;
 		if (resource == null || !resource.exists()) {
 			throw new IllegalArgumentException("resource must not be null and must exist"); 
 		}		
@@ -41,9 +41,14 @@ public class MoveProcessProcessor extends MoveProcessor {
 		} else if (isGpdFile(resource)) {
 			jpdlResource = getJpdlResource(resource);
 			gpdResource = resource;
-		}		
+		}	
 		if (jpdlResource != null && jpdlResource.exists() && gpdResource != null && gpdResource.exists()) {
-			resourcesToMove = new IResource[] { jpdlResource, gpdResource }; 			
+			jpgResource = getJpgResource(jpdlResource);
+			if (jpgResource != null && jpgResource.exists()) {
+				resourcesToMove = new IResource[] { jpdlResource, gpdResource, jpgResource }; 
+			} else {
+				resourcesToMove = new IResource[] { jpdlResource, gpdResource }; 
+			}
 		} else {
 			throw new IllegalArgumentException("both jpdlFile and gpdFile must not be null and must exist");
 		}
@@ -67,6 +72,13 @@ public class MoveProcessProcessor extends MoveProcessor {
 	private boolean isGpdFile(IResource resource) {
 		String name = resource.getName();
 		return name.startsWith(".") && name.endsWith(".gpd.xml");
+	}
+	
+	private IResource getJpgResource(IResource resource) {
+		if (!resource.getName().endsWith(".jpdl.xml")) {
+			throw new IllegalArgumentException("jpg resource can only be obtained for a jpdl file");
+		}
+		return resource.getParent().getFile(new Path(getProcessName(resource) + ".jpg"));
 	}
 	
 	private IResource getGpdResource(IResource resource) {
@@ -111,7 +123,29 @@ public class MoveProcessProcessor extends MoveProcessor {
 				MultiStatus multi = new MultiStatus(
 							ResourcesPlugin.PI_RESOURCES,
 							IResourceStatus.OUT_OF_SYNC_LOCAL,
-							"both resources are out of sync with file system", 
+							"the resources are out of sync with file system", 
+							null);
+				multi.add(result);
+				multi.add(temp);
+				result = multi;
+			}
+		}
+		if (resourcesToMove.length == 3 && !resourcesToMove[2].isSynchronized(IResource.DEPTH_INFINITE)) {
+			IStatus temp = new Status (
+						IStatus.ERROR,
+						ResourcesPlugin.PI_RESOURCES,
+						IResourceStatus.OUT_OF_SYNC_LOCAL,
+						"Resource " + resourcesToMove[2].getName() + "is out of sync with file system",
+						null);
+			if (result == null) {
+				result = temp;
+			} else if (result instanceof MultiStatus) {
+				((MultiStatus)result).add(temp);
+			} else {
+				MultiStatus multi = new MultiStatus(
+							ResourcesPlugin.PI_RESOURCES,
+							IResourceStatus.OUT_OF_SYNC_LOCAL,
+							"the resources are out of sync with file system", 
 							null);
 				multi.add(result);
 				multi.add(temp);
