@@ -114,7 +114,7 @@ public class DetailsView extends PageBookView implements ISelectionProvider,
         super.showPageRec(pageRec);
     }
     
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"rawtypes" })
 	public Object getAdapter(Class adapter) {
     	if (adapter == IPropertySheetPage.class && getCurrentPage() != null && getCurrentPage() instanceof DetailsPage)
             return ((DetailsPage)getCurrentPage()).getContributingEditor().getAdapter(adapter);
