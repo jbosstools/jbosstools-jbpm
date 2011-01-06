@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <chapter id="bpmn2jpdl" >
-    <title>Translate a Bpmn file to a JPDL file</title>
-    <para>In this chapter we provide you with the necessary steps to translate a Bpmn file to a JPDL file.</para>  
+	  <title>Translate a Bpmn file to a JPDL file</title>
+    <para>This chapter provides you with the necessary steps to translate a Bpmn file to a JPDL file.</para>  
     
     <section id="createproject">
     	<title>Creating a project</title>
   	    <para>Before creating a Bpmn file, you should have a Project created.</para>
-  	    <para>Create a project by 
-  	          <emphasis><property>New > Project... > General > Project</property></emphasis>. Enter the following information:
-   </para>
-  <para>Project Name: test</para>
-     
+  	    <para>
+  	    	Create a project by selecting
+  	      	<menuchoice>
+  	      		<guimenuitem>File</guimenuitem>
+  	      		<guimenuitem>New</guimenuitem>
+  	      		<guimenuitem>Project...</guimenuitem>
+  	      		<guimenuitem>General</guimenuitem>
+  	      		<guimenuitem>Project</guimenuitem>
+  	      	</menuchoice>.
+  	    </para>
+  	    <para>Enter <guilabel>test</guilabel> in the <guilabel>Project name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
         <figure>
             <title>Creating a Project</title>
                 <mediaobject>
@@ -19,15 +25,21 @@
                      </imageobject>
                 </mediaobject>
         </figure>
-        <para>Click on the <property>Finish</property> button.</para>
     </section>
     <section id="createbpmnfile">
-    	<title>Creating a Bpmn File by STP BPMN Editor</title>
-        <para>Create a BPMN diagram file by 
-  	          <emphasis><property>New > Others... > Bpmn Diagram</property></emphasis>
-  	          . Enter the following information:
+    	<title>Creating a BPMN file using the STP BPMN editor</title>
+        <para>Create a BPMN diagram file by selecting 
+        	<menuchoice>
+						<guimenuitem>File</guimenuitem>
+						<guimenuitem>New</guimenuitem>
+						<guimenuitem>Other...</guimenuitem>
+						<guimenuitem>Other</guimenuitem>
+						<guimenuitem>Bpmn Diagram</guimenuitem>
+					</menuchoice>.
   	    </para>
-              <para>File Name: test</para>
+  	    
+  	    <para>Enter <guilabel>test</guilabel> in the <guilabel>File name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
+              
            <figure>
             <title>Creating BPMN Diagram</title>
                 <mediaobject>
@@ -36,19 +48,23 @@
                      </imageobject>
                 </mediaobject>
         </figure>
-        <para>Click on the <property>Finish</property> button.</para>
-        <para>Open the test.bpmn_diagram file by double-click it.</para>
-        <para>Draw the Bpmn diagram using STP BPMN editor. If you do not know how to use STP BPMN editor, please visit <ulink url="http://www.eclipse.org/bpmn/">BPMN project page for details</ulink>.</para>
+        <para>Open the <guilabel>test.bpmn_diagram</guilabel> file by double-clicking it.</para>
+        <para>Draw the Bpmn diagram using the STP BPMN editor. For more information on how to use the STP BPMN editor, please visit the <ulink url="http://www.eclipse.org/bpmn/">BPMN project page</ulink>.</para>
     </section>
         <section id="bpmntojpdl">
     	<title>Exporting a Bpmn File to Jpdl files</title>
   	    <para>A Bpmn file may include more than one pool. Every pool can be mapped to a corresponding Jpdl file.</para>
   	    <itemizedlist>
   	        <listitem>
-  	      	  <para>Select 'test.bpmn' file and right-click it. Open the export wizard by 
-  	      	      <emphasis><property>Export... -> BPMN -> BPMN to jPDL</property></emphasis>
-  	          .
+  	      	  <para>Select the <guilabel>test.bpmn</guilabel> file and right-click on it. Open the export wizard by selecting
+  	      	  	<menuchoice>
+									<guimenuitem>Export...</guimenuitem>
+									<guimenuitem>BPMN</guimenuitem>
+									<guimenuitem>BPMN to jPDL...</guimenuitem>
+								</menuchoice>
+  	           from the context menu.
   	          </para>
+  	          <para>Click the <guibutton>Next</guibutton> button.</para>
               <figure>
                    <title>BPMN Export</title>
                        <mediaobject>
@@ -57,10 +73,10 @@
                             </imageobject>
                        </mediaobject>
               </figure>
-              <para>Click on the <property>Next</property> button.</para>
+              
             </listitem>
             <listitem>
-  	      	  <para>Select the BPMN file that you want to translate.
+  	      	  <para>Select the BPMN file that you want to translate, and click the <guibutton>Next</guibutton> button.
   	          </para>
               <figure>
                    <title>Choosing a BPMN File</title>
@@ -70,10 +86,9 @@
                             </imageobject>
                        </mediaobject>
               </figure>
-              <para>Click on the <property>Next</property> button.</para>
             </listitem>
             <listitem>
-  	      	  <para>Select the Pools of BPMN that you want to translate.
+  	      	  <para>Select the BPMN Pools that you want to translate, and click the <guibutton>Next</guibutton> button.
   	          </para>
               <figure>
                    <title>Choosing BPMN Pools</title>
@@ -83,16 +98,16 @@
                             </imageobject>
                        </mediaobject>
               </figure>
-              <para>Click on the <property>Next</property> button.</para>
             </listitem>
             <listitem>
   	      	  <para>On the next page, you may get error or warning messages that occurred during the conversion. If there are no messages, this page is skipped.
   	          </para>
-                     <para>Click on the <property>Next</property> button.</para>
+                     <para>Click on the <guibutton>Next</guibutton> button.</para>
             </listitem>
             <listitem>
-  	      	  <para>Select the target location to save the generated JPDL files.
+  	      	  <para>Select the target location where the generated JPDL files will be saved. If you'd like to overwrite existing resources,check this &quot;Overwrite existing resources&quot; checkbox.
   	          </para>
+  	          <para>Click on the <guibutton>Finish</guibutton> button to generate the JPDL files in the target location.</para>
               <figure>
                    <title>Target Location</title>
                        <mediaobject>
@@ -101,13 +116,9 @@
                             </imageobject>
                        </mediaobject>
               </figure>
-              <itemizedlist>
-                  <listitem>
-                      <para>If you'd like to overwrite existing resources,check this &quot;Overwrite existing resources&quot; checkbox.</para>
-                  </listitem>
-              </itemizedlist>
-              <para>Click on the <property>Finish</property> button.</para>
-              <para>Then the JPDL files are generated to the target location.</para>
+
+           
+              <para></para>
             </listitem>            
   	    </itemizedlist>
   	    <para>The generated files look like this: </para>
@@ -119,7 +130,7 @@
                             </imageobject>
                        </mediaobject>
               </figure>  
-            <para>We hope, this guide helped you to get started with the JBoss BPMN Convert module. Besides, for additional information you are welcome on <ulink
+            <para>We hope this guide helped you to get started with the JBoss BPMN Convert module. For additional information and support please visit the <ulink
                     url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
     </section>
        
