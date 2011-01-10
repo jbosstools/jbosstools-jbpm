@@ -34,7 +34,7 @@
                     <entry><para>STP BPMN Editor</para></entry>
                     <entry><para>JBoss BPMN Convert module contains the STP Business Process Modeling Notation (BPMN) Editor, which is a tool to express any processes in a graphical form (as simple diagrams with a set of graphical elements). These BPMN files can then be converted to jPDL.</para></entry>
                     <entry>
-                        <link linkend="createbpmnfile">Creating a BPMN file using the STP BPMN editor</link>
+                        <xref linkend="createbpmnfile"/>
                     </entry>
                 </row>
                 
