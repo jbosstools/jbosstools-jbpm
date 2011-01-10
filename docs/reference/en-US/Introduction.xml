@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter id="Introduction" xreflabel="Introduction">
+<chapter id="Introduction">
  <?dbhtml filename="TargetAudience.html"?>
  <chapterinfo>
   <keywordset>
@@ -67,7 +67,7 @@
 
      <row>
       <entry>
-       <link linkend="minimal_process_definition">jPDL support</link>
+       <xref linkend="minimal_process_definition"/>
       </entry>
       <entry>Enables managing workflow processes as well as human tasks and interactions between
        them. jPDL combines the best techniques both in Java and in declarative process.</entry>
@@ -75,7 +75,7 @@
 
      <row>
       <entry>
-       <link linkend="GuidedTourJBossjBPMGPD">Support of Graphical Process Designer (GPD)</link>
+       <xref linkend="GuidedTourJBossjBPMGPD"/>
       </entry>
       <entry>Is used for simplifying declarative process development and visualizations of all
        actions.</entry>
@@ -83,7 +83,7 @@
 
      <row>
       <entry>
-       <link linkend="CreatingjBPMProject">Project Creation wizard</link>
+       <xref linkend="CreatingjBPMProject"/>
       </entry>
       <entry>Allows to create a new jBPM template project that already includes all advanced
        artifacts and core jBPM libraries.</entry>
@@ -91,7 +91,7 @@
 
      <row>
       <entry>
-       <link linkend="minimal_process_definition">Rich palette of pre-build process nodes</link>
+       <xref linkend="minimal_process_definition"/>
       </entry>
       <entry>Provides process-building functionality and gives opportunity even non-programmers to
        develop processes.</entry>
@@ -99,14 +99,14 @@
 
      <row>
       <entry>
-       <link linkend="the_views">A large range of special views, including:</link>
+       <xref linkend="the_views"/>
       </entry>
       <entry></entry>
      </row>
 
      <row>
       <entry>
-       <link linkend="source_mode">Support of XML code view</link>
+       <xref linkend="source_mode"/>
       </entry>
       <entry>Shows the corresponding XML that&apos;s generated automatically in the Source view
        of the process definition editor when developing the process.</entry>
@@ -114,14 +114,14 @@
 
      <row>
       <entry>
-       <link linkend="the_properties_view">Properties view</link>
+       <xref linkend="the_properties_view"/>
       </entry>
       <entry>Facilitates configuring and editing of all nodes properties.</entry>
      </row>
 
      <row>
       <entry>
-       <link linkend="jbpm_gpd_editor">The jBPM Graphical Process Designer editor</link>
+       <xref linkend="jbpm_gpd_editor"/>
       </entry>
       <entry>The plugin is used for designing the workflow.</entry>
      </row>

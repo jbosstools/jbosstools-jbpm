@@ -15,7 +15,7 @@
 
     </chapterinfo>
     <title>Tasks</title>
-<section id="jboss_jbpm_runtime_installation" xreflabel="jboss_jbpm_runtime_installation">
+<section id="jboss_jbpm_runtime_installation">
 
     <title>JBoss jBPM Runtime Installation</title>
     <para>The main purpose of this chapter is to let you know how to launch the <property>JBoss
@@ -367,7 +367,7 @@
                 </emphasis> to the process. So we implement another test.</para>
             
             <para>At first, let&apos;s return to the
-                code we already saw <!--<link linkend="hello_test">-->in the previous chapter<!--</link>--> and add new test method <emphasis>
+                code we already saw <!--<xref linkend="hello_test">-->in the previous chapter and add new test method <emphasis>
                     <property>testActionHendler</property></emphasis> to it. </para>
             
             <figure>
