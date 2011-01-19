@@ -28,7 +28,9 @@
 			<para>Try to avoid using spaces in the names of installation folders. It can cause problems with Sun based VMs.</para>
 		</note>
 
-		<para>Select <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem><guimenuitem>JBoss jBPM</guimenuitem><guimenuitem>Runtime Locations</guimenuitem></menuchoice>. Here you can add, edit and remove JBoss jBPM installation locations. Click the <guibutton>Add</guibutton> button. In the subsequent dialog box enter a name for a newly added jBPM runtime and point to the correct location of this package on your file system. Click the <guibutton>OK</guibutton> button twice to save the changes.
+		<para>
+			Select <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem><guimenuitem>JBoss jBPM</guimenuitem><guimenuitem>Runtime Locations</guimenuitem></menuchoice>. Here you can add, edit and remove JBoss jBPM installation locations. Click the <guibutton>Add</guibutton> button. In the subsequent dialog box enter a name for a newly added jBPM runtime and point to the correct location of this package on your file system. Click the <guibutton>OK</guibutton> button twice to save the changes.
+		</para>
 
 		<figure>
 			<title>Adding jBPM Location</title>
