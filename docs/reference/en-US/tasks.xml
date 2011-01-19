@@ -192,35 +192,19 @@
 
 		<title>Actions : The JBoss jBPM Integration Mechanism</title>
 
-		<para> In this chapter we will show how to do software integration with <property>JBoss
-            jBPM</property>. The standard mechanism to implement this is to wrap the functionality you
-            want to integrate in a class that implements the <emphasis>
-                <property>ActionHandler</property>
-			</emphasis> interface. In order to demonstrate it let's specify Hello World action for our
-            process.</para>
+		<para>
+			This chapter will demonstrate how to integrate with <property>JBoss jBPM</property>. The standard mechanism to implement this is to wrap the functionality you want to integrate in a class that implements the <emphasis><property>ActionHandler</property></emphasis> interface. In order to demonstrate it let&apos;s specify a simple Hello World action for our process.
+		</para>
 
 		<section>
 			<title>Creating a Hello World Action</title>
 
-			<para>Each Hello World process should integrate one or more Hello World actions, so this is
-                what we will be doing. We can integrate custom code at different points in the process
-                definition. To do this we have to specify an action handler, represented by an
-                implementation of the <emphasis>
-                    <property>ActionHandler</property>
-				</emphasis> interface, and attach this piece of code to a particular event. These events
-                are amongst others, going over a transition, leaving or entering nodes, after and before
-                signalling. </para>
+			<para>
+				Each Hello World process should integrate one or more Hello World actions, so this is what we will be doing. We can integrate custom code at different points in the process definition. To do this we have to specify an action handler, represented by an implementation of the <emphasis><property>ActionHandler</property></emphasis> interface, and attach this piece of code to a particular event. These events are amongst others, going over a transition, leaving or entering nodes, after and before signaling. 
+			</para>
 
-			<para> To make things a little bit more concrete, let&apos;s create a new class called <emphasis>
-                <property>HelloActionHandler</property>.
-            </emphasis> For that firstly we&apos;ll create a new package <emphasis>
-                <property>com.jbay.action</property>
-				</emphasis> in the <emphasis>
-                <property>src/java/main</property>
-				</emphasis> folder of our project. Then, we should call New Class Creation wizard as
-                usual by right-clicking and navigating <emphasis>
-                    <property>New > Class</property>.
-                </emphasis>
+			<para>
+				To make things a little bit more concrete, let&apos;s create a new class called <emphasis><property>HelloActionHandler</property></emphasis>. For that firstly we will create a new package <code>com.jbay.action</code> in the <filename>src/java/main</filename> folder of our project. Then, we should call New Class Creation wizard as usual selecting <menuchoice><guimenuitem>New</guimenuitem><guimenuitem>Class</guimenuitem></menuchoice> from the context menu.
 			</para>
 
 			<figure>
@@ -233,29 +217,17 @@
 				</mediaobject>
 			</figure>
 
-			<para>Notice that two first gaps have been filled automatically. Here, instead of <emphasis>
-                <property>Package</property>
-				</emphasis> option <emphasis>
-                <property>Enclose type</property>
-				</emphasis> option can be selected where a type in which to enclose a new class should
-                be specified.</para>
+			<para>
+				Notice that two first gaps have been filled automatically. Here, instead of the <emphasis><property>Package</property></emphasis> option, the <emphasis><property>Enclose type</property></emphasis> option can be selected to define the type in which the new class should be created will be enclosed.
+			</para>
 
-			<para>In our case, we leave everything as it is, just type <emphasis>
-                <property>HelloActionHandler</property>
-				</emphasis> as a name of new class and add <emphasis>
-                <property>org.jbpm.graph.ActionHendler</property>
-				</emphasis> interface as it&apos;s shown in the picture above.</para>
+			<para>
+				In our case, we leave everything as it is, just type <code>HelloActionHandler</code> as a name of new class and add <code>org.jbpm.graph.ActionHendler</code> interface as it is shown in the picture above.
+			</para>
 
-			<para>Thus, our <emphasis>
-                <property>HelloActionHandler</property>
-				</emphasis> implements the <emphasis>
-                <property>ActionHandler</property>
-				</emphasis> interface including the <emphasis>
-                <property>execute</property>
-				</emphasis> method as shown in the next figure. Here, we add a variable named <emphasis>
-                <property>greeting</property>
-				</emphasis> to the collection of process variables and put     a message in it :
-                <emphasis>&quot;Hello from ActionHandler&quot;</emphasis>. </para>
+			<para>
+				Thus, our <code>HelloActionHandler</code> implements the <code>ActionHandler</code> interface, including the <code>execute</code> method as shown in the next figure. Here, we add a variable named <code>greeting</code> to the collection of process variables and put a message in it: <code>&quot;Hello from ActionHandler&quot;</code>. 
+      </para>
 
 			<figure>
 				<title>A Simple Hello Action</title>
@@ -267,27 +239,23 @@
 				</mediaobject>
 			</figure>
 
-			<para>Now, as we have <emphasis>
-                <property>HelloActionHandler</property>
-				</emphasis> class defined, let&apos;s explore how we can handle it.</para>
+			<para>Now, as we have <code>HelloActionHandler</code> class defined, let&apos;s explore how we can handle it.</para>
 		</section>
 
 		<section>
 			<title>Integrating the Hello World Action</title>
 
-			<para>The main purpose of this chapter is to provide you with the steps associating our
-                Hello World action with a particular event and test the correctness of our actions as
-                well.</para>
+			<para>
+				The main purpose of this chapter is to provide you with the steps required to associate our Hello World action with a particular event and test the validity of our actions as well.
+			</para>
 
-			<para> As good Testcity citizens we will first create a Unit Test that proves the behaviour
-                we want to achieve by adding the <emphasis>
-                    <property>ActionHandler</property>
-				</emphasis> to the process. So we implement another test.</para>
+			<para>
+				In order to validate our code we will first create a Unit Test that proves the behavior we want to achieve by adding the <code>ActionHandler</code> to the process. So we implement another test.
+			</para>
 
-			<para>At first, let&apos;s return to the
-                code we already saw <!--<xref linkend="hello_test">-->in the previous chapter and add new test method <emphasis>
-                    <property>testActionHendler</property>
-				</emphasis> to it. </para>
+			<para>
+				At first, let&apos;s return to the code we already saw <!--<xref linkend="hello_test">-->in the previous chapter and add new test method <code>testActionHendler</code> to it.
+			</para>
 
 			<figure>
 				<title>Create the Hello Action Test</title>
@@ -299,23 +267,13 @@
 				</mediaobject>
 			</figure>
 
-			<para>We assert
-                that no variable called <emphasis>
-                    <property>greeting</property>
-				</emphasis> exist. Then we give the process a signal to move it to the auction state. We
-                want to associate the execution of the action with the event of going over the
-                transition from the start state to the auction state. So after the signal, the process
-                should be in the auction state as in the previous scenario. But moreover, the <emphasis>
-                    <property>greeting</property>
-				</emphasis> variable should exist and contain the string <emphasis>&quot;Hello from
-                    ActionHandler&quot;</emphasis>. That&apos;s what we assert in the last lines of the test
-                method.</para>
-            
-            
-
-			<para> Running the tests now results in a failure. The point is that we did not associate
-                the action with any particular event in the process definition, so the process variable
-                did not get set. </para>
+			<para>
+				We assert that no variable called <code>greeting</code> exist. Then we give the process a signal to move it to the action state. We want to associate the execution of the action with the event of going over the transition from the start state to the action state. So after the signal, the process should be in the action state as in the previous scenario. But moreover, the <code>greeting</code> variable should exist and contain the string <code>&quot;Hello from ActionHandler&quot;</code>. That is what we assert in the last lines of the test method.
+			</para>
+      
+			<para>
+				Running the tests now results in a failure. The point is that we did not associate the action with any particular event in the process definition, so the process variable did not get set.
+			</para>
 
 			<figure>
 				<title>Test Results Before Integration</title>
@@ -327,12 +285,9 @@
 				</mediaobject>
 			</figure>
 
-			<para> Let&apos;s do something about it and add an action to the first transition of our
-                sample process. To do this you can use the Actions tab in the Properties Editor that is
-                under the graphical canvas. Bring up the popup menu of the action element container and
-                chose New Action as it's shown on the figure below. The other way to add an action
-                to the transition is simply to use the dropdown menu that is available under the action
-                icon in the right upper corner of the Properties View.</para>
+			<para>
+				Let&apos;s do something about it and add an action to the first transition of our sample process. To do this you can use the Actions tab in the Properties Editor that is under the graphical canvas. Bring up the popup menu of the action element container and chose New Action as it's shown on the figure below. The other way to add an action to the transition is simply to use the dropdown menu that is available under the action icon in the right upper corner of the Properties View.
+			</para>
 
 			<figure>
 				<title>Adding an Action to a Transition</title>
@@ -356,10 +311,9 @@
 				</mediaobject>
 			</figure>
 
-			<para>The first of these three pages allows you to give the Action a name. The last page
-                contains some advanced attributes such as whether the Action is asynchronous. The
-                Details page is the most important. It allows to choose and configure the actual action
-                handler implementation. </para>
+			<para>
+				The first of these three pages allows you to give the Action a name. The last page contains some advanced attributes such as whether the Action is asynchronous. The Details page is the most important. It allows to choose and configure the actual action handler implementation.
+			</para>
 
 			<figure>
 				<title>The Details page of an Action Configuration Dialog</title>
@@ -372,9 +326,7 @@
 			</figure>
             
 
-			<para>Clicking on the <emphasis>
-                <property>Search...</property>
-				</emphasis> button brings us to a Choose Class dialog.</para>
+			<para>Clicking on the <guibutton>Search...</guibutton> button brings us to a Choose Class dialog.</para>
             
 
 			<figure>
@@ -388,9 +340,9 @@
 			</figure>
             
 
-			<para> We choose our previously created &apos;HelloActionHandler&apos; class and
-                push the <property>OK</property> button. After the selection of the action handler for
-                the action, we can run the test and observe it gives us a green light.</para>
+			<para>
+				We choose our previously created <code>HelloActionHandler</code> class and click the <guibutton>OK</guibutton> button. After selecting the action handler for the action, we can run the test and observe it gives us a green light.
+			</para>
 
 			<figure>
 				<title>Test Results</title>
@@ -408,11 +360,9 @@
 		<section>
 			<title> Integration Points</title>
 
-			<para> The different integration points in a process definition are thoroughly documented in
-                the <ulink url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink>. Instance nodes can contain many action
-                elements. Each of these will appear in the Action element list of the Actions tab. But
-                each Action also has a properties view of itself. You can navigate to this view by
-                selecting the added Action in the outline view. </para>
+			<para>
+				The different integration points in a process definition are thoroughly documented in the <ulink url="http://docs.jboss.com/jbpm/v3/userguide/">JBoss jBPM User Guide</ulink>. Instance nodes can contain many action elements. Each of these will appear in the Action element list of the Actions tab. But each Action also has a properties view of itself. You can navigate to this view by selecting the added Action in the outline view. 
+			</para>
 
 		</section>
 	</section>
@@ -421,23 +371,14 @@
 
 		<title>Quick Howto Guide</title>
 
-		<para>This chapter contains additional information related to the <property>JBoss
-            jBPM</property>.</para>
+		<para>This chapter contains additional information related to the <property>JBoss jBPM</property>.</para>
 
 		<section id="change_core_jbpm_inst">
 			<title>Change the Default Core jBPM Installation</title>
 
-			<para> You can change the default <property>jBPM</property> installation by means of the
-                Eclipse preference mechanism. Open the Preferences dialog by selecting <emphasis>
-                    <property>Window &gt; Preferences</property>
-				</emphasis> and select the <emphasis>
-                    <property>JBoss jBPM &gt; Runtime Location</property>
-				</emphasis> category. Using this page you can add multiple <property>jBPM</property>
-                installation locations and change the default one. The default installation is used for
-                the classpath settings when creating a new Process Project. Changing the preferences has
-                no influence on already created projects. Getting rid of a <property>jBPM</property>
-                installation that&apos;s being referenced by a project however will cause the
-                classpath to contain errors. </para>
+			<para> 
+				You can change the default <property>jBPM</property> installation by means of the Eclipse preference mechanism. Open the Preferences dialog by selecting <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> and select the <guilabel>JBoss jBPM &gt; Runtime Location</guilabel> category. Using this page you can add multiple <property>jBPM</property> installation locations and change the default one. The default installation is used for the classpath settings when creating a new Process Project. Changing the preferences has no influence on already created projects. Getting rid of a <property>jBPM</property> installation that is being referenced by a project however will cause the classpath to contain errors. 
+			</para>
             
 
 			<figure>
@@ -456,10 +397,9 @@
 
 			<para>Here, we&apos;ll examine how you can configure the Task nodes in jBPM jPDL GPD.</para>
 
-			<para> You can add Tasks to Task nodes and then configure them in a similar manner as the
-                Action configuration mechanism. Let&apos;s consider the process definition similar
-                to the previous one that contains three nodes: Start state, Task node and End state. The
-                <property>Properties view</property> for selected Task node includes several tabs. </para>
+			<para>
+				You can add Tasks to Task nodes and then configure them in a similar manner Actions are configured. Let&apos;s consider the process definition similar to the previous one that contains three nodes: Start state, Task node and End state. The <property>Properties view</property> for the selected Task node includes several tabs.
+			</para>
 
 			<figure>
 				<title>The Properties View of the selected Task Node</title>
@@ -470,8 +410,9 @@
 				</mediaobject>
 			</figure>
 
-			<para>We should choose the Task tab and then bring up the context menu or click the button
-                in the top right corner of the view to add a Task to our Task node.</para>
+			<para>
+				We should choose the Task tab and then bring up the context menu or click the button in the top right corner of the view to add a Task to our Task node.
+			</para>
 
 			<figure>
 				<title>Adding a Task to the Task Node</title>
@@ -482,8 +423,7 @@
 				</mediaobject>
 			</figure>
 
-			<para>Every added Task has its own configuration possibilities. You can access them through
-                the <property>Properties view</property> as well.</para>
+			<para>Every added Task has its own configuration possibilities. You can access them through the <property>Properties view</property> as well.</para>
 
 			<figure>
 				<title>The Task properties</title>
@@ -494,10 +434,9 @@
 				</mediaobject>
 			</figure>
 
-			<para>The <property>General page</property> is a place where you can specify the name of a
-                Task and its description. For instance, let it be <emphasis>
-                    <property>approve oder</property>
-				</emphasis> with appropriate description that you can see in the figure below.</para>
+			<para>
+				The <property>General page</property> is a place where you can specify the name of a Task and its description. For instance, let it be <emphasis><property>approve oder</property></emphasis> with appropriate description that you can see in the figure below.
+			</para>
 
 			<figure>
 				<title>The Task General Page</title>
@@ -508,16 +447,9 @@
 				</mediaobject>
 			</figure>
 
-			<para>Now, look at <property>Details page</property>. First, you should specify the due date
-                that is a mandatory property for the Task. The due date is the date on which the task
-                should be accomplished. Here you can also set a Task priority as well as signalling,
-                notifying or blocking. The <emphasis>
-                    <property>Blocking</property>
-				</emphasis> attribute indicates that the process will not be able to continue if this
-                task is still unaccomplished. The <emphasis>
-                    <property>Generate Form...</property>
-				</emphasis> button is for creating a simple task form that can be rendered by the jBPM
-                console.</para>
+			<para>
+				Now, look at <property>Details page</property>. First, you should specify the due date that is a mandatory property for the Task. The due date is the date on which the task should be accomplished. Here you can also set a Task priority as well as signaling, notifying or blocking. The <emphasis><property>Blocking</property></emphasis> attribute indicates that the process will not be able to continue if this task is still unaccomplished. The <guibutton>Generate Form...</guibutton> button is for creating a simple task form that can be rendered by the jBPM console.
+			</para>
 
 			<figure>
 				<title>The Task Details Page</title>
@@ -528,14 +460,9 @@
 				</mediaobject>
 			</figure>
 
-			<para>For our example, we specify the due date as 2 business days, choose the high priority
-                and also check the <emphasis>
-                    <property>Signalling</property>
-				</emphasis> and <emphasis>
-                    <property>Notify</property>
-				</emphasis> attributes. It means that the Task should be accomplished in 2 business days
-                and the assignee will be notified by email when the task is assigned. To specify how the
-                Task should be assigned switch on to the <property>Assignment page</property>.</para>
+			<para>
+				For our example, we specify the due date as 2 business days, choose the high priority and also check the <emphasis><property>Signaling</property></emphasis> and <emphasis><property>Notify</property></emphasis> attributes. It means that the Task should be accomplished in 2 business days and the assignee will be notified by email when the task is assigned. To specify how the Task should be assigned switch on to the <property>Assignment page</property>.
+			</para>
 
 			<figure>
 				<title>The Task Assignment Page</title>
@@ -546,8 +473,7 @@
 				</mediaobject>
 			</figure>
 
-			<para>On the <property>Reminder page</property> you can specify whether the assignee will be reminded of the task
-                that awaits him.</para>
+			<para>On the <property>Reminder page</property> you can specify whether the assignee will be reminded of the task that awaits him.</para>
 
 			<figure>
 				<title>The Task Reminder Page</title>
@@ -558,8 +484,7 @@
 				</mediaobject>
 			</figure>
 
-			<para>In our case, the assignee will be reminded by email after two business hours and
-                continue to get reminding every business hour after that.</para>
+			<para>In our case, the assignee will be reminded by email after two business hours and continue to get reminding every business hour after that.</para>
 			<para>In the next figure you can see our configuring generated into XML.</para>
 			<figure>
 				<title>The Task Reminder Page</title>
@@ -569,8 +494,9 @@
 					</imageobject>
 				</mediaobject>
 			</figure>
-			<para>We hope, our guide will help you to get started with the jPDL process language and jBPM
-                workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
+			<para>
+				We hope, our guide will help you to get started with the jPDL process language and jBPM workflow on the whole. Besides, for additional information you are welcome on <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.
+			</para>
 		</section>
 	</section>
 
