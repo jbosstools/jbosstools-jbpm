@@ -203,7 +203,7 @@
 			</para>
 
 			<para>
-				To make things a little bit more concrete, let&apos;s create a new class called <emphasis><property>HelloActionHandler</property></emphasis>. For that firstly we will create a new package <code>com.jbay.action</code> in the <filename>src/java/main</filename> folder of our project. Then, we should call New Class Creation wizard as usual selecting <menuchoice><guimenuitem>New</guimenuitem><guimenuitem>Class</guimenuitem></menuchoice> from the context menu.
+				To make things a little bit more concrete, let&apos;s create a new class called <emphasis><property>HelloActionHandler</property></emphasis>. For that firstly we will create a new package <code>com.jbay.action</code> in the <filename>src/main/java</filename> folder of our project. Then, we should call New Class Creation wizard as usual selecting <menuchoice><guimenuitem>New</guimenuitem><guimenuitem>Class</guimenuitem></menuchoice> from the context menu.
 			</para>
 
 			<figure>
@@ -253,7 +253,46 @@
 			</para>
 
 			<para>
-				At first, let&apos;s return to the code we already saw <!--<xref linkend="hello_test">-->in the previous chapter and add new test method <code>testActionHendler</code> to it.
+				First we need to create a new Junit Test Case by selecting <menuchoice><guimenuitem>File</guimenuitem><guimenuitem>New</guimenuitem><guimenuitem>Other</guimenuitem><guimenuitem>JUnit</guimenuitem><guimenuitem>Junit Test Case</guimenuitem></menuchoice>. Give it a name of <code>HelloTest</code>, place it in the <code>com.jbay</code> package, and click the <guibutton>OK</guibutton> button.
+			</para>
+			
+			<figure>
+				<title>Create the Hello Action Test</title>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/The_JBoss_jBPM_Int_Mech/NewJUnitTestCase.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+			
+			<para>
+				Populate the new class with the following code:
+<programlisting>package com.jbay;
+
+import org.jbpm.graph.def.ProcessDefinition;
+import org.jbpm.graph.exe.ProcessInstance;
+
+import junit.framework.TestCase;
+
+public class HelloTest extends TestCase
+{
+	public void testActionhandler() throws Exception {
+		
+		ProcessDefinition definition = 
+			ProcessDefinition.parseXmlResource("hello.jpdl.xml");
+		
+		ProcessInstance instance = new ProcessInstance(definition);
+		assertNull("The greeting variable should not exist",
+				instance.getContextInstance().getVariable("greeting"));
+		
+		instance.signal();
+		assertEquals("The greeting variable is created",
+				instance.getContextInstance().getVariable("greeting"),
+				"Hello from ActionHandler");
+	}
+}				
+</programlisting>
 			</para>
 
 			<figure>
