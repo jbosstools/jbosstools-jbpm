@@ -253,7 +253,7 @@
 			</para>
 
 			<para>
-				First we need to create a new Junit Test Case by selecting <menuchoice><guimenuitem>File</guimenuitem><guimenuitem>New</guimenuitem><guimenuitem>Other</guimenuitem><guimenuitem>JUnit</guimenuitem><guimenuitem>Junit Test Case</guimenuitem></menuchoice>. Give it a name of <code>HelloTest</code>, place it in the <code>com.jbay</code> package, and click the <guibutton>OK</guibutton> button.
+				First we need to create a new Junit Test Case by selecting <menuchoice><guimenuitem>File</guimenuitem><guimenuitem>New</guimenuitem><guimenuitem>Other</guimenuitem><guimenuitem>JUnit</guimenuitem><guimenuitem>Junit Test Case</guimenuitem></menuchoice>. Give it a name of <code>HelloTest</code>, place it in the <code>com.jbay</code> package, and click the <guibutton>Finish</guibutton> button.
 			</para>
 			
 			<figure>
@@ -415,7 +415,7 @@ public class HelloTest extends TestCase
 			<title>Change the Default Core jBPM Installation</title>
 
 			<para> 
-				You can change the default <property>jBPM</property> installation by means of the Eclipse preference mechanism. Open the Preferences dialog by selecting <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> and select the <guilabel>JBoss jBPM &gt; Runtime Location</guilabel> category. Using this page you can add multiple <property>jBPM</property> installation locations and change the default one. The default installation is used for the classpath settings when creating a new Process Project. Changing the preferences has no influence on already created projects. Getting rid of a <property>jBPM</property> installation that is being referenced by a project however will cause the classpath to contain errors. 
+				You can change the default <property>jBPM</property> installation by means of the Eclipse preference mechanism. Open the Preferences dialog by selecting <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> and select the <menuchoice><guimenuitem>JBoss jBPM</guimenuitem><guimenuitem>Runtime Location</guimenuitem></menuchoice> category. Using this page you can add multiple <property>jBPM</property> installation locations and change the default one. The default installation is used for the classpath settings when creating a new Process Project. Changing the preferences has no influence on already created projects. Getting rid of a <property>jBPM</property> installation that is being referenced by a project however will cause the classpath to contain errors. 
 			</para>
             
 
