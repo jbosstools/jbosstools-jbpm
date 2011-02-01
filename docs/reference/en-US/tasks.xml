@@ -117,7 +117,7 @@
 				</mediaobject>
 			</figure>
 			<para>
-				Selecting the <emphasis><property>JBoss jBPM</property></emphasis> category, then the <emphasis><property>Process Definition</property></emphasis> item and clicking on the <guibutton>Next</guibutton> button brings us to the <emphasis><property>Create Process Definition</property></emphasis> page.
+				Selecting the <emphasis><property>JBoss jBPM</property></emphasis> category, then the <emphasis><property>jBPM Process Definition</property></emphasis> item and clicking on the <guibutton>Next</guibutton> button brings us to the <emphasis><property>Create Process Definition</property></emphasis> page.
 			</para>
 			<figure>
 				<title>The Create New Process Defining Page</title>
@@ -128,7 +128,7 @@
 				</mediaobject>
 			</figure>
 			<para>
-				We choose <emphasis><property>hello</property></emphasis> as the name of the process archive file. Click on the <emphasis><property>Finish</property></emphasis> button to end the wizard and open the process definition editor.
+				We choose <emphasis><property>hello</property></emphasis> as the name of the process archive file. Click on the <guibutton>Finish</guibutton> button to end the wizard and open the process definition editor.
 			</para>
 			<figure>
 				<title>The Process Definition Editor</title>
@@ -140,10 +140,7 @@
 			</figure>
         
 			<para>
-				You can see in the Package Explorer that creating a process definition involves creating a folder with the name of the process definition and populating this folder with two .xml files : <filename>gpd.xml</filename> , <filename>processdefinition.xml</filename> and a .jpg file: <filename>processimage.jpg</filename>.
-			</para>
-			<para>
-				The <filename>gpd.xml</filename> file contains the graphical information used by the process definition editor. The <filename>processdefinition.xml</filename> file contains the actual process definition info. The graphical view of the process is automatically saved in the <filename>processimage.jpg</filename> file. At present, the GPD assumes that these three files are siblings. More sophisticated configuration will be supported later.
+				You can see in the Package Explorer that creating a process definition involves creating a folder with the name of the process definition and populating this folder with an XML file called <filename>[process name].jpdl.xml</filename>, contains the actual process definition information. A JPG file called <filename>[process name].jpg</filename> will also be automatically generated when changes are saved to the process.
 			</para>
 
 			<section id="minimal_process_definition">
