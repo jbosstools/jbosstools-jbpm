@@ -140,7 +140,7 @@
 			</figure>
         
 			<para>
-				You can see in the Package Explorer that creating a process definition involves creating a folder with the name of the process definition and populating this folder with an XML file called <filename>[process name].jpdl.xml</filename>, contains the actual process definition information. A JPG file called <filename>[process name].jpg</filename> will also be automatically generated when changes are saved to the process.
+				You can see in the Package Explorer that creating a process definition involves creating an XML file called <filename>[process name].jpdl.xml</filename>, which contains the process definition information. A JPG file called <filename>[process name].jpg</filename> will also be automatically generated when changes are saved to the process.
 			</para>
 
 			<section id="minimal_process_definition">
