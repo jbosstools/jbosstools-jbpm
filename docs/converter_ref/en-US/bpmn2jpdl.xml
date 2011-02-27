@@ -1,137 +1,136 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<chapter id="bpmn2jpdl" >
-	  <title>Translate a BPMN file to a JPDL file</title>
-    <para>This chapter provides you with the necessary steps to translate a BPMN file to a JPDL file.</para>  
-    
-    <section id="createproject">
-    	<title>Creating a project</title>
-  	    <para>Before creating a BPMN file, you should have a Project created.</para>
-  	    <para>
+<chapter id="bpmn2jpdl">
+	<title>Translate a BPMN file to a JPDL file</title>
+	<para>This chapter provides you with the necessary steps to translate a BPMN file to a JPDL file.</para>
+
+	<section id="createproject">
+		<title>Creating a project</title>
+		<para>Before creating a BPMN file, you should have a Project created.</para>
+		<para>
   	    	Create a project by selecting
   	      	<menuchoice>
   	      		<guimenuitem>File</guimenuitem>
-  	      		<guimenuitem>New</guimenuitem>
-  	      		<guimenuitem>Project...</guimenuitem>
-  	      		<guimenuitem>General</guimenuitem>
-  	      		<guimenuitem>Project</guimenuitem>
-  	      	</menuchoice>.
+				<guimenuitem>New</guimenuitem>
+				<guimenuitem>Project...</guimenuitem>
+				<guimenuitem>General</guimenuitem>
+				<guimenuitem>Project</guimenuitem>
+			</menuchoice>.
   	    </para>
-  	    <para>Enter <guilabel>test</guilabel> in the <guilabel>Project name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
-        <figure>
-            <title>Creating a Project</title>
-                <mediaobject>
-                     <imageobject>
-                          <imagedata fileref="images/bpmnconvert_bpmn2jpdl_1.png"></imagedata>
-                     </imageobject>
-                </mediaobject>
-        </figure>
-    </section>
-    <section id="createbpmnfile">
-    	<title>Creating a BPMN file using the STP BPMN editor</title>
-        <para>Create a BPMN diagram file by selecting 
+		<para>Enter <guilabel>test</guilabel> in the <guilabel>Project name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
+		<figure>
+			<title>Creating a Project</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/bpmnconvert_bpmn2jpdl_1.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
+	<section id="createbpmnfile">
+		<title>Creating a BPMN file using the STP BPMN editor</title>
+		<para>Create a BPMN diagram file by selecting 
         	<menuchoice>
 						<guimenuitem>File</guimenuitem>
-						<guimenuitem>New</guimenuitem>
-						<guimenuitem>Other...</guimenuitem>
-						<guimenuitem>Other</guimenuitem>
-						<guimenuitem>Bpmn Diagram</guimenuitem>
-					</menuchoice>.
+				<guimenuitem>New</guimenuitem>
+				<guimenuitem>Other...</guimenuitem>
+				<guimenuitem>Other</guimenuitem>
+				<guimenuitem>Bpmn Diagram</guimenuitem>
+			</menuchoice>.
   	    </para>
-  	    
-  	    <para>Enter <guilabel>test</guilabel> in the <guilabel>File name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
-              
-           <figure>
-            <title>Creating BPMN Diagram</title>
-                <mediaobject>
-                     <imageobject>
-                          <imagedata fileref="images/bpmnconvert_bpmn2jpdl_2.png"></imagedata>
-                     </imageobject>
-                </mediaobject>
-        </figure>
-        <para>Open the <guilabel>test.bpmn_diagram</guilabel> file by double-clicking it.</para>
-        <para>Draw the BPMN diagram using the STP BPMN editor. For more information on how to use the STP BPMN editor, please visit the <ulink url="http://www.eclipse.org/bpmn/">BPMN project page</ulink>.</para>
-    </section>
-        <section id="bpmntojpdl">
-    	<title>Exporting a BPMN File to JPDL files</title>
-  	    <para>A BPMN file may include more than one pool. Every pool can be mapped to a corresponding JPDL file.</para>
-  	    <itemizedlist>
-  	        <listitem>
-  	      	  <para>Select the <guilabel>test.bpmn</guilabel> file and right-click on it. Open the export wizard by selecting
+  	
+		<para>Enter <guilabel>test</guilabel> in the <guilabel>File name</guilabel> field, and click the <guibutton>Finish</guibutton> button.</para>
+
+		<figure>
+			<title>Creating BPMN Diagram</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/bpmnconvert_bpmn2jpdl_2.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>Open the <guilabel>test.bpmn_diagram</guilabel> file by double-clicking it.</para>
+		<para>Draw the BPMN diagram using the STP BPMN editor. For more information on how to use the STP BPMN editor, please visit the <ulink url="http://www.eclipse.org/bpmn/">BPMN project page</ulink>.</para>
+	</section>
+	<section id="bpmntojpdl">
+		<title>Exporting a BPMN File to JPDL files</title>
+		<para>A BPMN file may include more than one pool. Every pool can be mapped to a corresponding JPDL file.</para>
+		<itemizedlist>
+			<listitem>
+				<para>Select the <guilabel>test.bpmn</guilabel> file and right-click on it. Open the export wizard by selecting
   	      	  	<menuchoice>
 									<guimenuitem>Export...</guimenuitem>
-									<guimenuitem>BPMN</guimenuitem>
-									<guimenuitem>BPMN to JPDL...</guimenuitem>
-								</menuchoice>
+						<guimenuitem>BPMN</guimenuitem>
+						<guimenuitem>BPMN to JPDL...</guimenuitem>
+					</menuchoice>
   	           from the context menu.
   	          </para>
-  	          <para>Click the <guibutton>Next</guibutton> button.</para>
-              <figure>
-                   <title>BPMN Export</title>
-                       <mediaobject>
-                            <imageobject>
-                                <imagedata fileref="images/bpmnconvert_bpmn2jpdl_3.png"></imagedata>
-                            </imageobject>
-                       </mediaobject>
-              </figure>
-              
-            </listitem>
-            <listitem>
-  	      	  <para>Select the BPMN file that you want to translate, and click the <guibutton>Next</guibutton> button.
-  	          </para>
-              <figure>
-                   <title>Choosing a BPMN File</title>
-                       <mediaobject>
-                            <imageobject>
-                                <imagedata fileref="images/bpmnconvert_bpmn2jpdl_4.png"></imagedata>
-                            </imageobject>
-                       </mediaobject>
-              </figure>
-            </listitem>
-            <listitem>
-  	      	  <para>Select the BPMN Pools that you want to translate, and click the <guibutton>Next</guibutton> button.
-  	          </para>
-              <figure>
-                   <title>Choosing BPMN Pools</title>
-                       <mediaobject>
-                            <imageobject>
-                                <imagedata fileref="images/bpmnconvert_bpmn2jpdl_5.png"></imagedata>
-                            </imageobject>
-                       </mediaobject>
-              </figure>
-            </listitem>
-            <listitem>
-  	      	  <para>On the next page, you may get error or warning messages that occurred during the conversion. If there are no messages, this page is skipped.
-  	          </para>
-                     <para>Click on the <guibutton>Next</guibutton> button.</para>
-            </listitem>
-            <listitem>
-  	      	  <para>Select the target location where the generated JPDL files will be saved. If you'd like to overwrite existing resources,check this &quot;Overwrite existing resources&quot; checkbox.
-  	          </para>
-  	          <para>Click on the <guibutton>Finish</guibutton> button to generate the JPDL files in the target location.</para>
-              <figure>
-                   <title>Target Location</title>
-                       <mediaobject>
-                            <imageobject>
-                                <imagedata fileref="images/bpmnconvert_bpmn2jpdl_7.png"></imagedata>
-                            </imageobject>
-                       </mediaobject>
-              </figure>
+				<para>Click the <guibutton>Next</guibutton> button.</para>
+				<figure>
+					<title>BPMN Export</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/bpmnconvert_bpmn2jpdl_3.png"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
 
+			</listitem>
+			<listitem>
+				<para>Select the BPMN file that you want to translate, and click the <guibutton>Next</guibutton> button.
+  	          </para>
+				<figure>
+					<title>Choosing a BPMN File</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/bpmnconvert_bpmn2jpdl_4.png"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</listitem>
+			<listitem>
+				<para>Select the BPMN Pools that you want to translate, and click the <guibutton>Next</guibutton> button.
+  	          </para>
+				<figure>
+					<title>Choosing BPMN Pools</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/bpmnconvert_bpmn2jpdl_5.png"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</listitem>
+			<listitem>
+				<para>On the next page, you may get error or warning messages that occurred during the conversion. If there are no messages, this page is skipped.
+  	          </para>
+				<para>Click on the <guibutton>Next</guibutton> button.</para>
+			</listitem>
+			<listitem>
+				<para>Select the target location where the generated JPDL files will be saved. If you'd like to overwrite existing resources,check this &quot;Overwrite existing resources&quot; checkbox.
+  	          </para>
+				<para>Click on the <guibutton>Finish</guibutton> button to generate the JPDL files in the target location.</para>
+				<figure>
+					<title>Target Location</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/bpmnconvert_bpmn2jpdl_7.png"></imagedata>
+						</imageobject>
+					</mediaobject>
+				</figure>
            
-              <para></para>
-            </listitem>            
-  	    </itemizedlist>
-  	    <para>The generated files look like this: </para>
-              <figure>
-                   <title>The Generated JPDL Files</title>
-                       <mediaobject>
-                            <imageobject>
-                                <imagedata fileref="images/bpmnconvert_bpmn2jpdl_8.png"></imagedata>
-                            </imageobject>
-                       </mediaobject>
-              </figure>  
-            <para>We hope this guide helped you to get started with the JBoss BPMN Convert module. For additional information and support please visit the <ulink
-                    url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
-    </section>
-       
+
+				<para></para>
+			</listitem>
+		</itemizedlist>
+		<para>The generated files look like this: </para>
+		<figure>
+			<title>The Generated JPDL Files</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/bpmnconvert_bpmn2jpdl_8.png"></imagedata>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>We hope this guide helped you to get started with the JBoss BPMN Convert module. For additional information and support please visit the <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=201">JBoss forum</ulink>.</para>
+	</section>
+
 </chapter>
