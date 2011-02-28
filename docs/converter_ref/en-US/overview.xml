@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <chapter id="overview">
-   <title>BPMN Convert Overview</title>
-    <para>This chapter provides a short overview of the JBoss BPMN Convert module, which is a tool used to translate BPMN files. Specifically, the JBoss BPMN Convert module allows you to translate BPMN files to a basic JPDL.</para>
-    <para>The BPMN file may be written by hand, or created with the aid of an editor. In this guide, we will use the STP BPMN editor to draw a BPMN file.</para> 
-    <para>You can download the editor, which is included with the BPMN Modeller, using Eclipse and the SOA Tools project update site. You can find the necessary links and other related information on the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink>.</para>  
+	<title>BPMN Convert Overview</title>
+	<para>
+		This chapter provides a short overview of the JBoss BPMN Convert module, which is a tool used to translate BPMN files. Specifically, the JBoss BPMN Convert module allows you to translate BPMN files to a basic JPDL.
+	</para>
+  <para>The BPMN file may be written by hand, or created with the aid of an editor. In this guide, we will use the STP BPMN editor to draw a BPMN file.</para> 
+  <para>
+  		You can download the editor, which is included with the BPMN Modeler, using Eclipse and the SOA Tools project update site. You can find the necessary links and other related information on the <ulink url="http://www.eclipse.org/bpmn">Eclipse BPMN project page</ulink>.
+  	</para>  
+    
+	<note>
+		<title>Note</title>
+		<para>
+			In order to satisfy the dependencies when installing the BPMN Modeler, you will need to add the following update sites to JBDS:
+			<itemizedlist>
+				<listitem>
+					<para>http://download.eclipse.org/stp/updates/helios</para>
+				</listitem>
+				<listitem>
+					<para>http://download.eclipse.org/releases/helios</para>
+				</listitem>
+			</itemizedlist>
+		</para>		
+	</note>
   
 <section>
     <title>Key Features of JBoss BPMN Convert module</title>
