@@ -15,10 +15,10 @@
 			In order to satisfy the dependencies when installing the BPMN Modeler, you will need to add the following update sites to JBDS:
 			<itemizedlist>
 				<listitem>
-					<para>http://download.eclipse.org/stp/updates/helios</para>
+					<para><ulink url="http://download.eclipse.org/stp/updates/helios">http://download.eclipse.org/stp/updates/helios</ulink></para>
 				</listitem>
 				<listitem>
-					<para>http://download.eclipse.org/releases/helios</para>
+					<para><ulink url="http://download.eclipse.org/releases/helios">http://download.eclipse.org/releases/helios</ulink></para>
 				</listitem>
 			</itemizedlist>
 		</para>		
