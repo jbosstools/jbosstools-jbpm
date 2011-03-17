@@ -155,7 +155,7 @@
 					<?dbhtml filename="adding_the_nodes.html"?>
 					<title>Adding the Nodes</title>
 					<para>
-						Add the <emphasis><property>Start</property>, </emphasis><emphasis><property>State</property></emphasis> and <emphasis><property>End</property></emphasis> nodes to the process definition by selecting the appropiate option from the tools palette and clicking on the canvas. The result should look similar to this:
+						Add the <emphasis><property>Start</property>, </emphasis><emphasis><property>State</property></emphasis> and <emphasis><property>End</property></emphasis> nodes to the process definition by selecting the appropriate option from the tools palette and clicking on the canvas. The result should look similar to this:
 					</para>
 					<figure>
 						<title>A Simple Process With Three Nodes</title>
