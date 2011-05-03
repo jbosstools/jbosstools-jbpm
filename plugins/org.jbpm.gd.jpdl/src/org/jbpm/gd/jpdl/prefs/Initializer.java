@@ -8,7 +8,7 @@ public class Initializer extends AbstractPreferenceInitializer implements Prefer
 
 	@Override
 	public void initializeDefaultPreferences() {
-		IEclipsePreferences preferenceStore = new DefaultScope().getNode("org.jbpm.gd.jpdl");
+		IEclipsePreferences preferenceStore = DefaultScope.INSTANCE.getNode("org.jbpm.gd.jpdl");
 		preferenceStore.put(SERVER_NAME, "localhost");
 		preferenceStore.put(SERVER_PORT, "8080");
 		preferenceStore.put(SERVER_DEPLOYER, "/jbpm-console/upload");
