@@ -32,6 +32,7 @@ public class DefaultPage extends PreferencePage implements IWorkbenchPreferenceP
 	public DefaultPage() {
 		super();
 		noDefaultAndApplyButton();
+		setDescription("Expand the tree to edit preferences for a specific feature.");
 	}
 
 	protected Control createContents(Composite parent) {
