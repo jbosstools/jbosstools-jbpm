@@ -10,6 +10,7 @@ import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
 import org.jbpm.gd.jpdl.model.Join;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Timer;
 import org.jbpm.gd.jpdl.model.Transition;
 
@@ -111,6 +112,7 @@ public class JoinDomAdapter extends XmlAdapter {
 			join.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			join.addTransition((Transition)jpdlElement);
+      ((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("description".equals(getNodeType(type))) {
 			join.setDescription((Description)jpdlElement);
 		}

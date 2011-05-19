@@ -4,7 +4,10 @@ import java.beans.PropertyChangeEvent;
 
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
+import org.jbpm.gd.jpdl.model.Fork;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.SubProcess;
+import org.jbpm.gd.jpdl.model.Transition;
 
 
 public class SubProcessDomAdapter extends XmlAdapter {

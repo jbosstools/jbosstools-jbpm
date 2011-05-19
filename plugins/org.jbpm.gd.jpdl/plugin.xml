@@ -379,6 +379,11 @@
             id="org.jbpm.gd.jpdl.prefs.templates"
             name="Jpdl Templates"
             category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
+      <page
+            class="org.jbpm.gd.jpdl.prefs.CompatibilityPage"
+            id="org.jbpm.gd.jpdl.prefs.templates"
+            name="Compatibility"
+            category="org.jbpm.gd.jpdl.prefs.jbpm3"/>
    </extension>
    
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">

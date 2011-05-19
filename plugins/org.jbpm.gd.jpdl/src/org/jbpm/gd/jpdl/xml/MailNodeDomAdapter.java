@@ -10,6 +10,7 @@ import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
 import org.jbpm.gd.jpdl.model.MailNode;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Subject;
 import org.jbpm.gd.jpdl.model.Text;
 import org.jbpm.gd.jpdl.model.Timer;
@@ -148,6 +149,7 @@ public class MailNodeDomAdapter extends XmlAdapter {
 			mailNode.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			mailNode.addTransition((Transition)jpdlElement);
+			((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("description".equals(getNodeType(type))) {
 			mailNode.setDescription((Description)jpdlElement);
 		}

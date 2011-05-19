@@ -9,6 +9,7 @@ import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Task;
 import org.jbpm.gd.jpdl.model.TaskNode;
 import org.jbpm.gd.jpdl.model.Timer;
@@ -137,6 +138,7 @@ public class TaskNodeDomAdapter extends XmlAdapter {
 			taskNode.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			taskNode.addTransition((Transition)jpdlElement);
+      ((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("task".equals(type)) {
 			taskNode.addTask((Task)jpdlElement);
 		} else if ("description".equals(getNodeType(type))) {

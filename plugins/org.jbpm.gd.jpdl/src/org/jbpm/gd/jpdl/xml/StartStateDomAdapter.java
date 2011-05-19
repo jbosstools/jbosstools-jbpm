@@ -9,6 +9,7 @@ import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.StartState;
 import org.jbpm.gd.jpdl.model.Task;
 import org.jbpm.gd.jpdl.model.Transition;
@@ -96,6 +97,7 @@ public class StartStateDomAdapter extends XmlAdapter {
 			startState.setDescription((Description)jpdlElement);
 		} else if ("transition".equals(type)) {
 			startState.addTransition((Transition)jpdlElement);
+			((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("event".equals(type)) {
 			startState.addEvent((Event)jpdlElement);
 		} else if ("exception-handler".equals(type)) {

@@ -1,5 +1,8 @@
 package org.jbpm.gd.jpdl.properties;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -19,8 +22,11 @@ import org.jbpm.gd.common.notation.AbstractNotationElement;
 import org.jbpm.gd.common.part.NotationElementGraphicalEditPart;
 import org.jbpm.gd.common.part.OutlineEditPart;
 import org.jbpm.gd.common.properties.AbstractPropertySection;
+import org.jbpm.gd.jpdl.Plugin;
 import org.jbpm.gd.jpdl.model.Condition;
+import org.jbpm.gd.jpdl.model.Decision;
 import org.jbpm.gd.jpdl.model.Transition;
+import org.jbpm.gd.jpdl.prefs.CompatibilityPage;
 
 
 public class ConditionSection extends AbstractPropertySection implements SelectionListener, FocusListener {
@@ -31,18 +37,29 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 	private Text expressionText;
 	private Text scriptText;
 	private Transition transition;
-	
+
+  private static final String CONDITION_ON_TRANSITION_WARNING = "Invalid condition: transitions with conditions only valid if the source node is a decision!";
+
+  private Label warningLabel;
+  private Boolean hideTransitionConditionWarnings;
+  
 	public void createControls(Composite parent,
             TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
         Composite clientArea = getWidgetFactory().createFlatFormComposite(parent);
+
+        warningLabel = getWidgetFactory().createLabel(clientArea, "");
+        warningLabel.setForeground(ColorConstants.red);
         conditionLabel = getWidgetFactory().createLabel(clientArea, "Condition Type");
         conditionCombo = getWidgetFactory().createCCombo(clientArea);
-        conditionCombo.setItems(new String[] {"Unconditional", "Expression", "Script" });
+        // updateConditionCombo(); -- refresh is always called, and the ConditionCombo is set there.
+
         conditionCombo.setEditable(false);
         label = getWidgetFactory().createLabel(clientArea, "");
         expressionText = getWidgetFactory().createText(clientArea, "");
         scriptText = getWidgetFactory().createText(clientArea, "", SWT.H_SCROLL | SWT.V_SCROLL);
+
+        warningLabel.setLayoutData(createWarningLabelLayoutData());
         conditionLabel.setLayoutData(createConditionLabelLayoutData());
         conditionCombo.setLayoutData(createConditionComboLayoutData());
         label.setLayoutData(createLabelLayoutData());
@@ -51,15 +68,85 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
         hookListeners();
         refresh();
     }
-	
+
+  IPropertyChangeListener preferenceListener = new IPropertyChangeListener() {
+    /*
+     * @see IPropertyChangeListener.propertyChange()
+     */
+    public void propertyChange(PropertyChangeEvent event) {
+      if (event.getProperty().equals(Plugin.TRANS_COND_WARN_PREFERENCE)) {
+         hideTransitionConditionWarnings = null;
+      }
+    }
+  };
+
 	private void hookListeners() {
 		conditionCombo.addSelectionListener(this);
 		expressionText.addSelectionListener(this);
 		expressionText.addFocusListener(this);
 		scriptText.addSelectionListener(this);
 		scriptText.addFocusListener(this);
+    Plugin.getDefault().getPreferenceStore().addPropertyChangeListener(preferenceListener);
 	}
-	
+  
+  public void dispose() {
+    Plugin.getDefault().getPreferenceStore().removePropertyChangeListener(preferenceListener);
+    super.dispose();
+  }
+ 
+  private void updateConditionCombo() {
+    if (transition == null) {
+      conditionCombo.setItems(new String[] { "Unconditional" });
+    }
+    else if (getHideTransitionConditionWarning() ) {
+      conditionCombo.setItems(new String[] { "Unconditional", "Expression", "Script" });
+    }
+    else {
+      // showTransitionConditionWarning && transition != null
+      if( transition.getSource() instanceof Decision ) {
+        conditionCombo.setItems(new String[] { "Unconditional", "Expression", "Script" });
+      }
+      else if (transition.getCondition() != null ) {
+        // backwards compatibility, warning will be shown
+        if (transition.getCondition().getExpression() != null) {
+          conditionCombo.setItems(new String[] { "Unconditional", "Expression" });
+        }
+        else if (transition.getCondition().getScript() != null) {
+          conditionCombo.setItems(new String[] { "Unconditional", "Script" });
+        }
+      }
+      else {
+        conditionCombo.setItems(new String[] { "Unconditional" });
+      }
+    }
+  }
+
+  private void updateWarningLabel() {
+    if( getHideTransitionConditionWarning() ) {
+      warningLabel.setText("");
+    }
+    else if (transition == null 
+             || transition.getCondition() == null
+             || transition.getSource() == null 
+             || transition.getSource() instanceof Decision) {
+      warningLabel.setText("");
+    }
+    else if (transition.getCondition() != null && !(transition.getSource() instanceof Decision)) {
+      warningLabel.setText(CONDITION_ON_TRANSITION_WARNING);
+    }
+    else {
+      warningLabel.setText("");
+    }
+  }
+ 
+  private FormData createWarningLabelLayoutData() {
+    FormData result = new FormData();
+    result.left = new FormAttachment(0, 5);
+    result.right = new FormAttachment(100, -5);
+    result.top = new FormAttachment(conditionCombo, 10);
+    return result;
+  }
+  
 	private FormData createConditionLabelLayoutData() {
 		FormData result = new FormData();
 		result.left = new FormAttachment(0, 5);
@@ -78,7 +165,7 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 		FormData result = new FormData();
 		result.left = new FormAttachment(0, 5);
 		result.right = new FormAttachment(100, -5);
-		result.top = new FormAttachment(conditionCombo, 10);
+    result.top = new FormAttachment(warningLabel, 10);
 		return result;
 	}
 	
@@ -116,6 +203,8 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
     }
  	
  	public void refresh() {
+    updateConditionCombo();
+    updateWarningLabel();
  		if (transition == null || transition.getCondition() == null){
  			conditionCombo.setText("Unconditional");
 			label.setText("");
@@ -146,7 +235,7 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
  				scriptText.setVisible(false);
  			}
  		}
-     }
+ 	}
  	
 	public boolean shouldUseExtraSpace() {
 		return true;
@@ -180,6 +269,7 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 	
 	private void handleConditionComboSelected() {
 		if ("Expression".equals(conditionCombo.getText())) {
+      updateWarningLabel();
 			label.setText("Expression");
 			scriptText.setVisible(false);
 			expressionText.setVisible(true);
@@ -187,6 +277,7 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 				updateCondition();
 			}
 		} else if ("Script".equals(conditionCombo.getText())) {
+      updateWarningLabel();
 			label.setText("Script");
 			expressionText.setVisible(false);
 			scriptText.setVisible(true);
@@ -194,6 +285,7 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 				updateCondition();
 			}
 		} else {
+		  warningLabel.setText("");
 			label.setText("");
 			expressionText.setVisible(false);
 			scriptText.setVisible(false);
@@ -229,4 +321,12 @@ public class ConditionSection extends AbstractPropertySection implements Selecti
 		}		
 	}
 	
+  private Boolean getHideTransitionConditionWarning() {
+    if (hideTransitionConditionWarnings == null) {
+      hideTransitionConditionWarnings = Plugin.getDefault().getPreferenceStore()
+        .getBoolean(Plugin.TRANS_COND_WARN_PREFERENCE);
+    }
+    return hideTransitionConditionWarnings;
+  }
+
 }

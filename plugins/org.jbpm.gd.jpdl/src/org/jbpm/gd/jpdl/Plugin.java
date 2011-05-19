@@ -33,6 +33,11 @@ public class Plugin extends AbstractUIPlugin implements Constants {
 
 	private ResourceBundle resourceBundle;
 	
+  /**
+   * @since 3.4
+   */
+  public static final String TRANS_COND_WARN_PREFERENCE = "transition condition warn";
+  
 	public Plugin() {
 		super();
 		plugin = this;

@@ -11,6 +11,7 @@ import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
 import org.jbpm.gd.jpdl.model.Handler;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Transition;
 
 public class DecisionDomAdapter extends XmlAdapter {
@@ -120,6 +121,7 @@ public class DecisionDomAdapter extends XmlAdapter {
 			decision.addExceptionHandler((ExceptionHandler)jpdlElement);
 		} else if ("transition".equals(type)) {
 			decision.addTransition((Transition)jpdlElement);
+			((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		}
 	}
 	

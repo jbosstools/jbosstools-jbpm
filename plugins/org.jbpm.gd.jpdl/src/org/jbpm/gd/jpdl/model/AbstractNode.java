@@ -59,6 +59,7 @@ public class AbstractNode extends AbstractNamedElement implements NodeElement, D
 	public void removeTransition(Transition transition) {
 		if (!(transitions.contains(transition))) return;
 		transitions.remove(transition);
+		transition.setSource(null);
 		firePropertyChange("transitionRemove", transition, null);
 	}
 	
