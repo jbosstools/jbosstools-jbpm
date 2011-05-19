@@ -15,6 +15,7 @@ import org.jbpm.gd.jpdl.model.Fork;
 import org.jbpm.gd.jpdl.model.Join;
 import org.jbpm.gd.jpdl.model.MailNode;
 import org.jbpm.gd.jpdl.model.Node;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.ProcessState;
 import org.jbpm.gd.jpdl.model.State;
 import org.jbpm.gd.jpdl.model.SuperState;
@@ -136,6 +137,7 @@ public class SuperStateDomAdapter extends XmlAdapter {
 			superState.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			superState.addTransition((Transition)jpdlElement);
+      ((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("node".equals(type)) {
 			superState.addNodeElement((Node)jpdlElement);
 		} else if ("state".equals(type)) {

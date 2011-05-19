@@ -14,6 +14,7 @@ import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
 import org.jbpm.gd.jpdl.model.MailAction;
 import org.jbpm.gd.jpdl.model.Node;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Script;
 import org.jbpm.gd.jpdl.model.Timer;
 import org.jbpm.gd.jpdl.model.Transition;
@@ -149,6 +150,7 @@ public class NodeDomAdapter extends XmlAdapter {
 			node.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			node.addTransition((Transition)jpdlElement);
+			((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		}
 	}
 	

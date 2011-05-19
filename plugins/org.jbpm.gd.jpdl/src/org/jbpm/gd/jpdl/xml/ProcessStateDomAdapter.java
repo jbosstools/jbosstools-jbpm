@@ -9,6 +9,7 @@ import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.ProcessState;
 import org.jbpm.gd.jpdl.model.SubProcess;
 import org.jbpm.gd.jpdl.model.Timer;
@@ -124,6 +125,7 @@ public class ProcessStateDomAdapter extends XmlAdapter {
 			processState.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			processState.addTransition((Transition)jpdlElement);
+			((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("variable".equals(type)) {
 			processState.addVariable((Variable)jpdlElement);
 		} else if ("sub-process".equals(type)) {

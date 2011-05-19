@@ -13,6 +13,7 @@ import org.jbpm.gd.jpdl.model.CreateTimer;
 import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
 import org.jbpm.gd.jpdl.model.MailAction;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.Script;
 import org.jbpm.gd.jpdl.model.Transition;
 
@@ -85,6 +86,8 @@ public class TransitionDomAdapter extends XmlAdapter {
 		if ("to".equals(name)) {
 			transition.setTo(newValue);
 		} else if ("name".equals(name)) {
+			transition.setName(newValue);
+		} else if ("condition".equals(name)) {
 			transition.setName(newValue);
 		}
 	}

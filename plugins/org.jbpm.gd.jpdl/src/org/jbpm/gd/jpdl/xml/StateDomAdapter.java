@@ -9,6 +9,7 @@ import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
 import org.jbpm.gd.jpdl.model.Event;
 import org.jbpm.gd.jpdl.model.ExceptionHandler;
+import org.jbpm.gd.jpdl.model.NodeElement;
 import org.jbpm.gd.jpdl.model.State;
 import org.jbpm.gd.jpdl.model.Timer;
 import org.jbpm.gd.jpdl.model.Transition;
@@ -112,6 +113,7 @@ public class StateDomAdapter extends XmlAdapter {
 			state.addTimer((Timer)jpdlElement);
 		} else if ("transition".equals(type)) {
 			state.addTransition((Transition)jpdlElement);
+      ((Transition)jpdlElement).setSource((NodeElement)getSemanticElement());
 		} else if ("description".equals(getNodeType(type))) {
 			state.setDescription((Description)jpdlElement);
 		}
