@@ -75,7 +75,7 @@ public class JpdlEditor extends Editor {
 		return new GraphicalViewer(this) {
 			protected void initEditPartFactory() {
 				setEditPartFactory(new JpdlGraphicalEditPartFactory());
-			}			
+			}	
 		};
 	}
 

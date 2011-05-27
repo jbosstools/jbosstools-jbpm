@@ -78,6 +78,8 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 	
 	private ContentProvider contentProvider;
 	
+	private IPropertySheetPage propertySheetPage;
+	
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		super.init(site, input);
@@ -306,13 +308,20 @@ public abstract class Editor extends XMLMultiPageEditorPart implements
 		} else if (adapter == IContentOutlinePage.class) {
 			return getOutlineViewer();
 		} else if (adapter == IPropertySheetPage.class) {
-	            return new TabbedPropertySheetPage(this);
+	            return getPropertySheetPage();
 		} else if (adapter == org.eclipse.gef.GraphicalViewer.class) {
 			return getGraphicalViewer();
 		} else {
 			result = super.getAdapter(adapter);
 		}
 		return result;
+	}
+	
+	public IPropertySheetPage getPropertySheetPage() {
+		if (propertySheetPage == null) {
+			propertySheetPage = new TabbedPropertySheetPage(this);
+		}
+		return propertySheetPage;
 	}
 
 	public void doSave(IProgressMonitor monitor) {
