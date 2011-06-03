@@ -127,18 +127,21 @@ public class B2JExportWizard extends BpmnToWizard {
 			errorList.add(NLS.bind(B2JMessages.Translate_Error_File_CanNotRead,
 					TranslateHelper.getBpmnDiagramName(bpmnFileName)));
 		}
-		GraphicalFileGenerator generator = new GraphicalFileGenerator(
-				bpmnDiagramDocument, translator.getMap(), bpmnFileParentPath,
-				bpmnFileName);
 
-		this.setStrForGpdList(Arrays.asList(generator.translateToStrings()));
+		if (bpmnDiagramDocument != null) {
+			GraphicalFileGenerator generator = new GraphicalFileGenerator(
+					bpmnDiagramDocument, translator.getMap(), bpmnFileParentPath,
+					bpmnFileName);
+	
+			this.setStrForGpdList(Arrays.asList(generator.translateToStrings()));
+				
+			for (Document def : generator.getGpdDefs()) {
+				this.generatedGpdFoldersList.add(def.getRootElement().attributeValue(Constants.Dom_Element_Name));
+			}
 			
-		for (Document def : generator.getGpdDefs()) {
-			this.generatedGpdFoldersList.add(def.getRootElement().attributeValue(Constants.Dom_Element_Name));
+			warningList.addAll(generator.getWarnings());
+			errorList.addAll(generator.getErrors());
 		}
-		
-		warningList.addAll(generator.getWarnings());
-		errorList.addAll(generator.getErrors());
 
 		List<String> list = new ArrayList<String>();
 		list.addAll(errorList);
