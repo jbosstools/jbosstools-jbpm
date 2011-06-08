@@ -31,7 +31,6 @@
 		<para>
 			Select <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem><guimenuitem>JBoss jBPM</guimenuitem><guimenuitem>Runtime Locations</guimenuitem></menuchoice>. Here you can add, edit and remove JBoss jBPM installation locations. Click the <guibutton>Add</guibutton> button. In the subsequent dialog box enter a name for a newly added jBPM runtime and point to the correct location of this package on your file system. Click the <guibutton>OK</guibutton> button twice to save the changes.
 		</para>
-
 		<figure>
 			<title>Adding jBPM Location</title>
 			<mediaobject>
@@ -537,5 +536,26 @@ public class HelloTest extends TestCase
 			</para>
 		</section>
 	</section>
-
+	<section>
+		<title>JBoss jBPM Runtime Removal</title>
+		<para>
+			To remove a jBPM runtime select <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem><guimenuitem>JBoss jBPM</guimenuitem><guimenuitem>Runtime Locations</guimenuitem></menuchoice>. From here, select the jBPM runtime you wish to remove and then click the <guibutton>Remove</guibutton> button.
+		</para>
+		<para>
+			Once jBPM runtimes have been installed, one runtime must always remain. Due to this design, if you only have one jBPM runtime remaining you will not be able to remove it and the <guibutton>Remove</guibutton> will be greyed out.
+		</para>
+		<note>
+			<para>
+				You may choose any jBPM runtime to be the last remaining, the only requirement is that there must be one.
+			</para>
+		</note>
+		<figure>
+			<title>Remove button greyed out</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/runtime_removal/runtime_removal_01.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
 </chapter>
