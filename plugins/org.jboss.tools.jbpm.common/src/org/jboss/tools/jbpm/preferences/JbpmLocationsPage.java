@@ -51,6 +51,7 @@ public class JbpmLocationsPage extends PreferencePage implements IWorkbenchPrefe
 	
 	public JbpmLocationsPage() {
 		super();
+		noDefaultAndApplyButton();
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 	}
 	
