@@ -29,11 +29,8 @@ import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.ui.actions.ToggleGridAction;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.jbpm.gd.jpdl.Constants;
 
 
@@ -82,7 +79,7 @@ public abstract class GraphicalViewer extends ScrollingGraphicalViewer {
 	
 	protected void fireSelectionChanged() {
 		super.fireSelectionChanged();
-		if (getSelection() != null) {
+		if (getSelection() != null && editor.getPropertySheetPage().getControl() != null) {
 			editor.getPropertySheetPage().selectionChanged(editor, getSelection());
 		}
 	}
