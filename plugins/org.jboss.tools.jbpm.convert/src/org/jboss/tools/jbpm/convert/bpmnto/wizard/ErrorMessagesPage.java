@@ -58,6 +58,9 @@ public class ErrorMessagesPage extends AbstractConvertWizardPage {
 	}
 	
 	public boolean isPageComplete() {
+		if (((BpmnToWizard)this.getWizard()).getErrorList().size() >0) {
+			return false;
+		}
 		return true;
 	}
 

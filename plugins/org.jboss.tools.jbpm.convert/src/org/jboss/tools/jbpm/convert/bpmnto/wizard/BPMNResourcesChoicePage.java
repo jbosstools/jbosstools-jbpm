@@ -60,9 +60,10 @@ public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
 			public void selectionChanged(SelectionChangedEvent event) {
 				updateControls();
 				currentSelection = viewer.getSelection();
+				((BpmnToWizard) wizard).getErrorList().clear();
+				((BpmnToWizard) wizard).getWarningList().clear();
 				((BpmnToWizard) wizard)
 						.setSelection((IStructuredSelection) currentSelection);
-
 			}
 		});
 	}
