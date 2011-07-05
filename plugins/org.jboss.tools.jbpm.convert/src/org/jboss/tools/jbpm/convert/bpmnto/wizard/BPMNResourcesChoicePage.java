@@ -91,7 +91,7 @@ public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
 		return currentSelection;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public boolean checkSelectedResources(ISelection selectedResources) {
 		boolean res = true;
 		if (selectedResources instanceof IStructuredSelection
@@ -100,8 +100,7 @@ public class BPMNResourcesChoicePage extends AbstractConvertWizardPage {
 			for (Iterator it = ss.iterator(); it.hasNext();) {
 				Object o = it.next();
 				if (o instanceof IFile) {
-					if (!((IFile) o).getFileExtension()
-							.equalsIgnoreCase("bpmn")) {
+					if (!"bpmn".equalsIgnoreCase(((IFile) o).getFileExtension())) {
 						res = false;
 						break;
 					}
@@ -125,7 +124,7 @@ class ProjectFilter extends ViewerFilter {
 		boolean res = false;
 		if (element instanceof IFile) {
 			IFile file = (IFile) element;
-			if (file.getFileExtension().equalsIgnoreCase(BPMN_FILE_EXT)) {
+			if (BPMN_FILE_EXT.equalsIgnoreCase(file.getFileExtension())) {
 				res = file.getProject().isAccessible();
 			}
 		}
@@ -144,8 +143,7 @@ class ProjectFilter extends ViewerFilter {
 			IResource[] resources = container.members();
 			for (int i = 0; i < resources.length; i++) {
 				if (resources[i] instanceof IFile
-						&& ((IFile) resources[i]).getFileExtension()
-								.equalsIgnoreCase(BPMN_FILE_EXT)) {
+						&& BPMN_FILE_EXT.equalsIgnoreCase(((IFile) resources[i]).getFileExtension())) {
 					res = true;
 					break;
 				}
