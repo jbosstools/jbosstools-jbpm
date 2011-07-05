@@ -91,9 +91,7 @@ public class B2JExportWizard extends BpmnToWizard {
 
 	}
 
-	public List<String> translateBpmnToStrings() {
-		List<String> warningList = new ArrayList<String>();
-		List<String> errorList = new ArrayList<String>();
+	public void translateBpmnToStrings() {
 
 		Document bpmnDocument = null;
 		try {
@@ -142,12 +140,6 @@ public class B2JExportWizard extends BpmnToWizard {
 			warningList.addAll(generator.getWarnings());
 			errorList.addAll(generator.getErrors());
 		}
-
-		List<String> list = new ArrayList<String>();
-		list.addAll(errorList);
-		list.addAll(warningList);
-
-		return list;
 	}
 
 	public List<String> getStrForProcessList() {

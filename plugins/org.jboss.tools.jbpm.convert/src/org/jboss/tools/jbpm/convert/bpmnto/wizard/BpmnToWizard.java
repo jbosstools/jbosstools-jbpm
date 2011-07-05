@@ -59,6 +59,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	protected List<String> poolIdList = new ArrayList<String>();
 	// the list contains errors or warnings when generating
 	protected List<String> errorList = new ArrayList<String>();
+	protected List<String> warningList = new ArrayList<String>();
 
 	public BpmnToWizard() {
 		super();
@@ -113,18 +114,18 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	private void initialize() {
 		if (selection.getFirstElement() instanceof IFile) {
 			IFile bpmnFile = (IFile) selection.getFirstElement();
-			bpmnFileName = bpmnFile.getName();
-			bpmnFileParentPath = bpmnFile.getParent().getLocation()
-					.toOSString();
-			try {
-				idMap = BPMNToUtil.getPoolIDsFromDocument(BPMNToUtil.parse(
-						bpmnFileParentPath, bpmnFileName));
-				poolIdList.clear();
-			} catch (Exception e) {
-				errorList.add(0, NLS.bind(
-						B2JMessages.Translate_Error_File_CanNotRead,
-						bpmnFileName));
-				e.printStackTrace();
+			if ("bpmn".equals(bpmnFile.getFileExtension())) {
+				bpmnFileName = bpmnFile.getName();
+				bpmnFileParentPath = bpmnFile.getParent().getLocation()
+						.toOSString();
+				try {
+					idMap = BPMNToUtil.getPoolIDsFromDocument(BPMNToUtil.parse(
+							bpmnFileParentPath, bpmnFileName));
+					poolIdList.clear();
+				} catch (Exception e) {
+					errorList.add(0, NLS.bind(
+							B2JMessages.Translate_Error_File_CanNotRead, bpmnFileName));
+				}
 			}
 		}
 		if (poolsPage != null) {
@@ -133,13 +134,22 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	}
 
 	public IWizardPage getNextPage(IWizardPage page) {
+		if (page.getName().equals(B2JMessages.Bpmn_File_Choose_WizardPage_Name)) {
+			if (errorList.size() > 0) {
+				errorPage.getListViewer().setInput(errorList);		
+				return errorPage;
+			}	
+		}
 		if (page.getName().equals(B2JMessages.Bpmn_Pool_Choose_WizardPage_Name)) {
-			errorList = translateBpmnToStrings();
+			translateBpmnToStrings();
 			isDoTranslation = true;
-			if (errorList.size() == 0) {
+			if (errorList.size() == 0 && warningList.size() == 0) {
 				return locationPage;
 			}
-			errorPage.getListViewer().setInput(errorList);
+			List<String> list = new ArrayList<String>();
+			list.addAll(errorList);
+			list.addAll(warningList);
+			errorPage.getListViewer().setInput(list);			
 			return super.getNextPage(page);
 		} else {
 			return super.getNextPage(page);
@@ -148,7 +158,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	}
 
 	public boolean performFinish() {
-		if(!isDoTranslation){
+		if (!isDoTranslation) {
 			translateBpmnToStrings();
 		}
 		createGeneratedFile(this.isOverWrite());
@@ -161,7 +171,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 	 * a string list to reserve these strings the return list is error or
 	 * warning messages
 	 */
-	public abstract List<String> translateBpmnToStrings();
+	public abstract void translateBpmnToStrings();
 
 	/*
 	 * write the generated strings to the files
@@ -175,14 +185,12 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 		return container.getLocation().toOSString();
 	}
 
-
 	/*
 	 * refresh eclipse workspace
 	 */
 	public void refreshWorkspace() {
 		try {
-			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(
-					IResource.DEPTH_INFINITE, null);
+			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -204,6 +212,14 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 		this.errorList = errorList;
 	}
 
+	public List<String> getWarningList() {
+		return warningList;
+	}
+
+	public void setWarningList(List<String> warningList) {
+		this.warningList = warningList;
+	}
+	
 	public IStructuredSelection getSelection() {
 		return selection;
 	}
@@ -237,7 +253,7 @@ public abstract class BpmnToWizard extends Wizard implements IExportWizard {
 			IStructuredSelection targetLocationSelection) {
 		this.targetLocationSelection = targetLocationSelection;
 	}
-	
+
 	public boolean isOverWrite() {
 		return isOverWrite;
 	}
