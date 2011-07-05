@@ -72,8 +72,7 @@ public class GeneratedFileLocationPage extends AbstractConvertWizardPage {
 
 	public void addOtherAreas(Composite composite) {
 		button = new Button(composite, SWT.CHECK | SWT.NONE);
-		button
-				.setText(B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_CheckBox);
+		button.setText(B2JMessages.Bpmn_GeneratedFile_Location_WizardPage_CheckBox);
 		button.setFont(composite.getFont());
 		button.addSelectionListener(new SelectionListener() {
 			public void widgetDefaultSelected(SelectionEvent arg0) {
@@ -105,7 +104,8 @@ public class GeneratedFileLocationPage extends AbstractConvertWizardPage {
 	}
 
 	public boolean isPageComplete() {
-		if (viewer == null || viewer.getSelection() == null) {
+		if (viewer == null || viewer.getSelection() == null 
+				           || viewer.getSelection().isEmpty()) {
 			return false;
 		}
 		return true;

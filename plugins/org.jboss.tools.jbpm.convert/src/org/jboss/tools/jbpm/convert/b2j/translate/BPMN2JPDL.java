@@ -122,6 +122,7 @@ public class BPMN2JPDL extends BPMNTranslator {
 		}
 		
 		Element diagram = bpmnDocument.getRootElement();
+		
 		if (this.poolIDList == null || this.poolIDList.size() == 0) {
 			for (Object pool : diagram
 					.elements(Constants.Bpmn_Pool_Element_Name)) {
