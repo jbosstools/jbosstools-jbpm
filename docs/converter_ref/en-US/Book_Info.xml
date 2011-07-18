@@ -5,9 +5,9 @@
 	<title>BPMN Convert User Guide</title>
 	<subtitle>Provides information relating to the BPMN Convert module.</subtitle>
 	<productname>JBoss Developer Studio</productname>
-	<productnumber>4.0</productnumber>
-	<edition>4.0.0</edition>
-	<pubsnumber>4</pubsnumber>
+	<productnumber>4.1</productnumber>
+	<edition>4.1.0</edition>
+	<pubsnumber>1</pubsnumber>
 	<abstract>
 		<para>The BPMN Convert User Guide explains how to use the BPMN Convert module to translate a BPMN file to a JPDL file.</para>
 	</abstract>
