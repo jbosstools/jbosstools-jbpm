@@ -17,9 +17,9 @@
 		<module>org.jboss.tools.jbpm.common.feature</module>
 		<module>org.jboss.tools.jbpm.convert.feature</module>
 		<module>org.jboss.tools.jbpm3.feature</module>
-		<module>org.jboss.tools.jbpm3.tests.feature</module>
+		<module>org.jboss.tools.jbpm3.test.feature</module>
 		<module>org.jboss.tools.jbpm4.feature</module>
-		<module>org.jboss.tools.jbpm4.tests.feature</module>
+		<module>org.jboss.tools.jbpm4.test.feature</module>
 		<module>org.jbpm.gd.jpdl.feature</module>
 	</modules>
 </project>

@@ -23,10 +23,10 @@
 	<feature url="features/org.jbpm.gd.jpdl.feature_0.0.0.jar" id="org.jbpm.gd.jpdl.feature" version="0.0.0">
 		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
 	</feature>
-	<feature url="features/org.jboss.tools.jbpm3.tests.feature_0.0.0.jar" id="org.jboss.tools.jbpm3.tests.feature" version="0.0.0">
+	<feature url="features/org.jboss.tools.jbpm3.test.feature_0.0.0.jar" id="org.jboss.tools.jbpm3.test.feature" version="0.0.0">
 		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
 	</feature>
-	<feature url="features/org.jboss.tools.jbpm4.tests.feature_0.0.0.jar" id="org.jboss.tools.jbpm4.tests.feature" version="0.0.0">
+	<feature url="features/org.jboss.tools.jbpm4.test.feature_0.0.0.jar" id="org.jboss.tools.jbpm4.test.feature" version="0.0.0">
 		<category name="JBoss Tools jbpm Nightly Build Update Site"/>
 	</feature>
 </site>
