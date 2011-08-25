@@ -1,0 +1,7 @@
+<!ENTITY PRODUCT "JBoss">
+<!ENTITY BOOKID "BPMN_Convert_User_Guide">
+<!ENTITY YEAR "2011">
+<!ENTITY HOLDER "Red Hat">
+<!ENTITY BZPRODUCT "JBoss Developer Studio">
+<!ENTITY BZCOMPONENT "BPMN Convert User Guide">
+<!ENTITY BZURL "<ulink url='https://bugzilla.redhat.com/enter_bug.cgi?product=JBoss&percnt;20Developer&percnt;20Studio&percnt;204&amp;component=BPMN&percnt;20Convert&percnt;20User&percnt;20Guide&amp;version=4.1.0&amp;short_desc=Error&percnt;20in&percnt;20BPMN&percnt;20Convert&percnt;20User&percnt;20Guide'>http://bugzilla.redhat.com/</ulink>">
