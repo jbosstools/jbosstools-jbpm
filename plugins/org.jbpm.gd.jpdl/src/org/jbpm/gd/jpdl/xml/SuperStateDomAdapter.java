@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Decision;
@@ -115,10 +116,15 @@ public class SuperStateDomAdapter extends XmlAdapter {
 		}
 	}
 	
-	protected void doModelUpdate(String name, String newValue) {
-		SuperState superState = (SuperState)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final SuperState superState = (SuperState)getSemanticElement();
 		if ("name".equals(name)) {
-			superState.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					superState.setName(newValue);
+				}				
+			});
 		} else if ("async".equals(name)) {
 			superState.setAsync(newValue);
 		}

@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
@@ -79,10 +80,15 @@ public class StartStateDomAdapter extends XmlAdapter {
 		}
 	}
 
-	protected void doModelUpdate(String name, String newValue) {
-		StartState startState = (StartState)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final StartState startState = (StartState)getSemanticElement();
 		if ("name".equals(name)) {
-			startState.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					startState.setName(newValue);
+				}				
+			});
 		}
 	}
 	

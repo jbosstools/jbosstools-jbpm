@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
@@ -110,10 +111,15 @@ public class TaskNodeDomAdapter extends XmlAdapter {
 		}
 	}
 
-	protected void doModelUpdate(String name, String newValue) {
-		TaskNode taskNode = (TaskNode)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final TaskNode taskNode = (TaskNode)getSemanticElement();
 		if ("name".equals(name)) {
-			taskNode.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					taskNode.setName(newValue);
+				}				
+			});
 		} else if ("async".equals(name)) {
 			taskNode.setAsync(newValue);
 		} else if ("signal".equals(name)) {
