@@ -2,7 +2,7 @@
 <feature
       id="org.jbpm.gd.jpdl.feature"
       label="%featureName"
-      version="3.2.0.qualifier"
+      version="3.2.1.qualifier"
       provider-name="%featureProvider">
 
    <description>
@@ -15,7 +15,7 @@
 
    <license url="%licenseURL">
       %license
-</license>
+   </license>
 
    <plugin
          id="org.jbpm.gd.jpdl"
