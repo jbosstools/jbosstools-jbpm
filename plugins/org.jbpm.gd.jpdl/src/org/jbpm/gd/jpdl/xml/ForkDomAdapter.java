@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
@@ -98,10 +99,15 @@ public class ForkDomAdapter extends XmlAdapter {
 		}
 	}
 	
-	protected void doModelUpdate(String name, String newValue) {
-		Fork fork = (Fork)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final Fork fork = (Fork)getSemanticElement();
 		if ("name".equals(name)) {
-			fork.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					fork.setName(newValue);
+				}				
+			});
 		} else if ("async".equals(name)) {
 			fork.setAsync(newValue);
 		}

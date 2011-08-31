@@ -2,6 +2,7 @@ package org.jbpm.gd.jpdl.notation;
 
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import org.jbpm.gd.common.editor.CreationFactory;
@@ -19,7 +20,10 @@ public class JpdlNodeContainer extends AbstractNodeContainer {
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		String eventName = evt.getPropertyName();
-		if (eventName.equals("nodeElementAdd")) {
+		if (eventName.equals("name")) {
+			firePropertyChange(evt.getPropertyName(), evt.getOldValue(), evt.getNewValue());
+			updateArrivingEdges((String)evt.getNewValue());
+		} else if (eventName.equals("nodeElementAdd")) {
 			SemanticElement jpdlElement = (SemanticElement)evt.getNewValue();
 			NotationElement notationElement = getRegisteredNotationElementFor(jpdlElement);
 			if (notationElement == null) {
@@ -114,4 +118,15 @@ public class JpdlNodeContainer extends AbstractNodeContainer {
 		}
 		danglingEdges.removeAll(list);
 	}
+	
+	private void updateArrivingEdges(String to) {
+		List edges = getArrivingEdges();
+		for (int i = 0; i < edges.size(); i++) {
+			Edge edge = (Edge)edges.get(i);
+			((SemanticElement)edge.getSemanticElement()).removePropertyChangeListener(edge);
+			((Transition)edge.getSemanticElement()).setTo(to);
+			((SemanticElement)edge.getSemanticElement()).addPropertyChangeListener(edge);
+		}
+	}
+	
 }

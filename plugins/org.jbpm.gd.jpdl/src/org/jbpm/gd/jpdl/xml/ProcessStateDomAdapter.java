@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Description;
@@ -103,10 +104,15 @@ public class ProcessStateDomAdapter extends XmlAdapter {
 		}
 	}
 	
-	protected void doModelUpdate(String name, String newValue) {
-		ProcessState processState = (ProcessState)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final ProcessState processState = (ProcessState)getSemanticElement();
 		if ("name".equals(name)) {
-			processState.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					processState.setName(newValue);
+				}				
+			});
 		} else if ("async".equals(name)) {
 			processState.setAsync(newValue);
 		}

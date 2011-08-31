@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.Display;
 import org.jbpm.gd.common.model.SemanticElement;
 import org.jbpm.gd.common.xml.XmlAdapter;
 import org.jbpm.gd.jpdl.model.Decision;
@@ -95,10 +96,15 @@ public class DecisionDomAdapter extends XmlAdapter {
 		}
 	}
 		
-	protected void doModelUpdate(String name, String newValue) {
-		Decision decision = (Decision)getSemanticElement();
+	protected void doModelUpdate(String name, final String newValue) {
+		final Decision decision = (Decision)getSemanticElement();
 		if ("name".equals(name)) {
-			decision.setName(newValue);
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					decision.setName(newValue);
+				}				
+			});
 		} else if ("async".equals(name)) {
 			decision.setAsync(newValue);
 		} else if ("expression".equals(name)) {
