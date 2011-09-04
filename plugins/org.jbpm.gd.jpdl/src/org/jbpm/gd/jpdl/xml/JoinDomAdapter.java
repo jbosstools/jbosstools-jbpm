@@ -95,7 +95,6 @@ public class JoinDomAdapter extends XmlAdapter {
 		final Join join = (Join)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					join.setName(newValue);
 				}				

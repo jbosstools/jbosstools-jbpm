@@ -120,7 +120,6 @@ public class SuperStateDomAdapter extends XmlAdapter {
 		final SuperState superState = (SuperState)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					superState.setName(newValue);
 				}				

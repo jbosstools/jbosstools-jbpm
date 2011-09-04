@@ -84,7 +84,6 @@ public class StartStateDomAdapter extends XmlAdapter {
 		final StartState startState = (StartState)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					startState.setName(newValue);
 				}				

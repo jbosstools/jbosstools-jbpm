@@ -96,7 +96,6 @@ public class StateDomAdapter extends XmlAdapter {
 		final State state = (State)getSemanticElement();
 		if ("name".equals(name)) {		
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					state.setName(newValue);
 				}				

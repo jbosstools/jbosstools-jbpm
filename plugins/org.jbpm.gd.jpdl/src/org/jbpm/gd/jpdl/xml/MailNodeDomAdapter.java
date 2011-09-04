@@ -122,7 +122,6 @@ public class MailNodeDomAdapter extends XmlAdapter {
 		final MailNode mailNode = (MailNode)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					mailNode.setName(newValue);
 				}				
