@@ -103,7 +103,6 @@ public class ForkDomAdapter extends XmlAdapter {
 		final Fork fork = (Fork)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					fork.setName(newValue);
 				}				

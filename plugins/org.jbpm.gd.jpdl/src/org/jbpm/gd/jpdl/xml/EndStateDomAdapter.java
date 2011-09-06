@@ -69,7 +69,6 @@ public class EndStateDomAdapter extends XmlAdapter {
 		final EndState endState = (EndState)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					endState.setName(newValue);
 				}				

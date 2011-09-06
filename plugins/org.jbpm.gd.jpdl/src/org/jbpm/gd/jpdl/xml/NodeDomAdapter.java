@@ -121,7 +121,6 @@ public class NodeDomAdapter extends XmlAdapter {
 		final Node node = (Node)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					node.setName(newValue);
 				}				

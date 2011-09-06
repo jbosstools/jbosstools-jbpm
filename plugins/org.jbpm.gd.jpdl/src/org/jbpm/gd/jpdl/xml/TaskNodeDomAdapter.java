@@ -115,7 +115,6 @@ public class TaskNodeDomAdapter extends XmlAdapter {
 		final TaskNode taskNode = (TaskNode)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					taskNode.setName(newValue);
 				}				

@@ -108,7 +108,6 @@ public class ProcessStateDomAdapter extends XmlAdapter {
 		final ProcessState processState = (ProcessState)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					processState.setName(newValue);
 				}				

@@ -100,7 +100,6 @@ public class DecisionDomAdapter extends XmlAdapter {
 		final Decision decision = (Decision)getSemanticElement();
 		if ("name".equals(name)) {
 			Display.getDefault().asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					decision.setName(newValue);
 				}				
