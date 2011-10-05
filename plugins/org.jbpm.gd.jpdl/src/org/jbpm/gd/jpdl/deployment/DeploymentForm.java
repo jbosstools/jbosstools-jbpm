@@ -331,6 +331,9 @@ public class DeploymentForm {
 		serverNameText.removeModifyListener(serverNameTextListener);
 		serverPortText.removeModifyListener(serverPortTextListener);
 		serverDeployerText.removeModifyListener(serverDeployerTextListener);		
+		useCredentialsButton.removeSelectionListener(useCredentialsButtonSelectionListener);
+		userNameText.removeModifyListener(userNameTextListener);
+		passwordText.removeModifyListener(passwordTextListener);
 	}
 	
 	private void updateControls() {
@@ -454,15 +457,30 @@ public class DeploymentForm {
 		serverPortText.addModifyListener(serverPortTextListener);
 		serverDeployerText.addModifyListener(serverDeployerTextListener);
 		useCredentialsButton.addSelectionListener(useCredentialsButtonSelectionListener);
+		userNameText.addModifyListener(userNameTextListener);
+		passwordText.addModifyListener(passwordTextListener);
 	}
 	
 	private SelectionListener useCredentialsButtonSelectionListener = new SelectionAdapter() {		
 		public void widgetSelected(SelectionEvent event) {
 			userNameText.setEnabled(useCredentialsButton.getSelection());
 			passwordText.setEnabled(useCredentialsButton.getSelection());
+			deploymentInfo.setUseCredentials(useCredentialsButton.getSelection());
 		}
 	};
 		
+	private ModifyListener userNameTextListener = new ModifyListener() {		
+		public void modifyText(ModifyEvent event) {
+			deploymentInfo.setUserName(userNameText.getText());
+		}
+	};
+	
+	private ModifyListener passwordTextListener = new ModifyListener() {		
+		public void modifyText(ModifyEvent event) {
+			deploymentInfo.setPassword(passwordText.getText());
+		}
+	};
+	
 	private ModifyListener serverNameTextListener = new ModifyListener() {		
 		public void modifyText(ModifyEvent event) {
 			deploymentInfo.setServerName(serverNameText.getText());
