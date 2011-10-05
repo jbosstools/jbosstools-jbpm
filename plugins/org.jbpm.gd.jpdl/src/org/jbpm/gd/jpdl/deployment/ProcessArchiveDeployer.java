@@ -13,6 +13,7 @@ import java.net.URLConnection;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.jbpm.gd.common.util.Base64Converter;
+import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.editor.JpdlEditor;
 
 public class ProcessArchiveDeployer {
@@ -44,7 +45,7 @@ public class ProcessArchiveDeployer {
 		if (url == null) return false;
 		URLConnection connection = openConnection(url);
 		if (connection == null) return false;
-		connection.setDoOutput(true);
+		prepareConnection(connection);
 		String response = receiveData(connection);
 		if (response == null) {
 			return false;
@@ -146,8 +147,14 @@ public class ProcessArchiveDeployer {
 			showFileNotFoundException();
 			return null;
 		} catch (IOException e) {
-			showReceiveDataException();
-			return null;
+			if (e.getMessage().contains("401")) {
+				showNotAuthorizedException();
+				return null;
+			} else {
+				Logger.logError("Unexpected IOException", e);
+				showReceiveDataException();
+				return null;
+			}
 		}
 		
 	}
@@ -171,6 +178,18 @@ public class ProcessArchiveDeployer {
 				null,
 				"A connection to the server could not be established. " +
 				"Check your connection parameters and verify that the server is running.",
+				SWT.ICON_ERROR, 
+				new String[] { "OK" }, 
+				0);
+		dialog.open();
+	}
+
+	private void showNotAuthorizedException() {
+		MessageDialog dialog = new MessageDialog(
+				jpdlEditor.getSite().getShell(), 
+				"Authorization Failed", 
+				null,
+				"The used credentials are not allowed to establish a connection to the server.",
 				SWT.ICON_ERROR, 
 				new String[] { "OK" }, 
 				0);
