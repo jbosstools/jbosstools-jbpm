@@ -44,7 +44,7 @@ Export-Package: org.jbpm.gd.common.command,
  org.jbpm.gd.pf.properties,
  org.jbpm.gd.pf.wizard,
  org.jbpm.gd.pf.xml
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
  org.eclipse.core.resources,
  org.eclipse.ui,
  org.eclipse.ui.views,
