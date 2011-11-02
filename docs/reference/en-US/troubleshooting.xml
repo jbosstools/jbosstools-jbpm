@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+	<title>Troubleshooting</title>
+	<section id="troubleshooting">
+		<title>Conditional transitions</title>
+		<para>
+			Conditional transitions are discouraged if they are leaving anything other than condition nodes. The property page for transitions will display a warning if such a circumstance occurs.
+		</para>
+		<figure>
+			<title>Conditional transitions - troubleshooting</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/troubleshooting/troubleshooting_01.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			The warning can be suppressed by navigating to <menuchoice><guimenuitem>Window</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> and checking the checkbox <guilabel>Suppress warning on invalid transitions with conditions.</guilabel> on the Compatibility preference page. 
+		</para>
+	</section>
+</chapter>
