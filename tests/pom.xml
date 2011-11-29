@@ -19,6 +19,7 @@
 		<module>org.jboss.tools.jbpm.convert.test</module>
 		<module>org.jbpm.gd.jpdl.test</module>
 		<module>org.jboss.tools.jbpm.ui.bot.test</module>
+		<module>org.eclipse.bpmn2.tests</module>
 	</modules>
 </project>
 	
