@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test Plugin for BPMN2
+Bundle-SymbolicName: org.eclipse.bpmn2.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.junit,
+ org.eclipse.bpmn2
