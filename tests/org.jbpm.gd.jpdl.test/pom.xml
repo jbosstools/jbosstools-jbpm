@@ -13,7 +13,7 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
-		<emma.filter>org.jbpm.gd*</emma.filter>
+		<coverage.filter>org.jbpm.gd*</coverage.filter>
 		<emma.instrument.bundles>org.jbpm.gd.jpdl</emma.instrument.bundles>
 	</properties>
 </project>

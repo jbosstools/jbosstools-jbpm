@@ -12,7 +12,7 @@
 	<version>4.3.0-SNAPSHOT</version>
 	<packaging>eclipse-test-plugin</packaging>
 	<properties>
-		<emma.filter>org.jboss.tools.flow.jpdl4.multipage*</emma.filter>
+		<coverage.filter>org.jboss.tools.flow.jpdl4.multipage*</coverage.filter>
 		<emma.instrument.bundles>org.jboss.tools.flow.jpdl4.multipage</emma.instrument.bundles>
 	</properties>
 </project>

@@ -13,7 +13,7 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
-		<emma.filter>org.jboss.tools.flow.jpdl4*</emma.filter>
+		<coverage.filter>org.jboss.tools.flow.jpdl4*</coverage.filter>
 		<emma.instrument.bundles>org.jboss.tools.flow.jpdl4</emma.instrument.bundles>
 	</properties>
 </project>
