@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %PLUGIN_NAME
 Bundle-SymbolicName: org.jboss.tools.jbpm.convert;singleton:=true
-Bundle-Version: 1.3.0.qualifier
+Bundle-Version: 4.5.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: org.jboss.tools.jbpm.convert.bpmnto.BpmnToPlugin
 Require-Bundle: org.eclipse.ui,

@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.jbpm3.feature"
       label="%featureName"
-      version="3.2.1.qualifier"
+      version="4.5.0.qualifier"
       provider-name="%featureProvider">
 
    <description>

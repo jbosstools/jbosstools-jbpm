@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="org.jboss.tools.jbpm3.test.feature" label="%featureName" version="3.3.0.qualifier" provider-name="%featureProvider">
+<feature 
+	  id="org.jboss.tools.jbpm3.test.feature" 
+	  label="%featureName" 
+	  version="4.5.0.qualifier" 
+	  provider-name="%featureProvider">
 
 	<description>
       %description

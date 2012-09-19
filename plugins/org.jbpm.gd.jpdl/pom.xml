@@ -5,10 +5,9 @@
 	<parent>
 		<groupId>org.jboss.tools.jbpm</groupId>
 		<artifactId>plugins</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>4.5.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.jboss.tools.jbpm.plugins</groupId>
 	<artifactId>org.jbpm.gd.jpdl</artifactId>
-	<version>3.4.1-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 </project>

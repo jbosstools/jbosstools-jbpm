@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %bundleName
 Bundle-SymbolicName: org.jbpm.gd.jpdl;singleton:=true
-Bundle-Version: 3.4.1.qualifier
+Bundle-Version: 4.5.0.qualifier
 Bundle-ClassPath: .,
  lib/dom4j-1.4.jar
 Bundle-Activator: org.jbpm.gd.jpdl.Plugin
