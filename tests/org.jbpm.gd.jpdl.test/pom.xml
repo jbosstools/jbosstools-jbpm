@@ -14,4 +14,4 @@
 		<coverage.filter>org.jbpm.gd*</coverage.filter>
 		<emma.instrument.bundles>org.jbpm.gd.jpdl</emma.instrument.bundles>
 	</properties>
-<version>4.5.1-SNAPSHOT</version></project>
+</project>
