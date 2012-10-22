@@ -1,5 +1,9 @@
 # The jBPM Tools project
 
+## Summary
+
+jBPM Tools provide tooling for jBPM 3.
+
 ## Install
 
 _jBPM Tools_ is part of [JBoss Tools](http://jboss.org/tools) from
