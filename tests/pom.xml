@@ -15,7 +15,6 @@
 		<module>org.jboss.tools.jbpm.common.test</module>
 		<module>org.jboss.tools.jbpm.convert.test</module>
 		<module>org.jbpm.gd.jpdl.test</module>
-		<module>org.jboss.tools.jbpm.ui.bot.test</module>
 	</modules>
 </project>
 	
