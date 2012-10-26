@@ -19,5 +19,4 @@
 
 	<plugin id="org.jboss.tools.jbpm.common.test" download-size="0" install-size="0" version="0.0.0" unpack="false" />
 	<plugin id="org.jbpm.gd.jpdl.test" download-size="0" install-size="0" version="0.0.0" unpack="false" />
-	<plugin id="org.jboss.tools.jbpm.ui.bot.test" download-size="0" install-size="0" version="0.0.0" unpack="false" />
 </feature>
