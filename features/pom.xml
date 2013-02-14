@@ -17,6 +17,7 @@
 		<module>org.jboss.tools.jbpm3.feature</module>
 		<module>org.jboss.tools.jbpm3.test.feature</module>
 		<module>org.jbpm.gd.jpdl.feature</module>
+		<module>org.jboss.tools.runtime.jbpm.detector.feature</module>
 	</modules>
 </project>
 	
