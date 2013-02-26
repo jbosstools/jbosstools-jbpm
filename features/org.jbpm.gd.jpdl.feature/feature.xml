@@ -2,7 +2,7 @@
 <feature
       id="org.jbpm.gd.jpdl.feature"
       label="%featureName"
-      version="4.5.0.qualifier"
+      version="4.5.200.qualifier"
       provider-name="%featureProvider">
 
    <description>
