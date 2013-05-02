@@ -51,6 +51,8 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -83,18 +85,20 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.part.ISetSelectionTarget;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.jboss.tools.jbpm.preferences.JbpmInstallation;
 import org.jboss.tools.jbpm.preferences.PreferencesManager;
 import org.jbpm.gd.jpdl.Logger;
 import org.jbpm.gd.jpdl.util.JbpmClasspathContainer;
 
-public class NewProcessProjectWizard extends Wizard implements INewWizard {
+public class NewProcessProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 
 	private WizardNewProjectCreationPage mainPage;
 	private ConfigureRuntimePage configureRuntimePage;
 	private NewProcessProjectDetailsWizardPage coreJbpmPage;
 	private IProject newProject;
 	private IWorkbench workbench;
+	private IConfigurationElement configElement;
 	
 	public boolean canFinish() {
 		return super.canFinish() && coreJbpmPage.combo.getItemCount() > 0 && coreJbpmPage.combo.getSelectionIndex() != -1;
@@ -472,6 +476,7 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 			if (page.findView("org.eclipse.ui.views.PropertySheet") == null) {
 				page.showView("org.eclipse.ui.views.PropertySheet");
 			}
+			BasicNewProjectResourceWizard.updatePerspective(configElement);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -554,4 +559,8 @@ public class NewProcessProjectWizard extends Wizard implements INewWizard {
 		return contents;
 	}
 	
+	public void setInitializationData(IConfigurationElement cfig, String   propertyName, Object   data) {
+        configElement = cfig;
+     }
+
 }

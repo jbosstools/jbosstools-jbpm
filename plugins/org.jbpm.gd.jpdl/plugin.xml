@@ -326,6 +326,7 @@
             category="org.jboss.tools.jbpm"
             class="org.jbpm.gd.jpdl.wizard.NewProcessProjectWizard"
             id="org.jbpm.gd.jpdl.wizard.new.project"
+            finalPerspective="org.jbpm.gd.jpdl.JpdlPerspective"
             project="true" >
          <description>
             A wizard that creates a new jBPM 3 Project
