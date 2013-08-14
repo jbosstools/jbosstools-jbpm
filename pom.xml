@@ -61,7 +61,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
              <artifact>
                <groupId>org.jboss.tools.integration-stack</groupId>
                <artifactId>target-platform</artifactId>
-               <version>4.1.1-SNAPSHOT</version>
+               <version>4.1.1.Final</version>
                <type>target</type>
                <classifier>base</classifier>
              </artifact>
