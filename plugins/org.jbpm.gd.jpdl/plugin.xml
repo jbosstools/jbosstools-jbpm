@@ -295,7 +295,7 @@
       </perspective>
    </extension>
    
-  <extension point="org.eclipse.core.runtime.contentTypes">
+  <extension point="org.eclipse.core.contenttype.contentTypes">
   	<content-type id="semantic" 	name="jpdl semantic info"
 		base-type="org.eclipse.core.runtime.xml"
 		default-charset="UTF-8">
@@ -1301,7 +1301,7 @@
     </editor> 
   </extension> 
   	
-  <extension point="org.eclipse.core.runtime.contentTypes">
+  <extension point="org.eclipse.core.contenttype.contentTypes">
   	<content-type id="pageflow" name="jpdl semantic info"
 		base-type="org.eclipse.core.runtime.xml"
 		default-charset="UTF-8">
