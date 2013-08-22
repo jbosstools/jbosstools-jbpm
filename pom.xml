@@ -17,6 +17,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<module>features</module>
 		<module>site</module>
 	</modules>
+	<properties>
+ 		<tycho.scmUrl>scm:git:https://github.com/jbosstools/jbosstools-jbpm.git</tycho.scmUrl>
+ 	</properties>
   <build>
     <plugins>
       <plugin>
