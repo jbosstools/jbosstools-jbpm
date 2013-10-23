@@ -4,7 +4,7 @@ Bundle-Name: %BundleName
 Bundle-SymbolicName: org.jboss.tools.jbpm.convert.test;singleton:=true
 Bundle-Version: 4.5.200.qualifier
 Bundle-Vendor: %BundleProvider
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.jboss.tools.jbpm.convert,
  org.junit;bundle-version="4.8.0",
  org.eclipse.core.runtime;bundle-version="3.4.0"
