@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.runtime.jbpm.detector.feature"
       label="%featureName"
-      version="4.5.200.qualifier"
+      version="4.6.0.qualifier"
       provider-name="%providerName"
       plugin="org.jboss.tools.runtime.jbpm.detector">
 
@@ -19,10 +19,10 @@
    </license>
 
    <requires>
-      <import plugin="org.jboss.tools.runtime.core" />
+      <import plugin="org.jboss.tools.runtime.core"/>
    </requires>
-   
-      <plugin
+
+   <plugin
          id="org.jboss.tools.runtime.jbpm.detector"
          download-size="0"
          install-size="0"

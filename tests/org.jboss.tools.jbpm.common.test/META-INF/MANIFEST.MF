@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %BundleName
 Bundle-SymbolicName: org.jboss.tools.jbpm.common.test
-Bundle-Version: 4.5.200.qualifier
+Bundle-Version: 4.6.0.qualifier
 Bundle-Vendor: %BundleProvider
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,

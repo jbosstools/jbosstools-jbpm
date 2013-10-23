@@ -2,7 +2,7 @@
 <feature
       id="org.jboss.tools.jbpm.convert.feature"
       label="%featureName"
-      version="4.5.200.qualifier"
+      version="4.6.0.qualifier"
       provider-name="%providerName"
       plugin="org.jboss.tools.jbpm.convert">
 
