@@ -14,17 +14,4 @@
 		<coverage.filter>org.jboss.tools.jbpm.convert*</coverage.filter>
 		<emma.instrument.bundles>org.jboss.tools.jbpm.convert</emma.instrument.bundles>
 	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<configuration>
-					<explodedBundles>
-						<bundle>org.jboss.tools.jbpm.convert.test</bundle>
-					</explodedBundles>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
