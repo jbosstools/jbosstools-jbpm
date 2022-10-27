@@ -3,7 +3,8 @@
 ## Summary
 
 jBPM Tools provide tooling for jBPM 3.
-NOTE: This project is deprecated, and will likely be removed from JBoss Tools at some point in the future.
+
+**NOTE: This project is deprecated, and will likely be removed from JBoss Tools at some point in the future.**
 
 
 ## Install
